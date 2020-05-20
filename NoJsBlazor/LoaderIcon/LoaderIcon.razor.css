@@ -1,31 +1,6 @@
-﻿.loader-icon {
+﻿.loader-icon > div {
+  position: absolute;
   border-radius: 50%; }
-  .loader-icon .ball-1 {
-    position: absolute;
-    left: 10%;
-    top: 10%;
-    border-radius: 50%; }
-  .loader-icon .ball-2 {
-    position: absolute;
-    left: 55%;
-    top: 10%;
-    width: 35%;
-    height: 35%;
-    border-radius: 50%; }
-  .loader-icon .ball-3 {
-    position: absolute;
-    left: 10%;
-    top: 55%;
-    width: 35%;
-    height: 35%;
-    border-radius: 50%; }
-  .loader-icon .ball-4 {
-    position: absolute;
-    left: 55%;
-    top: 55%;
-    width: 35%;
-    height: 35%;
-    border-radius: 50%; }
 
 @keyframes spin {
   from {

@@ -40,7 +40,11 @@ namespace NoJsBlazor {
         /// <summary>
         /// same as <see cref="Ease">Ease</see>, only even slower start and end
         /// </summary>
-        Ease_in_out
+        Ease_in_out,
+        /// <summary>
+        /// fast rotation, but in the middle part very slow
+        /// </summary>
+        Slow_middle
     }
 
     /// <summary>
@@ -231,6 +235,7 @@ namespace NoJsBlazor {
                 LoaderTimingFunction.Ease_in => "ease-in",
                 LoaderTimingFunction.Ease_out => "ease-out",
                 LoaderTimingFunction.Ease_in_out => "ease-in-out",
+                LoaderTimingFunction.Slow_middle => "cubic-bezier(0.2, 0.8, 0.8, 0.2)",
                 _ => throw new Exception("pigs have learned to time")
             };
         }

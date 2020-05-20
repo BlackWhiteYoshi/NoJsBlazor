@@ -1,137 +1,104 @@
-﻿.loader-icon {
+﻿.loader-icon > div {
+    position: absolute;
     border-radius: 50%;
+}
 
-    .ball-1 {
-        position: absolute;
-        left: 10%;
-        top: 10%;
-        border-radius: 50%;
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
     }
 
-    .ball-2 {
-        position: absolute;
-        left: 55%;
-        top: 10%;
-        width: 35%;
-        height: 35%;
-        border-radius: 50%;
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-skew {
+    from {
+        transform: rotate(0deg) skew(-30deg, -30deg);
     }
 
-    .ball-3 {
-        position: absolute;
-        left: 10%;
-        top: 55%;
-        width: 35%;
-        height: 35%;
-        border-radius: 50%;
+    to {
+        transform: rotate(360deg) skew(30deg, 30deg);
+    }
+}
+
+@keyframes ball-color-1 {
+    from {
+        background-color: red;
     }
 
-    .ball-4 {
-        position: absolute;
-        left: 55%;
-        top: 55%;
-        width: 35%;
-        height: 35%;
-        border-radius: 50%;
+    to {
+        background-color: blue;
+    }
+}
+
+@keyframes ball-color-2 {
+    from {
+        background-color: blue;
     }
 
-    @keyframes spin {
-        from {
-            transform: rotate(0deg);
-        }
+    to {
+        background-color: yellow;
+    }
+}
 
-        to {
-            transform: rotate(360deg);
-        }
+@keyframes ball-color-3 {
+    from {
+        background-color: yellow;
     }
 
-    @keyframes spin-skew {
-        from {
-            transform: rotate(0deg) skew(-30deg, -30deg);
-        }
+    to {
+        background-color: green;
+    }
+}
 
-        to {
-            transform: rotate(360deg) skew(30deg, 30deg);
-        }
+@keyframes ball-color-4 {
+    from {
+        background-color: green;
     }
 
-    @keyframes ball-color-1 {
-        from {
-            background-color: red;
-        }
+    to {
+        background-color: red;
+    }
+}
 
-        to {
-            background-color: blue;
-        }
+@keyframes ball-move-1 {
+    from {
+        transform: translate(0, 0);
     }
 
-    @keyframes ball-color-2 {
-        from {
-            background-color: blue;
-        }
+    to {
+        transform: translate(-25%, -25%);
+    }
+}
 
-        to {
-            background-color: yellow;
-        }
+@keyframes ball-move-2 {
+    from {
+        transform: translate(0, 0);
     }
 
-    @keyframes ball-color-3 {
-        from {
-            background-color: yellow;
-        }
+    to {
+        transform: translate(25%, -25%);
+    }
+}
 
-        to {
-            background-color: green;
-        }
+@keyframes ball-move-3 {
+    from {
+        transform: translate(0, 0);
     }
 
-    @keyframes ball-color-4 {
-        from {
-            background-color: green;
-        }
+    to {
+        transform: translate(-25%, 25%);
+    }
+}
 
-        to {
-            background-color: red;
-        }
+@keyframes ball-move-4 {
+    from {
+        transform: translate(0, 0);
     }
 
-    @keyframes ball-move-1 {
-        from {
-            transform: translate(0, 0);
-        }
-
-        to {
-            transform: translate(-25%, -25%);
-        }
-    }
-
-    @keyframes ball-move-2 {
-        from {
-            transform: translate(0, 0);
-        }
-
-        to {
-            transform: translate(25%, -25%);
-        }
-    }
-
-    @keyframes ball-move-3 {
-        from {
-            transform: translate(0, 0);
-        }
-
-        to {
-            transform: translate(-25%, 25%);
-        }
-    }
-
-    @keyframes ball-move-4 {
-        from {
-            transform: translate(0, 0);
-        }
-
-        to {
-            transform: translate(25%, 25%);
-        }
+    to {
+        transform: translate(25%, 25%);
     }
 }
