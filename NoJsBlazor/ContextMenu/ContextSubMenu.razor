@@ -1,0 +1,13 @@
+﻿@namespace NoJsBlazor
+
+<li class="context-item dropright">
+    <div @ontouchstart="dropRightTC.OnTouchStart">
+        <CascadingValue Name="Head" Value="true" IsFixed="true">
+            @Head
+        </CascadingValue>
+        <span class="dropright-arrow @(Expanded ? "expanded" : "")"></span>
+    </div>
+    <ul class="dropright-menu @(Expanded ? "expanded" : "")">
+        @Items
+    </ul>
+</li>

@@ -1,0 +1,20 @@
+﻿@namespace NoJsBlazor
+
+<div class="slider" @attributes="@Attributes">
+    @if (Title != null) {
+        <label>@Title</label>
+    }
+    <div>
+        <button class="btn" @onmousedown="leftButtonTC.OnMouseDown" @ontouchstart="leftButtonTC.OnTouchStart">@LeftButtonText</button>
+        @if (!Editable) {
+            <label>@Display(Value)</label>
+        }
+        else {
+            <input value="@Display(Value)" @onchange="OnChangeEditField" />
+        }
+        <button class="btn" @onmousedown="rightButtonTC.OnMouseDown" @ontouchstart="rightButtonTC.OnTouchStart">@RightButtonText</button>
+    </div>
+    <div>
+        <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnSlider" @onchange="() => OnChange.InvokeAsync(Value)" />
+    </div>
+</div>

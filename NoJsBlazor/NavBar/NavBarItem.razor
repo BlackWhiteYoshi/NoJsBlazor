@@ -1,0 +1,24 @@
+﻿@namespace NoJsBlazor
+
+@if (Head) {
+    @ChildContent
+}
+else {
+    <li class="nav-item">
+        @ChildContent
+    </li>
+}
+
+@code {
+    /// <summary>
+    /// Will be automatically set by the parent.
+    /// </summary>
+    [CascadingParameter(Name = "Head")]
+    public bool Head { get; set; }
+
+    /// <summary>
+    /// Html that will be displayed.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

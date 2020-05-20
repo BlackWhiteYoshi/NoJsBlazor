@@ -1,0 +1,158 @@
+﻿.carousel {
+    // carousel-container
+    position: relative;
+    margin: 0;
+
+    .carousel-inner {
+        position: relative;
+        overflow: hidden;
+
+        .carousel-item {
+            display: block;
+            width: 100%;
+            float: left;
+            margin-right: -100%;
+            // animation duration for fade-out
+            transition: opacity ease-out 500ms;
+            // z-index of active item will be 20, all others have 10
+
+            img {
+                // all images should have the same aspect ratios, otherwise ugly height changes happens
+                // width should not be modified
+                width: 100%;
+            }
+        }
+
+        .slide {
+            // animation duration for slide/slide-rotate
+            transition: transform ease-out 500ms;
+        }
+    }
+
+    // overlay stuff
+    .carousel-overlay {
+        position: absolute;
+        z-index: 30;
+        bottom: 20%;
+        left: 20%;
+    }
+
+    // arrow control buttons (left/previous and right/next arrow)
+    .carousel-control-prev, .carousel-control-next {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 15%;
+        opacity: 0.5;
+        cursor: pointer;
+        z-index: 40;
+        transition: opacity 0.3s;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    .carousel-control-prev {
+        left: 0;
+
+        .carousel-control-prev-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+        }
+    }
+
+    .carousel-control-next {
+        right: 0;
+
+        .carousel-control-next-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+        }
+    }
+
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        display: inline-block;
+        // size of the arrow control buttons
+        $size: 20;
+        width: $size + px;
+        height: $size + px;
+    }
+
+    // indicators at the bottom
+    .carousel-indicators {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        padding-left: 0;
+        // space to the left/right of the whole list
+        margin-left: 15%;
+        margin-right: 15%;
+        list-style: none;
+        z-index: 40;
+
+        li {
+            box-sizing: content-box;
+            // size of the indicators
+            width: 90px;
+            height: 5px;
+            // space between the indicators
+            margin: 0 3px;
+            // color of the indicators
+            background-color: #fff;
+            background-clip: padding-box;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            cursor: pointer;
+            transition: opacity 0.3s;
+
+            &:hover {
+                opacity: 1 !important;
+            }
+
+            // progressbar
+            div {
+                height: 100%;
+                // color of the progressbar in the active container
+                background-color: #00AAAA;
+            }
+        }
+    }
+
+    // play/pause button
+    .carousel-play-button {
+        position: absolute;
+        // position of button
+        bottom: 40px;
+        left: 15%;
+        z-index: 16;
+        opacity: 0.6;
+        cursor: pointer;
+        transition: opacity 0.3s;
+        z-index: 50;
+
+        &:hover {
+            opacity: 0.9;
+        }
+        
+        .play-icon, .pause-icon {
+            // size of the button, should be a square, so width and height should be equal
+            $size: 30;
+            display: block;
+            width: $size + px;
+            height: $size + px;
+        }
+
+        .play-icon {
+            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none' fill='rgb(255,255,255)' stroke-width='0'><polygon points='16.02885683,10 83.97114317,50 16.02885683,90'/></svg>");
+        }
+
+        .pause-icon {
+            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none' fill='rgb(255,255,255)' stroke-width='0'><polygon points='15,15 41.25,15 41.25,85 15,85'/><polygon points='58.75,15 85,15 85,85 58.75,85'/></svg>");
+        }
+    }
+}

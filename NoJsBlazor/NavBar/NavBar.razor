@@ -1,0 +1,25 @@
+﻿@namespace NoJsBlazor
+
+<nav class="navbar navbar-nav" @attributes="@Attributes">
+    <div class="navbar-toggler">
+        <div style="@(DisableBrand ? "float: none;" : "")">
+            <button class="navbar-toggler-icon" aria-label="Toggle navigation"
+                    @onmousedown="ToggleTC.OnMouseDown" @ontouchstart="ToggleTC.OnTouchStart"></button>
+        </div>
+        @if (!DisableBrand) {
+            <span class="navbar-brand" @onclick="Reset">@Brand</span>
+        }
+    </div>
+    <div class="navbar-collapse @(Expanded ? "expanded" : "")">
+        <ul class="navbar-nav">
+            @if (!DisableBrand) {
+                <li>
+                    <span class="navbar-brand" @onclick="Reset">@Brand</span>
+                </li>
+            }
+            <CascadingValue Name="Root" Value="this" IsFixed="true">
+                @Items
+            </CascadingValue>
+        </ul>
+    </div>
+</nav>

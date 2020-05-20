@@ -1,0 +1,25 @@
+﻿@namespace NoJsBlazor
+@inherits NavBarItem
+
+@if (Head) {
+    <NavLink class="nav-link" @attributes="Attributes" @onclick="NavBarRoot.Reset">@ChildContent</NavLink>
+}
+else {
+    <li class="nav-item">
+        <NavLink class="nav-link" @attributes="Attributes" @onclick="NavBarRoot.Reset">@ChildContent</NavLink>
+    </li>
+}
+
+@code {
+    /// <summary>
+    /// Will be automatically set by the root.
+    /// </summary>
+    [CascadingParameter(Name = "Root")]
+    public NavBar NavBarRoot { get; set; }
+
+    /// <summary>
+    /// Captures unmatched values
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> Attributes { get; set; }
+}

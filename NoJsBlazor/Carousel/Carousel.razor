@@ -1,0 +1,51 @@
+﻿@namespace NoJsBlazor
+@inherits ListholdingComponentBase<CarouselItem>
+
+<div class="carousel" @attributes="@Attributes">
+    <div class="carousel-inner">
+        @if (ItemContainer.Length > 0) {
+            @for (int i = 0; i < ItemContainer.Length; i++) {
+                <div class="carousel-item @ItemContainer[i].Class" style="
+                        z-index: @ItemContainer[i].Zindex;
+                        opacity: @ItemContainer[i].Opacity;
+                        transform: translateX(@(ItemContainer[i].TranslateX)%) rotateY(@(ItemContainer[i].RotateY)grad);">
+                    @ItemContainer[i].CarouselItem.Render()
+                </div>
+            }
+        }
+        else {
+            <CascadingValue Name="Parent" Value="(ListholdingComponentBase<CarouselItem>)this" IsFixed="true">
+                @Items
+            </CascadingValue>
+        }
+    </div>
+    @if (Overlay != null) {
+        <div class="carousel-overlay">
+            @Overlay
+        </div>
+    }
+    @if (ControlArrowsEnable) {
+        <a class="carousel-control-prev" role="button" @onmousedown="prevTC.OnMouseDown" @ontouchstart="prevTC.OnTouchStart">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" role="button" @onmousedown="nextTC.OnMouseDown" @ontouchstart="nextTC.OnTouchStart">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+    }
+    @if (IndicatorsEnable) {
+        <ol class="carousel-indicators">
+            @foreach (int i in Enumerable.Range(0, ItemContainer.Length)) {
+                <li style="opacity: @ItemContainer[i].IndicatorOpacity"
+                    @onmousedown="(MouseEventArgs e) => {indicatorTC.Parameter = i; indicatorTC.OnMouseDown(e); }"
+                    @ontouchstart="(TouchEventArgs e) => { indicatorTC.Parameter = i; indicatorTC.OnTouchStart(e); }" >
+                    <div style="width:@(ItemContainer[i].ProgressBar)%; transition: width @(ItemContainer[i].ProgressBarTransition)ms linear;"></div>
+                </li>
+            }
+        </ol>
+    }
+    @if (PlayButtonEnable) {
+        <div class="carousel-play-button" role="button" @onmousedown="playButtonTC.OnMouseDown" @ontouchstart="playButtonTC.OnTouchStart">
+            <span class="@(!Running ? "play-icon" : "pause-icon")" aria-hidden="true"></span>
+        </div>
+    }
+</div>

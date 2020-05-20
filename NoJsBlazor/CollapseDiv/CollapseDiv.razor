@@ -1,0 +1,12 @@
+﻿@namespace NoJsBlazor
+
+<div class="collapse-div" @attributes="@Attributes" style="@AddStyles() height: @(collapsed ? HeadHeight + "px" : (HeadHeight + ContentHeight) + "px");">
+    <div class="button-div @(collapsed ? "collapsed" : "collapseable")"
+            @onmousedown="touchClick.OnMouseDown" @ontouchstart="touchClick.OnTouchStart">
+        @Head
+    </div>
+
+    <div class="content-div" style="transform: translateY(@(collapsed ? -50 : 0)%) rotate3d(1, 0, 0, @(collapsed ? 90 : 0)deg);">
+        @Content
+    </div>
+</div>

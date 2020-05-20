@@ -1,0 +1,30 @@
+﻿[
+  {
+    "outputFile": "Carousel/Carousel.razor.css",
+    "inputFile": "Carousel/Carousel.razor.scss"
+  },
+  {
+    "outputFile": "CollapseDiv/CollapseDiv.razor.css",
+    "inputFile": "CollapseDiv/CollapseDiv.razor.scss"
+  },
+  {
+    "outputFile": "ContextMenu/ContextMenu.razor.css",
+    "inputFile": "ContextMenu/ContextMenu.razor.scss"
+  },
+  {
+    "outputFile": "Dialog/Dialog.razor.css",
+    "inputFile": "Dialog/Dialog.razor.scss"
+  },
+  {
+    "outputFile": "LoaderIcon/LoaderIcon.razor.css",
+    "inputFile": "LoaderIcon/LoaderIcon.razor.scss"
+  },
+  {
+    "outputFile": "NavBar/NavBar.razor.css",
+    "inputFile": "NavBar/NavBar.razor.scss"
+  },
+  {
+    "outputFile": "Slider/Slider.razor.css",
+    "inputFile": "Slider/Slider.razor.scss"
+  }
+]

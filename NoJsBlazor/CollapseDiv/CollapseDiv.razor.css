@@ -1,0 +1,36 @@
+﻿/**
+ * bootstrap variables for container
+ * sm: 540px,
+ * md: 720px,
+ * lg: 960px,
+ * xl: 1140px
+ */
+.collapse-div {
+  display: inline-block;
+  width: 100%;
+  padding: 20px 50px 20px 20px;
+  background-color: #DDE;
+  transition: height 0.3s ease-out; }
+  @media (max-width: 767.99px) {
+    .collapse-div {
+      margin: 0 0 40px 0; } }
+  .collapse-div > .content-div {
+    transition: transform 0.3s ease-out; }
+  .collapse-div .button-div > p {
+    text-align: center;
+    cursor: pointer; }
+  .collapse-div p {
+    margin: 0 0 10px 0;
+    font-size: 17px;
+    line-height: 22px; }
+  .collapse-div .drop-down-arrow {
+    width: 12px;
+    height: 12px;
+    margin: 0 -12px 0 5px;
+    transition: transform 0.3s;
+    display: inline-block;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='rgb(255,255,255)' stroke='rgb(0,0,0)' stroke-width='6'/><polygon points='53,63 33,43' stroke='rgb(0,0,0)' stroke-width='6'/><polygon points='47,63 67,43' stroke='rgb(0,0,0)' stroke-width='6'/></svg>"); }
+  .collapse-div .button-div.collapseable .drop-down-arrow {
+    transform: rotate(180deg); }
+  .collapse-div .button-div.collapsed .drop-down-arrow {
+    transform: rotate(0deg); }

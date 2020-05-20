@@ -1,0 +1,14 @@
+﻿@namespace NoJsBlazor
+
+<li class="nav-item dropdown">
+    <CascadingValue Name="Head" Value="true" IsFixed="true">
+        @Head
+    </CascadingValue>
+    <span class="dropdown-arrow @(Expanded ? "expanded" : "")" role="button"
+            @onmousedown="dropDownTC.OnMouseDown"
+            @ontouchstart="dropDownTC.OnTouchStart">
+    </span>
+    <ul class="dropdown-menu @(Expanded ? "expanded" : "")">
+        @Items
+    </ul>
+</li>

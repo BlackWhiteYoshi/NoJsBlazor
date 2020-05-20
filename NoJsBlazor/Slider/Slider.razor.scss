@@ -1,0 +1,99 @@
+﻿.slider {
+    display: inline-block;
+    margin: 10px;
+
+    // Title
+    & > label {
+        display: table;
+        margin: 0 auto 5px auto;
+    }
+
+    // div with buttons and value Display
+    & > div {
+        display: table;
+        margin: 0 auto;
+
+        // decrement & increment buttons
+        & > button {
+            display: inline-block;
+            font-size: 10px;
+            margin: 0 3px;
+            padding: 0 3px;
+            border-radius: 50%;
+            background-color: #07F;
+        }
+
+        // value display text
+        & > label {
+            display: inline-block;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            transform: translateY(1px);
+        }
+
+        // value display text
+        & > input {
+            display: inline-block;
+            height: 20px;
+            width: 60px;
+            text-align: center;
+            border: solid 1px #CCC;
+            transform: translateY(2px);
+        }
+
+        // slider
+        & > input[type=range] {
+            -webkit-appearance: none;
+            width: 100px;
+            height: 5px;
+            margin: 5px 5px 0 5px;
+            padding: 0;
+            background: #5FF;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &:focus {
+                outline: none;
+            }
+
+            // track
+            @mixin track {
+                height: 6px;
+                background: #5FF;
+                border-radius: 3px;
+            }
+
+            
+            &::-webkit-slider-runnable-track {
+               @include track;
+            }
+
+            &::-moz-range-track {
+                @include track;
+            }
+
+            // thumb
+            @mixin thumb {
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: #07F;
+                cursor: pointer;
+            }
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                @include thumb;
+                margin-top: -5px;
+            }
+
+            &::-moz-range-thumb {
+                @include thumb;
+            }
+        }
+    }
+}

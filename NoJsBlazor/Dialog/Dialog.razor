@@ -1,0 +1,22 @@
+﻿@namespace NoJsBlazor
+
+@if (Active) {
+    if (ModalScreen) {
+        <div class="modal-background" @onmousedown="modalBackgroundTC.OnMouseDown" @ontouchstart="modalBackgroundTC.OnTouchStart"
+                @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
+                @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd"></div>
+    }
+    <div class="dialog" @attributes="@Attributes" style="@AddStyles() transform: translate(calc(-50% + @(xMovement)px), calc(-50% + @(yMovement)px));"
+            @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
+            @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd">
+        @if (ShowTitle) {
+            <div class="title"
+                    @onmousedown="headBarTC.OnMouseDown" @ontouchstart="headBarTC.OnTouchStart">
+                @Title
+            </div>
+        }
+        <div class="content @(!ShowTitle ? "content-only" : "")">
+            @Content
+        </div>
+    </div>
+}
