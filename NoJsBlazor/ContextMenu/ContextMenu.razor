@@ -1,6 +1,6 @@
 ﻿@namespace NoJsBlazor
 
-<ul class="context-menu @(Expanded ? "expanded" : "")" @attributes="@Attributes" style="@AddStyles() top: @(top)px; left: @(left)px;">
+<ul class="context-menu @(Expanded ? "expanded" : "")" @attributes="@Attributes" style="top: @(top)px; left: @(left)px; @AddStyles()">
     <CascadingValue Name="Root" Value="this" IsFixed="true">
         @ChildContent
     </CascadingValue>

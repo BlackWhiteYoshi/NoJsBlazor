@@ -1,7 +1,7 @@
 ﻿@namespace NoJsBlazor
 
 <div class="loader-icon" @attributes="@Attributes"
-        style="@AddStyles() width: @(Size)px; height: @(Size)px; animation: @animation @(SpinDuration)ms @spinTimingFunction @spinDirection infinite;">
+        style="width: @(Size)px; height: @(Size)px; animation: @animation @(SpinDuration)ms @spinTimingFunction @spinDirection infinite; @AddStyles()">
     <div class="ball-1"
             style="left: @(ballMarginOuter)%; top: @(ballMarginOuter)%; width: @(ballSize)%; height: @(ballSize)%;
         animation: ball-color-1 @(ColorDuration)ms alternate @colorTimingFunction infinite,

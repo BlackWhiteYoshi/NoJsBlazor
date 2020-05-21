@@ -6,7 +6,7 @@
                 @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
                 @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd"></div>
     }
-    <div class="dialog" @attributes="@Attributes" style="@AddStyles() transform: translate(calc(-50% + @(xMovement)px), calc(-50% + @(yMovement)px));"
+    <div class="dialog" @attributes="@Attributes" style="transform: translate(calc(-50% + @(xMovement)px), calc(-50% + @(yMovement)px)); @AddStyles()"
             @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
             @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd">
         @if (ShowTitle) {
