@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 
 namespace NoJsBlazor {
+    /// <summary>
+    /// <para>Wrapper for the content that will be a context item.</para>
+    /// <para>This should be placed inside of a <see cref="ContextMenu"/>/<see cref="ContextSubMenu"/> instance.</para>
+    /// </summary>
     public partial class ContextItem {
         /// <summary>
         /// Html that will be displayed.

@@ -9,7 +9,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Library for Blazor apps. This Library doesn't use any Javascript code, everything is implemented in Html, (s)css and C#.</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

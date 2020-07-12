@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace NoJsBlazor {
+    /// <summary>
+    /// Another <see cref="ContextMenu"/> inside of a <see cref="ContextMenu"/> or <see cref="ContextSubMenu"/>.
+    /// </summary>
     public partial class ContextSubMenu {
         /// <summary>
         /// Will be automatically set by the root.

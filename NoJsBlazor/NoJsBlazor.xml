@@ -24,9 +24,15 @@
             Transition to transform: x-axis and y-axis
             </summary>
         </member>
+        <member name="T:NoJsBlazor.Carousel">
+            <summary>
+            <para>A Carousel like in Bootstrap. It holds <see cref="T:Microsoft.AspNetCore.Components.RenderFragment"/> as items. </para>
+            <para>It can also display an overlay, control-arrows, item indicators and a play/stop button.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Carousel.Active">
             <summary>
-            Active image at the beginning.
+            Active item at the beginning.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.IntervalTime">
@@ -86,6 +92,18 @@
             Indicates if the interval of the carousel is currently running.
             </summary>
         </member>
+        <member name="E:NoJsBlazor.Carousel.OnActiveChanged">
+            <summary>
+            <para>Fires every time after <see cref="F:NoJsBlazor.Carousel.active">active</see> item changed.</para>
+            <para>Parameter is index of the new active item.</para>
+            </summary>
+        </member>
+        <member name="E:NoJsBlazor.Carousel.OnRunningChanged">
+            <summary>
+            <para>Fires every time after the <see cref="P:NoJsBlazor.Carousel.Running">Running</see> state is set.</para>
+            <para>Parameter indicates if the carousel is currently running.</para>
+            </summary>
+        </member>
         <member name="M:NoJsBlazor.Carousel.ReInitialize">
             <summary>
             <para>If one of theses parameters are changed manually, this method should be called:</para>
@@ -105,14 +123,14 @@
             </summary>
             <param name="index">0 = first item, Length - 1 = last item</param>
         </member>
-        <member name="M:NoJsBlazor.Carousel.SwapImage(System.Int32,System.Int32)">
+        <member name="M:NoJsBlazor.Carousel.SwapItem(System.Int32,System.Int32)">
             <summary>
             Swaps 2 items in the carousel.
             </summary>
             <param name="index1">0 = first item, Length - 1 = last item</param>
             <param name="index2">0 = first item, Length - 1 = last item</param>
         </member>
-        <member name="M:NoJsBlazor.Carousel.SetActiveImage(System.Int32,System.Boolean)">
+        <member name="M:NoJsBlazor.Carousel.SetActiveItem(System.Int32,System.Boolean)">
             <summary>
             Set the item with the given index to active.
             </summary>
@@ -157,7 +175,7 @@
         </member>
         <member name="T:NoJsBlazor.CarouselItem">
             <summary>
-            <para>An item of <see cref="T:NoJsBlazor.Carousel"/>.</para>
+            <para>Wrapper for the content that will be a carousel item.</para>
             <para>This should be placed inside Renderfragment <b>Items</b> of a <see cref="T:NoJsBlazor.Carousel"/> instance.</para>
             </summary>
         </member>
@@ -182,6 +200,11 @@
             How this component renders, what is normally written in razor-syntax
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="T:NoJsBlazor.CollapseDiv">
+            <summary>
+            A container that content can be collapsed.
+            </summary>
         </member>
         <member name="P:NoJsBlazor.CollapseDiv.Head">
             <summary>
@@ -222,6 +245,12 @@
             Captures unmatched values
             </summary>
         </member>
+        <member name="T:NoJsBlazor.ContextItem">
+            <summary>
+            <para>Wrapper for the content that will be a context item.</para>
+            <para>This should be placed inside of a <see cref="T:NoJsBlazor.ContextMenu"/>/<see cref="T:NoJsBlazor.ContextSubMenu"/> instance.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.ContextItem.ChildContent">
             <summary>
             Html that will be displayed.
@@ -230,7 +259,13 @@
         <member name="P:NoJsBlazor.ContextItem.OnPressed">
             <summary>
             <para>Invokes every time when this list item get clicked or touched.</para>
-            <para><see cref="T:System.EventArgs"/> is either <see cref="!:MouseEventArgs"/> or <see cref="!:TouchEventArgs"/>, depends if it was invoked by clicking or touching.</para>
+            <para><see cref="T:System.EventArgs"/> is either <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>, depends if it was invoked by clicking or touching.</para>
+            </summary>
+        </member>
+        <member name="T:NoJsBlazor.ContextMenu">
+            <summary>
+            <para>A menu that can be toggled and shown at mouse position.</para>
+            <para>Triggering the menu is not included.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.ContextMenu.ChildContent">
@@ -285,6 +320,11 @@
             Collapses all expanded submenus.
             </summary>
         </member>
+        <member name="T:NoJsBlazor.ContextSubMenu">
+            <summary>
+            Another <see cref="T:NoJsBlazor.ContextMenu"/> inside of a <see cref="T:NoJsBlazor.ContextMenu"/> or <see cref="T:NoJsBlazor.ContextSubMenu"/>.
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.ContextSubMenu.ContextMenuRoot">
             <summary>
             Will be automatically set by the root.
@@ -316,6 +356,11 @@
             <summary>
             <para>Expands/Collapses this menu.</para>
             <para>Shorthand for: <see cref="P:NoJsBlazor.ContextSubMenu.Expanded">Expanded</see> = !<see cref="P:NoJsBlazor.ContextSubMenu.Expanded">Expanded</see>;</para>
+            </summary>
+        </member>
+        <member name="T:NoJsBlazor.Dialog">
+            <summary>
+            A little message window that it is first hidden and can be displayed on demand.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.Title">
@@ -358,6 +403,16 @@
         <member name="P:NoJsBlazor.Dialog.Attributes">
             <summary>
             Captures unmatched values
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Dialog.XMovement">
+            <summary>
+            Current offset of x-coordinate, 0 means middle of the screen.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Dialog.YMovement">
+            <summary>
+            Current offset of y-coordinate, 0 means middle of the screen.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.Active">
@@ -458,6 +513,11 @@
             begins with counterclockwise, then clockwise, ...
             </summary>
         </member>
+        <member name="T:NoJsBlazor.LoaderIcon">
+            <summary>
+            A little, animated icon that can be used to indicate loading.
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.LoaderIcon.Size">
             <summary>
             Base size of the icon.
@@ -520,6 +580,11 @@
             Captures unmatched values
             </summary>
         </member>
+        <member name="T:NoJsBlazor.NavBar">
+            <summary>
+            A container that can display your brand, the content can be collapsed and contains <see cref="T:NoJsBlazor.NavBarMenu"/> or/and <see cref="T:NoJsBlazor.NavBarItem"/>/<see cref="T:NoJsBlazor.NavBarLink"/>.
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.NavBar.DisableBrand">
             <summary>
             Should skip the <see cref="P:NoJsBlazor.NavBar.Brand">Brand</see> output.
@@ -557,6 +622,12 @@
             Collapses all expanded menus and submenus.
             </summary>
         </member>
+        <member name="T:NoJsBlazor.NavBarMenu">
+            <summary>
+            <para>A single menu that can hold other <see cref="T:NoJsBlazor.NavBarMenu"/> or/and <see cref="T:NoJsBlazor.NavBarItem"/>/<see cref="T:NoJsBlazor.NavBarLink"/>.</para>
+            <para>This should be placed inside of a <see cref="T:NoJsBlazor.NavBar"/> or <see cref="T:NoJsBlazor.NavBarMenu"/>.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.NavBarMenu.NavBarRoot">
             <summary>
             Will be automatically set by the root.
@@ -588,6 +659,12 @@
             <summary>
             <para>Expands/Collapses this menu.</para>
             <para>Shorthand for: <see cref="P:NoJsBlazor.NavBarMenu.Expanded">Expanded</see> = !<see cref="P:NoJsBlazor.NavBarMenu.Expanded">Expanded</see>;</para>
+            </summary>
+        </member>
+        <member name="T:NoJsBlazor.DecimalSlider">
+            <summary>
+            <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
+            <para>The value of this object is from type <see cref="T:System.Decimal"/>.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Value">
@@ -653,6 +730,12 @@
             Captures unmatched values
             </summary>
         </member>
+        <member name="T:NoJsBlazor.Slider">
+            <summary>
+            <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
+            <para>The value of this object is from type <see cref="T:System.Int32"/>.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Slider.Value">
             <summary>
             Value of the Slider
@@ -709,6 +792,11 @@
         <member name="P:NoJsBlazor.Slider.Attributes">
             <summary>
             Captures unmatched values
+            </summary>
+        </member>
+        <member name="T:NoJsBlazor.CoordinateTracker">
+            <summary>
+            This class can save a 2D-coordinate, calculates the difference to the next coordinate, then update the coordinate and calculates the next difference and so on.
             </summary>
         </member>
         <member name="F:NoJsBlazor.CoordinateTracker.x">

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace NoJsBlazor {
     /// <summary>
-    /// <para>An item of <see cref="Carousel"/>.</para>
+    /// <para>Wrapper for the content that will be a carousel item.</para>
     /// <para>This should be placed inside Renderfragment <b>Items</b> of a <see cref="Carousel"/> instance.</para>
     /// </summary>
     public class CarouselItem : ListableComponentBase<CarouselItem> {
@@ -44,6 +44,11 @@ namespace NoJsBlazor {
         /// </summary>
         /// <param name="builder"></param>
         protected override void BuildRenderTree(RenderTreeBuilder builder) {
+            /***
+             * <div class="carousel-item" @if (active) { style="z-index: 20;" }>
+             *     @ChildContent
+             * </div>
+             ***/
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "carousel-item");
             if (active)

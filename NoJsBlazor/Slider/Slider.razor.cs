@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 
 namespace NoJsBlazor {
+    /// <summary>
+    /// <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
+    /// <para>The value of this object is from type <see cref="int"/>.</para>
+    /// </summary>
     public partial class Slider {
         /// <summary>
         /// Value of the Slider
@@ -123,7 +127,7 @@ namespace NoJsBlazor {
         }
 
 
-        protected int? DefaultParseEdit(string input) {
+        private int? DefaultParseEdit(string input) {
             if (int.TryParse(input, out int result))
                 if (result < Min)
                     return Min;

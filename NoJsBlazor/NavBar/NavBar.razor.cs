@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 
 namespace NoJsBlazor {
+    /// <summary>
+    /// A container that can display your brand, the content can be collapsed and contains <see cref="NavBarMenu"/> or/and <see cref="NavBarItem"/>/<see cref="NavBarLink"/>.
+    /// </summary>
     public partial class NavBar {
         #region Parameters
 

@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace NoJsBlazor {
+    /// <summary>
+    /// <para>A menu that can be toggled and shown at mouse position.</para>
+    /// <para>Triggering the menu is not included.</para>
+    /// </summary>
     public partial class ContextMenu {
         /// <summary>
         /// Content of this ContextMenu.

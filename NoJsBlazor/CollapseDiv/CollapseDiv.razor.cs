@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 
 namespace NoJsBlazor {
+    /// <summary>
+    /// A container that content can be collapsed.
+    /// </summary>
     public partial class CollapseDiv {
         /// <summary>
         /// <para>Content that is also visible collapsed.</para>

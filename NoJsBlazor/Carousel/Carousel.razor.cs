@@ -23,6 +23,10 @@ namespace NoJsBlazor {
         SlideRotate
     }
 
+    /// <summary>
+    /// <para>A Carousel like in Bootstrap. It holds <see cref="RenderFragment"/> as items. </para>
+    /// <para>It can also display an overlay, control-arrows, item indicators and a play/stop button.</para>
+    /// </summary>
     public partial class Carousel : IDisposable {
         private struct Item {
             public CarouselItem CarouselItem;
@@ -40,7 +44,7 @@ namespace NoJsBlazor {
         #region Parameters & Fields
 
         /// <summary>
-        /// Active image at the beginning.
+        /// Active item at the beginning.
         /// </summary>
         [Parameter]
         public int Active { get; set; } = 0;
@@ -110,10 +114,25 @@ namespace NoJsBlazor {
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> Attributes { get; set; }
 
+
         /// <summary>
         /// Indicates if the interval of the carousel is currently running.
         /// </summary>
         public bool Running => interval.Enabled;
+
+
+        /// <summary>
+        /// <para>Fires every time after <see cref="active">active</see> item changed.</para>
+        /// <para>Parameter is index of the new active item.</para>
+        /// </summary>
+        public event Action<int> OnActiveChanged;
+
+        /// <summary>
+        /// <para>Fires every time after the <see cref="Running">Running</see> state is set.</para>
+        /// <para>Parameter indicates if the carousel is currently running.</para>
+        /// </summary>
+        public event Action<bool> OnRunningChanged;
+
 
         private readonly TouchClick prevTC;
         private readonly TouchClick nextTC;
@@ -159,7 +178,7 @@ namespace NoJsBlazor {
 
         private void IndicatorButton(EventArgs e) {
             StopInterval();
-            SwapImages(active, indicatorTC.Parameter, indicatorTC.Parameter - active);
+            SwapItems(active, indicatorTC.Parameter, indicatorTC.Parameter - active);
         }
 
         private void PlayButton(EventArgs e) {
@@ -242,16 +261,16 @@ namespace NoJsBlazor {
             if (next < 0)
                 next = ItemContainer.Length - 1;
 
-            SwapImages(active, next, -1);
+            SwapItems(active, next, -1);
         }
 
         private void Next() {
             int next = (active + 1) % ItemContainer.Length;
 
-            SwapImages(active, next, 1);
+            SwapItems(active, next, 1);
         }
 
-        private async void SwapImages(int active, int next, int direction) {
+        private async void SwapItems(int active, int next, int direction) {
             ItemContainer[active].ProgressBarTransition = 0;
             ItemContainer[active].ProgressBar = 0;
 
@@ -311,6 +330,7 @@ namespace NoJsBlazor {
 
             _ = InvokeAsync(StateHasChanged);
             this.active = next;
+            OnActiveChanged?.Invoke(this.active);
         }
 
         private void StopInterval() {
@@ -321,6 +341,7 @@ namespace NoJsBlazor {
                 autoStart.Stop();
                 autoStart.Start();
             }
+            OnRunningChanged?.Invoke(false);
         }
 
 
@@ -331,6 +352,7 @@ namespace NoJsBlazor {
             ItemContainer[active].ProgressBar = 100;
             interval.Start();
             InvokeAsync(StateHasChanged);
+            OnRunningChanged?.Invoke(true);
         }
 
         private void Interval(object source, ElapsedEventArgs e) {
@@ -380,36 +402,36 @@ namespace NoJsBlazor {
                 index = ItemContainer.Length;
 
             // create array with one more space and copy array in the new array with one space at position
-            Item[] images = new Item[ItemContainer.Length + 1];
+            Item[] items = new Item[ItemContainer.Length + 1];
             int i = 0;
             for (; i < index; i++)
-                images[i] = ItemContainer[i];
+                items[i] = ItemContainer[i];
             for (; i < ItemContainer.Length; i++)
-                images[i + 1] = ItemContainer[i];
+                items[i + 1] = ItemContainer[i];
 
             // fill space position with default values
-            images[index].CarouselItem = item;
-            images[index].IndicatorOpacity = 0.5F;
-            images[index].ProgressBar = 0;
-            images[index].ProgressBarTransition = 0;
-            images[index].Class = null;
+            items[index].CarouselItem = item;
+            items[index].IndicatorOpacity = 0.5F;
+            items[index].ProgressBar = 0;
+            items[index].ProgressBarTransition = 0;
+            items[index].Class = null;
             switch (animation) {
                 case CarouselAnimation.FadeOut:
-                    images[index].Opacity = 0;
-                    images[index].TranslateX = 0;
-                    images[index].RotateY = 0;
+                    items[index].Opacity = 0;
+                    items[index].TranslateX = 0;
+                    items[index].RotateY = 0;
                     break;
 
                 case CarouselAnimation.Slide:
-                    images[index].Opacity = 1;
-                    images[index].TranslateX = 100;
-                    images[index].RotateY = 0;
+                    items[index].Opacity = 1;
+                    items[index].TranslateX = 100;
+                    items[index].RotateY = 0;
                     break;
 
                 case CarouselAnimation.SlideRotate:
-                    images[index].Opacity = 1;
-                    images[index].TranslateX = 50;
-                    images[index].RotateY = 100;
+                    items[index].Opacity = 1;
+                    items[index].TranslateX = 50;
+                    items[index].RotateY = 100;
                     break;
             }
 
@@ -424,7 +446,7 @@ namespace NoJsBlazor {
                 }
             }
 
-            ItemContainer = images;
+            ItemContainer = items;
 
             InvokeAsync(StateHasChanged);
         }
@@ -444,12 +466,12 @@ namespace NoJsBlazor {
                 throw new IndexOutOfRangeException($"index must be smaller than Length");
 
             // create array with one less space and copy array in the new array with removed item at index
-            Item[] images = new Item[ItemContainer.Length - 1];
+            Item[] items = new Item[ItemContainer.Length - 1];
             int i = 0;
             for (; i < index; i++)
-                images[i] = ItemContainer[i];
-            for (; i < images.Length; i++)
-                images[i] = ItemContainer[i + 1];
+                items[i] = ItemContainer[i];
+            for (; i < items.Length; i++)
+                items[i] = ItemContainer[i + 1];
 
             // adjust active
             if (index < active) {
@@ -463,7 +485,7 @@ namespace NoJsBlazor {
             else if (index == active) {
                 if (active < ItemContainer.Length) {
                     int newActive = active;
-                    if (active == images.Length) {
+                    if (active == items.Length) {
                         newActive--;
                         if (interval.Enabled) {
                             interval.Stop();
@@ -471,18 +493,18 @@ namespace NoJsBlazor {
                         }
                     }
 
-                    images[newActive].IndicatorOpacity = ItemContainer[active].IndicatorOpacity;
-                    images[newActive].Opacity = ItemContainer[active].Opacity;
-                    images[newActive].ProgressBar = ItemContainer[active].ProgressBar;
-                    images[newActive].ProgressBarTransition = ItemContainer[active].ProgressBarTransition;
-                    images[newActive].TranslateX = ItemContainer[active].TranslateX;
-                    images[newActive].RotateY = ItemContainer[active].RotateY;
+                    items[newActive].IndicatorOpacity = ItemContainer[active].IndicatorOpacity;
+                    items[newActive].Opacity = ItemContainer[active].Opacity;
+                    items[newActive].ProgressBar = ItemContainer[active].ProgressBar;
+                    items[newActive].ProgressBarTransition = ItemContainer[active].ProgressBarTransition;
+                    items[newActive].TranslateX = ItemContainer[active].TranslateX;
+                    items[newActive].RotateY = ItemContainer[active].RotateY;
 
                     active = newActive;
                 }
             }
 
-            ItemContainer = images;
+            ItemContainer = items;
 
             InvokeAsync(StateHasChanged);
         }
@@ -492,7 +514,7 @@ namespace NoJsBlazor {
         /// </summary>
         /// <param name="index1">0 = first item, Length - 1 = last item</param>
         /// <param name="index2">0 = first item, Length - 1 = last item</param>
-        public void SwapImage(int index1, int index2) {
+        public void SwapItem(int index1, int index2) {
             CarouselItem buffer = ItemContainer[index1].CarouselItem;
             ItemContainer[index1].CarouselItem = ItemContainer[index2].CarouselItem;
             ItemContainer[index2].CarouselItem = buffer;
@@ -505,9 +527,9 @@ namespace NoJsBlazor {
         /// </summary>
         /// <param name="index">0 = first item, Length - 1 = last item</param>
         /// <param name="intervalStop">stopping interval with this change</param>
-        public void SetActiveImage(int index, bool intervalStop = true) {
+        public void SetActiveItem(int index, bool intervalStop = true) {
             if (active != index) {
-                SwapImages(active, index, index - active);
+                SwapItems(active, index, index - active);
                 if (intervalStop)
                     StopInterval();
                 else if (interval.Enabled) {

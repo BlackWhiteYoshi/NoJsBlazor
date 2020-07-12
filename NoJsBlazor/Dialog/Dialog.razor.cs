@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace NoJsBlazor {
+    /// <summary>
+    /// A little message window that it is first hidden and can be displayed on demand.
+    /// </summary>
     public partial class Dialog {
         /// <summary>
         /// Html that will be displayed inside the head bar.
@@ -56,6 +59,15 @@ namespace NoJsBlazor {
         public Dictionary<string, object> Attributes { get; set; }
 
         /// <summary>
+        /// Current offset of x-coordinate, 0 means middle of the screen.
+        /// </summary>
+        public double XMovement { get; set; } = 0.0;
+        /// <summary>
+        /// Current offset of y-coordinate, 0 means middle of the screen.
+        /// </summary>
+        public double YMovement { get; set; } = 0.0;
+
+        /// <summary>
         /// <para>true -> window is shown;</para>
         /// <para>false -> window is closed</para>
         /// </summary>
@@ -69,10 +81,6 @@ namespace NoJsBlazor {
             }
         }
         private bool _active;
-
-
-        private double xMovement = 0.0;
-        private double yMovement = 0.0;
 
         /// <summary>
         /// Use this to fill the @onmove and @onup event of the object behind this window if you don't enable <see cref="ModalScreen">ModalScreen</see>
@@ -102,8 +110,8 @@ namespace NoJsBlazor {
 
             (double dx, double dy) = tracker.MoveCoordinate(e);
 
-            xMovement += dx;
-            yMovement += dy;
+            XMovement += dx;
+            YMovement += dy;
             StateHasChanged();
         }
 

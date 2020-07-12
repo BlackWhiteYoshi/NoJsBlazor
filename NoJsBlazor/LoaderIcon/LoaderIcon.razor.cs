@@ -69,6 +69,9 @@ namespace NoJsBlazor {
         Alternate_reverse
     }
 
+    /// <summary>
+    /// A little, animated icon that can be used to indicate loading.
+    /// </summary>
     public partial class LoaderIcon {
         #region Parameters
 
