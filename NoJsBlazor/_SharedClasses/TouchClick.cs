@@ -39,22 +39,18 @@ namespace NoJsBlazor {
         /// <summary>
         /// usage: @onmousedown="[MyTouchClickObject].OnMouseDown"
         /// </summary>
-        /// <param name="e"></param>
         public Action<MouseEventArgs> OnMouseDown => OnMouseDownAction;
         /// <summary>
         /// usage: @ontouchstart="[MyTouchClickObject].OnTouchStart"
         /// </summary>
-        /// <param name="e"></param>
         public Action<TouchEventArgs> OnTouchStart => OnTouchStartAction;
         /// <summary>
         /// usage: @onmousemove="[MyTouchClickObject].OnMouseMove"
         /// </summary>
-        /// <param name="e"></param>
         public Action<MouseEventArgs> OnMouseMove => OnMouseMoveAction;
         /// <summary>
         /// usage: @ontouchmove="[MyTouchClickObject].OnTouchMove"
         /// </summary>
-        /// <param name="e"></param>
         public Action<TouchEventArgs> OnTouchMove => OnTouchMoveAction;
         /// <summary>
         /// usage: @onmouseup="[MyTouchClickObject].OnMouseUp"
@@ -129,6 +125,21 @@ namespace NoJsBlazor {
     /// <para>It manages, that the simulated click on phnone devices will not trigger the given method a second time and also only the left click will trigger an invoke.</para>
     /// </summary>
     public class TouchClick : TouchClick<object> {
+        /// <summary>
+        /// Creates an Object that handles mouse and touch input properly to invoke the corresponding given methods.
+        /// </summary>
+        /// <param name="OnDown">
+        /// <para>Will be executed once every time when someone clickes or touches the item.</para>
+        /// <para><see cref="EventArgs"/> is either an instance of  <see cref="MouseEventArgs"/> or <see cref="TouchEventArgs"/>.</para>
+        /// </param>
+        /// <param name="OnMove">
+        /// <para>Wxecutes only if OnDown happend before.</para>
+        /// <para><see cref="EventArgs"/> is either an instance of  <see cref="MouseEventArgs"/> or <see cref="TouchEventArgs"/>.</para>
+        /// </param>
+        /// <param name="OnUp">
+        /// <para>Will be executed once every time when someone releases the item but only if OnDown happend.</para>
+        /// <para><see cref="EventArgs"/> is either an instance of  <see cref="MouseEventArgs"/> or <see cref="TouchEventArgs"/>.</para>
+        /// </param>
         public TouchClick(Action<EventArgs> OnDown = null, Action<EventArgs> OnMove = null, Action<EventArgs> OnUp = null)
             : base(OnDown, OnMove, OnUp) { }
     }

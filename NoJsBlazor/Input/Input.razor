@@ -1,0 +1,6 @@
+﻿@namespace NoJsBlazor
+
+<div class="text-input-field" @attributes="@Attributes">
+    <input value="@Value" @oninput="OnInput" type="@(Password ? "password" : "text")" />
+    <label class="@(hasValue ? "filled-input-label" : "")">@Name</label>
+</div>

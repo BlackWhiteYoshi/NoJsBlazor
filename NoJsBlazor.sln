@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoJsBlazor", "NoJsBlazor\NoJsBlazor.csproj", "{9CB081AF-FF80-4688-B597-8C1B05D84107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoJsBlazor", "NoJsBlazor\NoJsBlazor.csproj", "{9CB081AF-FF80-4688-B597-8C1B05D84107}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -438,6 +438,26 @@
             <para>The same as Active = false</para>
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Input.Value">
+            <summary>
+            Value of this Input field.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Input.Name">
+            <summary>
+            Displayed text of this Input field.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Input.Password">
+            <summary>
+            Indicates if the characters should be display as *****
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Input.Attributes">
+            <summary>
+            Captures unmatched values
+            </summary>
+        </member>
         <member name="T:NoJsBlazor.LoaderAnimation">
             <summary>
             Types of spinning
@@ -947,25 +967,21 @@
             <summary>
             usage: @onmousedown="[MyTouchClickObject].OnMouseDown"
             </summary>
-            <param name="e"></param>
         </member>
         <member name="P:NoJsBlazor.TouchClick`1.OnTouchStart">
             <summary>
             usage: @ontouchstart="[MyTouchClickObject].OnTouchStart"
             </summary>
-            <param name="e"></param>
         </member>
         <member name="P:NoJsBlazor.TouchClick`1.OnMouseMove">
             <summary>
             usage: @onmousemove="[MyTouchClickObject].OnMouseMove"
             </summary>
-            <param name="e"></param>
         </member>
         <member name="P:NoJsBlazor.TouchClick`1.OnTouchMove">
             <summary>
             usage: @ontouchmove="[MyTouchClickObject].OnTouchMove"
             </summary>
-            <param name="e"></param>
         </member>
         <member name="P:NoJsBlazor.TouchClick`1.OnMouseUp">
             <summary>
@@ -988,6 +1004,23 @@
             <para>Objects of that class can handle mouse and touch input properly, that on mouse/touch down the corresponding given methods invokes.</para>
             <para>It manages, that the simulated click on phnone devices will not trigger the given method a second time and also only the left click will trigger an invoke.</para>
             </summary>
+        </member>
+        <member name="M:NoJsBlazor.TouchClick.#ctor(System.Action{System.EventArgs},System.Action{System.EventArgs},System.Action{System.EventArgs})">
+            <summary>
+            Creates an Object that handles mouse and touch input properly to invoke the corresponding given methods.
+            </summary>
+            <param name="OnDown">
+            <para>Will be executed once every time when someone clickes or touches the item.</para>
+            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
+            </param>
+            <param name="OnMove">
+            <para>Wxecutes only if OnDown happend before.</para>
+            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
+            </param>
+            <param name="OnUp">
+            <para>Will be executed once every time when someone releases the item but only if OnDown happend.</para>
+            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
+            </param>
         </member>
         <member name="P:NoJsBlazor.NavBarItem.Head">
             <summary>

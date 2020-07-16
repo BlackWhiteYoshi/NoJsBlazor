@@ -1,0 +1,52 @@
+﻿.text-input-field {
+    $border-radius: 20px;
+    $focus-color: #00F;
+
+    position: relative;
+    display: table;
+    margin: 25px auto 20px auto;
+    border-radius: $border-radius;
+    background-color: #FFF;
+
+    & > input {
+        position: relative;
+        padding: 8px 15px;
+        width: 200px;
+        height: 41.5px;
+        border: solid #444 1px;
+        border-radius: $border-radius;
+        z-index: 2;
+        outline: none;
+        background: none;
+
+        &:focus {
+            border: solid $focus-color 2px;
+        }
+    }
+
+    & > label {
+        position: absolute;
+        top: 0;
+        left: 16px;
+        font-size: 16px;
+        line-height: 5px;
+        background-color: #EEE;
+        opacity: 0.7;
+        z-index: 1;
+        transform: translateY(17px);
+        transition: transform 0.3s;
+    }
+
+    & > input:focus + label, .filled-input-label {
+        font-size: 13px;
+        padding: 0 3px;
+        opacity: 1;
+        z-index: 4;
+        transform: translateY(-2.5px);
+        transition: all 0.2s;
+    }
+
+    & > input:focus + label {
+        color: $focus-color;
+    }
+}
