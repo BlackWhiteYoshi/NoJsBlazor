@@ -7,7 +7,14 @@ namespace NoJsBlazor {
         /// Value of this Input field.
         /// </summary>
         [Parameter]
-        public string Value { get; set; }
+        public string Value {
+            get => _value;
+            set {
+                _value = value;
+                hasValue = !string.IsNullOrEmpty(Value);
+            }
+        }
+        private string _value;
 
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
@@ -36,7 +43,6 @@ namespace NoJsBlazor {
         private void OnInput(ChangeEventArgs e) {
             Value = (string)e.Value;
             ValueChanged.InvokeAsync(Value);
-            hasValue = !string.IsNullOrEmpty(Value);
         }
     }
 }
