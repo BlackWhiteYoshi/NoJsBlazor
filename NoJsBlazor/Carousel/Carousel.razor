@@ -9,7 +9,7 @@
                         z-index: @ItemContainer[i].Zindex;
                         opacity: @ItemContainer[i].Opacity;
                         transform: translateX(@(ItemContainer[i].TranslateX)%) rotateY(@(ItemContainer[i].RotateY)grad);">
-                    @ItemContainer[i].CarouselItem.Render()
+                    @ItemContainer[i].CarouselItem.ChildContent
                 </div>
             }
         }

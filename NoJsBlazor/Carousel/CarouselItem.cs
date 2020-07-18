@@ -35,10 +35,6 @@ namespace NoJsBlazor {
             base.OnInitialized();
         }
 
-        internal RenderFragment Render() {
-            return ChildContent;
-        }
-
         /// <summary>
         /// How this component renders, what is normally written in razor-syntax
         /// </summary>
