@@ -241,13 +241,13 @@
   z-index: 900;
   background: rgba(255, 255, 255, 0.8); }
 
-.text-input-field {
+.input-field-container {
   position: relative;
   display: table;
-  margin: 25px auto 20px auto;
+  margin: 20px auto;
   border-radius: 20px;
   background-color: #FFF; }
-  .text-input-field > input {
+  .input-field-container > input {
     position: relative;
     padding: 8px 15px;
     width: 200px;
@@ -257,9 +257,9 @@
     z-index: 2;
     outline: none;
     background: none; }
-    .text-input-field > input:focus {
+    .input-field-container > input:focus {
       border: solid #00F 2px; }
-  .text-input-field > label {
+  .input-field-container > label {
     position: absolute;
     top: 0;
     left: 16px;
@@ -270,14 +270,14 @@
     z-index: 1;
     transform: translateY(17px);
     transition: transform 0.3s; }
-  .text-input-field > input:focus + label, .text-input-field .filled-input-label {
+  .input-field-container > input:focus + label, .input-field-container .filled-input-label {
     font-size: 13px;
     padding: 0 3px;
     opacity: 1;
     z-index: 4;
     transform: translateY(-2.5px);
     transition: all 0.2s; }
-  .text-input-field > input:focus + label {
+  .input-field-container > input:focus + label {
     color: #00F; }
 
 .loader-icon > div {
