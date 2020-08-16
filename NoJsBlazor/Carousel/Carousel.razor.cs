@@ -387,7 +387,8 @@ namespace NoJsBlazor {
         }
 
         /// <summary>
-        /// Adds an item to the carousel.
+        /// <para>Adds an item to the carousel.</para>
+        /// <para>Default (index = -1) is at the end of the carousel.</para>
         /// </summary>
         /// <param name="item">RenderFragment to Render</param>
         /// <param name="index">0 = first item, Length or -1 = last item</param>
@@ -452,7 +453,7 @@ namespace NoJsBlazor {
         }
 
         /// <summary>
-        /// Removes an item from the carousel.
+        /// Removes the item with the given index from the carousel.
         /// </summary>
         /// <param name="index">0 = first item, Length - 1 = last item</param>
         public void RemoveItem(int index) {
@@ -507,6 +508,18 @@ namespace NoJsBlazor {
             ItemContainer = items;
 
             InvokeAsync(StateHasChanged);
+        }
+
+        /// <summary>
+        /// Removes the first appearance of the given item from the carousel.
+        /// </summary>
+        /// <param name="carouselItem"></param>
+        public void RemoveItem(CarouselItem carouselItem) {
+            for (int i = 0; i < ItemContainer.Length; i++)
+                if (ItemContainer[i].CarouselItem == carouselItem) {
+                    RemoveItem(i);
+                    break;
+                }
         }
 
         /// <summary>
