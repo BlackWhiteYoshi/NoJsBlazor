@@ -4,25 +4,9 @@ using System.Collections.Generic;
 namespace NoJsBlazor {
     /// <summary>
     /// <para>A normal input field with a embedded label.</para>
-    /// <para>Don't use it inside EditForm, use <see cref="EditFormInput">EditFormInput</see> instead.</para>
+    /// <para>It can only be used inside EditForm.</para>
     /// </summary>
-    public partial class Input {
-        /// <summary>
-        /// Value of this Input field.
-        /// </summary>
-        [Parameter]
-        public string Value {
-            get => _value;
-            set {
-                _value = value;
-                hasValue = !string.IsNullOrEmpty(Value);
-            }
-        }
-        private string _value;
-
-        [Parameter]
-        public EventCallback<string> ValueChanged { get; set; }
-
+    public partial class EditFormInput {
         /// <summary>
         /// <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
         /// <para>returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete)</para>
@@ -67,21 +51,24 @@ namespace NoJsBlazor {
         /// </summary>
         [Parameter]
         public bool Autocomplete { get; set; }
-        
+
         /// <summary>
         /// These values are applied to the input field.
         /// </summary>
         [Parameter]
         public Dictionary<string, object> InputAttributes { get; set; }
 
-        /// <summary>
-        /// Captures unmatched values. The values are applied to the outer div container and not to the input field
-        /// </summary>
-        [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> Attributes { get; set; }
+
+        protected override string FormatValueAsString(string value) => value;
+
+        protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage) {
+            result = value;
+            validationErrorMessage = null;
+            return true;
+        }
 
 
-        private bool hasValue;
+        private bool HasValue => !string.IsNullOrEmpty(Value);
 
         private void OnInput(ChangeEventArgs e) {
             Value = (string)e.Value;

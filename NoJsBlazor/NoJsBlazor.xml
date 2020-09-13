@@ -445,6 +445,54 @@
             <para>The same as Active = false</para>
             </summary>
         </member>
+        <member name="T:NoJsBlazor.EditFormInput">
+            <summary>
+            <para>A normal input field with a embedded label.</para>
+            <para>It can only be used inside EditForm.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.EditFormInput.Title">
+            <summary>
+            <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
+            <para>returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete)</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.EditFormInput.Label">
+            <summary>
+            Displayed text of this Input field.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.EditFormInput.Type">
+            <summary>
+            Indicates if the characters should be display as *****
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.EditFormInput.Id">
+            <summary>
+            sets the "id"-attribute in input field and the "for"-attribute in the label.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.EditFormInput.Name">
+            <summary>
+            sets the "name"-attribute in the input field.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.EditFormInput.Autocomplete">
+            <summary>
+            sets the "autocomplete"-attribute in the input field.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.EditFormInput.InputAttributes">
+            <summary>
+            These values are applied to the input field.
+            </summary>
+        </member>
+        <member name="T:NoJsBlazor.Input">
+            <summary>
+            <para>A normal input field with a embedded label.</para>
+            <para>Don't use it inside EditForm, use <see cref="T:NoJsBlazor.EditFormInput">EditFormInput</see> instead.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Input.Value">
             <summary>
             Value of this Input field.
@@ -479,6 +527,11 @@
         <member name="P:NoJsBlazor.Input.Autocomplete">
             <summary>
             sets the "autocomplete"-attribute in the input field.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Input.InputAttributes">
+            <summary>
+            These values are applied to the input field.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Attributes">

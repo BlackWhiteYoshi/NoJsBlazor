@@ -1,7 +1,9 @@
 ﻿@namespace NoJsBlazor
+@inherits InputBase<string>
 
-<div class="input-field-container" @attributes="@Attributes">
+<div class="input-field-container" @attributes="@AdditionalAttributes">
     <input
+            class="@CssClass"
             id="@Id"
             value="@Value"
             @oninput="OnInput"
@@ -9,5 +11,5 @@
             name="@Name"
             autocomplete="@(Autocomplete ? "on" : "off")"
             @attributes="@InputAttributes" />
-    <label class="@(hasValue ? "filled-input-label" : "")" for="@Id">@Label</label>
+    <label class="@(HasValue ? "filled-input-label" : "")" for="@Id">@Label</label>
 </div>

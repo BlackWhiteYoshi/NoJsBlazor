@@ -24,7 +24,7 @@ $xl: 1200px;
 }
 
 // height of the navbar
-$Height: 50;
+$Height: 50px;
 
 // background of the navbar
 $backgroundImage: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230,230,255,0.8), rgba(200, 200, 255, 0.8));
@@ -34,14 +34,14 @@ $breakpoint: $md;
 
 // space between the items in desktop view (this effects the width of the navbar in desktop view)
 // space is part of the link, so the links get more easily clickable
-$desktop-item-padding: 13;
+$desktop-item-padding: 13px;
 
 // space between the items in desktop view (this effects the width of the navbar in desktop view)
 // space is part of list-item, so it is really just empty space
 $desktop-item-margin: 0;
 
 // width of the navbar in phone view
-$phone-min-width: 280;
+$phone-min-width: 280px;
 
 // size of right arrow in desktop view
 $dropright-arrow-size: 10px;
@@ -50,12 +50,12 @@ $dropright-arrow-size: 10px;
 
 .navbar {
     display: table;
-    height: $Height + px;
+    height: $Height;
     margin: 0;
     padding: 5px 0 0 0;
 
     @include media-breakpoint-down($breakpoint) {
-        min-width: $phone-min-width + px;
+        min-width: $phone-min-width;
     }
 
     .navbar-brand {
@@ -149,9 +149,11 @@ $dropright-arrow-size: 10px;
 
         @include media-breakpoint-down($breakpoint) {
             position: absolute;
-            top: $Height + px;
+            top: $Height;
             left: 0;
             width: 100%;
+            max-height: calc(100vh - #{$Height});
+            overflow-y: auto;
             background-image: $backgroundImage;
 
             .navbar-brand {
@@ -237,20 +239,20 @@ $dropright-arrow-size: 10px;
                 }
 
                 .nav-item {
-                    margin-left: $desktop-item-margin + px;
-                    margin-right: $desktop-item-margin + px;
+                    margin-left: $desktop-item-margin;
+                    margin-right: $desktop-item-margin;
                     padding: 0;
 
                     p {
-                        padding: 0.5rem $desktop-item-padding + px;
+                        padding: 0.5rem $desktop-item-padding;
                         margin: 0;
                         cursor: pointer;
                     }
 
                     .nav-link, p {
                         display: inline-block;
-                        padding-left: $desktop-item-padding + px;
-                        padding-right: $desktop-item-padding + px;
+                        padding-left: $desktop-item-padding;
+                        padding-right: $desktop-item-padding;
                         transition: color 0.1s;
                         transition: text-shadow 0.1s;
                         color: #000;
@@ -358,7 +360,7 @@ $dropright-arrow-size: 10px;
             vertical-align: middle;
             transition: fill 0.1s;
             margin-bottom: 1px;
-            padding-right: $size + $desktop-item-padding + px;
+            padding-right: $size + $desktop-item-padding;
             width: $size + px;
             height: $size + px;
             background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon fill='rgb(0,0,0,0.7)' points='0,0 5,10 10,0 5,3'/></svg>");
