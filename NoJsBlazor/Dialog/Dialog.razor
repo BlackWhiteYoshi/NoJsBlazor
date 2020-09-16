@@ -1,22 +1,22 @@
 ﻿@namespace NoJsBlazor
 
 @if (Active) {
-    if (ModalScreen) {
-        <div class="modal-background" @onmousedown="modalBackgroundTC.OnMouseDown" @ontouchstart="modalBackgroundTC.OnTouchStart"
-                @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
-                @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd"></div>
-    }
-    <div class="dialog" @attributes="@Attributes" style="transform: translate(calc(-50% + @(XMovement)px), calc(-50% + @(YMovement)px)); @AddStyles()"
+    <div class="dialog-modal-background" style="@(!ModalScreen ? "background: #0000; pointer-events: none;" : "")"
+            @onmousedown="modalBackgroundTC.OnMouseDown" @ontouchstart="modalBackgroundTC.OnTouchStart"
             @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
             @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd">
-        @if (ShowTitle) {
-            <div class="title"
-                    @onmousedown="headBarTC.OnMouseDown" @ontouchstart="headBarTC.OnTouchStart">
-                @Title
+        <div class="dialog-window" @attributes="@Attributes" style="transform: translate(@(XMovement)px, @(YMovement)px); @AddStyles()"
+                @onmousedown:stopPropagation="true" @ontouchstart:stopPropagation="true"
+                @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
+                @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd">
+            @if (ShowTitle) {
+                <div class="title" @onmousedown="headBarTC.OnMouseDown" @ontouchstart="headBarTC.OnTouchStart">
+                    @Title
+                </div>
+            }
+            <div class="content @(!ShowTitle ? "content-only" : "")">
+                @Content
             </div>
-        }
-        <div class="content @(!ShowTitle ? "content-only" : "")">
-            @Content
         </div>
     </div>
 }

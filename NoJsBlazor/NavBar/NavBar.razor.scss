@@ -47,6 +47,29 @@ $phone-min-width: 280px;
 $dropright-arrow-size: 10px;
 
 
+// color of text/letters
+$font-color: #000;
+
+// color of text/letters while hovered
+$font-hover: #FFF;
+
+// shadow by hovering
+$font-shadow: #000;
+
+
+// color of dropdown-arrow (dropright-arrow)
+$arrow-color: "%23000B";
+
+// color of dropdown-arrow (dropright-arrow) while hovered
+$arrow-hover: "%23FFFB";
+
+// stroke-color of dropdown-arrow (dropright-arrow) while hovered
+$arrow-stroke: "%23000";
+
+// color of phone view round circle dropdown icon
+$arrow-phone: "%23000B";
+
+
 
 .navbar {
     display: table;
@@ -69,7 +92,7 @@ $dropright-arrow-size: 10px;
         a {
             transition: color 0.1s;
             transition: text-shadow 0.1s;
-            color: #000;
+            color: $font-color;
 
             span {
                 margin-left: 5px;
@@ -88,8 +111,8 @@ $dropright-arrow-size: 10px;
             &:hover {
                 transition: color 0.3s;
                 transition: text-shadow 0.3s;
-                color: #FFF !important;
-                text-shadow: 0 0 5px #000 !important;
+                color: $font-hover !important;
+                text-shadow: 0 0 5px $font-shadow !important;
 
                 img {
                     transition: background-color 0.3s;
@@ -181,11 +204,11 @@ $dropright-arrow-size: 10px;
                     .nav-link, p {
                         display: inline-block;
                         width: 100%;
-                        color: #000;
+                        color: $font-color;
 
                         &:focus {
-                            color: #FFF !important;
-                            text-shadow: 0 0 5px #000;
+                            color: $font-hover !important;
+                            text-shadow: 0 0 5px $font-shadow;
                             text-decoration: initial;
                             background-color: initial;
                         }
@@ -193,8 +216,8 @@ $dropright-arrow-size: 10px;
                         &:hover, &:active {
                             transition: color 0.3s;
                             transition: text-shadow 0.3s;
-                            color: #FFF !important;
-                            text-shadow: 0 0 5px #000;
+                            color: $font-hover !important;
+                            text-shadow: 0 0 5px $font-shadow;
                         }
                     }
 
@@ -255,13 +278,13 @@ $dropright-arrow-size: 10px;
                         padding-right: $desktop-item-padding;
                         transition: color 0.1s;
                         transition: text-shadow 0.1s;
-                        color: #000;
+                        color: $font-color;
 
                         &:hover, &:active {
                             transition: color 0.3s;
                             transition: text-shadow 0.3s;
-                            color: #FFF !important;
-                            text-shadow: 0 0 5px #000;
+                            color: $font-hover !important;
+                            text-shadow: 0 0 5px $font-shadow;
 
                             .dropdown-arrow {
                                 fill: #D8D8D8;
@@ -328,6 +351,29 @@ $dropright-arrow-size: 10px;
 
 // drop-down-arrow
 .navbar {
+    // phone round circle string
+    $phone-view-round-circle-header: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>";
+    $phone-view-round-circle-content: "<circle cx='50' cy='50' r='40' fill='rgba(0, 0, 0, 0)'/><line x1='33' y1='43' x2='50' y2='60'/><line x1='67' y1='43' x2='50' y2='60'/>";
+    
+    $phone-view-round-circle-string: "url(\"data:image/svg+xml;utf8," + $phone-view-round-circle-header + "<g stroke-width='8' stroke='" + $arrow-phone + "' stroke-linecap='round'>" + $phone-view-round-circle-content + "</g></svg>\")";
+    
+    
+    // dropdown-arrow string
+    $down-arraw-background-header: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'>";
+    $down-arraw-background-points: "0,0 5,10 10,0 5,3";
+
+    $down-arraw-background-string: "url(\"data:image/svg+xml;utf8," + $down-arraw-background-header + "<polygon fill='" + $arrow-color + "' points='" + $down-arraw-background-points + "'/></svg>\")";
+    $down-arraw-hover-background-string: "url(\"data:image/svg+xml;utf8," + $down-arraw-background-header + "<polygon fill='" + $arrow-hover + "' stroke='" + $arrow-stroke + "' stroke-width='1' points='" + $down-arraw-background-points + "'/></svg>\")";
+
+
+    // dropright-arrow string
+    $right-arraw-background-header: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'>";
+    $right-arraw-background-points: "0,0 3,5 0,10 10,5";
+
+    $right-arraw-background-string: "url(\"data:image/svg+xml;utf8," + $right-arraw-background-header + "<polygon fill='" + $arrow-color + "' points='" + $right-arraw-background-points + "'/></svg>\")";
+    $right-arraw-hover-background-string: "url(\"data:image/svg+xml;utf8," + $right-arraw-background-header + "<polygon fill='" + $arrow-hover + "' stroke='" + $arrow-stroke + "' stroke-width='1' points='" + $right-arraw-background-points + "'/></svg>\")";
+
+
     @include media-breakpoint-down($breakpoint) {
         // phone view round circle dropdown icon
         .dropdown-arrow {
@@ -339,7 +385,7 @@ $dropright-arrow-size: 10px;
             opacity: 0.9;
             cursor: pointer;
             transition: transform 0.3s;
-            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g stroke-width='8' stroke='rgb(0,0,0,0.7)' stroke-linecap='round'><circle cx='50' cy='50' r='40' fill='rgba(0, 0, 0, 0)'/><line x1='33' y1='43' x2='50' y2='60'/><line x1='67' y1='43' x2='50' y2='60'/></g></svg>");
+            background: #{$phone-view-round-circle-string};
             background-repeat: no-repeat;
 
             &:hover {
@@ -363,12 +409,12 @@ $dropright-arrow-size: 10px;
             padding-right: $size + $desktop-item-padding;
             width: $size + px;
             height: $size + px;
-            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon fill='rgb(0,0,0,0.7)' points='0,0 5,10 10,0 5,3'/></svg>");
+            background: #{$down-arraw-background-string};
             background-repeat: no-repeat;
         }
 
         .nav-item.dropdown:hover > .dropdown-arrow {
-            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon fill='rgb(255,255,255,0.7)' stroke='black' stroke-width='1' points='0,0 5,10 10,0 5,3'/></svg>");
+            background: #{$down-arraw-hover-background-string};
             background-repeat: no-repeat;
         }
 
@@ -378,12 +424,12 @@ $dropright-arrow-size: 10px;
                 width: $dropright-arrow-size;
                 height: $dropright-arrow-size;
                 margin-top: 2px;
-                background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon fill='rgb(0,0,0,0.7)' points='0,0 3,5 0,10 10,5'/></svg>");
+                background: #{$right-arraw-background-string};
                 background-repeat: no-repeat;
             }
 
             .nav-item.dropdown:hover > .dropdown-arrow {
-                background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon fill='rgb(255,255,255,0.7)' stroke='black' stroke-width='1' points='0,0 3,5 0,10 10,5'/></svg>");
+                background: #{$right-arraw-hover-background-string};
                 background-repeat: no-repeat;
             }
         }

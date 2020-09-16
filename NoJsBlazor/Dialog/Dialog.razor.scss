@@ -1,74 +1,73 @@
-﻿.dialog {
-    $border-radius: 20px;
-
+﻿// background around the window if Modalscreen = true
+.dialog-modal-background {
     position: fixed;
-    display: table;
-
-    // place middle align
-    left: 50%;
-    top: 50%;
-
-    z-index: 901;
-
-    // no shrink
-    white-space: nowrap;
-
-    // border properties
-    border: solid 3px black;
-    border-radius: $border-radius;
-
-    animation: fade-in 0.6s;
-
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    .title {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-
-        // background of headbar
-        background-color: #FFF;
-        padding: 5px 0 5px 15px;
-        border-radius: $border-radius $border-radius 0 0;
-        border-bottom: solid 2px #AAA;
-        cursor: default;
-
-        p {
-            display: inline;
-            margin: 0;
-        }
-    }
-
-    .content {
-        // background of window
-        background-color: #EEE;
-        // space to the edges
-        padding: 20px;
-        border-radius: 0 0 $border-radius $border-radius;
-    }
-
-    .content.content-only {
-        border-radius: $border-radius;
-    }
-}
-
-// background around the window if Modalscreen = true
-.modal-background {
-    position: fixed;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+
+    // place dialog middle
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     z-index: 900;
-    // the color
+    
+    // the color for modal-screen
     background: rgba(255, 255, 255, 0.8);
+
+    .dialog-window {
+        $border-radius: 20px;
+
+        margin: 0 20px;
+        z-index: 901;
+        pointer-events: auto;
+
+        // border properties
+        border: solid 3px black;
+        border-radius: $border-radius;
+
+        animation: fade-in 0.6s;
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .title {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+
+            // background of headbar
+            background-color: #FFF;
+            padding: 5px 0 5px 15px;
+            border-radius: $border-radius $border-radius 0 0;
+            border-bottom: solid 2px #AAA;
+            cursor: default;
+
+            p {
+                display: inline;
+                margin: 0;
+            }
+        }
+
+        .content {
+            // background of window
+            background-color: #EEE;
+            // space to the edges
+            padding: 20px;
+            border-radius: 0 0 $border-radius $border-radius;
+        }
+
+        .content.content-only {
+            border-radius: $border-radius;
+        }
+    }
 }
