@@ -621,59 +621,70 @@
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.Size">
             <summary>
-            Base size of the icon.
+            <para>Base size of the icon.</para>
+            <para>Default is 100.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.BallSize">
             <summary>
-            Ball size relativ to the <see cref="P:NoJsBlazor.LoaderIcon.Size">base size</see>.
+            <para>Ball size relativ to the <see cref="P:NoJsBlazor.LoaderIcon.Size">base size</see>.</para>
+            <para>This value can range from 0 to 1, default is 0.875.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.BallMargin">
             <summary>
             <para>Space between the balls relativ to the ball size.</para>
             <para>If ball size is 1.0, this value has no effect.</para>
+            <para>This value can range from 0 to 1, default is 0.25.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.Animation">
             <summary>
-            Type of animation to play.
+            <para>Type of animation to play.</para>
+            <para>Defailt is LoaderAnimation.Spin.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.SpinDuration">
             <summary>
-            Speed of the rotation in ms.
+            <para>Speed of the rotation in ms.</para>
+            <para>Defailt is 2000.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.SpinTimingFunction">
             <summary>
-            Timing function of the rotation.
+            <para>Timing function of the rotation.</para>
+            <para>Defailt is LoaderTimingFunction.Linear.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.SpinDirection">
             <summary>
-            Animation direction of the rotation.
+            <para>Animation direction of the rotation.</para>
+            <para>Defailt is LoaderDirection.Normal.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.ColorDuration">
             <summary>
-            Speed of color changing in ms.
+            <para>Speed of color changing in ms.</para>
+            <para>Default is 1500.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.ColorTimingFunction">
             <summary>
-            Timing function of color changing.
+            <para>Timing function of color changing.</para>
+            <para>Default is LoaderTimingFunction.Linear.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.BallMoveDuration">
             <summary>
             <para>Speed of moving the balls outwards in ms.</para>
             <para>Value of 0 will remove this animation.</para>
+            <para>Default is 2000.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.BallMoveTimingFunction">
             <summary>
-            Timing funtion of moving the balls outwards.
+            <para>Timing funtion of moving the balls outwards.</para>
+            <para>Default is LoaderTimingFunction.Ease_in_out.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.Attributes">

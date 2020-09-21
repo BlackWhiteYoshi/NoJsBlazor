@@ -76,13 +76,15 @@ namespace NoJsBlazor {
         #region Parameters
 
         /// <summary>
-        /// Base size of the icon.
+        /// <para>Base size of the icon.</para>
+        /// <para>Default is 100.</para>
         /// </summary>
         [Parameter]
         public int Size { get; set; } = 100;
 
         /// <summary>
-        /// Ball size relativ to the <see cref="Size">base size</see>.
+        /// <para>Ball size relativ to the <see cref="Size">base size</see>.</para>
+        /// <para>This value can range from 0 to 1, default is 0.875.</para>
         /// </summary>
         [Parameter]
         public float BallSize {
@@ -102,6 +104,7 @@ namespace NoJsBlazor {
         /// <summary>
         /// <para>Space between the balls relativ to the ball size.</para>
         /// <para>If ball size is 1.0, this value has no effect.</para>
+        /// <para>This value can range from 0 to 1, default is 0.25.</para>
         /// </summary>
         [Parameter]
         public float BallMargin {
@@ -121,7 +124,8 @@ namespace NoJsBlazor {
         private float ballMarginInner;
 
         /// <summary>
-        /// Type of animation to play.
+        /// <para>Type of animation to play.</para>
+        /// <para>Defailt is LoaderAnimation.Spin.</para>
         /// </summary>
         [Parameter]
         public LoaderAnimation Animation {
@@ -135,13 +139,15 @@ namespace NoJsBlazor {
         private string animation = "spin";
 
         /// <summary>
-        /// Speed of the rotation in ms.
+        /// <para>Speed of the rotation in ms.</para>
+        /// <para>Defailt is 2000.</para>
         /// </summary>
         [Parameter]
         public int SpinDuration { get; set; } = 2000;
 
         /// <summary>
-        /// Timing function of the rotation.
+        /// <para>Timing function of the rotation.</para>
+        /// <para>Defailt is LoaderTimingFunction.Linear.</para>
         /// </summary>
         [Parameter]
         public LoaderTimingFunction SpinTimingFunction {
@@ -155,7 +161,8 @@ namespace NoJsBlazor {
         private string spinTimingFunction = "linear";
 
         /// <summary>
-        /// Animation direction of the rotation.
+        /// <para>Animation direction of the rotation.</para>
+        /// <para>Defailt is LoaderDirection.Normal.</para>
         /// </summary>
         [Parameter]
         public LoaderDirection SpinDirection {
@@ -169,13 +176,15 @@ namespace NoJsBlazor {
         private string spinDirection = "normal";
 
         /// <summary>
-        /// Speed of color changing in ms.
+        /// <para>Speed of color changing in ms.</para>
+        /// <para>Default is 1500.</para>
         /// </summary>
         [Parameter]
-        public int ColorDuration { get; set; } = 1000;
+        public int ColorDuration { get; set; } = 1500;
 
         /// <summary>
-        /// Timing function of color changing.
+        /// <para>Timing function of color changing.</para>
+        /// <para>Default is LoaderTimingFunction.Linear.</para>
         /// </summary>
         [Parameter]
         public LoaderTimingFunction ColorTimingFunction {
@@ -191,12 +200,14 @@ namespace NoJsBlazor {
         /// <summary>
         /// <para>Speed of moving the balls outwards in ms.</para>
         /// <para>Value of 0 will remove this animation.</para>
+        /// <para>Default is 2000.</para>
         /// </summary>
         [Parameter]
         public int BallMoveDuration { get; set; } = 2000;
 
         /// <summary>
-        /// Timing funtion of moving the balls outwards.
+        /// <para>Timing funtion of moving the balls outwards.</para>
+        /// <para>Default is LoaderTimingFunction.Ease_in_out.</para>
         /// </summary>
         [Parameter]
         public LoaderTimingFunction BallMoveTimingFunction {

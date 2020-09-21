@@ -1,4 +1,9 @@
-﻿.loader-icon > div {
+﻿$color1: #D00;  // red
+$color2: #00D;  // blue
+$color3: #DD0;  // yellow
+$color4: #0D0;  // green
+
+.loader-icon > div {
     position: absolute;
     border-radius: 50%;
 }
@@ -23,43 +28,43 @@
     }
 }
 
-@keyframes ball-color-1 {
+@keyframes ball-color-1-2 {
     from {
-        background-color: red;
+        background-color: $color1;
     }
 
     to {
-        background-color: blue;
+        background-color: $color2;
     }
 }
 
-@keyframes ball-color-2 {
+@keyframes ball-color-2-3 {
     from {
-        background-color: blue;
+        background-color: $color2;
     }
 
     to {
-        background-color: yellow;
+        background-color: $color3;
     }
 }
 
-@keyframes ball-color-3 {
+@keyframes ball-color-3-4 {
     from {
-        background-color: yellow;
+        background-color: $color3;
     }
 
     to {
-        background-color: green;
+        background-color: $color4;
     }
 }
 
-@keyframes ball-color-4 {
+@keyframes ball-color-4-1 {
     from {
-        background-color: green;
+        background-color: $color4;
     }
 
     to {
-        background-color: red;
+        background-color: $color1;
     }
 }
 

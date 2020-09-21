@@ -296,29 +296,29 @@
   to {
     transform: rotate(360deg) skew(30deg, 30deg); } }
 
-@keyframes ball-color-1 {
+@keyframes ball-color-1-2 {
   from {
-    background-color: red; }
+    background-color: #D00; }
   to {
-    background-color: blue; } }
+    background-color: #00D; } }
 
-@keyframes ball-color-2 {
+@keyframes ball-color-2-3 {
   from {
-    background-color: blue; }
+    background-color: #00D; }
   to {
-    background-color: yellow; } }
+    background-color: #DD0; } }
 
-@keyframes ball-color-3 {
+@keyframes ball-color-3-4 {
   from {
-    background-color: yellow; }
+    background-color: #DD0; }
   to {
-    background-color: green; } }
+    background-color: #0D0; } }
 
-@keyframes ball-color-4 {
+@keyframes ball-color-4-1 {
   from {
-    background-color: green; }
+    background-color: #0D0; }
   to {
-    background-color: red; } }
+    background-color: #D00; } }
 
 @keyframes ball-move-1 {
   from {
