@@ -1,51 +1,23 @@
-﻿$xs: 0px;
-$sm: 576px;
-$md: 768px;
-$lg: 992px;
-$xl: 1200px;
-/**
- * bootstrap variables for container
- * sm: 540px,
- * md: 720px,
- * lg: 960px,
- * xl: 1140px
- */
-
-@mixin media-breakpoint-up($width) {
-    @media (min-width: $width) {
-        @content;
-    }
-}
-
-@mixin media-breakpoint-down($width) {
-    @media (max-width: $width - 0.01) {
-        @content;
-    }
-}
-
-
-.collapse-div {
+﻿.collapse-div {
     // speed of collapsing/expanding
     $speed: 0.3s;
 
     display: inline-block;
     width: 100%;
-    padding: 20px 50px 20px 20px;
+    padding: 20px;
     background-color: #DDE;
-    transition: height $speed ease-out;  
-
-    @include media-breakpoint-down($md) {
-        margin: 0 0 40px 0;
-    }
-
-    & > .content-div {
-        transition: transform $speed ease-out;
-    }
+    overflow: hidden;
+    transition: height $speed ease-out;
 
     // content of button/headline
-    .button-div > p {
-        text-align: center;
-        cursor: pointer;
+    .button-div {
+        margin-bottom: 15px;
+
+        & > p {
+            margin: 0;
+            text-align: center;
+            cursor: pointer;
+        }
     }
 
     p {

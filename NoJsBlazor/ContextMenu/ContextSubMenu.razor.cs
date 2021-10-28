@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace NoJsBlazor {
@@ -11,20 +12,22 @@ namespace NoJsBlazor {
         /// Will be automatically set by the root.
         /// </summary>
         [CascadingParameter(Name = "Root")]
-        public ContextMenu ContextMenuRoot { get; set; }
+        [AllowNull]
+        public ContextMenu ContextMenuRoot { get; init; }
 
         /// <summary>
         /// Content that is collapsed visible.
         /// </summary>
         [Parameter]
-        public RenderFragment Head { get; set; }
+        public RenderFragment? Head { get; set; }
 
         /// <summary>
         /// Content that is expanded visible.
         /// </summary>
         [Parameter]
-        public RenderFragment Items { get; set; }
+        public RenderFragment? Items { get; set; }
 
+        private bool _expanded = false;
         /// <summary>
         /// Value for expanding or collapsing this submenu.
         /// </summary>
@@ -37,37 +40,28 @@ namespace NoJsBlazor {
                 InvokeAsync(StateHasChanged);
             }
         }
-        private bool _expanded = false;
 
         /// <summary>
         /// <para>Fires every time after <see cref="Expanded">Expanded</see> got set.</para>
         /// <para>Value is equal <see cref="Expanded">Expanded</see>.</para>
         /// </summary>
-        public event Action<bool> OnToggle;
+        public event Action<bool>? OnToggle;
 
         private readonly TouchClick dropRightTC;
 
-        public ContextSubMenu() {
-            dropRightTC = new TouchClick(PhoneDropRightHandler);
-        }
+        public ContextSubMenu() => dropRightTC = new TouchClick(PhoneDropRightHandler);
 
-        protected override void OnInitialized() {
-            ContextMenuRoot?.Register(this);
-        }
+        protected override void OnInitialized() => ContextMenuRoot?.Register(this);
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void PhoneDropRightHandler(EventArgs e) {
-            Toggle();
-        }
+        private void PhoneDropRightHandler(EventArgs e) => Toggle();
 
         /// <summary>
         /// <para>Expands/Collapses this menu.</para>
         /// <para>Shorthand for: <see cref="Expanded">Expanded</see> = !<see cref="Expanded">Expanded</see>;</para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Toggle() {
-            Expanded = !Expanded;
-        }
+        public void Toggle() => Expanded = !Expanded;
     }
 }

@@ -1,0 +1,67 @@
+﻿@namespace ManualTesting
+
+<header id="header-navbar" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
+    <NavBar @ref="navBar">
+        <Brand>
+            <a href="/">
+                <span>My Website</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                </svg>
+            </a>
+        </Brand>
+        <Items>
+            <NavBarLink>Test</NavBarLink>
+            <NavBarMenu>
+                <Head>
+                    <NavBarLink>@CBox.LPrint("Example", "Beispiel")</NavBarLink>
+                </Head>
+                <Items>
+                    <NavBarLink>@CBox.LPrint("Example 2", "Beispiel 3")</NavBarLink>
+                    <NavBarMenu>
+                        <Head>
+                            <NavBarLink>@CBox.LPrint("Example 2", "Beispiel 2")</NavBarLink>
+                        </Head>
+                        <Items>
+                            <NavBarLink>@CBox.LPrint("Example 3", "Beispiel 3")</NavBarLink>
+                        </Items>
+                    </NavBarMenu>
+                </Items>
+            </NavBarMenu>
+            <NavBarLink>@CBox.LPrint("Example 2", "Beispiel 2")</NavBarLink>
+            <NavBarLink>@CBox.LPrint("Example 3", "Beispiel 3")</NavBarLink>
+        </Items>
+    </NavBar>
+    <div id="flag" @onmousedown="dialogOpenTC.OnMouseDown" @ontouchstart="dialogOpenTC.OnTouchStart">@GetFlag(DBox.Language, 20)</div>
+</header>
+
+<Dialog @ref="dialog" ModalScreen="false" id="language-dialog" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
+    <Title>
+        <p>@GetFlag(DBox.Language, 15, "margin: 0 5px 2px 0;") @CBox.LPrint("Select Language", "Wähle Sprache")</p>
+    </Title>
+    <Content>
+        <div class="@(DBox.Language == Language.English ? "selected" : "")"
+                @onmousedown="(MouseEventArgs e) => { setLanguageTC.Parameter = Language.English; setLanguageTC.OnMouseDown(e); }"
+                @ontouchstart="(TouchEventArgs e) => { setLanguageTC.Parameter = Language.English; setLanguageTC.OnTouchStart(e); }">
+            <UKFlag />
+            <p>English</p>
+        </div>
+        <div class="@(DBox.Language == Language.German ? "selected" : "")"
+                @onmousedown="(MouseEventArgs e) => { setLanguageTC.Parameter = Language.German; setLanguageTC.OnMouseDown(e); }"
+                @ontouchstart="(TouchEventArgs e) => { setLanguageTC.Parameter = Language.German; setLanguageTC.OnTouchStart(e); }">
+            <GermanFlag />
+            <p>Deutsch</p>
+        </div>
+    </Content>
+</Dialog>
+
+
+@code {
+    public RenderFragment GetFlag(Language language, int height, string? styles = null) {
+        return language switch {
+            Language.English => @<UKFlag height="@height" style="@styles" />,
+            Language.German => @<GermanFlag height="@height" style="@styles" />,
+            _ => throw new Exception("invalid enum or not all enums are present in this switch")
+        };
+    }
+}

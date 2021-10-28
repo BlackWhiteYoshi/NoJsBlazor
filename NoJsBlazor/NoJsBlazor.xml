@@ -464,7 +464,11 @@
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Type">
             <summary>
-            Indicates if the characters should be display as *****
+            e.g.<br></br>
+            normal text (abcd)<br></br>
+            password (****)<br></br>
+            numberField (0123)<br></br>
+            …
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Id">
@@ -511,7 +515,7 @@
         </member>
         <member name="P:NoJsBlazor.Input.Type">
             <summary>
-            Indicates if the characters should be display as *****
+            Sets the type attribute.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Id">
@@ -787,11 +791,6 @@
         <member name="P:NoJsBlazor.DecimalSlider.Title">
             <summary>
             An optional label.
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.StartValue">
-            <summary>
-            Initial value.
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Min">

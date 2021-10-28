@@ -11,7 +11,7 @@ namespace NoJsBlazor {
         #region Listable
 
         [CascadingParameter(Name = "Parent")]
-        public ListableHoldingComponentBase<T> Parent { get; set; }
+        public ListableHoldingComponentBase<T>? Parent { get; set; }
 
         /// <summary>
         /// <para>Registering the component at the parent <see cref="ListableComponentBase{T}"/>.</para>
@@ -29,7 +29,7 @@ namespace NoJsBlazor {
         /// <summary>
         /// List of all registered <see cref="ListableComponentBase{T}"/> childs.
         /// </summary>
-        protected readonly List<T> childList = new List<T>();
+        protected readonly List<T> childList = new();
 
         /// <summary>
         /// API for <see cref="ListableComponentBase{T}"/> objects to add themselves to the list.

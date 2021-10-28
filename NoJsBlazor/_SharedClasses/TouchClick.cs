@@ -10,9 +10,9 @@ namespace NoJsBlazor {
     public class TouchClick<T> {
         private bool isTouch = false;
         private bool isDown = false;
-        private readonly Action<EventArgs> OnDown;
-        private readonly Action<EventArgs> OnMove;
-        private readonly Action<EventArgs> OnUp;
+        private readonly Action<EventArgs>? OnDown;
+        private readonly Action<EventArgs>? OnMove;
+        private readonly Action<EventArgs>? OnUp;
 
         /// <summary>
         /// Creates an Object that handles mouse and touch input properly to invoke the corresponding given methods.
@@ -29,7 +29,7 @@ namespace NoJsBlazor {
         /// <para>Will be executed once every time when someone releases the item but only if OnDown happend.</para>
         /// <para><see cref="EventArgs"/> is either an instance of  <see cref="MouseEventArgs"/> or <see cref="TouchEventArgs"/>.</para>
         /// </param>
-        public TouchClick(Action<EventArgs> OnDown = null, Action<EventArgs> OnMove = null, Action<EventArgs> OnUp = null) {
+        public TouchClick(Action<EventArgs>? OnDown = null, Action<EventArgs>? OnMove = null, Action<EventArgs>? OnUp = null) {
             this.OnDown = OnDown;
             this.OnMove = OnMove;
             this.OnUp = OnUp;
@@ -65,7 +65,7 @@ namespace NoJsBlazor {
         /// <para>T should be a model that can hold all necessary parameters.</para>
         /// <para>Set the parameters before invoking the Action, so the parameters can be used in the given method.</para>
         /// </summary>
-        public T Parameter { get; set; }
+        public T? Parameter { get; set; }
 
 
         private void OnMouseDownAction(MouseEventArgs e) {
@@ -88,7 +88,8 @@ namespace NoJsBlazor {
             if (isTouch || !isDown)
                 return;
 
-            if ((e.Buttons & 0x1) != 1) { // "e.Buttons & 0x1" means left mouse button down
+            // "e.Buttons & 0x1" means left mouse button down
+            if ((e.Buttons & 0x1) != 1) {
                 OnMouseUpAction(e);
                 return;
             }
@@ -140,7 +141,6 @@ namespace NoJsBlazor {
         /// <para>Will be executed once every time when someone releases the item but only if OnDown happend.</para>
         /// <para><see cref="EventArgs"/> is either an instance of  <see cref="MouseEventArgs"/> or <see cref="TouchEventArgs"/>.</para>
         /// </param>
-        public TouchClick(Action<EventArgs> OnDown = null, Action<EventArgs> OnMove = null, Action<EventArgs> OnUp = null)
-            : base(OnDown, OnMove, OnUp) { }
+        public TouchClick(Action<EventArgs>? OnDown = null, Action<EventArgs>? OnMove = null, Action<EventArgs>? OnUp = null) : base(OnDown, OnMove, OnUp) { }
     }
 }

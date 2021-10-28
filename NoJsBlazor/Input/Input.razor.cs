@@ -7,18 +7,18 @@ namespace NoJsBlazor {
     /// <para>Don't use it inside EditForm, use <see cref="EditFormInput">EditFormInput</see> instead.</para>
     /// </summary>
     public partial class Input {
+        private string? _value;
         /// <summary>
         /// Value of this Input field.
         /// </summary>
         [Parameter]
-        public string Value {
+        public string? Value {
             get => _value;
             set {
                 _value = value;
                 hasValue = !string.IsNullOrEmpty(Value);
             }
         }
-        private string _value;
 
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
@@ -42,25 +42,25 @@ namespace NoJsBlazor {
         /// Displayed text of this Input field.
         /// </summary>
         [Parameter]
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         /// <summary>
-        /// Indicates if the characters should be display as *****
+        /// Sets the type attribute.
         /// </summary>
         [Parameter]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// sets the "id"-attribute in input field and the "for"-attribute in the label.
         /// </summary>
         [Parameter]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// sets the "name"-attribute in the input field.
         /// </summary>
         [Parameter]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// sets the "autocomplete"-attribute in the input field.
@@ -72,19 +72,19 @@ namespace NoJsBlazor {
         /// These values are applied to the input field.
         /// </summary>
         [Parameter]
-        public Dictionary<string, object> InputAttributes { get; set; }
+        public Dictionary<string, object>? InputAttributes { get; set; }
 
         /// <summary>
         /// Captures unmatched values. The values are applied to the outer div container and not to the input field
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> Attributes { get; set; }
+        public Dictionary<string, object>? Attributes { get; set; }
 
 
         private bool hasValue;
 
         private void OnInput(ChangeEventArgs e) {
-            Value = (string)e.Value;
+            Value = (string?)e.Value;
             ValueChanged.InvokeAsync(Value);
         }
     }

@@ -1,0 +1,52 @@
+﻿#language-dialog {
+    $border-radius: 20px;
+    border: none;
+
+    & > .title {
+        border: solid 3px #000;
+        border-bottom: solid 2px #000;
+        border-radius: $border-radius $border-radius 0 0;
+    }
+
+    & > .content {
+        display: block;
+        padding: 0;
+        border-radius: 0 0 $border-radius $border-radius;
+        background-color: #FFF;
+        cursor: pointer;
+        min-width: 175px;
+        
+        & > .selected {
+            background-color: #0078D7;
+        }
+
+        & > div {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            padding: 15px 30px 15px 20px;
+            font-size: 16px;
+            background-color: #FFF;
+
+            border-top: none;
+            border-bottom: solid 1px #000;
+            border-left: solid 3px #000;
+            border-right: solid 3px #000;
+
+            & > svg {
+                display: table;
+                margin: 0 auto;
+                height: 25px;
+            }
+
+            & > p {
+                display: table;
+                margin: 0 0 0 15px;
+            }
+        }
+
+        & > div:last-child {
+            border-bottom: solid 3px #000;
+            border-radius: 0 0 $border-radius $border-radius;
+        }
+    }
+}

@@ -10,15 +10,15 @@ namespace NoJsBlazor {
     /// </summary>
     public enum CarouselAnimation {
         /// <summary>
-        /// Transition to opacity
+        /// Transition on opacity
         /// </summary>
         FadeOut,
         /// <summary>
-        /// Transition to transform: x-axis
+        /// Transition on transform: x-axis
         /// </summary>
         Slide,
         /// <summary>
-        /// Transition to transform: x-axis and y-axis
+        /// Transition on transform: x-axis and y-axis
         /// </summary>
         SlideRotate
     }
@@ -34,63 +34,71 @@ namespace NoJsBlazor {
             public int Opacity;
             public float TranslateX;
             public float RotateY;
-            public string Class;
+            public string? Class;
             public float IndicatorOpacity;
             public int ProgressBar;
             public int ProgressBarTransition;
         }
-        private Item[] ItemContainer = new Item[0];
+        private Item[] ItemContainer = Array.Empty<Item>();
 
         #region Parameters & Fields
 
         /// <summary>
-        /// Active item at the beginning.
+        /// <para>Index of the active item at the beginning.</para>
+        /// <para>Default is 0.</para>
         /// </summary>
         [Parameter]
-        public int Active { get; set; } = 0;
+        public int Active { get; init; } = 0;
         private int active;
 
         /// <summary>
-        /// Waiting time before beginning swap animation in ms.
+        /// <para>Waiting time before beginning swap animation in ms.</para>
+        /// <para>Default is 6000.</para>
         /// </summary>
         [Parameter]
-        public int IntervalTime { get; set; } = 6000;
+        public int IntervalTime { get; init; } = 6000;
 
         /// <summary>
-        /// Type of swapping animation.
+        /// <para>Type of swapping animation.</para>
+        /// <para>Default is FadeOut.</para>
         /// </summary>
         [Parameter]
-        public CarouselAnimation Animation { get; set; } = CarouselAnimation.FadeOut;
+        public CarouselAnimation Animation { get; init; } = CarouselAnimation.FadeOut;
         CarouselAnimation animation;
 
         /// <summary>
         /// <para>Starts interval after [AutoStartTime] ms, if interval not running and no action occurs.</para>
         /// <para>Value of 0 deactivates autostart.</para>
+        /// <para>Default is 0.</para>
         /// </summary>
         [Parameter]
-        public int AutoStartTime { get; set; } = 0;
+        public int AutoStartTime { get; init; } = 0;
         private bool autoStartActive = false;
 
         /// <summary>
-        /// Interval Thread starts at beginning.
+        /// <para>Interval Thread starts at beginning.</para>
+        /// <para>Default is true.</para>
         /// </summary>
         [Parameter]
-        public bool BeginRunning { get; set; } = true;
+        public bool BeginRunning { get; init; } = true;
 
         /// <summary>
-        /// Next/Previous Arrows available
+        /// <para>Next/Previous Arrows available</para>
+        /// <para>Default is true.</para>
         /// </summary>
         [Parameter]
         public bool ControlArrowsEnable { get; set; } = true;
 
         /// <summary>
-        /// Indicators available
+        /// <para>Indicators available</para>
+        /// <para>Default is true.</para>
         /// </summary>
         [Parameter]
         public bool IndicatorsEnable { get; set; } = true;
 
         /// <summary>
-        /// PlayButton available
+        /// <para>PlayButton available</para>
+        /// <para>Default is true.</para>
         /// </summary>
         [Parameter]
         public bool PlayButtonEnable { get; set; } = true;
@@ -100,19 +108,19 @@ namespace NoJsBlazor {
         /// <para>This should be a list of <see cref="CarouselItem"/> objects.</para>
         /// </summary>
         [Parameter]
-        public RenderFragment Items { get; set; }
+        public RenderFragment? Items { get; set; }
 
         /// <summary>
         /// Html that will be rendered in the overlay section.
         /// </summary>
         [Parameter]
-        public RenderFragment Overlay { get; set; }
+        public RenderFragment? Overlay { get; set; }
 
         /// <summary>
         /// Captures unmatched values
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> Attributes { get; set; }
+        public Dictionary<string, object>? Attributes { get; set; }
 
 
         /// <summary>
@@ -125,13 +133,13 @@ namespace NoJsBlazor {
         /// <para>Fires every time after <see cref="active">active</see> item changed.</para>
         /// <para>Parameter is index of the new active item.</para>
         /// </summary>
-        public event Action<int> OnActiveChanged;
+        public event Action<int>? OnActiveChanged;
 
         /// <summary>
         /// <para>Fires every time after the <see cref="Running">Running</see> state is set.</para>
         /// <para>Parameter indicates if the carousel is currently running.</para>
         /// </summary>
-        public event Action<bool> OnRunningChanged;
+        public event Action<bool>? OnRunningChanged;
 
 
         private readonly TouchClick prevTC;
@@ -139,8 +147,8 @@ namespace NoJsBlazor {
         private readonly TouchClick<int> indicatorTC;
         private readonly TouchClick playButtonTC;
 
-        private readonly Timer interval = new Timer();
-        private readonly Timer autoStart = new Timer();
+        private readonly Timer interval = new();
+        private readonly Timer autoStart = new();
 
         #endregion
 
@@ -655,6 +663,7 @@ namespace NoJsBlazor {
         public void Dispose() {
             interval?.Dispose();
             autoStart?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         #endregion

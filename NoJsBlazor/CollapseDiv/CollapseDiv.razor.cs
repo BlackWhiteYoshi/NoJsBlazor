@@ -12,33 +12,34 @@ namespace NoJsBlazor {
         /// <para>If clicked on it, it will expand/collapse.</para>
         /// </summary>
         [Parameter]
-        public RenderFragment Head { get; set; }
+        public RenderFragment? Head { get; set; }
 
         /// <summary>
         /// Content that is hidden when collapsed.
         /// </summary>
         [Parameter]
-        public RenderFragment Content { get; set; }
+        public RenderFragment? Content { get; set; }
 
         /// <summary>
-        /// <para>Height of the head of the Component which also functions as the collapse/expand button.</para>
+        /// <para>Height in px of the head of the Component which also functions as the collapse/expand button.</para>
         /// <para>It is also the height of the Component when it is collapsed.</para>
+        /// <para>Default is 62.</para>
         /// </summary>
         [Parameter]
-        public int HeadHeight { get; set; } = 60;
+        public int HeadHeight { get; set; } = 62;
 
         /// <summary>
-        /// <para>Height gain of the Component when it expand.</para>
-        /// <para><see cref="HeadHeight">ButtonHeight</see> + <see cref="ContentHeight">ContentHeight</see> = expanded Component-height</para>
+        /// <para>Height of the Component when it is expanded.</para>
+        /// <para>Default is 173.</para>
         /// </summary>
         [Parameter]
-        public int ContentHeight { get; set; } = 150;
+        public int ContentHeight { get; set; } = 173;
 
         /// <summary>
         /// Initializing collapsed or expanded.
         /// </summary>
         [Parameter]
-        public bool StartCollapsed { get; set; } = true;
+        public bool StartCollapsed { get; init; } = true;
 
         /// <summary>
         /// <para>Fires every time when collapse state is changed.</para>
@@ -51,38 +52,32 @@ namespace NoJsBlazor {
         /// Captures unmatched values
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> Attributes { get; set; }
+        public Dictionary<string, object>? Attributes { get; set; }
 
+        private bool _collapsed;
         public bool Collapsed {
-            get => collapsed;
+            get => _collapsed;
             set {
-                collapsed = value;
+                _collapsed = value;
                 OnCollapseChanged.InvokeAsync(value);
                 InvokeAsync(StateHasChanged);
             }
         }
-        private bool collapsed;
 
 
         private readonly TouchClick touchClick;
 
-        public CollapseDiv() {
-            touchClick = new TouchClick(ButtonDown);
-        }
+        public CollapseDiv() => touchClick = new TouchClick(ButtonDown);
 
-        protected override void OnInitialized() {
-            collapsed = StartCollapsed;
-        }
+        protected override void OnInitialized() => Collapsed = StartCollapsed;
 
-        private void ButtonDown(EventArgs e) {
-            Collapsed = !Collapsed;
-        }
-    
-        private object AddStyles() {
+        private void ButtonDown(EventArgs e) => Collapsed = !Collapsed;
+
+        private object? AddStyles() {
             if (Attributes == null)
                 return null;
 
-            if (Attributes.TryGetValue("style", out object styles))
+            if (Attributes.TryGetValue("style", out object? styles))
                 return styles;
             else
                 return null;

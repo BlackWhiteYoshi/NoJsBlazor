@@ -1,0 +1,14 @@
+﻿@namespace ManualTesting
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" @attributes="@Attributes">
+    <polygon points="5,98.30254038 55,11.7 105,98.30254038" fill="rgb(255,204,0)" stroke="rgb(255,204,0)" stroke-width="10" stroke-linejoin="round" />
+    <circle cx="55" cy="40" r="7" fill="black" />
+    <line x1="53" y1="40" x2="55" y2="70" stroke="black" stroke-width="10" stroke-linecap="round" />
+    <line x1="57" y1="40" x2="55" y2="70" stroke="black" stroke-width="10" stroke-linecap="round" />
+    <circle cx="55" cy="88" r="7" fill="black" />
+</svg>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? Attributes { get; set; }
+}

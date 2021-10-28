@@ -11,7 +11,7 @@ namespace NoJsBlazor {
         /// <summary>
         /// List of all registered <see cref="ListableComponentBase{T}">ListableComponentBase</see> childs.
         /// </summary>
-        protected readonly List<T> childList = new List<T>();
+        protected readonly List<T> childList = new();
 
         /// <summary>
         /// API for <see cref="ListableComponentBase{T}"/> objects to add themselves to the list.

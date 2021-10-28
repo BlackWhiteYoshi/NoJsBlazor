@@ -14,14 +14,15 @@ namespace NoJsBlazor {
         /// Content of this ContextMenu.
         /// </summary>
         [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        public RenderFragment? ChildContent { get; set; }
 
         /// <summary>
         /// Captures unmatched values
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> Attributes { get; set; }
+        public Dictionary<string, object>? Attributes { get; set; }
 
+        private bool _expanded = false;
         /// <summary>
         /// Value for expanding or collapsing this submenu.
         /// </summary>
@@ -34,13 +35,12 @@ namespace NoJsBlazor {
                 InvokeAsync(StateHasChanged);
             }
         }
-        private bool _expanded = false;
 
         /// <summary>
         /// <para>Fires every time after <see cref="Expanded">Expanded</see> got set.</para>
         /// <para>Value is equal <see cref="Expanded">Expanded</see>.</para>
         /// </summary>
-        public event Action<bool> OnToggle;
+        public event Action<bool>? OnToggle;
 
         private double top;
         private double left;
@@ -50,7 +50,7 @@ namespace NoJsBlazor {
         /// <para>Display the context menu at the given location.</para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Show(double x, double y) {
+        public void Open(double x, double y) {
             left = x;
             top = y;
             Expanded = true;
@@ -60,27 +60,27 @@ namespace NoJsBlazor {
         /// <para>Display the context menu based on mouse position.</para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Show(MouseEventArgs e) {
-            Show(e.ClientX, e.ClientY);
-        }
+        public void Open(MouseEventArgs e) => Open(e.ClientX, e.ClientY);
 
         /// <summary>
         /// <para>Display the context menu based on touch position.</para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Show(TouchEventArgs e) {
-            Show(e.Touches[0].ClientX, e.Touches[0].ClientY);
-        }
+        public void Open(TouchEventArgs e) => Open(e.Touches[0].ClientX, e.Touches[0].ClientY);
 
         /// <summary>
         /// Display the context menu based on press position.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Show(EventArgs e) {
-            if (e is MouseEventArgs m)
-                Show(m);
-            else
-                Show((TouchEventArgs)e);
+        public void Open(EventArgs eventArgs) {
+            switch (eventArgs) {
+                case MouseEventArgs mouseEventArgs:
+                    Open(mouseEventArgs);
+                    break;
+                case TouchEventArgs touchEventArgs:
+                    Open(touchEventArgs);
+                    break;
+            }
         }
 
         /// <summary>
@@ -94,11 +94,9 @@ namespace NoJsBlazor {
 
         #region ResetContextMenu
 
-        private readonly List<ContextSubMenu> nestedItems = new List<ContextSubMenu>();
+        private readonly List<ContextSubMenu> nestedItems = new();
 
-        internal void Register(ContextSubMenu contextMenu) {
-            nestedItems.Add(contextMenu);
-        }
+        internal void Register(ContextSubMenu contextMenu) => nestedItems.Add(contextMenu);
 
         /// <summary>
         /// Collapses all expanded submenus.
@@ -110,11 +108,11 @@ namespace NoJsBlazor {
 
         #endregion
 
-        private object AddStyles() {
+        private object? AddStyles() {
             if (Attributes == null)
                 return null;
 
-            if (Attributes.TryGetValue("style", out object styles))
+            if (Attributes.TryGetValue("style", out object? styles))
                 return styles;
             else
                 return null;

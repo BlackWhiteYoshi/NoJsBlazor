@@ -12,13 +12,13 @@ namespace NoJsBlazor {
         /// Html that will be displayed inside the head bar.
         /// </summary>
         [Parameter]
-        public RenderFragment Title { get; set; }
+        public RenderFragment? Title { get; set; }
 
         /// <summary>
         /// Html that will be displayed inside the window.
         /// </summary>
         [Parameter]
-        public RenderFragment Content { get; set; }
+        public RenderFragment? Content { get; set; }
 
         /// <summary>
         /// Indicates whether to skip the <see cref="Title">Title</see> section
@@ -50,13 +50,13 @@ namespace NoJsBlazor {
         /// <para>Technically invokes every time when <see cref="Active">Active</see> is set to false</para>
         /// </summary>
         [Parameter]
-        public Action OnClose { get; set; }
+        public Action? OnClose { get; set; }
 
         /// <summary>
         /// Captures unmatched values
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> Attributes { get; set; }
+        public Dictionary<string, object>? Attributes { get; set; }
 
         /// <summary>
         /// Current offset of x-coordinate, 0 means middle of the screen.
@@ -75,8 +75,8 @@ namespace NoJsBlazor {
             get => _active;
             set {
                 _active = value;
-                if (OnClose != null && !value)
-                    OnClose.Invoke();
+                if (!value)
+                    OnClose?.Invoke();
                 InvokeAsync(StateHasChanged);
             }
         }
@@ -100,9 +100,7 @@ namespace NoJsBlazor {
         }
 
 
-        private void HeadBarDown(EventArgs e) {
-            tracker.SetCoordinate(e);
-        }
+        private void HeadBarDown(EventArgs e) => tracker.SetCoordinate(e);
 
         private void HeadBarMove(EventArgs e) {
             if (!Moveable)
@@ -118,10 +116,21 @@ namespace NoJsBlazor {
 
         /// <summary>
         /// <para>Display the window.</para>
+        /// <para>The same as setting XMovement/YMovement = 0 and Active = true</para>
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Open() {
+            XMovement = 0.0;
+            YMovement = 0.0;
+            Active = true;
+        }
+
+        /// <summary>
+        /// <para>Display the window at the last moved position.</para>
         /// <para>The same as Active = true</para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Show() {
+        public void OpenWithLastPosition() {
             Active = true;
         }
 
@@ -130,15 +139,14 @@ namespace NoJsBlazor {
         /// <para>The same as Active = false</para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Close() {
-            Active = false;
-        }
+        public void Close() => Active = false;
 
-        private object AddStyles() {
+
+        private object? AddStyles() {
             if (Attributes == null)
                 return null;
 
-            if (Attributes.TryGetValue("style", out object styles))
+            if (Attributes.TryGetValue("style", out object? styles))
                 return styles;
             else
                 return null;

@@ -15,11 +15,12 @@ else {
     /// Will be automatically set by the root.
     /// </summary>
     [CascadingParameter(Name = "Root")]
-    public NavBar NavBarRoot { get; set; }
+    [System.Diagnostics.CodeAnalysis.AllowNull]
+    public NavBar NavBarRoot { get; init; }
 
     /// <summary>
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object> Attributes { get; set; }
+    public Dictionary<string, object>? Attributes { get; set; }
 }

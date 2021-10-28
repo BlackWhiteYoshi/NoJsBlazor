@@ -26,25 +26,29 @@ namespace NoJsBlazor {
         /// Displayed text of this Input field.
         /// </summary>
         [Parameter]
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         /// <summary>
-        /// Indicates if the characters should be display as *****
+        /// e.g.<br></br>
+        /// normal text (abcd)<br></br>
+        /// password (****)<br></br>
+        /// numberField (0123)<br></br>
+        /// …
         /// </summary>
         [Parameter]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// sets the "id"-attribute in input field and the "for"-attribute in the label.
         /// </summary>
         [Parameter]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// sets the "name"-attribute in the input field.
         /// </summary>
         [Parameter]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// sets the "autocomplete"-attribute in the input field.
@@ -56,14 +60,14 @@ namespace NoJsBlazor {
         /// These values are applied to the input field.
         /// </summary>
         [Parameter]
-        public Dictionary<string, object> InputAttributes { get; set; }
+        public Dictionary<string, object>? InputAttributes { get; set; }
 
 
-        protected override string FormatValueAsString(string value) => value;
+        protected override string? FormatValueAsString(string? value) => value;
 
-        protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage) {
-            result = value;
-            validationErrorMessage = null;
+        protected override bool TryParseValueFromString(string? value, out string result, out string validationErrorMessage) {
+            result = value ?? string.Empty;
+            validationErrorMessage = string.Empty;
             return true;
         }
 
@@ -71,7 +75,7 @@ namespace NoJsBlazor {
         private bool HasValue => !string.IsNullOrEmpty(Value);
 
         private void OnInput(ChangeEventArgs e) {
-            Value = (string)e.Value;
+            Value = (string?)e.Value;
             ValueChanged.InvokeAsync(Value);
         }
     }

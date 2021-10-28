@@ -4,17 +4,17 @@
     @if (Title != null) {
         <label>@Title</label>
     }
-    <div>
+    <div class="slider-buttons">
         <button class="btn" @onmousedown="leftButtonTC.OnMouseDown" @ontouchstart="leftButtonTC.OnTouchStart">@LeftButtonText</button>
         @if (!Editable) {
-            <label>@Display(value)</label>
+            <label>@Display(Value)</label>
         }
         else {
-            <input value="@Display(value)" @onchange="OnChangeEditField" />
+            <input value="@Display(Value)" @onchange="OnChangeEditField" />
         }
         <button class="btn" @onmousedown="rightButtonTC.OnMouseDown" @ontouchstart="rightButtonTC.OnTouchStart">@RightButtonText</button>
     </div>
-    <div>
-        <input type="range" min="@Min" max="@Max" step="@Step"value="@Value" @oninput="OnSlider" @onchange="() => OnChange.InvokeAsync(Value)" />
+    <div class="slider-input">
+        <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnSlider" @onchange="() => OnChange.InvokeAsync(Value)" />
     </div>
 </div>

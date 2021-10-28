@@ -1,0 +1,23 @@
+﻿@namespace ManualTesting
+
+<div id="body-container"  @onmousedown="(MouseEventArgs e) => MouseDown?.Invoke(e)" @ontouchstart="(TouchEventArgs e) => TouchStart?.Invoke(e)"
+      @onmousemove="(MouseEventArgs e) => MouseMove?.Invoke(e)" @ontouchmove="(TouchEventArgs e) => TouchMove?.Invoke(e)"
+      @onmouseup="(MouseEventArgs e) => MouseUp?.Invoke(e)" @ontouchend="(TouchEventArgs e) => TouchEnd?.Invoke(e)">
+
+    <RootNavBar Root="this" />
+
+    <main>
+        <CascadingValue Value="this" IsFixed="true">
+            <Router AppAssembly="@typeof(Program).Assembly">
+                <Found Context="routeData">
+                    <RouteView RouteData="@routeData" />
+                </Found>
+                <NotFound>
+                    <NotFound />
+                </NotFound>
+            </Router>
+        </CascadingValue>
+    </main>
+
+    <RootFooter @ref="footer" />
+</div>

@@ -3,13 +3,7 @@ $sm: 576px;
 $md: 768px;
 $lg: 992px;
 $xl: 1200px;
-/**
- * bootstrap variables for container
- * sm: 540px,
- * md: 720px,
- * lg: 960px,
- * xl: 1140px
- */
+$xxl: 1400px;
 
 @mixin media-breakpoint-up($width) {
     @media (min-width: $width) {
@@ -19,6 +13,12 @@ $xl: 1200px;
 
 @mixin media-breakpoint-down($width) {
     @media (max-width: $width - 0.01) {
+        @content;
+    }
+}
+
+@mixin media-breakpoint-between($up, $down) {
+    @media (min-width: $up) and (max-width: $down - 0.01) {
         @content;
     }
 }
@@ -108,6 +108,15 @@ $arrow-phone: "%23000B";
                 transition: background-color 0.1s;
             }
 
+            svg {
+                margin: 0 0 5px 5px;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                fill: rgba(0, 0, 0, 0.3);
+                transition: background-color 0.1s;
+            }
+
             &:hover {
                 transition: color 0.3s;
                 transition: text-shadow 0.3s;
@@ -116,6 +125,12 @@ $arrow-phone: "%23000B";
 
                 img {
                     transition: background-color 0.3s;
+                    background-color: #E8E8E8;
+                }
+
+                svg {
+                    transition: background-color 0.3s;
+                    fill: rgba(0, 0, 0, 1);
                     background-color: #E8E8E8;
                 }
             }
@@ -449,21 +464,6 @@ $arrow-phone: "%23000B";
     height: $Height + px;
     background-image: $backgroundImage;
     z-index: 500;
-
-    .navbar-brand {
-        .oi-home {
-            font-family: Icons !important;
-            font-size: 16px !important;
-            color: rgba(0, 0, 0, 0.3) !important;
-            text-shadow: none !important;
-            transition: color 0.2s;
-        }
-
-        a:hover > .oi-home {
-            color: rgba(0, 0, 0, 0.8) !important;
-            text-shadow: none !important;
-        }
-    }
 
     #flag {
         display: table;

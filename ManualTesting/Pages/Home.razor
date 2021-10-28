@@ -1,0 +1,138 @@
+﻿@namespace ManualTesting
+@inherits PageComponentBase
+@page "/"
+
+<div id="home" class="fade-in">
+    <header class="headline-div">
+        <p>@CBox.LPrint("My Home Page", "Meine Startseite")</p>
+    </header>
+
+    <section>
+        <p class="headline">Carousel</p>
+
+        @{
+            const int WIDTH = 800;
+            const int HEIGHT = 450;
+        }
+        <div class="center" style="width: @(WIDTH)px;">
+            <Carousel Active="3" Animation="CarouselAnimation.SlideRotate" BeginRunning="false" IntervalTime="10000">
+                <Items>
+                    <CarouselItem>
+                        <div style="height: @(HEIGHT)px; background-color: red;"></div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div style="height: @(HEIGHT)px; background-color: blue;"></div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div style="height: @(HEIGHT)px; background-color: yellow;"></div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div style="height: @(HEIGHT)px; background-color: green;"></div>
+                    </CarouselItem>
+                </Items>
+                <Overlay>
+                    <p>Ich bin ein Overlay!</p>
+                </Overlay>
+            </Carousel>
+        </div>
+    </section>
+
+    <section>
+        <p class="headline">CollapseDiv</p>
+
+        <div class="center" style="width: 300px">
+            <CollapseDiv>
+                <Head>
+                    <p>press me!<span class="drop-down-arrow"></span></p>
+                </Head>
+                <Content>
+                    <p>Item 1</p>
+                    <p>Item 2</p>
+                    <p>Item 3</p>
+                </Content>
+            </CollapseDiv>
+        </div>
+    </section>
+
+    <section>
+        <p class="headline">ContextMenu</p>
+
+        <div class="center" style="width: 300px; height: 200px; background-color: #333;" @onclick="OpenContextMenu">
+            <ContextMenu @ref="contextMenu" style="position: relative; width: 120px; ">
+                <ContextSubMenu>
+                    <Head>
+                        <p>First</p>
+                    </Head>
+                    <Items>
+                        <ContextMenuItem>
+                            <p>Nested First</p>
+                        </ContextMenuItem>
+                    </Items>
+                </ContextSubMenu>
+                <ContextSubMenu>
+                    <Head>
+                        <p>Second</p>
+                    </Head>
+                    <Items>
+                        <ContextMenuItem>
+                            <p>Nested Second</p>
+                        </ContextMenuItem>
+                    </Items>
+                </ContextSubMenu>
+                <ContextMenuItem>
+                    <p>Third</p>
+                </ContextMenuItem>
+            </ContextMenu>
+        </div>
+    </section>
+
+    <section>
+        <p class="headline">Dialog</p>
+
+        <button class="btn btn-primary center" @onclick="OpenDialog">open dialog</button>
+
+        <Dialog @ref="dialog">
+            <Title>
+                <p style="user-select: none;">My Test Dialog</p>
+            </Title>
+            <Content>
+                <p>
+                    Ich bin irgendein Text.<br />
+                    Ich habe keinen Sinn.<br />
+                    Mich zu lesen bringt gar nichts.</p>
+
+                <button class="btn btn-primary center" @onclick="CloseDialog">close dialog</button>
+            </Content>
+        </Dialog>
+    </section>
+
+    <section>
+        <p class="headline">Input</p>
+
+        <Input Title="Eingabe"/>
+    </section>
+
+    <section>
+        <p class="headline">Loader Icon</p>
+
+        <div class="center">
+            <LoaderIcon />
+        </div>
+    </section>
+
+    <section>
+        <p class="headline">Slider</p>
+
+        <div class="center">
+            <Slider />
+        </div>
+
+        <div class="center">
+            <Slider Editable="true" />
+        </div>
+
+        <div class="center">
+            <DecimalSlider />
+        </div>
+    </section>
+</div>

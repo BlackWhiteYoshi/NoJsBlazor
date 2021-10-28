@@ -1,0 +1,66 @@
+﻿html, body {
+    font-family: "Calibri";
+    height: 100%;
+}
+
+body {
+    background: #EEEEEE;
+    background-size: 100%;
+}
+
+#app {
+    display: inline;
+}
+
+#body-container {
+    position: relative;
+    margin: 0;
+    padding: 40px 0 150px 0;
+    min-height: 100%;
+}
+
+#blazor-error-ui {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 600px;
+    z-index: 1000;
+    display: none;
+    background-image: linear-gradient(90deg,#ff7,#ff4,#ff7);
+
+    @media(min-width: 600px) {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    & > p {
+        margin: 10px 40px 10px 10px;
+        text-align: center;
+    }
+
+    & > .dismiss {
+        position: absolute;
+        top: 11px;
+        right: 25px;
+        cursor: pointer;
+    }
+
+    @media(max-width: 600px) {
+        & > p {
+            display: table;
+            margin: 10px auto;
+            text-align: left;
+        }
+
+        & > .dismiss {
+            top: 18px;
+            right: 20px;
+            font-size: 20px;
+        }
+
+        .sentence, .sentence {
+            display: block;
+        }
+    }
+}

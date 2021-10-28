@@ -19,23 +19,24 @@ namespace NoJsBlazor {
         /// Content which represents your site.
         /// </summary>
         [Parameter]
-        public RenderFragment Brand { get; set; }
+        public RenderFragment? Brand { get; set; }
 
         /// <summary>
         /// <para>List of the <see cref="NavBar"/>.</para>
         /// <para>This should be a list of <see cref="NavBarMenu"/> of <see cref="NavBarItem"/> objects.</para>
         /// </summary>
         [Parameter]
-        public RenderFragment Items { get; set; }
+        public RenderFragment? Items { get; set; }
 
         /// <summary>
         /// Captures unmatched values
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> Attributes { get; set; }
+        public Dictionary<string, object>? Attributes { get; set; }
 
         #endregion
 
+        private bool _expanded = false;
         /// <summary>
         /// Value for Expanding or Collapsing the navbar
         /// </summary>
@@ -47,19 +48,16 @@ namespace NoJsBlazor {
                 InvokeAsync(StateHasChanged);
             }
         }
-        private bool _expanded = false;
 
         /// <summary>
         /// <para>Fires every time after <see cref="Expanded">Expanded</see> got set.</para>
         /// <para>Value is equal <see cref="Expanded">Expanded</see>.</para>
         /// </summary>
-        public event Action<bool> OnToggle;
+        public event Action<bool>? OnToggle;
 
         private readonly TouchClick ToggleTC;
 
-        public NavBar() {
-            ToggleTC = new TouchClick(ToggleNavBar);
-        }
+        public NavBar() => ToggleTC = new TouchClick(ToggleNavBar);
 
         private void ToggleNavBar(EventArgs e) {
             if (Expanded)
@@ -68,17 +66,13 @@ namespace NoJsBlazor {
                 Expanded = true;
         }
 
-        internal void Rerender() {
-            InvokeAsync(StateHasChanged);
-        }
+        internal void Rerender() => InvokeAsync(StateHasChanged);
 
         #region ResetNavBarMenu
 
-        private readonly List<NavBarMenu> NestedItems = new List<NavBarMenu>();
+        private readonly List<NavBarMenu> NestedItems = new();
 
-        internal void Register(NavBarMenu nestedNavBar) {
-            NestedItems.Add(nestedNavBar);
-        }
+        internal void Register(NavBarMenu nestedNavBar) => NestedItems.Add(nestedNavBar);
 
 
         /// <summary>

@@ -9,13 +9,17 @@
     }
 
     // div with buttons and value Display
-    & > div {
-        display: table;
-        margin: 0 auto;
+    & > .slider-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+        margin: 2px 10px;
 
         // decrement & increment buttons
         & > button {
-            display: inline-block;
+            height: 23px;
             font-size: 10px;
             margin: 0 3px;
             padding: 0 3px;
@@ -25,23 +29,26 @@
 
         // value display text
         & > label {
-            display: inline-block;
-            margin: 0 0 10px 0;
-            font-weight: 700;
-            transform: translateY(1px);
+            font-size: 18px;
         }
 
         // value display text
         & > input {
-            display: inline-block;
-            height: 20px;
-            width: 60px;
+            height: 25px;
+            width: 35px;
+            font-size: 18px;
             text-align: center;
-            border: solid 1px #CCC;
-            transform: translateY(2px);
+            border: none;
+            outline: none;
+            background-color: rgba(0,0,0,0);
         }
+    }
 
-        // slider
+    // slider
+    & > .slider-input {
+        display: table;
+        margin: 0 auto;
+
         & > input[type=range] {
             -webkit-appearance: none;
             width: 100px;
@@ -69,7 +76,7 @@
 
             
             &::-webkit-slider-runnable-track {
-               @include track;
+                @include track;
             }
 
             &::-moz-range-track {

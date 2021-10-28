@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Test NoJsBlazor</title>
+    <base href="/" />
+
+    <link rel="stylesheet" href="/lib/bootstrap-5.0.1/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.min.css" />
+    <link rel="stylesheet" href="/css/site.min.css" />
+
+    <script>        
+        function SetHtmlLanguage(language) {
+            document.documentElement.lang = language;
+        }
+        
+        function GetBrowserLanguage() {
+            return navigator.language;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- content inside the app tag will be replaced after loading -->
+        <!-- loader-icon code was generated with NoJsBlazor.LoaderIcon.razor -->
+        <div class="loader-icon" style="position: fixed; top: 5%; left: 5%; width: 100px; height: 100px; animation: spin 2000ms linear normal infinite; margin-bottom: 40px">
+            <div class="ball-1" style="left: 13.75%; top: 13.75%; width: 35%; height: 35%;
+                    animation: ball-color-1-2 1000ms alternate linear infinite,
+                        ball-move-1 2000ms alternate ease-in-out infinite"></div>
+            <div class="ball-2" style="left: 51.25%; top: 13.75%; width: 35%; height: 35%;
+                    animation: ball-color-2-3 1000ms alternate linear infinite,
+                        ball-move-2 2000ms alternate ease-in-out infinite"></div>
+            <div class="ball-3" style="left: 13.75%; top: 51.25%; width: 35%; height: 35%;
+                    animation: ball-color-3-4 1000ms alternate linear infinite,
+                        ball-move-3 2000ms alternate ease-in-out infinite"></div>
+            <div class="ball-4" style="left: 51.25%; top: 51.25%; width: 35%; height: 35%;
+                    animation: ball-color-4-1 1000ms alternate linear infinite,
+                        ball-move-4 2000ms alternate ease-in-out infinite"></div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        <p>
+            <span class="sentence">An unexpected error has occurred.</span>
+            <span class="sentence"><a href="/" class="reload">Reload Website</a> if not working as expected.</span>
+        </p>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

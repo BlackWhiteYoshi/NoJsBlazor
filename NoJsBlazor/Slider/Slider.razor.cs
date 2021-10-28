@@ -24,22 +24,25 @@ namespace NoJsBlazor {
         /// An optional label.
         /// </summary>
         [Parameter]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
-        /// Slider lower bounds.
+        /// <para>Slider lower bounds.</para>
+        /// <para>Default is 0</para>
         /// </summary>
         [Parameter]
         public int Min { get; set; } = 0;
 
         /// <summary>
-        /// Slider upper bounds.
+        /// <para>Slider upper bounds.</para>
+        /// <para>Default is 10</para>
         /// </summary>
         [Parameter]
-        public int Max { get; set; } = 100;
+        public int Max { get; set; } = 10;
 
         /// <summary>
-        /// Slider precision
+        /// <para>Slider precision</para>
+        /// <para>Default is 1</para>
         /// </summary>
         [Parameter]
         public int Step { get; set; } = 1;
@@ -47,24 +50,28 @@ namespace NoJsBlazor {
         /// <summary>
         /// <para>Indicates if the user is able to edit the number directly.</para>
         /// <para>Technically the number is displayed in a input field instead of a label,</para>
+        /// <para>Dafault is false</para>
         /// </summary>
         [Parameter]
         public bool Editable { get; set; } = false;
 
         /// <summary>
-        /// Content inside the left Button.
+        /// <para>Content inside the left Button.</para>
+        /// <para>Default is "🡸"</para>
         /// </summary>
         [Parameter]
         public RenderFragment LeftButtonText { get; set; } = new RenderFragment((builder => builder.AddContent(0, "🡸")));
 
         /// <summary>
-        /// Content inside the right Button.
+        /// <para>Content inside the right Button.</para>
+        /// <para>Default is "🡺"</para>
         /// </summary>
         [Parameter]
         public RenderFragment RightButtonText { get; set; } = new RenderFragment((builder => builder.AddContent(0, "🡺")));
 
         /// <summary>
-        /// The way the value should be printed.
+        /// <para>The way the value should be printed.</para>
+        /// <para>Default is value.ToString()</para>
         /// </summary>
         [Parameter]
         public Func<int, string> Display { get; set; }
@@ -75,13 +82,13 @@ namespace NoJsBlazor {
         /// <para>Default succeed if the value is int-parseable and in Min/Max bounds.</para>
         /// </summary>
         [Parameter]
-        public Func<string, int?> ParseEdit { get; set; }
+        public Func<string?, int?> ParseEdit { get; set; }
 
         /// <summary>
         /// Captures unmatched values
         /// </summary>
         [Parameter(CaptureUnmatchedValues = true)]
-        public Dictionary<string, object> Attributes { get; set; }
+        public Dictionary<string, object>? Attributes { get; set; }
 
         private readonly TouchClick leftButtonTC;
         private readonly TouchClick rightButtonTC;
@@ -113,12 +120,12 @@ namespace NoJsBlazor {
         }
 
         private void OnSlider(ChangeEventArgs e) {
-            Value = int.Parse((string)e.Value);
+            Value = int.Parse((string)e.Value!);
             ValueChanged.InvokeAsync(Value);
         }
 
         private void OnChangeEditField(ChangeEventArgs input) {
-            int? buffer = ParseEdit((string)input.Value);
+            int? buffer = ParseEdit((string?)input.Value);
             if (buffer != null) {
                 Value = (int)buffer;
                 ValueChanged.InvokeAsync(Value);
@@ -127,7 +134,7 @@ namespace NoJsBlazor {
         }
 
 
-        private int? DefaultParseEdit(string input) {
+        private int? DefaultParseEdit(string? input) {
             if (int.TryParse(input, out int result))
                 if (result < Min)
                     return Min;

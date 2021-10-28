@@ -1,0 +1,45 @@
+﻿footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    // space between top and bottom edges
+    padding: 8px 0;
+
+    // background look
+    background-image: linear-gradient(90deg, #CCC, #FFF, #FFF, #FFF, #CCC);
+    @media (max-width: 750px) {
+        background-image: none;
+        background-color: #FFF;
+    }
+
+    & > ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        & > li {
+            text-align: center;
+            // space between items
+            margin: 0;
+            // font-size
+            font-size: 17px;
+
+            a, p {
+                // also space between items, but this space is part of the item, so links are easier to click
+                padding: 13px;
+                margin: 0;
+            }
+        }
+    }
+
+    // NavLink matches
+    .active {
+        font-weight: bolder;
+    }
+}

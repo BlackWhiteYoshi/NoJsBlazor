@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NoJsBlazor {
     /// <summary>
@@ -11,6 +12,7 @@ namespace NoJsBlazor {
         /// Content of this component.
         /// </summary>
         [Parameter]
+        [AllowNull]
         public RenderFragment ChildContent { get; set; }
 
         /// <summary>
@@ -22,9 +24,7 @@ namespace NoJsBlazor {
         /// Creates a <see cref="CarouselItem"/> with the given content, which can be inserted in an existing carousel.
         /// </summary>
         /// <param name="child">content of this object</param>
-        public CarouselItem(RenderFragment child) : base() {
-            ChildContent = child;
-        }
+        public CarouselItem(RenderFragment child) : base() => ChildContent = child;
 
 
         private bool active = false;
