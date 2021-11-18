@@ -1,0 +1,14 @@
+﻿@namespace UnitTest
+@inherits TestContext
+
+@code {
+    private IRenderedFragment RenderCarouselWithOneItem(MarkupString childcontent) => Render(
+        @<Carousel>
+            <Items>
+                <CarouselItem>
+                    @childcontent
+                </CarouselItem>
+            </Items>
+        </Carousel>
+        );
+}

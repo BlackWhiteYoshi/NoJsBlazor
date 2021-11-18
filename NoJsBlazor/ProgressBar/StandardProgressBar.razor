@@ -1,0 +1,42 @@
+﻿@namespace NoJsBlazor
+@inherits ProgressBar
+
+<div class="standard-progress-bar" @attributes="@Attributes">
+    <div>
+        <div style="
+            width: @(Width)px;
+            height: @(Height)px;
+            border-left: solid @Color @(Width * Progress)px;"></div>
+    </div>
+
+    <p class="center">@Text</p>
+</div>
+
+@code {
+    /// <summary>
+    /// <para>The Length of the Bar in px.</para>
+    /// <para>Default is 300.</para>
+    /// </summary>
+    [Parameter]
+    public int Width { get; set; } = 300;
+
+    /// <summary>
+    /// <para>The Thickness of the Bar in px.</para>
+    /// <para>Default is 20.</para>
+    /// </summary>
+    [Parameter]
+    public int Height { get; set; } = 20;
+
+    /// <summary>
+    /// <para>Color of the inner Bar.</para>
+    /// <para>Default is #08F (light blue).</para>
+    /// </summary>
+    [Parameter]
+    public string Color { get; set; } = "#08F";
+
+    /// <summary>
+    /// Captures unmatched values
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? Attributes { get; set; }
+}

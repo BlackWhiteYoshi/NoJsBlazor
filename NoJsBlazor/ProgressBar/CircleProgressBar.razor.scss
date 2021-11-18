@@ -1,0 +1,14 @@
+﻿.circle-progress-bar {
+    & > svg {
+        & > circle {
+            fill: none;
+            stroke: #444;
+        }
+    }
+
+    // text under the bar
+    & > p {
+        margin-top: 3px;
+        font-size: 18px;
+    }
+}

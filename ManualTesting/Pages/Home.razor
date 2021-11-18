@@ -15,19 +15,19 @@
             const int HEIGHT = 450;
         }
         <div class="center" style="width: @(WIDTH)px;">
-            <Carousel Active="3" Animation="CarouselAnimation.SlideRotate" BeginRunning="false" IntervalTime="10000">
+            <Carousel Active="3" Animation="CarouselAnimation.SlideRotate" BeginRunning="false" IntervalTime="4000">
                 <Items>
                     <CarouselItem>
-                        <div style="height: @(HEIGHT)px; background-color: red;"></div>
+                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, red, blue);"></div>
                     </CarouselItem>
                     <CarouselItem>
-                        <div style="height: @(HEIGHT)px; background-color: blue;"></div>
+                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, blue, yellow);"></div>
                     </CarouselItem>
                     <CarouselItem>
-                        <div style="height: @(HEIGHT)px; background-color: yellow;"></div>
+                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, yellow, green);"></div>
                     </CarouselItem>
                     <CarouselItem>
-                        <div style="height: @(HEIGHT)px; background-color: green;"></div>
+                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, green, red);"></div>
                     </CarouselItem>
                 </Items>
                 <Overlay>
@@ -117,6 +117,25 @@
 
         <div class="center">
             <LoaderIcon />
+        </div>
+    </section>
+
+    <section>
+        <p class="headline">ProgressBar</p>
+
+        <button class="btn btn-primary center" style="margin: 30px auto 10px auto;" @onclick="StandardProgressBarButtonClick">Add 1%</button>
+        <div class="center">
+            <StandardProgressBar @ref="standardProgress" />
+        </div>
+
+        <button class="btn btn-primary center" style="margin: 30px auto 10px auto;" @onclick="CircleProgressBarButtonClick">Add 1%</button>
+        <div class="center">
+            <CircleProgressBar @ref="circleProgress" />
+        </div>
+
+        <button class="btn btn-primary center" style="margin: 30px auto 10px auto;" @onclick="SpeedometerProgressBarButtonClick">Add 1%</button>
+        <div class="center">
+            <SpeedometerProgressBar @ref="speedometerProgress" />
         </div>
     </section>
 

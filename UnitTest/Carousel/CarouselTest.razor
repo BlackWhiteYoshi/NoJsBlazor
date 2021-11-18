@@ -1,0 +1,35 @@
+﻿@namespace UnitTest
+@inherits TestContext
+
+@code {
+    private void CarouselItemRed(RenderTreeBuilder __builder) {
+        <CarouselItem>
+            <div style="background-color: red;"></div>
+        </CarouselItem>
+    }
+
+    private void CarouselItemBlue(RenderTreeBuilder __builder) {
+        <CarouselItem>
+            <div style="background-color: blue;"></div>
+        </CarouselItem>
+    }
+
+    private void CarouselItemYellow(RenderTreeBuilder __builder) {
+        <CarouselItem>
+            <div style="background-color: yellow;"></div>
+        </CarouselItem>
+    }
+
+    private void CarouselItemGreen(RenderTreeBuilder __builder) {
+        <CarouselItem>
+            <div style="background-color: green;"></div>
+        </CarouselItem>
+    }
+
+    private void ItemsRedBlueYellowGreen(RenderTreeBuilder builder) {
+        CarouselItemRed(builder);
+        CarouselItemBlue(builder);
+        CarouselItemYellow(builder);
+        CarouselItemGreen(builder);
+    }
+}

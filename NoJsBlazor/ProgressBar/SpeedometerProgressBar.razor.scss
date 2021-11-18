@@ -1,0 +1,26 @@
+﻿.speedometer-progress-bar {
+    & > svg {
+        & > .inner-circle {
+            fill: #000;
+            fill-opacity: 0.4;
+            stroke: none;
+        }
+
+        & > .outer-circle {
+            stroke: #444;
+            fill: none;  
+        }
+
+        & > .meter {
+            stroke-width: 5;
+            stroke-linecap: round;
+            transition: transform ease-in-out 300ms;
+        }
+    }
+
+    // text under the bar
+    & > p {
+        margin-top: 3px;
+        font-size: 18px;
+    }
+}

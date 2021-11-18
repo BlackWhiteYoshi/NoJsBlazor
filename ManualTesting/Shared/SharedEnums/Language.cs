@@ -1,16 +1,15 @@
-﻿
-namespace ManualTesting {
+﻿namespace ManualTesting;
+
+/// <summary>
+/// Collection of supported languages.
+/// </summary>
+public enum Language {
     /// <summary>
-    /// Collection of supported languages.
+    /// The global language.
     /// </summary>
-    public enum Language {
-        /// <summary>
-        /// The global language.
-        /// </summary>
-        English,
-        /// <summary>
-        /// Deutsch
-        /// </summary>
-        German
-    }
+    English,
+    /// <summary>
+    /// Deutsch
+    /// </summary>
+    German
 }

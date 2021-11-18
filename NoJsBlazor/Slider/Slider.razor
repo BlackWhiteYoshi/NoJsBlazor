@@ -1,20 +1,38 @@
 ﻿@namespace NoJsBlazor
 
 <div class="slider" @attributes="@Attributes">
-    @if (Title != null) {
+    @if (Title != string.Empty) {
         <label>@Title</label>
     }
     <div class="slider-buttons">
-        <button class="btn" @onmousedown="leftButtonTC.OnMouseDown" @ontouchstart="leftButtonTC.OnTouchStart">@LeftButtonText</button>
+        <button class="btn" @onmousedown="leftButtonTC.OnMouseDown" @ontouchstart="leftButtonTC.OnTouchStart">@LeftButtonContent</button>
         @if (!Editable) {
             <label>@Display(Value)</label>
         }
         else {
             <input value="@Display(Value)" @onchange="OnChangeEditField" />
         }
-        <button class="btn" @onmousedown="rightButtonTC.OnMouseDown" @ontouchstart="rightButtonTC.OnTouchStart">@RightButtonText</button>
+        <button class="btn" @onmousedown="rightButtonTC.OnMouseDown" @ontouchstart="rightButtonTC.OnTouchStart">@RightButtonContent</button>
     </div>
     <div class="slider-input">
-        <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnSlider" @onchange="() => OnChange.InvokeAsync(Value)" />
+        <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnInputSlider" @onchange="OnChangeSlider" />
     </div>
 </div>
+
+@code {
+    private void DefaultLeftButton(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder) {
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+            <line x1="2" y1="5" x2="8" y2="5" />
+            <line x1="2" y1="5" x2="4" y2="3" />
+            <line x1="2" y1="5" x2="4" y2="7" />
+        </svg>
+    }
+
+    private void DefaultRightButton(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder) {
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+            <line x1="2" y1="5" x2="8" y2="5" />
+            <line x1="6" y1="3" x2="8" y2="5" />
+            <line x1="6" y1="7" x2="8" y2="5" />
+        </svg>
+    }
+}

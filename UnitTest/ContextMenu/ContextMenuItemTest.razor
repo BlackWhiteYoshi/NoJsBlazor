@@ -1,0 +1,42 @@
+﻿@namespace UnitTest
+@inherits TestContext
+
+@code {
+    private (IRenderedFragment, ContextMenu, ContextSubMenu, ContextMenuItem) RenderContextMenuTree(MarkupString childContent) {
+        ContextMenu? contextMenu = null;
+        ContextSubMenu? contextSubMenu = null;
+        ContextMenuItem? contextMenuItem = null;
+
+        IRenderedFragment fragment = Render(
+            @<ContextMenu @ref="contextMenu">
+                <ContextSubMenu @ref="contextSubMenu">
+                    <Items>
+                        <ContextMenuItem @ref="contextMenuItem">
+                            @childContent
+                        </ContextMenuItem>
+                    </Items>
+                </ContextSubMenu>
+            </ContextMenu>
+            );
+
+        return (fragment, contextMenu!, contextSubMenu!, contextMenuItem!);
+    }
+
+    private (IRenderedFragment, ContextMenu, ContextSubMenu, ContextMenuItem) RenderContextMenuWithCallback(Action<EventArgs> eventCallback) {
+        ContextMenu? contextMenu = null;
+        ContextSubMenu? contextSubMenu = null;
+        ContextMenuItem? contextMenuItem = null;
+
+        IRenderedFragment fragment = Render(
+            @<ContextMenu @ref="contextMenu">
+                <ContextSubMenu @ref="contextSubMenu">
+                    <Items>
+                        <ContextMenuItem @ref="contextMenuItem" OnPressed="eventCallback" />
+                    </Items>
+                </ContextSubMenu>
+            </ContextMenu>
+            );
+
+            return (fragment, contextMenu!, contextSubMenu!, contextMenuItem!);
+    }
+}

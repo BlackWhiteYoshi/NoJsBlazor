@@ -1,0 +1,46 @@
+﻿@namespace UnitTest
+@inherits TestContext
+
+@code {
+    private (IRenderedFragment, ContextMenu, ContextSubMenu, ContextMenuItem) RenderContextMenuTree() {
+        ContextMenu? contextMenu = null;
+        ContextSubMenu? contextSubMenu = null;
+        ContextMenuItem? contextMenuItem = null;
+
+        IRenderedFragment fragment = Render(
+            @<ContextMenu @ref="contextMenu">
+                <ContextSubMenu @ref="contextSubMenu">
+                    <Head>
+                        <p>Test Header Test</p>
+                    </Head>
+                    <Items>
+                        <ContextMenuItem @ref="contextMenuItem">
+                            <p>Test Item</p>
+                        </ContextMenuItem>
+                    </Items>
+                </ContextSubMenu>
+            </ContextMenu>
+            );
+
+        return (fragment, contextMenu!, contextSubMenu!, contextMenuItem!);
+    }
+
+    private void FourContextSubMenuItems(RenderTreeBuilder __builder) {
+        <ContextSubMenu>
+            <Head>Head 1</Head>
+            <Items>Item 1</Items>
+        </ContextSubMenu>
+        <ContextSubMenu>
+            <Head>Head 2</Head>
+            <Items>Item 2</Items>
+        </ContextSubMenu>
+        <ContextSubMenu>
+            <Head>Head 3</Head>
+            <Items>Item 3</Items>
+        </ContextSubMenu>
+        <ContextSubMenu>
+            <Head>Head 4</Head>
+            <Items>Item 4</Items>
+        </ContextSubMenu>
+    }
+}

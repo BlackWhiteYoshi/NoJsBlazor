@@ -1,7 +1,7 @@
 ﻿@namespace NoJsBlazor
 
 @if (Active) {
-    <div class="dialog-modal-background" style="@(!ModalScreen ? "background: #0000; pointer-events: none;" : "")"
+    <div class="dialog-modal-background" style="@(!ModalScreen ? "background: #0000; pointer-events: none;" : string.Empty)"
             @onmousedown="modalBackgroundTC.OnMouseDown" @ontouchstart="modalBackgroundTC.OnTouchStart"
             @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
             @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd">

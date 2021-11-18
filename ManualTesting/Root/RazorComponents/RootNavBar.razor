@@ -1,7 +1,7 @@
 ﻿@namespace ManualTesting
 
 <header id="header-navbar" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
-    <NavBar @ref="navBar">
+    <NavBar @ref="navBar" OnToggle="PhoneToggle">
         <Brand>
             <a href="/">
                 <span>My Website</span>
@@ -40,13 +40,13 @@
         <p>@GetFlag(DBox.Language, 15, "margin: 0 5px 2px 0;") @CBox.LPrint("Select Language", "Wähle Sprache")</p>
     </Title>
     <Content>
-        <div class="@(DBox.Language == Language.English ? "selected" : "")"
+        <div class="@(DBox.Language == Language.English ? "selected" : string.Empty)"
                 @onmousedown="(MouseEventArgs e) => { setLanguageTC.Parameter = Language.English; setLanguageTC.OnMouseDown(e); }"
                 @ontouchstart="(TouchEventArgs e) => { setLanguageTC.Parameter = Language.English; setLanguageTC.OnTouchStart(e); }">
             <UKFlag />
             <p>English</p>
         </div>
-        <div class="@(DBox.Language == Language.German ? "selected" : "")"
+        <div class="@(DBox.Language == Language.German ? "selected" : string.Empty)"
                 @onmousedown="(MouseEventArgs e) => { setLanguageTC.Parameter = Language.German; setLanguageTC.OnMouseDown(e); }"
                 @ontouchstart="(TouchEventArgs e) => { setLanguageTC.Parameter = Language.German; setLanguageTC.OnTouchStart(e); }">
             <GermanFlag />
@@ -54,14 +54,3 @@
         </div>
     </Content>
 </Dialog>
-
-
-@code {
-    public RenderFragment GetFlag(Language language, int height, string? styles = null) {
-        return language switch {
-            Language.English => @<UKFlag height="@height" style="@styles" />,
-            Language.German => @<GermanFlag height="@height" style="@styles" />,
-            _ => throw new Exception("invalid enum or not all enums are present in this switch")
-        };
-    }
-}

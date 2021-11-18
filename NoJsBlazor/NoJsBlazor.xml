@@ -11,17 +11,17 @@
         </member>
         <member name="F:NoJsBlazor.CarouselAnimation.FadeOut">
             <summary>
-            Transition to opacity
+            Transition on opacity
             </summary>
         </member>
         <member name="F:NoJsBlazor.CarouselAnimation.Slide">
             <summary>
-            Transition to transform: x-axis
+            Transition on transform: x-axis
             </summary>
         </member>
         <member name="F:NoJsBlazor.CarouselAnimation.SlideRotate">
             <summary>
-            Transition to transform: x-axis and y-axis
+            Transition on transform: x-axis and y-axis
             </summary>
         </member>
         <member name="T:NoJsBlazor.Carousel">
@@ -32,43 +32,51 @@
         </member>
         <member name="P:NoJsBlazor.Carousel.Active">
             <summary>
-            Active item at the beginning.
+            <para>Index of the active item at the beginning.</para>
+            <para>Default is 0.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.IntervalTime">
             <summary>
-            Waiting time before beginning swap animation in ms.
+            <para>Waiting time before beginning swap animation in ms.</para>
+            <para>Default is 6000.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.Animation">
             <summary>
-            Type of swapping animation.
+            <para>Type of swapping animation.</para>
+            <para>Default is FadeOut.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.AutoStartTime">
             <summary>
             <para>Starts interval after [AutoStartTime] ms, if interval not running and no action occurs.</para>
             <para>Value of 0 deactivates autostart.</para>
+            <para>Default is 0.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.BeginRunning">
             <summary>
-            Interval Thread starts at beginning.
+            <para>Interval Thread starts at beginning.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.ControlArrowsEnable">
             <summary>
-            Next/Previous Arrows available
+            <para>Next/Previous Arrows available</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.IndicatorsEnable">
             <summary>
-            Indicators available
+            <para>Indicators available</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.PlayButtonEnable">
             <summary>
-            PlayButton available
+            <para>PlayButton available</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.Items">
@@ -226,14 +234,15 @@
         </member>
         <member name="P:NoJsBlazor.CollapseDiv.HeadHeight">
             <summary>
-            <para>Height of the head of the Component which also functions as the collapse/expand button.</para>
+            <para>Height in px of the head of the Component which also functions as the collapse/expand button.</para>
             <para>It is also the height of the Component when it is collapsed.</para>
+            <para>Default is 62.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.CollapseDiv.ContentHeight">
             <summary>
-            <para>Height gain of the Component when it expand.</para>
-            <para><see cref="P:NoJsBlazor.CollapseDiv.HeadHeight">ButtonHeight</see> + <see cref="P:NoJsBlazor.CollapseDiv.ContentHeight">ContentHeight</see> = expanded Component-height</para>
+            <para>Height of the Component when it is expanded.</para>
+            <para>Default is 173.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.CollapseDiv.StartCollapsed">
@@ -250,23 +259,6 @@
         <member name="P:NoJsBlazor.CollapseDiv.Attributes">
             <summary>
             Captures unmatched values
-            </summary>
-        </member>
-        <member name="T:NoJsBlazor.ContextItem">
-            <summary>
-            <para>Wrapper for the content that will be a context item.</para>
-            <para>This should be placed inside of a <see cref="T:NoJsBlazor.ContextMenu"/>/<see cref="T:NoJsBlazor.ContextSubMenu"/> instance.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.ContextItem.ChildContent">
-            <summary>
-            Html that will be displayed.
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.ContextItem.OnPressed">
-            <summary>
-            <para>Invokes every time when this list item get clicked or touched.</para>
-            <para><see cref="T:System.EventArgs"/> is either <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>, depends if it was invoked by clicking or touching.</para>
             </summary>
         </member>
         <member name="T:NoJsBlazor.ContextMenu">
@@ -297,22 +289,22 @@
             <para>Value is equal <see cref="P:NoJsBlazor.ContextMenu.Expanded">Expanded</see>.</para>
             </summary>
         </member>
-        <member name="M:NoJsBlazor.ContextMenu.Show(System.Double,System.Double)">
+        <member name="M:NoJsBlazor.ContextMenu.Open(System.Double,System.Double)">
             <summary>
             <para>Display the context menu at the given location.</para>
             </summary>
         </member>
-        <member name="M:NoJsBlazor.ContextMenu.Show(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">
+        <member name="M:NoJsBlazor.ContextMenu.Open(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">
             <summary>
             <para>Display the context menu based on mouse position.</para>
             </summary>
         </member>
-        <member name="M:NoJsBlazor.ContextMenu.Show(Microsoft.AspNetCore.Components.Web.TouchEventArgs)">
+        <member name="M:NoJsBlazor.ContextMenu.Open(Microsoft.AspNetCore.Components.Web.TouchEventArgs)">
             <summary>
             <para>Display the context menu based on touch position.</para>
             </summary>
         </member>
-        <member name="M:NoJsBlazor.ContextMenu.Show(System.EventArgs)">
+        <member name="M:NoJsBlazor.ContextMenu.Open(System.EventArgs)">
             <summary>
             Display the context menu based on press position.
             </summary>
@@ -325,6 +317,23 @@
         <member name="M:NoJsBlazor.ContextMenu.Reset">
             <summary>
             Collapses all expanded submenus.
+            </summary>
+        </member>
+        <member name="T:NoJsBlazor.ContextMenuItem">
+            <summary>
+            <para>Wrapper for the content that will be a context item.</para>
+            <para>This should be placed inside of a <see cref="T:NoJsBlazor.ContextMenu"/>/<see cref="T:NoJsBlazor.ContextSubMenu"/> instance.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.ContextMenuItem.ChildContent">
+            <summary>
+            Html that will be displayed.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.ContextMenuItem.OnPressed">
+            <summary>
+            <para>Invokes every time when this list item get clicked or touched.</para>
+            <para><see cref="T:System.EventArgs"/> is either <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>, depends if it was invoked by clicking or touching.</para>
             </summary>
         </member>
         <member name="T:NoJsBlazor.ContextSubMenu">
@@ -433,9 +442,15 @@
             Use this to fill the @onmove and @onup event of the object behind this window if you don't enable <see cref="P:NoJsBlazor.Dialog.ModalScreen">ModalScreen</see>
             </summary>
         </member>
-        <member name="M:NoJsBlazor.Dialog.Show">
+        <member name="M:NoJsBlazor.Dialog.Open">
             <summary>
             <para>Display the window.</para>
+            <para>The same as setting XMovement/YMovement = 0 and Active = true</para>
+            </summary>
+        </member>
+        <member name="M:NoJsBlazor.Dialog.OpenWithLastPosition">
+            <summary>
+            <para>Display the window at the last moved position.</para>
             <para>The same as Active = true</para>
             </summary>
         </member>
@@ -645,7 +660,7 @@
         <member name="P:NoJsBlazor.LoaderIcon.Animation">
             <summary>
             <para>Type of animation to play.</para>
-            <para>Defailt is LoaderAnimation.Spin.</para>
+            <para>Default is LoaderAnimation.Spin.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.LoaderIcon.SpinDuration">
@@ -777,6 +792,29 @@
             <para>Shorthand for: <see cref="P:NoJsBlazor.NavBarMenu.Expanded">Expanded</see> = !<see cref="P:NoJsBlazor.NavBarMenu.Expanded">Expanded</see>;</para>
             </summary>
         </member>
+        <member name="T:NoJsBlazor.ProgressBar">
+            <summary>
+            Base Class for all ProgressBarComponents
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.ProgressBar.Progress">
+            <summary>
+            <para>The relative amoint of the progress Bar</para>
+            <para>0 means empty, 1 means full.</para>
+            <para>Default is 0.0</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.ProgressBar.Text">
+            <summary>
+            <para>Displaying text of this component.</para>
+            <para>Default is <see cref="F:System.String.Empty"/></para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.ProgressBar.Content">
+            <summary>
+            Accessing <see cref="P:NoJsBlazor.ProgressBar.Progress"/> and <see cref="P:NoJsBlazor.ProgressBar.Text"/> together.
+            </summary>
+        </member>
         <member name="T:NoJsBlazor.DecimalSlider">
             <summary>
             <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
@@ -795,38 +833,45 @@
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Min">
             <summary>
-            Slider lower bounds.
+            <para>Slider lower bounds.</para>
+            <para>Default is 0</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Max">
             <summary>
-            Slider upper bounds.
+            <para>Slider upper bounds.</para>
+            <para>Default is 10</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Step">
             <summary>
-            Slider precision
+            <para>Slider precision</para>
+            <para>Default is 0.1</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Editable">
             <summary>
             <para>Indicates if the user is able to edit the number directly.</para>
             <para>Technically the number is displayed in a input field instead of a label,</para>
+            <para>Dafault is false</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.LeftButtonText">
             <summary>
-            Content inside the left Button.
+            <para>Content inside the left Button.</para>
+            <para>Default is "🡸"</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.RightButtonText">
             <summary>
-            Content inside the right Button.
+            <para>Content inside the right Button.</para>
+            <para>Default is "🡺"</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Display">
             <summary>
-            The way the value should be printed.
+            <para>The way the value should be printed.</para>
+            <para>Default is value.ToString()</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.ParseEdit">
@@ -859,38 +904,45 @@
         </member>
         <member name="P:NoJsBlazor.Slider.Min">
             <summary>
-            Slider lower bounds.
+            <para>Slider lower bounds.</para>
+            <para>Default is 0</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.Max">
             <summary>
-            Slider upper bounds.
+            <para>Slider upper bounds.</para>
+            <para>Default is 10</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.Step">
             <summary>
-            Slider precision
+            <para>Slider precision</para>
+            <para>Default is 1</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.Editable">
             <summary>
             <para>Indicates if the user is able to edit the number directly.</para>
             <para>Technically the number is displayed in a input field instead of a label,</para>
+            <para>Dafault is false</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.LeftButtonText">
             <summary>
-            Content inside the left Button.
+            <para>Content inside the left Button.</para>
+            <para>Default is "🡸"</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.RightButtonText">
             <summary>
-            Content inside the right Button.
+            <para>Content inside the right Button.</para>
+            <para>Default is "🡺"</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.Display">
             <summary>
-            The way the value should be printed.
+            <para>The way the value should be printed.</para>
+            <para>Default is value.ToString()</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.ParseEdit">
@@ -1129,6 +1181,75 @@
             </summary>
         </member>
         <member name="P:NoJsBlazor.NavBarLink.Attributes">
+            <summary>
+            Captures unmatched values
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.CircleProgressBar.Diameter">
+            <summary>
+            <para>The size (width and height) of this element in px.</para>
+            <para>Default is 200.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.CircleProgressBar.Margin">
+            <summary>
+            <para>Space between Border and the inner Circle in px.</para>
+            <para>Default is 4.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.CircleProgressBar.Color">
+            <summary>
+            <para>Color of the inner Circle.</para>
+            <para>Default is #04A (dark blue).</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.CircleProgressBar.Attributes">
+            <summary>
+            Captures unmatched values
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.SpeedometerProgressBar.Diameter">
+            <summary>
+            <para>The size (width and height) of this element in px.</para>
+            <para>Default is 200.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.SpeedometerProgressBar.Length">
+            <summary>
+            <para>Relative Length of the meter, 1.0f is length of radius.</para>
+            <para>Default is 0.875f.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.SpeedometerProgressBar.Color">
+            <summary>
+            <para>Color of the inner Circle.</para>
+            <para>Default is #D22 (dark red).</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.SpeedometerProgressBar.Attributes">
+            <summary>
+            Captures unmatched values
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.StandardProgressBar.Width">
+            <summary>
+            <para>The Length of the Bar in px.</para>
+            <para>Default is 300.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.StandardProgressBar.Height">
+            <summary>
+            <para>The Thickness of the Bar in px.</para>
+            <para>Default is 20.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.StandardProgressBar.Color">
+            <summary>
+            <para>Color of the inner Bar.</para>
+            <para>Default is #08F (light blue).</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.StandardProgressBar.Attributes">
             <summary>
             Captures unmatched values
             </summary>

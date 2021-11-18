@@ -2,11 +2,11 @@
 @inherits NavBarItem
 
 @if (Head) {
-    <NavLink class="nav-link" @attributes="Attributes" @onclick="NavBarRoot.Reset">@ChildContent</NavLink>
+    <NavLink class="nav-link" @attributes="Attributes" @onclick="((NavBar)Parent).Reset">@ChildContent</NavLink>
 }
 else {
     <li class="nav-item">
-        <NavLink class="nav-link" @attributes="Attributes" @onclick="NavBarRoot.Reset">@ChildContent</NavLink>
+        <NavLink class="nav-link" @attributes="Attributes" @onclick="((NavBar)Parent).Reset">@ChildContent</NavLink>
     </li>
 }
 
@@ -14,9 +14,9 @@ else {
     /// <summary>
     /// Will be automatically set by the root.
     /// </summary>
-    [CascadingParameter(Name = "Root")]
+    [CascadingParameter(Name = "Parent")]
     [System.Diagnostics.CodeAnalysis.AllowNull]
-    public NavBar NavBarRoot { get; init; }
+    public ListholdingComponentBase<NavBarMenu> Parent { get; set; }
 
     /// <summary>
     /// Captures unmatched values

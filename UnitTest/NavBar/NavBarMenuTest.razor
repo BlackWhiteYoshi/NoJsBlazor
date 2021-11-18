@@ -1,0 +1,47 @@
+﻿@namespace UnitTest
+@inherits TestContext
+
+@code {
+    private (IRenderedFragment fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarTree(MarkupString headHtml) {
+        NavBar? navBar = null;
+        NavBarMenu? navBarMenu = null;
+        NavBarItem? navBarItem = null;
+
+        IRenderedFragment fragment = Render(
+            @<NavBar @ref="navBar">
+                <Items>
+                    <NavBarMenu @ref="navBarMenu">
+                        <Head>
+                            @headHtml
+                        </Head>
+                        <Items>
+                            <NavBarItem @ref="navBarItem" />
+                        </Items>
+                    </NavBarMenu>
+                </Items>
+            </NavBar>
+            );
+
+        return (fragment, navBar!, navBarMenu!, navBarItem!);
+    }
+
+    private (IRenderedFragment fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarWithCallback(Action<bool> eventCallback) {
+        NavBar? navBar = null;
+        NavBarMenu? navBarMenu = null;
+        NavBarItem? navBarItem = null;
+
+        IRenderedFragment fragment = Render(
+            @<NavBar @ref="navBar">
+                <Items>
+                    <NavBarMenu @ref="navBarMenu" OnToggle="eventCallback">
+                        <Items>
+                            <NavBarItem @ref="navBarItem" />
+                        </Items>
+                    </NavBarMenu>
+                </Items>
+            </NavBar>
+            );
+
+        return (fragment, navBar!, navBarMenu!, navBarItem!);
+    }
+}

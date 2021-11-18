@@ -1,13 +1,14 @@
 ﻿@namespace NoJsBlazor
+@inherits ListableComponentBase<ContextSubMenu>
 
 <li class="context-item dropright">
     <div @ontouchstart="dropRightTC.OnTouchStart">
         <CascadingValue Name="Head" Value="true" IsFixed="true">
             @Head
         </CascadingValue>
-        <span class="dropright-arrow @(Expanded ? "expanded" : "")"></span>
+        <span class="dropright-arrow @(Expanded ? "expanded" : string.Empty)"></span>
     </div>
-    <ul class="dropright-menu @(Expanded ? "expanded" : "")">
+    <ul class="dropright-menu @(Expanded ? "expanded" : string.Empty)">
         @Items
     </ul>
 </li>

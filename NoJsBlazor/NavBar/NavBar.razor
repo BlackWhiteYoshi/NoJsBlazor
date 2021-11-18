@@ -1,23 +1,24 @@
 ﻿@namespace NoJsBlazor
+@inherits ListholdingComponentBase<NavBarMenu>
 
 <nav class="navbar navbar-nav" @attributes="@Attributes">
     <div class="navbar-toggler">
-        <div style="@(DisableBrand ? "float: none;" : "")">
+        <div style="@(Brand == null ? "float: none;" : string.Empty)">
             <button class="navbar-toggler-icon" aria-label="Toggle navigation"
                     @onmousedown="ToggleTC.OnMouseDown" @ontouchstart="ToggleTC.OnTouchStart"></button>
         </div>
-        @if (!DisableBrand) {
+        @if (Brand != null) {
             <span class="navbar-brand" @onclick="Reset">@Brand</span>
         }
     </div>
-    <div class="navbar-collapse @(Expanded ? "expanded" : "")">
+    <div class="navbar-collapse @(Expanded ? "expanded" : string.Empty)">
         <ul class="navbar-nav">
-            @if (!DisableBrand) {
+            @if (Brand != null) {
                 <li>
                     <span class="navbar-brand" @onclick="Reset">@Brand</span>
                 </li>
             }
-            <CascadingValue Name="Root" Value="this" IsFixed="true">
+            <CascadingValue Name="Parent" Value="(ListholdingComponentBase<NavBarMenu>)this" IsFixed="true">
                 @Items
             </CascadingValue>
         </ul>

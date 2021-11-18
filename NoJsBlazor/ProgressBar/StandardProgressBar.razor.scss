@@ -1,0 +1,23 @@
+﻿$border-radius: 20px;
+
+.standard-progress-bar {
+    // border of bar
+    & > div {
+        // don't change border, or change also "BORDER_THICK" in component
+        border: solid 1px #444;
+        border-radius: $border-radius;
+
+        // bar itself
+        & > div {
+            margin: 2px;
+            border-radius: $border-radius;
+            transition: border-left ease-in-out 300ms
+        }
+    }
+
+    // text under the bar
+    & > p {
+        margin-top: 2px;
+        font-size: 18px;
+    }
+}
