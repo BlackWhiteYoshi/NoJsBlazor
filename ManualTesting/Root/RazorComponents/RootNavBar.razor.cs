@@ -76,24 +76,4 @@ public partial class RootNavBar : ComponentBase {
     }
 
     #endregion
-
-
-    private static RenderFragment GetFlag(Language language, int height, string styles = "") {
-        // <ComponentFlag height="@height" style="@styles" />
-        return (RenderTreeBuilder builder) => {
-            switch (language) {
-                case Language.English:
-                    builder.OpenComponent<UKFlag>(0);
-                    break;
-                case Language.German:
-                    builder.OpenComponent<GermanFlag>(0);
-                    break;
-                default:
-                    throw new Exception("invalid enum or not all enums are present in this switch");
-            }
-            builder.AddAttribute(1, "height", height);
-            builder.AddAttribute(2, "style", styles);
-            builder.CloseComponent();
-        };
-    }
 }

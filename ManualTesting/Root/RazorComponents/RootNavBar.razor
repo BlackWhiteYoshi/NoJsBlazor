@@ -54,3 +54,14 @@
         </div>
     </Content>
 </Dialog>
+
+
+@code {
+    private static RenderFragment GetFlag(Language language, int height, string styles = "") {
+        return language switch {
+            Language.English => @<UKFlag height="@height" style="@styles" />,
+            Language.German => @<GermanFlag height="@height" style="@styles" />,
+            _ => throw new Exception("invalid enum or not all enums are present in this switch")
+        };
+    }
+}
