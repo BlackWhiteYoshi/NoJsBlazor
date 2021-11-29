@@ -33,7 +33,7 @@ public partial class NavBarMenuTest : TestContext {
     #endregion
 
 
-    #region public Methods
+    #region public methods
 
     [Fact]
     public void Toggle_Changes_Expanded_State() {
@@ -42,6 +42,17 @@ public partial class NavBarMenuTest : TestContext {
 
         navBarMenu.Toggle();
         Assert.True(navBarMenu.Expanded);
+    }
+
+    [Fact]
+    public void SilentExpandedSetter_Sets_Without_Notifying() {
+        int fired = 0;
+
+        (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarWithCallback((bool expanded) => fired++);
+
+        navBarMenu.SilentExpandedSetter = true;
+        Assert.True(navBarMenu.Expanded);
+        Assert.Equal(0, fired);
     }
 
     #endregion

@@ -95,6 +95,7 @@ public partial class CarouselTest : TestContext {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, enabled);
         });
+        carouselContainer.Render();
         Carousel carousel = carouselContainer.Instance;
 
         Assert.Equal(enabled, carousel.Running);
@@ -201,9 +202,10 @@ public partial class CarouselTest : TestContext {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
         });
+        carouselContainer.Render();
         Carousel carousel = carouselContainer.Instance;
-        IElement indicatorList = carouselContainer.Find(".carousel-indicators");
 
+        IElement indicatorList = carouselContainer.Find(".carousel-indicators");
 
         int index2 = (index + 1) % carousel.ItemCount;
         int index3 = (index + 3) % carousel.ItemCount;
@@ -227,6 +229,7 @@ public partial class CarouselTest : TestContext {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, runAtBeginning);
         });
+        carouselContainer.Render();
         Carousel carousel = carouselContainer.Instance;
         IElement playButton = carouselContainer.Find(".carousel-play-button");
 
@@ -275,7 +278,7 @@ public partial class CarouselTest : TestContext {
     #endregion
 
 
-    #region public Methods
+    #region public methods
 
     [Fact]
     public void AddItem_Adds_An_Item() {
@@ -407,6 +410,7 @@ public partial class CarouselTest : TestContext {
             builder.Add((Carousel carousel) => carousel.BeginRunning, true);
             builder.Add((Carousel carousel) => carousel.IntervalTime, 100000);
         });
+        carouselContainer.Render();
         Carousel carousel = carouselContainer.Instance;
 
         Assert.True(carousel.Running);

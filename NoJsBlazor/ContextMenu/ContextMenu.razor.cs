@@ -12,7 +12,7 @@ public partial class ContextMenu : ListholdingComponentBase<ContextSubMenu> {
     public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
-    /// <para>Fires every time after <see cref="Expanded">Expanded</see> got set.</para>
+    /// <para>Fires every time when <see cref="Expanded">Expanded</see> get changed.</para>
     /// <para>Value is equal <see cref="Expanded">Expanded</see>.</para>
     /// </summary>
     [Parameter]
@@ -33,9 +33,11 @@ public partial class ContextMenu : ListholdingComponentBase<ContextSubMenu> {
     public bool Expanded {
         get => _expanded;
         private set {
-            _expanded = value;
-            OnToggle.InvokeAsync(value);
-            InvokeAsync(StateHasChanged);
+            if (value != _expanded) {
+                _expanded = value;
+                OnToggle.InvokeAsync(value);
+                InvokeAsync(StateHasChanged);
+            }
         }
     }
 
@@ -45,36 +47,14 @@ public partial class ContextMenu : ListholdingComponentBase<ContextSubMenu> {
 
 
     /// <summary>
-    /// <para>Display the context menu at the given location.</para>
+    /// Display the context menu at the given location.
     /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
     public void Open(double x, double y) {
         left = x;
         top = y;
         Expanded = true;
-    }
-
-    /// <summary>
-    /// <para>Display the context menu based on mouse position.</para>
-    /// </summary>
-    public void Open(MouseEventArgs e) => Open(e.ClientX, e.ClientY);
-
-    /// <summary>
-    /// <para>Display the context menu based on touch position.</para>
-    /// </summary>
-    public void Open(TouchEventArgs e) => Open(e.Touches[0].ClientX, e.Touches[0].ClientY);
-
-    /// <summary>
-    /// Display the context menu based on press position.
-    /// </summary>
-    public void Open(EventArgs eventArgs) {
-        switch (eventArgs) {
-            case MouseEventArgs mouseEventArgs:
-                Open(mouseEventArgs);
-                break;
-            case TouchEventArgs touchEventArgs:
-                Open(touchEventArgs);
-                break;
-        }
     }
 
     /// <summary>
@@ -86,6 +66,28 @@ public partial class ContextMenu : ListholdingComponentBase<ContextSubMenu> {
     }
 
 
+    /// <summary>
+    /// Display the context menu at the given location without notifying <see cref="OnToggle"/>.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    public void SilentOpen(double x, double y) {
+        left = x;
+        top = y;
+        _expanded = true;
+        InvokeAsync(StateHasChanged);
+    }
+
+    /// <summary>
+    /// Collapses all expanded submenus and closes the context menu without notifying <see cref="OnToggle"/>.
+    /// </summary>
+    public void SilentClose() {
+        Reset();
+        _expanded = false;
+        InvokeAsync(StateHasChanged);
+    }
+    
+    
     /// <summary>
     /// Collapses all expanded submenus.
     /// </summary>

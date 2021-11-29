@@ -77,15 +77,28 @@ public partial class Dialog : ComponentBase {
     public bool Active {
         get => _active;
         set {
-            _active = value;
-            if (value)
-                OnOpen.InvokeAsync();
-            else
-                OnClose.InvokeAsync();
-            InvokeAsync(StateHasChanged);
+            if (value != _active) {
+                _active = value;
+                if (value)
+                    OnOpen.InvokeAsync();
+                else
+                    OnClose.InvokeAsync();
+                InvokeAsync(StateHasChanged);
+            }
         }
     }
     private bool _active;
+
+    /// <summary>
+    /// Sets the state of <see cref="Active"/> without notifying <see cref="OnOpen"/> nor <see cref="OnClose"/>.
+    /// </summary>
+    public bool SilentActiveSetter {
+        set {
+            _active = value;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
 
     /// <summary>
     /// Use this to fill the @onmove and @onup event of the object behind this window if you don't enable <see cref="ModalScreen">ModalScreen</see>

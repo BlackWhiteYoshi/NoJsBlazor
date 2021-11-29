@@ -73,6 +73,26 @@ public class CollapseDivTest : TestContext {
     #endregion
 
 
+    #region public methods
+
+    [Fact]
+    public void SilentCollapsedSetter_Sets_Without_Notifying() {
+        int fired = 0;
+
+        IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
+            builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartCollapsed, false);
+            builder.Add((CollapseDiv collapseDiv) => collapseDiv.OnCollapseChanged, (bool collapsed) => fired++);
+        });
+        CollapseDiv collapseDiv = collapseDivContainer.Instance;
+
+        collapseDiv.SilentCollapsedSetter = true;
+        Assert.True(collapseDiv.Collapsed);
+        Assert.Equal(0, fired);
+    }
+
+    #endregion
+
+
     #region events
 
     [Fact]

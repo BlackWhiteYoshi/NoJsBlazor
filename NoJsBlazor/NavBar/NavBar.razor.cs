@@ -20,7 +20,7 @@ public partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     public RenderFragment? Items { get; set; }
 
     /// <summary>
-    /// <para>Fires every time after <see cref="Expanded">Expanded</see> got set.</para>
+    /// <para>Fires every time when <see cref="Expanded">Expanded</see> get changed.</para>
     /// <para>Value is equal <see cref="Expanded">Expanded</see>.</para>
     /// </summary>
     [Parameter]
@@ -41,8 +41,20 @@ public partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     public bool Expanded {
         get => _expanded;
         set {
+            if (value != _expanded) {
+                _expanded = value;
+                OnToggle.InvokeAsync(value);
+                InvokeAsync(StateHasChanged);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Sets the state of <see cref="Expanded"/> without notifying <see cref="OnToggle"/>.
+    /// </summary>
+    public bool SilentExpandedSetter {
+        set {
             _expanded = value;
-            OnToggle.InvokeAsync(value);
             InvokeAsync(StateHasChanged);
         }
     }

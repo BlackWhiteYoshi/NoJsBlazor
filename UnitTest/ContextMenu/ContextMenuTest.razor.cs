@@ -60,6 +60,35 @@ public partial class ContextMenuTest : TestContext {
         Assert.False(contextSubMenu.Expanded);
     }
 
+    [Fact]
+    public void SilentOpen_Expands_Without_Notifying() {
+        int fired = 0;
+
+        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent<ContextMenu>((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
+            builder.Add((ContextMenu contextMenu) => contextMenu.OnToggle, (bool expanded) => fired++);
+        });
+        ContextMenu contextMenu = contextMenuContainer.Instance;
+
+        contextMenu.SilentOpen(0.0, 0.0);
+        Assert.True(contextMenu.Expanded);
+        Assert.Equal(0, fired);
+    }
+
+    [Fact]
+    public void SilentClose_Hides_Without_Notifying() {
+        int fired = 0;
+
+        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent<ContextMenu>((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
+            builder.Add((ContextMenu contextMenu) => contextMenu.OnToggle, (bool expanded) => fired++);
+        });
+        ContextMenu contextMenu = contextMenuContainer.Instance;
+
+        contextMenu.SilentOpen(0.0, 0.0);
+        contextMenu.SilentClose();
+        Assert.False(contextMenu.Expanded);
+        Assert.Equal(0, fired);
+    }
+
     #endregion
 
 

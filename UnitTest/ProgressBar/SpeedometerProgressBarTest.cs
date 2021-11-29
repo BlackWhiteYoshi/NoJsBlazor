@@ -56,7 +56,7 @@ public class SpeedometerProgressBarTest : TestContext {
     #endregion
 
 
-    #region public Methods
+    #region public methods
 
     [Theory]
     [InlineData(0.5f)]

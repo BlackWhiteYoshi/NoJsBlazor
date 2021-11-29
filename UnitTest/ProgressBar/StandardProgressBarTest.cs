@@ -47,7 +47,7 @@ public class StandardProgressBarTest : TestContext {
     #endregion
 
 
-    #region public Methods
+    #region public methods
 
     [Fact]
     public void Progress_Sets_BorderWidth() {

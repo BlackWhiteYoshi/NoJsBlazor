@@ -171,6 +171,25 @@ public class DialogTest : TestContext {
         Assert.Equal(0, dialog.YMovement);
     }
 
+    [Fact]
+    public void SilentActiveSetter_Sets_Without_Notifying() {
+        int fired = 0;
+
+        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+            builder.Add((Dialog dialog) => dialog.OnOpen, () => fired++);
+            builder.Add((Dialog dialog) => dialog.OnClose, () => fired++);
+        });
+        Dialog dialog = dialogContainer.Instance;
+
+        dialog.SilentActiveSetter = true;
+        Assert.True(dialog.Active);
+        Assert.Equal(0, fired);
+
+        dialog.SilentActiveSetter = false;
+        Assert.False(dialog.Active);
+        Assert.Equal(0, fired);
+    }
+
     #endregion
 
 

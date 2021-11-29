@@ -58,7 +58,7 @@ public partial class NavBarTest : TestContext {
     #endregion
 
 
-    #region public Methods
+    #region public methods
 
     [Fact]
     public void Reset_Closes_Submenus() {
@@ -69,6 +69,20 @@ public partial class NavBarTest : TestContext {
         Assert.True(navBarMenu.Expanded);
         navBar.Reset();
         Assert.False(navBarMenu.Expanded);
+    }
+
+    [Fact]
+    public void SilentExpandedSetter_Sets_Without_Notifying() {
+        int fired = 0;
+
+        IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
+            builder.Add((NavBar navBar) => navBar.OnToggle, (bool expanded) => fired++);
+        });
+        NavBar navBar = navBarContainer.Instance;
+
+        navBar.SilentExpandedSetter = true;
+        Assert.True(navBar.Expanded);
+        Assert.Equal(0, fired);
     }
 
     #endregion

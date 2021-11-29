@@ -52,11 +52,26 @@ public partial class CollapseDiv : ComponentBase {
     public Dictionary<string, object>? Attributes { get; set; }
 
     private bool _collapsed;
+    /// <summary>
+    /// The state of collapsed or expanded.
+    /// </summary>
     public bool Collapsed {
         get => _collapsed;
         set {
+            if (value != _collapsed) {
+                _collapsed = value;
+                OnCollapseChanged.InvokeAsync(value);
+                InvokeAsync(StateHasChanged);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Sets the state of <see cref="Collapsed"/> without notifying <see cref="OnCollapseChanged"/>.
+    /// </summary>
+    public bool SilentCollapsedSetter {
+        set {
             _collapsed = value;
-            OnCollapseChanged.InvokeAsync(value);
             InvokeAsync(StateHasChanged);
         }
     }

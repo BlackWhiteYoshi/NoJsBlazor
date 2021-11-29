@@ -13,16 +13,30 @@ public partial class Input : ComponentBase {
     public string? Value {
         get => _value;
         set {
+            if (value != _value) {
+                _value = value;
+                hasValue = !string.IsNullOrEmpty(Value);
+                ValueChanged.InvokeAsync(Value);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Sets the state of <see cref="Value"/> without notifying <see cref="ValueChanged"/>.
+    /// </summary>
+    public string? SilentValueSetter {
+        set {
             _value = value;
             hasValue = !string.IsNullOrEmpty(Value);
         }
     }
 
+
     /// <summary>
-    /// Fires every time when user input occurs.
+    /// Fires every time <see cref="Value"/> changes.
     /// </summary>
     [Parameter]
-    public EventCallback<string> ValueChanged { get; set; }
+    public EventCallback<string?> ValueChanged { get; set; }
 
     /// <summary>
     /// <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
@@ -84,8 +98,5 @@ public partial class Input : ComponentBase {
 
     private bool hasValue;
 
-    private void OnInput(ChangeEventArgs e) {
-        Value = (string?)e.Value;
-        ValueChanged.InvokeAsync(Value);
-    }
+    private void OnInput(ChangeEventArgs e) => Value = (string?)e.Value;
 }

@@ -34,7 +34,7 @@ public partial class ContextSubMenuTest : TestContext {
     #endregion
 
 
-    #region public Methods
+    #region public methods
 
     [Fact]
     public void Toggle_Changes_Expanded_State() {
@@ -43,6 +43,18 @@ public partial class ContextSubMenuTest : TestContext {
 
         contextSubMenu.Toggle();
         Assert.True(contextSubMenu.Expanded);
+    }
+
+    [Fact]
+    public void SilentExpandedSetter_Sets_Without_Notifying() {
+        int fired = 0;
+
+        (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((bool expanded) => fired++);
+
+        bool stateAfterToggling = !contextSubMenu.Expanded;
+        contextSubMenu.SilentExpandedSetter = !contextSubMenu.Expanded;
+        Assert.Equal(stateAfterToggling, contextSubMenu.Expanded);
+        Assert.Equal(0, fired);
     }
 
     #endregion
