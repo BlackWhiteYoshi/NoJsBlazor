@@ -186,13 +186,18 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
         playButtonTC = new TouchClick(PlayButton);
     }
 
-    protected override void OnAfterRender(bool firstRender) {
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender) {
             Initialize();
             StateHasChanged();
 
-            if (BeginRunning)
+            if (BeginRunning) {
+                // first render has no indicators because ChildCount = 0 
+                // a second render is needed to render indicators with progress 0
+                // then start timer, which sets progress to full (with transition)
+                await Task.Yield();
                 StartInterval();
+            }
             else if (CurrAutoStartTime > 0)
                 autoStart.Start();
         }
@@ -362,8 +367,8 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
         }
 
         _ = InvokeAsync(StateHasChanged);
-        this.Active = next;
-        _ = OnActiveChanged.InvokeAsync(this.Active);
+        Active = next;
+        _ = OnActiveChanged.InvokeAsync(Active);
     }
 
     private void StopInterval() {
@@ -687,6 +692,7 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
     public void Dispose() {
         interval?.Dispose();
         autoStart?.Dispose();
+
         GC.SuppressFinalize(this);
     }
 
