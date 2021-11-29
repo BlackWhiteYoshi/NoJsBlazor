@@ -46,11 +46,6 @@
         }
 
         // value display text
-        & > label {
-            font-size: 18px;
-        }
-
-        // value display text
         & > input {
             border: none;
             outline: none;
@@ -102,6 +97,7 @@
                 width: 16px;
                 height: 16px;
                 border-radius: 50%;
+                border: none;
                 background: #07F;
                 cursor: pointer;
             }
