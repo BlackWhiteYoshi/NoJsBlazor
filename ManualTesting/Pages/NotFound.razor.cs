@@ -3,20 +3,18 @@
 public partial class NotFound : PageComponentBase {
     [Inject]
     [AllowNull]
-    public NavigationManager NavigationManager { get; init; }
+    private NavigationManager NavigationManager { get; init; }
 
 
     private const int BAD_REQUEST_LIST_MAX_DISTANCE = 16;
 
-    private static readonly string[] UrlList = new string[] {
-        "ExampleSite",
-        "ExampleSite2",
-        "ExampleSite3",
-
-        "AboutMe",
-        "Impressum",
-        "Privacy",
-    };
+    private static string[]? _urlList;
+    private static string[] UrlList => _urlList ??= (from type in typeof(Program).Assembly.GetTypes()
+                                                     let routeAttributes = type.GetCustomAttributes(typeof(RouteAttribute), false).OfType<RouteAttribute>()
+                                                     from routeAttribute in routeAttributes
+                                                     let template = routeAttribute.Template[1..]
+                                                     where template != string.Empty
+                                                     select template).ToArray();
 
 
     private unsafe void SortAndRenderUrls(RenderTreeBuilder builder) {
