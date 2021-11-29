@@ -7,9 +7,9 @@
     </header>
 
     <section class="center">
-        <p>@CBox.LPrint("The site at the specified URL could not be found.", "Die Seite an der angegebenen URL konnte nicht gefunden werden.")</p>
+        <p>@Lang.Print("The site at the specified URL could not be found.", "Die Seite an der angegebenen URL konnte nicht gefunden werden.")</p>
         <a href="/">
-            <p class="text-center" style="margin: 50px 0;">@CBox.LPrint("Back to Home Page", "Zurück zur Startseite")</p>
+            <p class="text-center" style="margin: 50px 0;">@Lang.Print("Back to Home Page", "Zurück zur Startseite")</p>
         </a>
         
         @((RenderFragment)SortAndRenderUrls)
@@ -19,7 +19,7 @@
 @code {
     private unsafe void RenderUrls(RenderTreeBuilder __builder, int** buckets, bool atLeastOneItem) {
         if (atLeastOneItem) {
-            <p class="text-center">@CBox.LPrint("Similar URLs", "Ähnliche URLs")</p>
+            <p class="text-center">@Lang.Print("Similar URLs", "Ähnliche URLs")</p>
 
             <ul class="center">
                 @for (int distance = 1; distance <= BAD_REQUEST_LIST_MAX_DISTANCE; distance++) {

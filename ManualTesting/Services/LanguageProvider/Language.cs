@@ -1,8 +1,5 @@
-﻿namespace ManualTesting;
+﻿namespace ManualTesting.Languages;
 
-/// <summary>
-/// Collection of supported languages.
-/// </summary>
 public enum Language {
     /// <summary>
     /// The global language.

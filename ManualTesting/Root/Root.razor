@@ -4,7 +4,7 @@
       @onmousemove="(MouseEventArgs e) => MouseMove?.Invoke(e)" @ontouchmove="(TouchEventArgs e) => TouchMove?.Invoke(e)"
       @onmouseup="(MouseEventArgs e) => MouseUp?.Invoke(e)" @ontouchend="(TouchEventArgs e) => TouchEnd?.Invoke(e)">
 
-    <RootNavBar Root="this" />
+    <RootNavBar @ref="navBar" Root="this" />
 
     <main>
         <CascadingValue Value="this" IsFixed="true">

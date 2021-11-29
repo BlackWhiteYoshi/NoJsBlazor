@@ -9,7 +9,8 @@ public partial class Home : PageComponentBase, IDisposable {
     private ContextMenu contextMenu;
 
     private void OpenContextMenu(MouseEventArgs e) {
-        contextMenu.Open(e.OffsetX, e.OffsetY);
+        // padding-left = 20px, padding-top = 20px
+        contextMenu.Open(e.OffsetX + 20, e.OffsetY + 20);
         Root.MouseDown += CloseContextMenu;
     }
 
@@ -81,5 +82,6 @@ public partial class Home : PageComponentBase, IDisposable {
 
     public void Dispose() {
         Root.MouseDown -= CloseContextMenu;
+        GC.SuppressFinalize(this);
     }
 }

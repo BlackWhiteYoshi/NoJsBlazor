@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace ManualTesting;
+﻿namespace ManualTesting;
 
 /// <summary>
 /// ConstantsBox for global static readonly Data or global static Methods
@@ -16,63 +14,6 @@ public static class CBox {
     /// <para>By using the same Random object, a equal distribution is provided.</para>
     /// </summary>
     public static Random Rng { get; } = new();
-
-
-    /// <summary>
-    /// Gives the display string dependent on the current language
-    /// </summary>
-    /// <param name="german">text to print if value is german</param>
-    /// <param name="english">text to print if value is english</param>
-    /// <returns></returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string LPrint(string english, string german) {
-        return DBox.Language switch {
-            Language.German => german,
-            Language.English => english,
-            _ => throw new ArgumentException("No Language Selected")
-        };
-    }
-
-    /// <summary>
-    /// Sets the Language, but also sets the "lang" property in the "html" tag
-    /// </summary>
-    /// <param name="language"></param>
-    /// <param name="jsSyncRuntime"></param>
-    public static void SetLanguage(Language language, IJSInProcessRuntime jsSyncRuntime) {
-        DBox.Language = language;
-        jsSyncRuntime.InvokeVoid("SetHtmlLanguage", language.GetAbbreviation());
-    }
-
-    /// <summary>
-    /// <para>Parses a string to an enum.</para>
-    /// <para>Only the first 2 characters are checked for determining the result.</para>
-    /// <para>if string is less than 2 characters or no match is found, the result will be English.</para>
-    /// </summary>
-    /// <param name="language"></param>
-    /// <returns></returns>
-    public static Language GetLanguage(string language) {
-        if (language.Length < 2)
-            return Language.English;
-
-        return language[0..2] switch {
-            "de" => Language.German,
-            _ => Language.English
-        };
-    }
-
-    /// <summary>
-    /// <para>Gives the correspending short form for the given language.</para>
-    /// <para>e.g. English -> "en", German -> "de"</para>
-    /// </summary>
-    /// <param name="language"></param>
-    /// <returns></returns>
-    public static string GetAbbreviation(this Language language) {
-        return language switch {
-            Language.German => "de",
-            Language.English => "en",
-            _ => throw new Exception("Language Error")
-        };
-    }
 
 
     /// <summary>

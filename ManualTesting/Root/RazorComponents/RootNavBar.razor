@@ -1,4 +1,6 @@
-﻿@namespace ManualTesting
+﻿@using ManualTesting.Languages
+
+@namespace ManualTesting
 
 <header id="header-navbar" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
     <NavBar @ref="navBar" OnToggle="PhoneToggle">
@@ -14,39 +16,39 @@
             <NavBarLink>Test</NavBarLink>
             <NavBarMenu>
                 <Head>
-                    <NavBarLink>@CBox.LPrint("Example", "Beispiel")</NavBarLink>
+                    <NavBarLink>@Lang.Print("Example", "Beispiel")</NavBarLink>
                 </Head>
                 <Items>
-                    <NavBarLink>@CBox.LPrint("Example 2", "Beispiel 3")</NavBarLink>
+                    <NavBarLink>@Lang.Print("Example 2", "Beispiel 3")</NavBarLink>
                     <NavBarMenu>
                         <Head>
-                            <NavBarLink>@CBox.LPrint("Example 2", "Beispiel 2")</NavBarLink>
+                            <NavBarLink>@Lang.Print("Example 2", "Beispiel 2")</NavBarLink>
                         </Head>
                         <Items>
-                            <NavBarLink>@CBox.LPrint("Example 3", "Beispiel 3")</NavBarLink>
+                            <NavBarLink>@Lang.Print("Example 3", "Beispiel 3")</NavBarLink>
                         </Items>
                     </NavBarMenu>
                 </Items>
             </NavBarMenu>
-            <NavBarLink>@CBox.LPrint("Example 2", "Beispiel 2")</NavBarLink>
-            <NavBarLink>@CBox.LPrint("Example 3", "Beispiel 3")</NavBarLink>
+            <NavBarLink>@Lang.Print("Example 2", "Beispiel 2")</NavBarLink>
+            <NavBarLink>@Lang.Print("Example 3", "Beispiel 3")</NavBarLink>
         </Items>
     </NavBar>
-    <div id="flag" @onmousedown="dialogOpenTC.OnMouseDown" @ontouchstart="dialogOpenTC.OnTouchStart">@GetFlag(DBox.Language, 20)</div>
+    <div id="flag" @onmousedown="dialogOpenTC.OnMouseDown" @ontouchstart="dialogOpenTC.OnTouchStart">@GetFlag(Lang.Language, 20)</div>
 </header>
 
 <Dialog @ref="dialog" ModalScreen="false" id="language-dialog" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
     <Title>
-        <p>@GetFlag(DBox.Language, 15, "margin: 0 5px 2px 0;") @CBox.LPrint("Select Language", "Wähle Sprache")</p>
+        <p>@GetFlag(Lang.Language, 15, "margin: 0 5px 2px 0;") @Lang.Print("Select Language", "Wähle Sprache")</p>
     </Title>
     <Content>
-        <div class="@(DBox.Language == Language.English ? "selected" : string.Empty)"
+        <div class="@(Lang.Language == Language.English ? "selected" : string.Empty)"
                 @onmousedown="(MouseEventArgs e) => { setLanguageTC.Parameter = Language.English; setLanguageTC.OnMouseDown(e); }"
                 @ontouchstart="(TouchEventArgs e) => { setLanguageTC.Parameter = Language.English; setLanguageTC.OnTouchStart(e); }">
             <UKFlag />
             <p>English</p>
         </div>
-        <div class="@(DBox.Language == Language.German ? "selected" : string.Empty)"
+        <div class="@(Lang.Language == Language.German ? "selected" : string.Empty)"
                 @onmousedown="(MouseEventArgs e) => { setLanguageTC.Parameter = Language.German; setLanguageTC.OnMouseDown(e); }"
                 @ontouchstart="(TouchEventArgs e) => { setLanguageTC.Parameter = Language.German; setLanguageTC.OnTouchStart(e); }">
             <GermanFlag />

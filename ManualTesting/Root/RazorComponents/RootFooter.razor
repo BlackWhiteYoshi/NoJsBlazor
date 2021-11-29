@@ -1,20 +1,25 @@
-﻿@namespace ManualTesting
+﻿@using ManualTesting.Languages
+
+@namespace ManualTesting
 
 <footer>
     <ul>
-        <li><NavLink href="AboutMe">@CBox.LPrint("About Me", "Über Mich")</NavLink></li>
+        <li><NavLink href="AboutMe">@Lang.Print("About Me", "Über Mich")</NavLink></li>
         <li><NavLink href="Impressum">Impressum</NavLink></li>
-        <li><NavLink href="Privacy">@CBox.LPrint("Privacy", "Datenschutz")</NavLink></li>
+        <li><NavLink href="Privacy">@Lang.Print("Privacy", "Datenschutz")</NavLink></li>
         <li><p style="font-size: 15px; color: black; opacity: 0.8;">@($"© {@DateTime.Now.Year} MyWebsite")</p></li>
     </ul>
 </footer>
 
 @code {
+    [Inject]
+    [AllowNull]
+    private ILanguageProvider Lang { get; init; }
+
+
     /// <summary>
     /// <para>This will notify this component to Rerender.</para>
     /// <para>Technically only StateHasChanged() is called.</para>
     /// </summary>
-    public void Rerender() {
-        StateHasChanged();
-    }
+    public void Rerender() => StateHasChanged();
 }

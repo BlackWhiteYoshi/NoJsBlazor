@@ -1,32 +1,35 @@
-﻿using NoJsBlazor;
+﻿using ManualTesting.Languages;
+using NoJsBlazor;
 
 namespace ManualTesting;
 
 public partial class RootNavBar : ComponentBase {
     [Inject]
     [AllowNull]
-    public IJSInProcessRuntime JsRuntime { get; init; }
+    private IJSInProcessRuntime JsRuntime { get; init; }
+
+    [Inject]
+    [AllowNull]
+    private ILanguageProvider Lang { get; init; }
 
     [Parameter]
+    [EditorRequired]
     [AllowNull]
     public Root Root { get; init; }
 
 
     [AllowNull]
     private NavBar navBar;
-
     [AllowNull]
     private Dialog dialog;
 
 
-    private readonly TouchClick navBarResetTC;
     private readonly TouchClick dialogOpenTC;
     private readonly TouchClick dialogCloseTC;
     private readonly TouchClick<Language> setLanguageTC;
 
 
     public RootNavBar() {
-        navBarResetTC = new(ResetNavBar);
         dialogOpenTC = new(DialogOpen);
         dialogCloseTC = new(DialogClose);
         setLanguageTC = new(SetLanguage);
@@ -36,18 +39,17 @@ public partial class RootNavBar : ComponentBase {
 
     private void PhoneToggle(bool expanded) {
         if (expanded) {
-            Root.MouseDown += navBarResetTC.OnMouseDown;
-            Root.TouchStart += navBarResetTC.OnTouchStart;
+            Root.MouseDown += Reset;
+            Root.TouchStart += Reset;
         }
         else {
-            Root.MouseDown -= navBarResetTC.OnMouseDown;
-            Root.TouchStart -= navBarResetTC.OnTouchStart;
+            Root.MouseDown -= Reset;
+            Root.TouchStart -= Reset;
         }
     }
 
-    private void ResetNavBar(EventArgs e) {
-        navBar.Reset();
-    }
+    private void Reset(EventArgs e) => navBar.Reset();
+
 
     private void DialogOpen(EventArgs e) {
         Root.MouseDown += dialogCloseTC.OnMouseDown;
@@ -66,14 +68,14 @@ public partial class RootNavBar : ComponentBase {
         Root.TouchMove -= dialog.headBarTC.OnTouchMove;
         Root.MouseUp -= dialog.headBarTC.OnMouseUp;
         Root.TouchEnd -= dialog.headBarTC.OnTouchEnd;
-        JsRuntime.InvokeVoid("localStorage.setItem", CBox.StorageKeyLanguage, DBox.Language);
+        JsRuntime.InvokeVoid("localStorage.setItem", CBox.StorageKeyLanguage, Lang.Language);
         dialog.Close();
     }
 
-    private void SetLanguage(EventArgs e) {
-        CBox.SetLanguage(setLanguageTC.Parameter, JsRuntime);
-        Root.Rerender();
-    }
+    private void SetLanguage(EventArgs e) => Lang.Language = setLanguageTC.Parameter;
 
     #endregion
+
+
+    public void Rerender() => StateHasChanged();
 }

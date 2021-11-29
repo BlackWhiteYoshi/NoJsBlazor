@@ -4,7 +4,7 @@
 
 <div id="home" class="fade-in">
     <header class="headline-div">
-        <p>@CBox.LPrint("My Home Page", "Meine Startseite")</p>
+        <p>@Lang.Print("My Home Page", "Meine Startseite")</p>
     </header>
 
     <section>
@@ -15,7 +15,7 @@
             const int HEIGHT = 450;
         }
         <div class="center" style="width: @(WIDTH)px;">
-            <Carousel Active="3" Animation="CarouselAnimation.SlideRotate" BeginRunning="false" IntervalTime="4000">
+            <Carousel ActiveStart="3" Animation="CarouselAnimation.SlideRotate" BeginRunning="false" IntervalTime="4000">
                 <Items>
                     <CarouselItem>
                         <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, red, blue);"></div>
@@ -57,8 +57,9 @@
     <section>
         <p class="headline">ContextMenu</p>
 
-        <div class="center" style="width: 300px; height: 200px; background-color: #333;" @onclick="OpenContextMenu">
-            <ContextMenu @ref="contextMenu" style="position: relative; width: 120px; ">
+        <div class="center" style="position: relative; padding: 20px; background-color: #DDD;">
+            <div style="width: 300px; height: 200px; background-color: #333;" @onclick="OpenContextMenu"></div>
+            <ContextMenu @ref="contextMenu">
                 <ContextSubMenu>
                     <Head>
                         <p>First</p>
