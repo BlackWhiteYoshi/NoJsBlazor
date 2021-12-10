@@ -6,7 +6,7 @@ public partial class NotFound : PageComponentBase {
     private NavigationManager NavigationManager { get; init; }
 
 
-    private const int BAD_REQUEST_LIST_MAX_DISTANCE = 16;
+    private const int BAD_REQUEST_LIST_MAX_DISTANCE = 8;
 
     private static string[]? _urlList;
     private static string[] UrlList => _urlList ??= (from type in typeof(Program).Assembly.GetTypes()
