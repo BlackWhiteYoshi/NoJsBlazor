@@ -4,8 +4,7 @@
 /// <para>Objects of that class can handle mouse and touch input properly, that on mouse/touch down the corresponding given methods invokes.</para>
 /// <para>It manages, that the simulated click on phnone devices will not trigger the given method a second time and also only the left click will trigger an invoke.</para>
 /// </summary>
-/// <typeparam name="T">T should be a data-model that can hold all necessary parameters.</typeparam>
-public class TouchClick<T> {
+public class TouchClick {
     private bool isTouch = false;
     private bool isDown = false;
     private readonly Action<EventArgs>? OnDown;
@@ -58,12 +57,6 @@ public class TouchClick<T> {
     /// usage: @ontouchend="[MyTouchClickObject].OnTouchEnd"
     /// </summary>
     public Action<TouchEventArgs> OnTouchEnd => OnTouchEndAction;
-
-    /// <summary>
-    /// <para>T should be a model that can hold all necessary parameters.</para>
-    /// <para>Set the parameters before invoking the Action, so the parameters can be used in the given method.</para>
-    /// </summary>
-    public T? Parameter { get; set; }
 
 
     private void OnMouseDownAction(MouseEventArgs e) {
@@ -123,7 +116,8 @@ public class TouchClick<T> {
 /// <para>Objects of that class can handle mouse and touch input properly, that on mouse/touch down the corresponding given methods invokes.</para>
 /// <para>It manages, that the simulated click on phnone devices will not trigger the given method a second time and also only the left click will trigger an invoke.</para>
 /// </summary>
-public class TouchClick : TouchClick<object> {
+/// <typeparam name="T">T should be a data-model that can hold all necessary parameters.</typeparam>
+public class TouchClick<T> : TouchClick {
     /// <summary>
     /// Creates an Object that handles mouse and touch input properly to invoke the corresponding given methods.
     /// </summary>
@@ -140,4 +134,68 @@ public class TouchClick : TouchClick<object> {
     /// <para><see cref="EventArgs"/> is either an instance of  <see cref="MouseEventArgs"/> or <see cref="TouchEventArgs"/>.</para>
     /// </param>
     public TouchClick(Action<EventArgs>? OnDown = null, Action<EventArgs>? OnMove = null, Action<EventArgs>? OnUp = null) : base(OnDown, OnMove, OnUp) { }
+
+
+    /// <summary>
+    /// <para>T should be a model that can hold all necessary parameters.</para>
+    /// <para>Set the parameters before invoking the Action, so the parameters can be used in the given method.</para>
+    /// </summary>
+    public T? Parameter { get; private set; }
+
+
+    /// <summary>
+    /// usage: @onmousedown="(MouseEventArgs e) => [MyTouchClickObject].OnMouseDown(e, parameter)"
+    /// </summary>
+    public new Action<MouseEventArgs, T> OnMouseDown => OnMouseDownAction;
+    /// <summary>
+    /// usage: @ontouchstart="(TouchEventArgs e) => [MyTouchClickObject].OnTouchStart(e, parameter)"
+    /// </summary>
+    public new Action<TouchEventArgs, T> OnTouchStart => OnTouchStartAction;
+    /// <summary>
+    /// usage: @onmousemove="(MouseEventArgs e) => [MyTouchClickObject].OnMouseMove(e, parameter)"
+    /// </summary>
+    public new Action<MouseEventArgs, T> OnMouseMove => OnMouseMoveAction;
+    /// <summary>
+    /// usage: @ontouchmove="(TouchEventArgs e) => [MyTouchClickObject].OnTouchMove(e, parameter)"
+    /// </summary>
+    public new Action<TouchEventArgs, T> OnTouchMove => OnTouchMoveAction;
+    /// <summary>
+    /// usage: @onmouseup="(MouseEventArgs e) => [MyTouchClickObject].OnMouseUp(e, parameter)"
+    /// </summary>
+    public new Action<MouseEventArgs, T> OnMouseUp => OnMouseUpAction;
+    /// <summary>
+    /// usage: @ontouchend="(TouchEventArgs e) => [MyTouchClickObject].OnTouchEnd(e, parameter)"
+    /// </summary>
+    public new Action<TouchEventArgs, T> OnTouchEnd => OnTouchEndAction;
+
+
+    private void OnMouseDownAction(MouseEventArgs e, T parameter) {
+        Parameter = parameter;
+        base.OnMouseDown(e);
+    }
+
+    private void OnTouchStartAction(TouchEventArgs e, T parameter) {
+        Parameter = parameter;
+        base.OnTouchStart(e);
+    }
+
+    private void OnMouseMoveAction(MouseEventArgs e, T parameter) {
+        Parameter = parameter;
+        base.OnMouseMove(e);
+    }
+
+    private void OnTouchMoveAction(TouchEventArgs e, T parameter) {
+        Parameter = parameter;
+        base.OnTouchMove(e);
+    }
+
+    private void OnMouseUpAction(MouseEventArgs e, T parameter) {
+        Parameter = parameter;
+        base.OnMouseUp(e);
+    }
+
+    private void OnTouchEndAction(TouchEventArgs e, T parameter) {
+        Parameter = parameter;
+        base.OnTouchEnd(e);
+    }
 }

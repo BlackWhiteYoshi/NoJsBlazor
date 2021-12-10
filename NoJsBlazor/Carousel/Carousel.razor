@@ -36,8 +36,8 @@
         <ol class="carousel-indicators">
             @foreach (int i in Enumerable.Range(0, ItemContainer.Length)) {
                 <li style="opacity: @ItemContainer[i].indicatorOpacity"
-                    @onmousedown="(MouseEventArgs e) => {indicatorTC.Parameter = i; indicatorTC.OnMouseDown(e); }"
-                    @ontouchstart="(TouchEventArgs e) => { indicatorTC.Parameter = i; indicatorTC.OnTouchStart(e); }" >
+                    @onmousedown="(MouseEventArgs e) => indicatorTC.OnMouseDown(e, i)"
+                    @ontouchstart="(TouchEventArgs e) => indicatorTC.OnTouchStart(e, i)" >
                     <div style="width:@(ItemContainer[i].progressBar)%; transition: width @(ItemContainer[i].progressBarTransition)ms linear;"></div>
                 </li>
             }

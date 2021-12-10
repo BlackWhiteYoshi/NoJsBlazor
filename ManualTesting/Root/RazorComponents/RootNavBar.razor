@@ -43,14 +43,14 @@
     </Title>
     <Content>
         <div class="@(Lang.Language == Language.English ? "selected" : string.Empty)"
-                @onmousedown="(MouseEventArgs e) => { setLanguageTC.Parameter = Language.English; setLanguageTC.OnMouseDown(e); }"
-                @ontouchstart="(TouchEventArgs e) => { setLanguageTC.Parameter = Language.English; setLanguageTC.OnTouchStart(e); }">
+                @onmousedown="(MouseEventArgs e) => setLanguageTC.OnMouseDown(e, Language.English)"
+                @ontouchstart="(TouchEventArgs e) => setLanguageTC.OnTouchStart(e, Language.English)">
             <UKFlag />
             <p>English</p>
         </div>
         <div class="@(Lang.Language == Language.German ? "selected" : string.Empty)"
-                @onmousedown="(MouseEventArgs e) => { setLanguageTC.Parameter = Language.German; setLanguageTC.OnMouseDown(e); }"
-                @ontouchstart="(TouchEventArgs e) => { setLanguageTC.Parameter = Language.German; setLanguageTC.OnTouchStart(e); }">
+                @onmousedown="(MouseEventArgs e) => setLanguageTC.OnMouseDown(e, Language.German)"
+                @ontouchstart="(TouchEventArgs e) => setLanguageTC.OnTouchStart(e, Language.German)">
             <GermanFlag />
             <p>Deutsch</p>
         </div>
