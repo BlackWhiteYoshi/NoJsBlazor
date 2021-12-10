@@ -38,7 +38,7 @@ public partial class Root : ComponentBase, IDisposable {
     }
 
     protected override void OnInitialized() {
-        string answer = JsRuntime.Invoke<string>("localStorage.getItem", CBox.StorageKeyLanguage);
+        string answer = JsRuntime.Invoke<string>("localStorage.getItem", CBox.STORAGE_KEY_LANGUAGE);
 
         if (Enum.TryParse(answer, false, out Language language))
             if (0 <= language && language < (Language)Enum.GetValues(typeof(Language)).Length)
@@ -47,7 +47,7 @@ public partial class Root : ComponentBase, IDisposable {
         {
             // no or invalid stored enum
             language = ILanguageProvider.GetLanguage(JsRuntime.Invoke<string>("GetBrowserLanguage"));
-            JsRuntime.InvokeVoid("localStorage.setItem", CBox.StorageKeyLanguage, language);
+            JsRuntime.InvokeVoid("localStorage.setItem", CBox.STORAGE_KEY_LANGUAGE, language);
         }
 
         LanguageIsAssigned:
@@ -68,9 +68,11 @@ public partial class Root : ComponentBase, IDisposable {
     /// <para>This will notify the <see cref="Root"/> to Rerender.</para>
     /// </summary>
     public void Rerender() {
-        StateHasChanged();
+        InvokeAsync(StateHasChanged);
+        
         navBar.Rerender();
         footer.Rerender();
+        
         PageComponent?.Rerender();
     }
 }

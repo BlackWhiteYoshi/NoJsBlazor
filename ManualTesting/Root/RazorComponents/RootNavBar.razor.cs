@@ -68,7 +68,7 @@ public partial class RootNavBar : ComponentBase {
         Root.TouchMove -= dialog.headBarTC.OnTouchMove;
         Root.MouseUp -= dialog.headBarTC.OnMouseUp;
         Root.TouchEnd -= dialog.headBarTC.OnTouchEnd;
-        JsRuntime.InvokeVoid("localStorage.setItem", CBox.StorageKeyLanguage, Lang.Language);
+        JsRuntime.InvokeVoid("localStorage.setItem", CBox.STORAGE_KEY_LANGUAGE, Lang.Language);
         dialog.Close();
     }
 
@@ -77,5 +77,5 @@ public partial class RootNavBar : ComponentBase {
     #endregion
 
 
-    public void Rerender() => StateHasChanged();
+    public void Rerender() => InvokeAsync(StateHasChanged);
 }

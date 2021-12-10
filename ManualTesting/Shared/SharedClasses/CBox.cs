@@ -7,7 +7,7 @@ public static class CBox {
     /// <summary>
     /// Key fot getting the value for language stored in local storage
     /// </summary>
-    public const string StorageKeyLanguage = "Language";
+    public const string STORAGE_KEY_LANGUAGE = "Language";
 
 
     /// <summary>

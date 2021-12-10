@@ -20,5 +20,5 @@ public class PageComponentBase : ComponentBase {
     /// <para>This will notify the <see cref="PageComponentBase"/> to Rerender.</para>
     /// <para>Technically only this components StateHasChanged() is called</para>
     /// </summary>
-    public void Rerender() => StateHasChanged();
+    public void Rerender() => InvokeAsync(StateHasChanged);
 }
