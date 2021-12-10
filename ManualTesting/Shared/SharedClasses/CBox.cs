@@ -9,12 +9,6 @@ public static class CBox {
     /// </summary>
     public const string StorageKeyLanguage = "Language";
 
-    /// <summary>
-    /// <para>Random Number Generator.</para>
-    /// <para>By using the same Random object, a equal distribution is provided.</para>
-    /// </summary>
-    public static Random Rng { get; } = new();
-
 
     /// <summary>
     /// calculates a distance for two strings
