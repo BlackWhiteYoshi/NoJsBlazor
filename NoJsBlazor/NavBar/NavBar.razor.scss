@@ -75,7 +75,6 @@ $arrow-phone: "%23000B";
     display: table;
     height: $Height;
     margin: 0;
-    padding: 5px 0 0 0;
 
     @include media-breakpoint-down($breakpoint) {
         min-width: $phone-min-width;
@@ -148,6 +147,7 @@ $arrow-phone: "%23000B";
         & > span {
             display: inline-block;
         }
+
         & > div {
             float: left;
             margin: 5px 0 0 0;
@@ -210,7 +210,7 @@ $arrow-phone: "%23000B";
                     width: 100%;
                     padding: 0 0 0 1rem;
 
-                    p  {
+                    p {
                         padding: 0.5rem 0;
                         margin: 0;
                         cursor: pointer;
@@ -277,6 +277,9 @@ $arrow-phone: "%23000B";
                 }
 
                 .nav-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
                     margin-left: $desktop-item-margin;
                     margin-right: $desktop-item-margin;
                     padding: 0;
@@ -419,7 +422,7 @@ $arrow-phone: "%23000B";
             $size: 12;
             display: inline-block;
             vertical-align: middle;
-            transition: fill 0.1s;
+            transition: fill, transform 0.1s;
             margin-bottom: 1px;
             padding-right: $size + $desktop-item-padding;
             width: $size + px;
@@ -431,6 +434,7 @@ $arrow-phone: "%23000B";
         .nav-item.dropdown:hover > .dropdown-arrow {
             background: #{$down-arraw-hover-background-string};
             background-repeat: no-repeat;
+            transform: translateY(3px);
         }
 
         // desktop view little right arrow at submenus
@@ -441,11 +445,13 @@ $arrow-phone: "%23000B";
                 margin-top: 2px;
                 background: #{$right-arraw-background-string};
                 background-repeat: no-repeat;
+                transform: translateX(-3px);
             }
 
             .nav-item.dropdown:hover > .dropdown-arrow {
                 background: #{$right-arraw-hover-background-string};
                 background-repeat: no-repeat;
+                transform: translateX(0);
             }
         }
     }
@@ -457,11 +463,12 @@ $arrow-phone: "%23000B";
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: $Height + px;
+    height: $Height;
     background-image: $backgroundImage;
     z-index: 500;
 
@@ -469,7 +476,6 @@ $arrow-phone: "%23000B";
         display: table;
         cursor: pointer;
         padding: 2px 4px 5px 4px;
-        margin-left: 10px;
         border-radius: 10px;
         transition: background-color 0.5s;
         opacity: 0.8;
