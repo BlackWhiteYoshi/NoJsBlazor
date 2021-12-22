@@ -10,7 +10,7 @@ public partial class NotFound : PageComponentBase {
 
     private static string[]? _urlList;
     private static string[] UrlList => _urlList ??= (from type in typeof(Program).Assembly.GetTypes()
-                                                     let routeAttributes = type.GetCustomAttributes(typeof(RouteAttribute), false).OfType<RouteAttribute>()
+                                                     let routeAttributes = type.GetCustomAttributes(typeof(RouteAttribute), inherit: false).OfType<RouteAttribute>()
                                                      from routeAttribute in routeAttributes
                                                      let template = routeAttribute.Template[1..]
                                                      where template != string.Empty
