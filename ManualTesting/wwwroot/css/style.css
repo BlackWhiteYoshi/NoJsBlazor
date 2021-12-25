@@ -1,4 +1,8 @@
-﻿.carousel {
+﻿*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.carousel {
   position: relative;
   margin: 0;
 }
@@ -619,11 +623,6 @@
   }
   .navbar > .navbar-collapse > .navbar-nav .nav-item .nav-link:hover .dropdown-arrow, .navbar > .navbar-collapse > .navbar-nav .nav-item .nav-link:active .dropdown-arrow, .navbar > .navbar-collapse > .navbar-nav .nav-item p:hover .dropdown-arrow, .navbar > .navbar-collapse > .navbar-nav .nav-item p:active .dropdown-arrow {
     fill: #D8D8D8;
-  }
-  .navbar > .navbar-collapse > .navbar-nav .nav-item:focus, .navbar > .navbar-collapse > .navbar-nav .nav-item .nav-link:focus {
-    color: initial;
-    text-decoration: initial;
-    background-color: initial;
   }
   .navbar > .navbar-collapse > .navbar-nav .nav-item .dropdown-menu {
     position: absolute;

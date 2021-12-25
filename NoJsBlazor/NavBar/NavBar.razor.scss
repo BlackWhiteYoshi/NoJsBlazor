@@ -310,12 +310,6 @@ $arrow-phone: "%23000B";
                         }
                     }
 
-                    &:focus, .nav-link:focus {
-                        color: initial;
-                        text-decoration: initial;
-                        background-color: initial;
-                    }
-
                     .dropdown-menu {
                         position: absolute;
                         top: 99%;
