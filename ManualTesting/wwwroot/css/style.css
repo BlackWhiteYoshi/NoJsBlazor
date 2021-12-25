@@ -266,6 +266,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  user-select: none;
   background-color: #FFF;
   padding: 5px 0 5px 15px;
   border-radius: 20px 20px 0 0;
@@ -811,6 +812,7 @@
   padding: 0 3px;
   border-radius: 50%;
   background-color: #07F;
+  border: 1px solid transparent;
 }
 .slider > .slider-buttons > button svg {
   width: 100%;
