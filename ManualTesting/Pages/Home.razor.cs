@@ -36,8 +36,8 @@ public partial class Home : PageComponentBase, IDisposable {
 
     #region ProgressBar
 
-    [AllowNull]
-    private StandardProgressBar standardProgress;
+    private float standardBarProgress;
+    private string standardBarText = string.Empty;
     private decimal standardPercentage = 0.0m;
 
     private void StandardProgressBarButtonClick(MouseEventArgs e) {
@@ -45,8 +45,8 @@ public partial class Home : PageComponentBase, IDisposable {
         if (standardPercentage > 1.0m)
             standardPercentage = 0.0m;
 
-        standardProgress.Progress = (float)standardPercentage;
-        standardProgress.Text = $"Load {standardPercentage * 100:0}%";
+        standardBarProgress = (float)standardPercentage;
+        standardBarText = $"Load {standardPercentage * 100:0}%";
     }
 
 
@@ -59,8 +59,7 @@ public partial class Home : PageComponentBase, IDisposable {
         if (circlePercentage > 1.0m)
             circlePercentage = 0.0m;
 
-        circleProgress.Progress = (float)circlePercentage;
-        circleProgress.Text = $"Load {circlePercentage * 100:0}%";
+        circleProgress.Content = ((float)circlePercentage, $"Load {circlePercentage * 100:0}%");
     }
 
 
@@ -73,8 +72,7 @@ public partial class Home : PageComponentBase, IDisposable {
         if (speedometerPercentage > 1.0m)
             speedometerPercentage = 0.0m;
 
-        speedometerProgress.Progress = (float)speedometerPercentage;
-        speedometerProgress.Text = $"Load {speedometerPercentage * 100:0}%";
+        speedometerProgress.Content = ((float)speedometerPercentage, $"Load {speedometerPercentage * 100:0}%");
     }
 
     #endregion

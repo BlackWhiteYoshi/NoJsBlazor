@@ -10,6 +10,7 @@ public abstract class ProgressBar : ComponentBase {
     /// <para>0 means empty, 1 means full.</para>
     /// <para>Default is 0.0</para>
     /// </summary>
+    [Parameter]
     public float Progress {
         get => _progress;
         set {
@@ -23,6 +24,7 @@ public abstract class ProgressBar : ComponentBase {
     /// <para>Displaying text of this component.</para>
     /// <para>Default is <see cref="string.Empty"/></para>
     /// </summary>
+    [Parameter]
     public string Text {
         get => _text;
         set {
@@ -37,7 +39,7 @@ public abstract class ProgressBar : ComponentBase {
     public (float bar, string text) Content {
         get => (Progress, Text);
         set {
-            (Progress, Text) = value;
+            (_progress, _text) = value;
             InvokeAsync(StateHasChanged);
         }
     }

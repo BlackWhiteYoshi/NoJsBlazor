@@ -47,19 +47,13 @@ public class CircleProgressBarTest : TestContext {
         Assert.Equal(COLOR, fill.Value);
     }
 
-    #endregion
-
-
-    #region public methods
-
     [Theory]
     [InlineData(0.5f)]
     [InlineData(1.0f)]
     public void Progress_Fills_Circle(float progress) {
-        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = RenderComponent<CircleProgressBar>();
-        CircleProgressBar circleProgressBar = circleProgressBarContainer.Instance;
-
-        circleProgressBar.Progress = progress;
+        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<CircleProgressBar> builder) => {
+            builder.Add((CircleProgressBar circleProgressBar) => circleProgressBar.Progress, progress);
+        });
 
         if (progress < 1.0)
             Assert.Single(circleProgressBarContainer.FindAll("path"));
@@ -73,14 +67,18 @@ public class CircleProgressBarTest : TestContext {
     public void Text_Sets_Description() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = RenderComponent<CircleProgressBar>();
-        CircleProgressBar circleProgressBar = circleProgressBarContainer.Instance;
-
-        circleProgressBar.Text = TEST_TEXT;
+        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<CircleProgressBar> builder) => {
+            builder.Add((CircleProgressBar circleProgressBar) => circleProgressBar.Text, TEST_TEXT);
+        });
 
         IElement p = circleProgressBarContainer.Find("p");
         Assert.Equal(TEST_TEXT, p.InnerHtml);
     }
+
+    #endregion
+
+
+    #region public methods
 
     [Fact]
     public void Content_Sets_Progress_And_Text() {

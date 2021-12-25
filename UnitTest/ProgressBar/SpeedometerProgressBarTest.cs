@@ -53,19 +53,13 @@ public class SpeedometerProgressBarTest : TestContext {
         Assert.Equal(COLOR, stroke.Value);
     }
 
-    #endregion
-
-
-    #region public methods
-
     [Theory]
     [InlineData(0.5f)]
     [InlineData(1.0f)]
     public void Progress_Rotates_Meter(float progress) {
-        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent<SpeedometerProgressBar>();
-        SpeedometerProgressBar speedometerProgressBar = speedometerProgressBarContainer.Instance;
-
-        speedometerProgressBar.Progress = progress;
+        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<SpeedometerProgressBar> builder) => {
+            builder.Add((SpeedometerProgressBar speedometerProgressBar) => speedometerProgressBar.Progress, progress);
+        });
 
         IElement line = speedometerProgressBarContainer.Find(".meter");
         IAttr style = line.Attributes["style"]!;
@@ -76,14 +70,18 @@ public class SpeedometerProgressBarTest : TestContext {
     public void Text_Sets_Description() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent<SpeedometerProgressBar>();
-        SpeedometerProgressBar speedometerProgressBar = speedometerProgressBarContainer.Instance;
-
-        speedometerProgressBar.Text = TEST_TEXT;
+        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<SpeedometerProgressBar> builder) => {
+            builder.Add((SpeedometerProgressBar speedometerProgressBar) => speedometerProgressBar.Text, TEST_TEXT);
+        });
 
         IElement p = speedometerProgressBarContainer.Find("p");
         Assert.Equal(TEST_TEXT, p.InnerHtml);
     }
+
+    #endregion
+
+
+    #region public methods
 
     [Fact]
     public void Content_Sets_Progress_And_Text() {

@@ -44,11 +44,6 @@ public class StandardProgressBarTest : TestContext {
         Assert.Contains(COLOR, style.Value);
     }
 
-    #endregion
-
-
-    #region public methods
-
     [Fact]
     public void Progress_Sets_BorderWidth() {
         const int WIDTH = 200;
@@ -56,10 +51,8 @@ public class StandardProgressBarTest : TestContext {
 
         IRenderedComponent<StandardProgressBar> standardProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<StandardProgressBar> builder) => {
             builder.Add((StandardProgressBar standardProgressBar) => standardProgressBar.Width, WIDTH);
+            builder.Add((StandardProgressBar standardProgressBar) => standardProgressBar.Progress, PROGRESS);
         });
-        StandardProgressBar standardProgressBar = standardProgressBarContainer.Instance;
-
-        standardProgressBar.Progress = PROGRESS;
 
         float width = WIDTH * PROGRESS;
         IElement div = standardProgressBarContainer.Find(".standard-progress-bar div div");
@@ -71,14 +64,18 @@ public class StandardProgressBarTest : TestContext {
     public void Text_Sets_Description() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<StandardProgressBar> standardProgressBarContainer = RenderComponent<StandardProgressBar>();
-        StandardProgressBar standardProgressBar = standardProgressBarContainer.Instance;
-
-        standardProgressBar.Text = TEST_TEXT;
+        IRenderedComponent<StandardProgressBar> standardProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<StandardProgressBar> builder) => {
+            builder.Add((StandardProgressBar standardProgressBar) => standardProgressBar.Text, TEST_TEXT);
+        });
 
         IElement p = standardProgressBarContainer.Find("p");
         Assert.Equal(TEST_TEXT, p.InnerHtml);
     }
+
+    #endregion
+
+
+    #region public methods
 
     [Fact]
     public void Content_Sets_Progress_And_Text() {
