@@ -2,20 +2,17 @@
 @inherits PageComponentBase
 @page "/"
 
-<div id="home" class="fade-in">
-    <header class="headline-div">
-        <p>@Lang.Print("My Home Page", "Meine Startseite")</p>
-    </header>
-
+<div id="home">
+    <h1 class="headline-background">@Lang.Print("My Home Page", "Meine Startseite")</h1>
+    
     <section>
-        <p class="headline">Carousel</p>
+        <h2 class="headline">Carousel</h2>
 
         @{
-            const int WIDTH = 800;
             const int HEIGHT = 450;
         }
-        <div class="center" style="width: @(WIDTH)px;">
-            <Carousel ActiveStart="3" Animation="CarouselAnimation.SlideRotate" BeginRunning="false" IntervalTime="4000">
+        <div class="center" style="width: 80%; max-width: 900px">
+            <Carousel ActiveStart="3" Animation="CarouselAnimation.Slide" BeginRunning="false" IntervalTime="4000">
                 <Items>
                     <CarouselItem>
                         <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, red, blue);"></div>
@@ -38,7 +35,7 @@
     </section>
 
     <section>
-        <p class="headline">CollapseDiv</p>
+        <h2 class="headline">CollapseDiv</h2>
 
         <div class="center" style="width: 300px">
             <CollapseDiv>
@@ -55,7 +52,7 @@
     </section>
 
     <section>
-        <p class="headline">ContextMenu</p>
+        <h2 class="headline">ContextMenu</h2>
 
         <div class="center" style="position: relative; padding: 20px; background-color: #DDD;">
             <div style="width: 300px; height: 200px; background-color: #333;" @onclick="OpenContextMenu"></div>
@@ -88,9 +85,9 @@
     </section>
 
     <section>
-        <p class="headline">Dialog</p>
+        <h2 class="headline">Dialog</h2>
 
-        <button class="btn btn-primary center" @onclick="OpenDialog">open dialog</button>
+        <button class="button-blue center" @onclick="OpenDialog">open dialog</button>
 
         <Dialog @ref="dialog">
             <Title>
@@ -102,19 +99,19 @@
                     Ich habe keinen Sinn.<br />
                     Mich zu lesen bringt gar nichts.</p>
 
-                <button class="btn btn-primary center" @onclick="CloseDialog">close dialog</button>
+                <button class="button-blue center" @onclick="CloseDialog">close dialog</button>
             </Content>
         </Dialog>
     </section>
 
     <section>
-        <p class="headline">Input</p>
+        <h2 class="headline">Input</h2>
 
         <Input Title="Eingabe"/>
     </section>
 
     <section>
-        <p class="headline">Loader Icon</p>
+        <h2 class="headline">Loader Icon</h2>
 
         <div class="center">
             <LoaderIcon />
@@ -122,26 +119,26 @@
     </section>
 
     <section>
-        <p class="headline">ProgressBar</p>
+        <h2 class="headline">ProgressBar</h2>
 
-        <button class="btn btn-primary center" style="margin: 30px auto 10px auto;" @onclick="StandardProgressBarButtonClick">Add 1%</button>
+        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="StandardProgressBarButtonClick">Add 1%</button>
         <div class="center">
             <StandardProgressBar Progress="standardBarProgress" Text="@standardBarText" />
         </div>
 
-        <button class="btn btn-primary center" style="margin: 30px auto 10px auto;" @onclick="CircleProgressBarButtonClick">Add 1%</button>
+        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="CircleProgressBarButtonClick">Add 1%</button>
         <div class="center">
             <CircleProgressBar @ref="circleProgress" />
         </div>
 
-        <button class="btn btn-primary center" style="margin: 30px auto 10px auto;" @onclick="SpeedometerProgressBarButtonClick">Add 1%</button>
+        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="SpeedometerProgressBarButtonClick">Add 1%</button>
         <div class="center">
             <SpeedometerProgressBar @ref="speedometerProgress" />
         </div>
     </section>
 
     <section>
-        <p class="headline">Slider</p>
+        <h2 class="headline">Slider</h2>
 
         <div class="center">
             <Slider />
