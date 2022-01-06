@@ -25,27 +25,38 @@
         </div>
     }
     @if (ControlArrowsEnable) {
-        <a class="carousel-control-prev" role="button" @onmousedown="prevTC.OnMouseDown" @ontouchstart="prevTC.OnTouchStart">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" role="button" @onmousedown="nextTC.OnMouseDown" @ontouchstart="nextTC.OnTouchStart">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"
+                class="carousel-arrow prev" role="button" @onmousedown="prevTC.OnMouseDown" @ontouchstart="prevTC.OnTouchStart">
+            <line x1="-1.5" y1="0" x2="1.5" y2="-3" />
+            <line x1="-1.5" y1="0" x2="1.5" y2="3" />
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"
+                class="carousel-arrow next" role="button" @onmousedown="nextTC.OnMouseDown" @ontouchstart="nextTC.OnTouchStart">
+            <line x1="1.5" y1="0" x2="-1.5" y2="-3" />
+            <line x1="1.5" y1="0" x2="-1.5" y2="3" />
+        </svg>
     }
     @if (IndicatorsEnable) {
         <ol class="carousel-indicators">
             @foreach (int i in Enumerable.Range(0, ItemContainer.Length)) {
-                <li style="opacity: @ItemContainer[i].indicatorOpacity"
-                    @onmousedown="(MouseEventArgs e) => indicatorTC.OnMouseDown(e, i)"
-                    @ontouchstart="(TouchEventArgs e) => indicatorTC.OnTouchStart(e, i)" >
-                    <div style="width:@(ItemContainer[i].progressBar)%; transition: width @(ItemContainer[i].progressBarTransition)ms linear;"></div>
+                <li role="button" @onmousedown="(MouseEventArgs e) => indicatorTC.OnMouseDown(e, i)" @ontouchstart="(TouchEventArgs e) => indicatorTC.OnTouchStart(e, i)">
+                    <div style="opacity: @ItemContainer[i].indicatorOpacity">
+                        <div style="width:@(ItemContainer[i].progressBar)%; transition: width @(ItemContainer[i].progressBarTransition)ms linear;"></div>
+                    </div>
                 </li>
             }
         </ol>
     }
     @if (PlayButtonEnable) {
-        <div class="carousel-play-button" role="button" @onmousedown="playButtonTC.OnMouseDown" @ontouchstart="playButtonTC.OnTouchStart">
-            <span class="@(!Running ? "play-icon" : "pause-icon")" aria-hidden="true"></span>
-        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.7 -1.1 1.95 2.2"
+                class="carousel-play-button @(!Running ? "play" : "pause")" role="button" @onmousedown="playButtonTC.OnMouseDown" @ontouchstart="playButtonTC.OnTouchStart">
+            @* 1/3 circle => cbrt(1) = (1,0),(-0.5,-0.866),(.0.5,0.866) *@
+            @* play trianlge: right, top-left, bottom-left *@
+            <polygon points="1,0 -0.5,-0.866 -0.5,0.866" />
+            @* pause lines: left, right *@
+            <line x1="-0.3" x2="-0.3" y1="-0.666" y2="0.666" />
+            <line x1="0.8" y1="-0.666" x2="0.8" y2="0.666" />
+        </svg>
     }
 </div>

@@ -1,19 +1,29 @@
 ﻿.carousel {
-    // carousel-container
-    position: relative;
-    margin: 0;
+    --swap-duration: 500ms;
 
-    .carousel-inner {
-        position: relative;
+    --arrow-size: 6%;
+    --arrow-color: #FFF;
+
+    --indicator-bottom-distance: 1em;
+    --indicator-list-width: 60%;
+    --indicator-gap: 5px;
+    --indicator-color: #FFF;
+    --indicator-progress-color: #0AA;
+
+    --play-button-size: 6%;
+    --play-button-color: #FFF;
+
+
+    position: relative;
+
+    & > .carousel-inner {
+        display: grid;
         overflow: hidden;
 
-        .carousel-item {
-            display: block;
-            width: 100%;
-            float: left;
-            margin-right: -100%;
-            // animation duration for fade-out
-            transition: opacity ease-out 500ms;
+        & > .carousel-item {
+            grid-row: 1;
+            grid-column: 1;
+            transition: opacity ease-out var(--swap-duration);
             // z-index of active item will be 20, all others have 10
 
             img {
@@ -22,138 +32,125 @@
                 width: 100%;
                 height: auto;
             }
-        }
 
-        .slide {
-            // animation duration for slide/slide-rotate
-            transition: transform ease-out 500ms;
+            &.slide {
+                transition: transform ease-out var(--swap-duration);
+            }
         }
     }
 
-    // overlay stuff
-    .carousel-overlay {
+
+    & > .carousel-overlay {
         position: absolute;
         z-index: 30;
         bottom: 20%;
         left: 20%;
     }
 
-    // arrow control buttons (left/previous and right/next arrow)
-    .carousel-control-prev, .carousel-control-next {
+    & > .carousel-arrow {
         position: absolute;
-        top: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 15%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        height: calc(var(--arrow-size) + 20px);
+        padding: 10px;
         opacity: 0.5;
         cursor: pointer;
         z-index: 40;
         transition: opacity 0.3s;
 
+        & > line {
+            stroke: var(--arrow-color);
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+    
         &:hover {
             opacity: 0.9;
         }
-    }
 
-    .carousel-control-prev {
-        left: 0;
+        &.prev {
+            left: 5%;
+        }
 
-        .carousel-control-prev-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+        &.next {
+            right: 5%;
         }
     }
 
-    .carousel-control-next {
-        right: 0;
-
-        .carousel-control-next-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
-        }
-    }
-
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        display: inline-block;
-        // size of the arrow control buttons
-        $size: 20;
-        width: $size + px;
-        height: $size + px;
-    }
-
-    // indicators at the bottom
-    .carousel-indicators {
+    & > .carousel-indicators {
         position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: var(--indicator-bottom-distance);
+        width: var(--indicator-list-width);
         display: flex;
-        justify-content: center;
-        padding-left: 0;
-        // space to the left/right of the whole list
-        margin-left: 15%;
-        margin-right: 15%;
+        flex-direction: row;
+        gap: var(--indicator-gap);
+        padding: 0;
+        margin: 0;
         list-style: none;
         z-index: 40;
 
-        li {
-            box-sizing: content-box;
-            // size of the indicators
-            width: 90px;
-            height: 5px;
-            // space between the indicators
-            margin: 0 3px;
-            // color of the indicators
-            background-color: #fff;
-            background-clip: padding-box;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
+        & > li {
+            flex-grow: 1;
             cursor: pointer;
-            transition: opacity 0.3s;
 
-            &:hover {
-                opacity: 1 !important;
+            & > div {
+                height: 5px;
+                margin: 10px 0;
+                background-color: var(--indicator-color);
+                border-radius: 5px;
+                overflow: hidden;
+                transition: opacity 0.3s;
+
+                // progressbar
+                & > div {
+                    height: 100%;
+                    background-color: var(--indicator-progress-color);
+                }
             }
 
-            // progressbar
-            div {
-                height: 100%;
-                // color of the progressbar in the active container
-                background-color: #00AAAA;
+            &:hover > div {
+                opacity: 1 !important;
             }
         }
     }
 
-    // play/pause button
-    .carousel-play-button {
+    & > .carousel-play-button {
         position: absolute;
-        // position of button
-        bottom: 40px;
+        bottom: calc(1em + 25px);
         left: 15%;
-        z-index: 16;
-        opacity: 0.6;
+        width: auto;
+        height: calc(var(--play-button-size) + 20px);
+        padding: 10px;
+        opacity: 0.5;
         cursor: pointer;
         transition: opacity 0.3s;
         z-index: 50;
+        fill: var(--play-button-color);
+        stroke: var(--play-button-color);
+        stroke-linecap: round;
+        stroke-linejoin: round;
 
+        & > line {
+            stroke-width: 40%; // 0.8
+        }
+    
+        & > polygon {
+            stroke-width: 20%; // 0.4
+        }
+    
+        &.pause > polygon {
+            display: none;
+        }
+
+        &.play > line {
+            display: none;
+        }
+    
         &:hover {
             opacity: 0.9;
-        }
-        
-        .play-icon, .pause-icon {
-            // size of the button, should be a square, so width and height should be equal
-            $size: 30;
-            display: block;
-            width: $size + px;
-            height: $size + px;
-        }
-
-        .play-icon {
-            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none' fill='rgb(255,255,255)' stroke-width='0'><polygon points='16.02885683,10 83.97114317,50 16.02885683,90'/></svg>");
-        }
-
-        .pause-icon {
-            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none' fill='rgb(255,255,255)' stroke-width='0'><polygon points='15,15 41.25,15 41.25,85 15,85'/><polygon points='58.75,15 85,15 85,85 58.75,85'/></svg>");
         }
     }
 }
