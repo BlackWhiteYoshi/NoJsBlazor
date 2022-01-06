@@ -22,9 +22,6 @@ public partial class Root : ComponentBase, IDisposable {
     [AllowNull]
     private RootNavBar navBar;
 
-    [AllowNull]
-    private RootFooter footer;
-
 
     #region Language
 
@@ -71,7 +68,6 @@ public partial class Root : ComponentBase, IDisposable {
         InvokeAsync(StateHasChanged);
         
         navBar.Rerender();
-        footer.Rerender();
         
         PageComponent?.Rerender();
     }
