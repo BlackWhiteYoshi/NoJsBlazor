@@ -33,50 +33,50 @@ public partial class DecimalSlider : ComponentBase {
 
     /// <summary>
     /// <para>Slider lower bounds.</para>
-    /// <para>Default is 0</para>
+    /// <para>Default is 0.</para>
     /// </summary>
     [Parameter]
     public decimal Min { get; set; } = 0m;
 
     /// <summary>
     /// <para>Slider upper bounds.</para>
-    /// <para>Default is 10</para>
+    /// <para>Default is 10.</para>
     /// </summary>
     [Parameter]
     public decimal Max { get; set; } = 10m;
 
     /// <summary>
     /// <para>Slider precision</para>
-    /// <para>Default is 0.1</para>
+    /// <para>Default is 0.1.</para>
     /// </summary>
     [Parameter]
     public decimal Step { get; set; } = 0.1m;
 
     /// <summary>
     /// <para>Indicates if the user is able to edit the number directly.</para>
-    /// <para>Technically the number is displayed in a input field instead of a label,</para>
-    /// <para>Dafault is false</para>
+    /// <para>Technically the number is displayed in a input field instead of a label.</para>
+    /// <para>Dafault is false.</para>
     /// </summary>
     [Parameter]
     public bool Editable { get; set; } = false;
 
     /// <summary>
     /// <para>Content inside the left Button.</para>
-    /// <para>Default is "🡸"</para>
+    /// <para>Default is a svg showing "🡸".</para>
     /// </summary>
     [Parameter]
     public RenderFragment LeftButtonContent { get; set; }
 
     /// <summary>
     /// <para>Content inside the right Button.</para>
-    /// <para>Default is "🡺"</para>
+    /// <para>Default is a svg showing "🡺".</para>
     /// </summary>
     [Parameter]
     public RenderFragment RightButtonContent { get; set; }
 
     /// <summary>
     /// <para>The way the value should be printed.</para>
-    /// <para>Default is value.ToString()</para>
+    /// <para>Default is value.ToString().</para>
     /// </summary>
     [Parameter]
     public Func<decimal, string> Display { get; set; } = (decimal value) => value.ToString();

@@ -17,13 +17,15 @@ public partial class Dialog : ComponentBase {
     public RenderFragment? Content { get; set; }
 
     /// <summary>
-    /// Indicates whether to skip the <see cref="Title">Title</see> section
+    /// <para>Indicates whether to skip the <see cref="Title">Title</see> section.</para>
+    /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
     public bool ShowTitle { get; set; } = true;
 
     /// <summary>
-    /// The Window can be grabed and draged around the screen
+    /// <para>The Window can be grabed and draged around the screen.</para>
+    /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
     public bool Moveable { get; set; } = true;
@@ -31,26 +33,26 @@ public partial class Dialog : ComponentBase {
     /// <summary>
     /// <para>If the background should be blurred/unavailable.</para>
     /// <para>Technically the background will be overlayed with a div with high opacity.</para>
+    /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
     public bool ModalScreen { get; set; } = true;
 
     /// <summary>
-    /// If on the <see cref="ModalScreen">ModalBackground</see> a click/touch occurs, whether the window should close or not close.
+    /// <para>If on the <see cref="ModalScreen">ModalBackground</see> a click/touch occurs, whether the window should close or not close.</para>
+    /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
     public bool CloseOnModalBackground { get; set; } = true;
 
     /// <summary>
     /// <para>Invokes every time when the Dialog get opened.</para>
-    /// <para>Technically invokes every time when <see cref="Active">Active</see> is set to true.</para>
     /// </summary>
     [Parameter]
     public EventCallback OnOpen { get; set; }
 
     /// <summary>
     /// <para>Invokes every time when the Dialog get closed.</para>
-    /// <para>Technically invokes every time when <see cref="Active">Active</see> is set to false.</para>
     /// </summary>
     [Parameter]
     public EventCallback OnClose { get; set; }

@@ -71,7 +71,7 @@ public partial class LoaderIcon : ComponentBase {
 
     /// <summary>
     /// <para>Speed of the rotation in ms.</para>
-    /// <para>Defailt is 2000.</para>
+    /// <para>Default is 2000.</para>
     /// </summary>
     [Parameter]
     public int SpinDuration { get; set; } = 2000;
@@ -80,7 +80,7 @@ public partial class LoaderIcon : ComponentBase {
     private string spinTimingFunction = "linear";
     /// <summary>
     /// <para>Timing function of the rotation.</para>
-    /// <para>Defailt is LoaderTimingFunction.Linear.</para>
+    /// <para>Default is LoaderTimingFunction.Linear.</para>
     /// </summary>
     [Parameter]
     public LoaderTimingFunction SpinTimingFunction {
@@ -95,7 +95,7 @@ public partial class LoaderIcon : ComponentBase {
     private string spinDirection = "normal";
     /// <summary>
     /// <para>Animation direction of the rotation.</para>
-    /// <para>Defailt is LoaderDirection.Normal.</para>
+    /// <para>Default is LoaderDirection.Normal.</para>
     /// </summary>
     [Parameter]
     public LoaderDirection SpinDirection {

@@ -33,7 +33,8 @@ public partial class CollapseDiv : ComponentBase {
     public int ContentHeight { get; set; } = 173;
 
     /// <summary>
-    /// Initializing collapsed or expanded.
+    /// <para>Initializing collapsed or expanded.</para>
+    /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
     public bool StartCollapsed { get; init; } = true;

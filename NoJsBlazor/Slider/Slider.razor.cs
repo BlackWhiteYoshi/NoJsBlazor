@@ -33,50 +33,50 @@ public partial class Slider : ComponentBase {
 
     /// <summary>
     /// <para>Slider lower bounds.</para>
-    /// <para>Default is 0</para>
+    /// <para>Default is 0.</para>
     /// </summary>
     [Parameter]
     public int Min { get; set; } = 0;
 
     /// <summary>
     /// <para>Slider upper bounds.</para>
-    /// <para>Default is 10</para>
+    /// <para>Default is 10.</para>
     /// </summary>
     [Parameter]
     public int Max { get; set; } = 10;
 
     /// <summary>
     /// <para>Slider precision</para>
-    /// <para>Default is 1</para>
+    /// <para>Default is 1.</para>
     /// </summary>
     [Parameter]
     public int Step { get; set; } = 1;
 
     /// <summary>
     /// <para>Indicates if the user is able to edit the number directly.</para>
-    /// <para>Technically the number is displayed in a input field instead of a label,</para>
-    /// <para>Dafault is false</para>
+    /// <para>Technically the number is displayed in a input field instead of a label.</para>
+    /// <para>Dafault is false.</para>
     /// </summary>
     [Parameter]
     public bool Editable { get; set; } = false;
 
     /// <summary>
     /// <para>Content inside the left Button.</para>
-    /// <para>Default is "🡸"</para>
+    /// <para>Default is a svg showing "🡸".</para>
     /// </summary>
     [Parameter]
     public RenderFragment LeftButtonContent { get; set; }
 
     /// <summary>
     /// <para>Content inside the right Button.</para>
-    /// <para>Default is "🡺"</para>
+    /// <para>Default is a svg showing "🡺".</para>
     /// </summary>
     [Parameter]
     public RenderFragment RightButtonContent { get; set; }
 
     /// <summary>
     /// <para>The way the value should be printed.</para>
-    /// <para>Default is value.ToString()</para>
+    /// <para>Default is value.ToString().</para>
     /// </summary>
     [Parameter]
     public Func<int, string> Display { get; set; }
