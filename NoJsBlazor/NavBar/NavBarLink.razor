@@ -2,11 +2,11 @@
 @inherits NavBarItem
 
 @if (Head) {
-    <NavLink class="nav-link" @attributes="Attributes" @onclick="((NavBar)Parent).Reset">@ChildContent</NavLink>
+    <NavLink class="nav-a" @attributes="Attributes" @onclick="((NavBar)Parent).Reset">@ChildContent</NavLink>
 }
 else {
-    <li class="nav-item">
-        <NavLink class="nav-link" @attributes="Attributes" @onclick="((NavBar)Parent).Reset">@ChildContent</NavLink>
+    <li class="nav-element">
+        <NavLink class="nav-a" @attributes="Attributes" @onclick="((NavBar)Parent).Reset">@ChildContent</NavLink>
     </li>
 }
 

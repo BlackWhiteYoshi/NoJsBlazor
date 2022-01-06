@@ -11,7 +11,7 @@ public partial class NavBarMenuTest : TestContext {
 
         (IRenderedFragment? fragment, _, _, _) = RenderNavBarTree(TEST_HTML);
 
-        IElement div = fragment.Find(".nav-item.dropdown");
+        IElement div = fragment.Find(".nav-element > .nav-div");
         Assert.Contains(TEST_HTML.Value, div.InnerHtml);
     }
 
@@ -25,7 +25,7 @@ public partial class NavBarMenuTest : TestContext {
         (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarTree(default);
         Assert.False(navBarMenu.Expanded);
 
-        IElement div = fragment.Find(".dropdown-arrow");
+        IElement div = fragment.Find(".nav-dropdown-arrow");
         div.TouchStart();
         Assert.True(navBarMenu.Expanded);
     }

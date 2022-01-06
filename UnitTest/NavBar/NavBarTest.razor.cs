@@ -30,10 +30,8 @@ public partial class NavBarTest : TestContext {
             builder.Add((NavBar navBar) => navBar.Brand, TEST_TEXT);
         });
 
-        IRefreshableElementCollection<IElement> divCollection = navBarContainer.FindAll(".navbar-brand");
-        Assert.Equal(2, divCollection.Count);
-        Assert.Equal(TEST_TEXT, divCollection[0].InnerHtml);
-        Assert.Equal(TEST_TEXT, divCollection[1].InnerHtml);
+        IElement brand = navBarContainer.Find(".nav-brand");
+        Assert.Equal(TEST_TEXT, brand.InnerHtml);
     }
 
     #endregion
@@ -46,7 +44,7 @@ public partial class NavBarTest : TestContext {
         IRenderedComponent<NavBar> navBarContainer = RenderComponent<NavBar>();
         NavBar navBar = navBarContainer.Instance;
 
-        IElement toggle = navBarContainer.Find(".navbar-toggler-icon");
+        IElement toggle = navBarContainer.Find(".nav-toggle");
 
         toggle.MouseDown();
         Assert.True(navBar.Expanded);

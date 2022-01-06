@@ -1,26 +1,22 @@
 ﻿@namespace NoJsBlazor
 @inherits ListholdingComponentBase<NavBarMenu>
 
-<nav class="navbar navbar-nav" @attributes="@Attributes">
-    <div class="navbar-toggler">
-        <div style="@(Brand == null ? "float: none;" : string.Empty)">
-            <button class="navbar-toggler-icon" aria-label="Toggle navigation"
-                    @onmousedown="ToggleTC.OnMouseDown" @ontouchstart="ToggleTC.OnTouchStart"></button>
-        </div>
-        @if (Brand != null) {
-            <span class="navbar-brand" @onclick="Reset">@Brand</span>
-        }
-    </div>
-    <div class="navbar-collapse @(Expanded ? "expanded" : string.Empty)">
-        <ul class="navbar-nav">
-            @if (Brand != null) {
-                <li>
-                    <span class="navbar-brand" @onclick="Reset">@Brand</span>
-                </li>
-            }
-            <CascadingValue Name="Parent" Value="(ListholdingComponentBase<NavBarMenu>)this" IsFixed="true">
-                @Items
-            </CascadingValue>
-        </ul>
-    </div>
+<nav class="@navRootClass" @attributes="@Attributes">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"
+            class="nav-toggle @(Expanded ? "expanded" : string.Empty)" aria-label="Toggle navigation" role="button"
+            @onmousedown="ToggleTC.OnMouseDown" @ontouchstart="ToggleTC.OnTouchStart">
+        <line x1='4' y1='7' x2='26' y2='7'/>
+        <line x1='4' y1='15' x2='26' y2='15'/>
+        <line x1='4' y1='23' x2='26' y2='23'/>
+    </svg>
+    
+    @if (Brand != null) {
+        <div class="nav-brand" @onclick="Reset">@Brand</div>
+    }
+
+    <ul class="nav-list @(Expanded ? "expanded" : string.Empty)">
+        <CascadingValue Name="Parent" Value="(ListholdingComponentBase<NavBarMenu>)this" IsFixed="true">
+            @Items
+        </CascadingValue>
+    </ul>
 </nav>
