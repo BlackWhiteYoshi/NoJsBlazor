@@ -111,12 +111,12 @@ public partial class CarouselTest : TestContext {
         });
 
         if (enabled) {
-            Assert.Single(carouselContainer.FindAll(".carousel-control-prev"));
-            Assert.Single(carouselContainer.FindAll(".carousel-control-next"));
+            Assert.Single(carouselContainer.FindAll(".carousel-arrow.prev"));
+            Assert.Single(carouselContainer.FindAll(".carousel-arrow.next"));
         }
         else {
-            Assert.Empty(carouselContainer.FindAll(".carousel-control-prev"));
-            Assert.Empty(carouselContainer.FindAll(".carousel-control-next"));
+            Assert.Empty(carouselContainer.FindAll(".carousel-arrow.prev"));
+            Assert.Empty(carouselContainer.FindAll(".carousel-arrow.next"));
         }
     }
 
@@ -163,7 +163,7 @@ public partial class CarouselTest : TestContext {
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
         });
         Carousel carousel = carouselContainer.Instance;
-        IElement nextButton = carouselContainer.Find(".carousel-control-next");
+        IElement nextButton = carouselContainer.Find(".carousel-arrow.next");
 
         Assert.Equal(1, carousel.Active);
         nextButton.MouseDown();
@@ -182,7 +182,7 @@ public partial class CarouselTest : TestContext {
             builder.Add((Carousel carousel) => carousel.ActiveStart, 2);
         });
         Carousel carousel = carouselContainer.Instance;
-        IElement prevButton = carouselContainer.Find(".carousel-control-prev");
+        IElement prevButton = carouselContainer.Find(".carousel-arrow.prev");
 
         Assert.Equal(2, carousel.Active);
         prevButton.MouseDown();
