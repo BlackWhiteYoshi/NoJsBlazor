@@ -19,29 +19,44 @@
 
         // decrement & increment buttons
         & > button {
-            height: 23px;
-            width: 28px;
+            width: 27px;
+            height: 22px;
             font-size: 10px;
             margin: 0 3px;
             padding: 0 3px;
+            border: 1px outset #EEE;
             border-radius: 50%;
-            background-color: #07F;
-            border: 1px solid transparent;
+            background-color: #0D6EFD;
+            transition: color linear 0.2s, background-color linear 0.2s, border-color linear 0.2s;
 
             svg {
                 width: 100%;
-                height: 100%;
+                height: auto;
 
                 line {
-                    stroke: #333;
+                    stroke: #FFF;
                     stroke-linecap: round;
                 }
+            }
+
+            &:hover {
+                border-color: #0A58CA;
+                background-color: #0B5ED7;
+                box-shadow: 3px 3px #0A58CA inset;
+            }
+
+            &:disabled {
+                width: 26px;
+                height: 21px;
+                border-color: transparent;
+                background-color: #8AF;
+                box-shadow: none;
             }
         }
 
         & > label, input {
-            height: 25px;
             width: 35px;
+            height: 25px;
             text-align: center;
             font-size: 18px;
         }
