@@ -8,7 +8,7 @@
     <Authors>BlackWhiteYoshi</Authors>
     <Copyright>MIT</Copyright>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>Library for Blazor apps. It contains some UI-Components. This Library doesn't use any Javascript code, everything is implemented in HTML, (S)CSS and C#.</Description>
+    <Description>Library for Blazor apps. It contains some UI-Components. This Library doesn't use any Javascript code, everything is implemented in Razor, (S)CSS and C#.</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Version>2.0.4</Version>
     <AssemblyVersion>2.0.4.0</AssemblyVersion>
