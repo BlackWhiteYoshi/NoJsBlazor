@@ -14,9 +14,7 @@
         }
         <button disabled="@(Value >= Max)" @onmousedown="rightButtonTC.OnMouseDown" @ontouchstart="rightButtonTC.OnTouchStart">@RightButtonContent</button>
     </div>
-    <div class="slider-input">
-        <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnInputSlider" @onchange="OnChangeSlider" />
-    </div>
+    <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnInputSlider" @onchange="OnChangeSlider" />
 </div>
 
 @code {
