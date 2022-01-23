@@ -355,24 +355,31 @@ body {
 
 .header-flag {
   height: 30px;
-  padding: 5px;
-  border-radius: 5px;
   cursor: pointer;
   opacity: 0.8;
-  transition: background-color 0.1s;
+  transition: box-shadow 0.1s;
+  border: 2px outset #eee;
+  border-radius: 2px;
 }
-.header-flag:hover {
-  background-color: #88F;
+.header-flag:hover:not(.active) {
   opacity: 1;
-  transition: background-color 0.3s;
+  box-shadow: 0 0 10px #88F;
+  transition: box-shadow 0.3s;
+}
+.header-flag.active {
+  opacity: 1;
+  border: 2px inset #eee;
 }
 
 #language-dialog {
-  min-width: 172px;
-  overflow: hidden;
+  min-width: 180px;
+}
+#language-dialog p {
+  margin: 0;
 }
 #language-dialog > .title {
-  padding: 0.4em 0.8em;
+  justify-content: center;
+  padding: 0.4em;
 }
 #language-dialog > .content {
   padding: 0;
@@ -382,7 +389,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0.6em 1.2em;
+  padding: 1.25em;
   border: none;
 }
 #language-dialog > .content > button > * {

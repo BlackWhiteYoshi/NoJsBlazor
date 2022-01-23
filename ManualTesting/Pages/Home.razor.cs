@@ -68,7 +68,7 @@ public partial class Home : PageComponentBase, IDisposable {
     private decimal speedometerPercentage = 0.0m;
 
     private void SpeedometerProgressBarButtonClick(MouseEventArgs e) {
-        speedometerPercentage += 0.01m;
+        speedometerPercentage += 0.1m;
         if (speedometerPercentage > 1.0m)
             speedometerPercentage = 0.0m;
 

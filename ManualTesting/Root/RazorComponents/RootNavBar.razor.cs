@@ -24,14 +24,12 @@ public partial class RootNavBar : ComponentBase {
     private Dialog dialog;
 
 
-    private readonly TouchClick dialogOpenTC;
-    private readonly TouchClick dialogCloseTC;
+    private readonly TouchClick toogleDialogTC;
     private readonly TouchClick<Language> setLanguageTC;
 
 
     public RootNavBar() {
-        dialogOpenTC = new(DialogOpen);
-        dialogCloseTC = new(DialogClose);
+        toogleDialogTC = new(ToggleDialog);
         setLanguageTC = new(SetLanguage);
     }
 
@@ -51,25 +49,26 @@ public partial class RootNavBar : ComponentBase {
     private void Reset(EventArgs e) => navBar.Reset();
 
 
-    private void DialogOpen(EventArgs e) {
-        Root.MouseDown += dialogCloseTC.OnMouseDown;
-        Root.TouchStart += dialogCloseTC.OnTouchStart;
-        Root.MouseMove += dialog.headBarTC.OnMouseMove;
-        Root.TouchMove += dialog.headBarTC.OnTouchMove;
-        Root.MouseUp += dialog.headBarTC.OnMouseUp;
-        Root.TouchEnd += dialog.headBarTC.OnTouchEnd;
-        dialog.Open();
-    }
-
-    private void DialogClose(EventArgs e) {
-        Root.MouseDown -= dialogCloseTC.OnMouseDown;
-        Root.TouchStart -= dialogCloseTC.OnTouchStart;
-        Root.MouseMove -= dialog.headBarTC.OnMouseMove;
-        Root.TouchMove -= dialog.headBarTC.OnTouchMove;
-        Root.MouseUp -= dialog.headBarTC.OnMouseUp;
-        Root.TouchEnd -= dialog.headBarTC.OnTouchEnd;
-        JsRuntime.InvokeVoid("localStorage.setItem", CBox.STORAGE_KEY_LANGUAGE, Lang.Language);
-        dialog.Close();
+    private void ToggleDialog(EventArgs e) {
+        if (!dialog.Active) {
+            Root.MouseDown += toogleDialogTC.OnMouseDown;
+            Root.TouchStart += toogleDialogTC.OnTouchStart;
+            Root.MouseMove += dialog.headBarTC.OnMouseMove;
+            Root.TouchMove += dialog.headBarTC.OnTouchMove;
+            Root.MouseUp += dialog.headBarTC.OnMouseUp;
+            Root.TouchEnd += dialog.headBarTC.OnTouchEnd;
+            dialog.Open();
+        }
+        else {
+            Root.MouseDown -= toogleDialogTC.OnMouseDown;
+            Root.TouchStart -= toogleDialogTC.OnTouchStart;
+            Root.MouseMove -= dialog.headBarTC.OnMouseMove;
+            Root.TouchMove -= dialog.headBarTC.OnTouchMove;
+            Root.MouseUp -= dialog.headBarTC.OnMouseUp;
+            Root.TouchEnd -= dialog.headBarTC.OnTouchEnd;
+            JsRuntime.InvokeVoid("localStorage.setItem", CBox.STORAGE_KEY_LANGUAGE, Lang.Language);
+            dialog.Close();
+        }
     }
 
     private void SetLanguage(EventArgs e) => Lang.Language = setLanguageTC.Parameter;

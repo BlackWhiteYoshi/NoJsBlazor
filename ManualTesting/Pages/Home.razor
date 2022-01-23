@@ -40,7 +40,7 @@
         <div class="center" style="width: 300px">
             <CollapseDiv>
                 <Head>
-                    <p>press me!<span class="drop-down-arrow"></span></p>
+                    <p>press me!</p><CollapseDivArrow />
                 </Head>
                 <Content>
                     <p>Item 1</p>
@@ -58,28 +58,18 @@
             <div style="width: 300px; height: 200px; background-color: #333;" @onclick="OpenContextMenu"></div>
             <ContextMenu @ref="contextMenu">
                 <ContextSubMenu>
-                    <Head>
-                        <p>First</p>
-                    </Head>
+                    <Head>First</Head>
                     <Items>
-                        <ContextMenuItem>
-                            <p>Nested First</p>
-                        </ContextMenuItem>
+                        <ContextMenuItem>Nested First</ContextMenuItem>
                     </Items>
                 </ContextSubMenu>
                 <ContextSubMenu>
-                    <Head>
-                        <p>Second</p>
-                    </Head>
+                    <Head>Second</Head>
                     <Items>
-                        <ContextMenuItem>
-                            <p>Nested Second</p>
-                        </ContextMenuItem>
+                        <ContextMenuItem>Nested Second</ContextMenuItem>
                     </Items>
                 </ContextSubMenu>
-                <ContextMenuItem>
-                    <p>Third</p>
-                </ContextMenuItem>
+                <ContextMenuItem>Third</ContextMenuItem>
             </ContextMenu>
         </div>
     </section>
@@ -91,15 +81,14 @@
 
         <Dialog @ref="dialog">
             <Title>
-                <p style="user-select: none;">My Test Dialog</p>
+                <p style="margin: 0;">My Test Dialog</p>
             </Title>
             <Content>
-                <p>
+                <p style="margin: 0;">
                     Ich bin irgendein Text.<br />
                     Ich habe keinen Sinn.<br />
                     Mich zu lesen bringt gar nichts.</p>
-
-                <button class="button-blue center" @onclick="CloseDialog">close dialog</button>
+                <button class="button-blue center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
             </Content>
         </Dialog>
     </section>
@@ -131,7 +120,7 @@
             <CircleProgressBar @ref="circleProgress" />
         </div>
 
-        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="SpeedometerProgressBarButtonClick">Add 1%</button>
+        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="SpeedometerProgressBarButtonClick">Add 10%</button>
         <div class="center">
             <SpeedometerProgressBar @ref="speedometerProgress" />
         </div>
@@ -141,11 +130,11 @@
         <h2 class="headline">Slider</h2>
 
         <div class="center">
-            <Slider />
+            <Slider Title="Test1" Display="@((int value) => $"{value}%")" />
         </div>
 
         <div class="center">
-            <Slider Editable="true" />
+            <Slider Editable="true" style="width: 200px;" />
         </div>
 
         <div class="center">
