@@ -1,109 +1,114 @@
-﻿$color1: #D00;  // red
-$color2: #00D;  // blue
-$color3: #DD0;  // yellow
-$color4: #0D0;  // green
+﻿.loader-icon {
+    --color1: #D00;  // red
+    --color2: #00D;  // blue
+    --color3: #DD0;  // yellow
+    --color4: #0D0;  // green
 
-.loader-icon > div {
-    position: absolute;
-    border-radius: 50%;
-}
+    
+    position: relative;
 
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
+    & > div {
+        position: absolute;
+        border-radius: 50%;
     }
 
-    to {
-        transform: rotate(360deg);
-    }
-}
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
 
-@keyframes spin-skew {
-    from {
-        transform: rotate(0deg) skew(-30deg, -30deg);
-    }
-
-    to {
-        transform: rotate(360deg) skew(30deg, 30deg);
-    }
-}
-
-@keyframes ball-color-1-2 {
-    from {
-        background-color: $color1;
+        to {
+            transform: rotate(360deg);
+        }
     }
 
-    to {
-        background-color: $color2;
-    }
-}
+    @keyframes spin-skew {
+        from {
+            transform: rotate(0deg) skew(-30deg, -30deg);
+        }
 
-@keyframes ball-color-2-3 {
-    from {
-        background-color: $color2;
-    }
-
-    to {
-        background-color: $color3;
-    }
-}
-
-@keyframes ball-color-3-4 {
-    from {
-        background-color: $color3;
+        to {
+            transform: rotate(360deg) skew(30deg, 30deg);
+        }
     }
 
-    to {
-        background-color: $color4;
-    }
-}
+    @keyframes ball-color-1-2 {
+        from {
+            background-color: var(--color1);
+        }
 
-@keyframes ball-color-4-1 {
-    from {
-        background-color: $color4;
-    }
-
-    to {
-        background-color: $color1;
-    }
-}
-
-@keyframes ball-move-1 {
-    from {
-        transform: translate(0, 0);
+        to {
+            background-color: var(--color2);
+        }
     }
 
-    to {
-        transform: translate(-25%, -25%);
-    }
-}
+    @keyframes ball-color-2-3 {
+        from {
+            background-color: var(--color2);
+        }
 
-@keyframes ball-move-2 {
-    from {
-        transform: translate(0, 0);
-    }
-
-    to {
-        transform: translate(25%, -25%);
-    }
-}
-
-@keyframes ball-move-3 {
-    from {
-        transform: translate(0, 0);
+        to {
+            background-color: var(--color3);
+        }
     }
 
-    to {
-        transform: translate(-25%, 25%);
-    }
-}
+    @keyframes ball-color-3-4 {
+        from {
+            background-color: var(--color3);
+        }
 
-@keyframes ball-move-4 {
-    from {
-        transform: translate(0, 0);
+        to {
+            background-color: var(--color4);
+        }
     }
 
-    to {
-        transform: translate(25%, 25%);
+    @keyframes ball-color-4-1 {
+        from {
+            background-color: var(--color4);
+        }
+
+        to {
+            background-color: var(--color1);
+        }
+    }
+
+    @keyframes ball-move-1 {
+        from {
+            transform: translate(0, 0);
+        }
+
+        to {
+            transform: translate(-25%, -25%);
+        }
+    }
+
+    @keyframes ball-move-2 {
+        from {
+            transform: translate(0, 0);
+        }
+
+        to {
+            transform: translate(25%, -25%);
+        }
+    }
+
+    @keyframes ball-move-3 {
+        from {
+            transform: translate(0, 0);
+        }
+
+        to {
+            transform: translate(-25%, 25%);
+        }
+    }
+
+    @keyframes ball-move-4 {
+        from {
+            transform: translate(0, 0);
+        }
+
+        to {
+            transform: translate(25%, 25%);
+        }
     }
 }
