@@ -20,11 +20,11 @@
 
 
 @mixin nav-content($breakpoint) {
-    --phone-menu-min-width: 330px;
+    --phone-menu-max-width: 330px;
     --phone-menu-max-height: calc(100vh - 100px);
     --phone-nav-dropdown-transition-max-height: 300px;
 
-    --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230,230,255,0.8), rgba(200, 200, 255, 0.8));
+    --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
     --font-color: #000;
 
     --desktop-link-padding: 13px;
@@ -32,6 +32,7 @@
 
     --phone-button-size: 65%;
     --phone-button-color: #000B;
+    --phone-hover-shadow: 0 0 10px #88F;
 
     --arrow-down-size: 12px;
     --arrow-right-size: 10px;
@@ -41,6 +42,10 @@
 
     --arrow-phone-size: 35px;
     --arrow-phone-color: #000B;
+    --arrow-phone-color-hover: #FFFB;
+
+    // cannot invert value to get -desktop-dropdown-padding in css variable
+    $desktop-dropdown-padding: 5px;
 
 
 
@@ -69,7 +74,9 @@
     }
 
     .nav-element {
+        position: relative;
         height: 100%;
+        padding: 0 $desktop-dropdown-padding;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -91,17 +98,17 @@
         position: absolute;
         top: 100%;
         margin: 0;
-        padding: 10px;
+        padding: $desktop-dropdown-padding 0;
         display: flex;
         flex-direction: column;
         background-image: var(--background-image);
         z-index: 900;
-        border-radius: 10px;
+        border-radius: 5px;
         transform: rotate3d(1, 0, 0, 90deg);
         transition: transform 0.2s;
 
         .nav-dropdown {
-            top: 0;
+            top: -$desktop-dropdown-padding;
             left: 100%;
         }
     }
@@ -152,7 +159,7 @@
             width: var(--arrow-right-size);
             height: auto;
             margin: 0px 5px 0 2px;
-            transform: translateX(0) rotate(270deg);
+            transform: rotate(270deg);
         }
 
         .nav-element:hover > .nav-div > .nav-dropdown-arrow {
@@ -169,6 +176,7 @@
             cursor: pointer;
             background-color: transparent;
             border: 2px outset #EEE;
+            transition: box-shadow 0.1s;
 
             & > line {
                 stroke: var(--phone-button-color);
@@ -176,6 +184,11 @@
                 stroke-linecap: round;
             }
 
+            &:hover:not(.expanded) {
+                box-shadow: var(--phone-hover-shadow);
+                transition: box-shadow 0.3s;
+            }
+            
             &.expanded {
                 border: 2px inset #EEE;
             }
@@ -183,9 +196,9 @@
 
         .nav-list {
             position: absolute;
-            top: 100%;
-            left: 50%;
-            min-width: var(--phone-menu-min-width);
+            inset: 100% 0 auto 0;
+            margin: 0 auto;
+            max-width: var(--phone-menu-max-width);
             max-height: var(--phone-menu-max-height);
             flex-direction: column;
             height: unset;
@@ -193,12 +206,16 @@
             border-radius: 10px;
             overflow-y: auto;
             background-image: var(--background-image);
-            transform: translate(-50%) rotate3d(1, 0, 0, 90deg);
+            transform: rotate3d(1, 0, 0, 90deg);
             transition: transform 0.2s;
 
             &.expanded {
-                transform: translate(-50%);
+                transform: none;
             }
+        }
+
+        .nav-element {
+            padding: 0;
         }
 
         .nav-dropdown {
@@ -206,7 +223,7 @@
             padding: 0;
             margin-left: 10px;
             display: flex;
-            transform: unset;
+            transform: none;
             overflow: hidden;
             max-height: 0;
             transition: max-height linear 0.3s;
@@ -219,14 +236,17 @@
     
 
         // round circle dropdown icon
-        .nav-dropdown-arrow, .nav-dropdown .nav-dropdown-arrow {
+        .nav-dropdown-arrow,
+        .nav-dropdown .nav-dropdown-arrow,
+        .nav-element:hover > .nav-div > .nav-dropdown-arrow,
+        .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
             width: var(--arrow-phone-size);
             height: auto;
             margin: 0;
             opacity: 0.9;
             cursor: pointer;
-            transform: rotate(0);
-            transition: transform 0.3s;
+            transform: none;
+            transition: transform 0.3s, stroke 0.1s;
         
             & > polygon {
                 display: none;
@@ -243,32 +263,24 @@
 
             &:hover {
                 opacity: 1;
+
+                & > line {
+                    stroke: var(--arrow-phone-color-hover);
+                    transition: stroke 0.3s;
+                }
             }
 
             &.expanded {
-                transform: rotate(180deg) !important;
+                transform: rotate(180deg);
             }
-        }
-
-        .nav-element:hover > .nav-div > .nav-dropdown-arrow, .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-            transform: none;
         }
     }
 }
 
+
 .nav-root { @include nav-content(0px); }
-.nav-root-100 { @include nav-content(100px); }
-.nav-root-200 { @include nav-content(200px); }
-.nav-root-300 { @include nav-content(300px); }
-.nav-root-400 { @include nav-content(400px); }
-.nav-root-500 { @include nav-content(500px); }
-.nav-root-600 { @include nav-content(600px); }
-.nav-root-700 { @include nav-content(700px); }
-.nav-root-800 { @include nav-content(800px); }
-.nav-root-900 { @include nav-content(900px); }
-.nav-root-1000 { @include nav-content(1000px); }
-.nav-root-1100 { @include nav-content(1100px); }
-.nav-root-1200 { @include nav-content(1200px); }
-.nav-root-1300 { @include nav-content(1300px); }
-.nav-root-1400 { @include nav-content(1400px); }
-.nav-root-1500 { @include nav-content(1500px); }
+$i: 100;
+@while $i <= 1500 {
+    .nav-root-#{$i} { @include nav-content($i + px);}
+    $i: $i + 100;
+}
