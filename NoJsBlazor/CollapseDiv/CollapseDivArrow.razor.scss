@@ -1,0 +1,27 @@
+﻿.collapse-div {
+    --arrow-size: 16px;
+    --arrow-stroke-color: #000B;
+    --arrow-background-color: #FFFB;
+
+
+    .collapse-arrow {
+        width: var(--arrow-size);
+        height: var(--arrow-size);
+        transition: transform 0.3s;
+
+        & > circle, & > line {
+            stroke: var(--arrow-stroke-color);
+            stroke-width: 0.6px;
+            fill: var(--arrow-background-color);
+            stroke-linecap: round;
+        }
+    }
+
+    &.collapseable .collapse-arrow {
+        transform: rotate(180deg);
+    }
+
+    &.collapsed .collapse-arrow {
+        transform: rotate(0deg);
+    }
+}

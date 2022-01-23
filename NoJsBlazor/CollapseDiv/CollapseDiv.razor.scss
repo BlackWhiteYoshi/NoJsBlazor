@@ -1,49 +1,38 @@
 ﻿.collapse-div {
-    // speed of collapsing/expanding
-    $speed: 0.3s;
+    --color: #DDE;
+    --transition-max-height: 300px;
+    
 
-    display: inline-block;
-    width: 100%;
-    padding: 20px;
-    background-color: #DDE;
-    overflow: hidden;
-    transition: height $speed ease-out;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: var(--color);
 
-    // content of button/headline
-    .button-div {
-        margin-bottom: 15px;
-
-        & > p {
-            margin: 0;
-            text-align: center;
-            cursor: pointer;
-        }
-    }
-
-    p {
-        margin: 0 0 10px 0;
-        font-size: 17px;
-        line-height: 22px;
+    & > .head {
+        width: 100%;
+        border: none;
+        background-color: unset;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
     }
 
 
-    // optional drop-down-icon, can be used with <span class="drop-down-arrow"></span>
-    .drop-down-arrow {
-        width: 12px;
-        height: 12px;
-        margin: 0 -12px 0 5px;
-        transition: transform 0.3s;
-        display: inline-block;
-        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='rgb(255,255,255)' stroke='rgb(0,0,0)' stroke-width='6'/><polygon points='53,63 33,43' stroke='rgb(0,0,0)' stroke-width='6'/><polygon points='47,63 67,43' stroke='rgb(0,0,0)' stroke-width='6'/></svg>");
+    & > .content {
+        overflow: hidden;
+        transition: max-height 0.3s linear;
     }
 
-    // if component is expanded, button-div has also the class collapseable
-    .button-div.collapseable .drop-down-arrow {
-        transform: rotate(180deg);
+    &.collapseable > .content {
+        max-height: var(--transition-max-height);
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
-    // if component is collapsed, button-div has also the class collapsed
-    .button-div.collapsed .drop-down-arrow {
-        transform: rotate(0deg);
+    &.collapsed > .content {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 }

@@ -1,10 +1,10 @@
 ﻿@namespace NoJsBlazor
 
-<div class="collapse-div" @attributes="@Attributes" style="height: @(Collapsed ? $"{HeadHeight}px" : $"{ContentHeight}px"); @AddStyles()">
-    <div class="button-div @(Collapsed ? "collapsed" : "collapseable")"
-            @onmousedown="touchClick.OnMouseDown" @ontouchstart="touchClick.OnTouchStart">
+<div class="collapse-div @(Collapsed ? "collapsed" : "collapseable")" @attributes="@Attributes">
+    <button class="head" @onmousedown="touchClick.OnMouseDown" @ontouchstart="touchClick.OnTouchStart">
         @Head
+    </button>
+    <div class="content">
+        @Content
     </div>
-
-    @Content
 </div>

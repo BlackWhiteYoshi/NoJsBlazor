@@ -85,14 +85,4 @@ public partial class CollapseDiv : ComponentBase {
     protected override void OnInitialized() => _collapsed = StartCollapsed;
 
     private void ButtonDown(EventArgs e) => Collapsed = !Collapsed;
-
-    private object? AddStyles() {
-        if (Attributes == null)
-            return null;
-
-        if (Attributes.TryGetValue("style", out object? styles))
-            return styles;
-        else
-            return null;
-    }
 }

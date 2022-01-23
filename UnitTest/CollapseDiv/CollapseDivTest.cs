@@ -6,51 +6,41 @@ public class CollapseDivTest : TestContext {
     #region parameter
 
     [Fact]
-    public void Head_Is_Rendered_In_Button_Div() {
+    public void Head_Is_Rendered_In_Head() {
         const string TEST_HTML = "<p>Test Text</p>";
 
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.Head, TEST_HTML);
         });
 
-        IElement buttonDiv = collapseDivContainer.Find(".button-div");
+        IElement headDiv = collapseDivContainer.Find(".head");
 
-        Assert.Equal(TEST_HTML, buttonDiv.InnerHtml);
+        Assert.Equal(TEST_HTML, headDiv.InnerHtml);
     }
 
     [Fact]
-    public void Content_Is_Rendered_Inside_outerDiv() {
-        const string TEST_HTML = "<p class=\"test\">Test Text</p>";
+    public void Content_Is_Rendered_In_Content() {
+        const string TEST_HTML = "<p>Test Text</p>";
 
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.Content, TEST_HTML);
         });
 
-        IElement outerDiv = collapseDivContainer.Find(".collapse-div");
-        IElement buttonDiv = collapseDivContainer.Find(".button-div");
+        IElement contentDiv = collapseDivContainer.Find(".content");
 
-        Assert.True(outerDiv.Contains(buttonDiv));
+        Assert.Equal(TEST_HTML, contentDiv.InnerHtml);
     }
 
-    [Fact]
-    public void StartCollapsed_Starts_Collapsed() {
-        {
-            IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
-                builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartCollapsed, true);
-            });
-            CollapseDiv collapseDiv = collapseDivContainer.Instance;
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void StartCollapsed_Starts_Collapsed(bool collapsed) {
+        IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
+            builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartCollapsed, collapsed);
+        });
+        CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
-            Assert.True(collapseDiv.Collapsed);
-        }
-
-        {
-            IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
-                builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartCollapsed, false);
-            });
-            CollapseDiv collapseDiv = collapseDivContainer.Instance;
-
-            Assert.False(collapseDiv.Collapsed);
-        }
+        Assert.Equal(collapsed, collapseDiv.Collapsed);
     }
 
     #endregion
@@ -59,14 +49,14 @@ public class CollapseDivTest : TestContext {
     #region interactive
 
     [Fact]
-    public void ButtonDiv_Clicked_Trigger_Collapsing() {
+    public void Head_Clicked_Trigger_Collapsing() {
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartCollapsed, false);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
         Assert.False(collapseDiv.Collapsed);
-        collapseDivContainer.Find(".button-div").MouseDown();
+        collapseDivContainer.Find(".head").MouseDown();
         Assert.True(collapseDiv.Collapsed);
     }
 
