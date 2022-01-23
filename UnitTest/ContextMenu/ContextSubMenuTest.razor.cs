@@ -11,7 +11,7 @@ public partial class ContextSubMenuTest : TestContext {
 
         (IRenderedFragment? fragment, _, _, _) = RenderContextMenuTree(TEST_HTML);
 
-        IElement div = fragment.Find(".context-item div");
+        IElement div = fragment.Find(".context-div");
         Assert.Contains(TEST_HTML.Value, div.InnerHtml);
     }
 
@@ -25,7 +25,7 @@ public partial class ContextSubMenuTest : TestContext {
         (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuTree(default);
         Assert.False(contextSubMenu.Expanded);
 
-        IElement div = fragment.Find(".context-item div");
+        IElement div = fragment.Find(".context-div");
         div.TouchStart();
         Assert.True(contextSubMenu.Expanded);
     }

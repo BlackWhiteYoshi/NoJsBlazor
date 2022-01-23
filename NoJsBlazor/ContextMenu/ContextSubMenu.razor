@@ -1,14 +1,16 @@
 ﻿@namespace NoJsBlazor
 @inherits ListableComponentBase<ContextSubMenu>
 
-<li class="context-item dropright">
-    <div @ontouchstart="dropRightTC.OnTouchStart">
+<li class="context-element">
+    <div class="context-div" role="button" @ontouchstart="dropRightTC.OnTouchStart">
         <CascadingValue Name="Head" Value="true" IsFixed="true">
             @Head
         </CascadingValue>
-        <span class="dropright-arrow @(Expanded ? "expanded" : string.Empty)"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" class="context-arrow @(Expanded ? "expanded" : string.Empty)">
+            <polygon fill="%23000B" points="0,0 5,10 10,0 5,3" />
+        </svg>
     </div>
-    <ul class="dropright-menu @(Expanded ? "expanded" : string.Empty)">
+    <ul class="context-menu @(Expanded ? "expanded" : string.Empty)">
         @Items
     </ul>
 </li>

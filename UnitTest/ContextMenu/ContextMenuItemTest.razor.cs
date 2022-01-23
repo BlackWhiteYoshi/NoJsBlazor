@@ -11,7 +11,7 @@ public partial class ContextMenuItemTest : TestContext {
 
         (IRenderedFragment? fragment, _, _, _) = RenderContextMenuTree(TEST_HTML);
 
-        IElement li = fragment.FindAll(".context-item")[1];
+        IElement li = fragment.FindAll(".context-element")[1];
         Assert.Equal(TEST_HTML.Value, li.InnerHtml);
     }
 
@@ -30,7 +30,7 @@ public partial class ContextMenuItemTest : TestContext {
 
         (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((EventArgs e) => fired++);
 
-        IElement li = fragment.FindAll(".context-item")[1];
+        IElement li = fragment.FindAll(".context-element")[1];
         if (type == ClickType.mouse)
             li.MouseDown();
         else

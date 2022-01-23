@@ -1,7 +1,7 @@
 ﻿@namespace NoJsBlazor
 @inherits ListholdingComponentBase<ContextSubMenu>
 
-<ul class="context-menu @(Expanded ? "expanded" : "")" @attributes="@Attributes" style="top: @(top)px; left: @(left)px; @AddStyles()">
+<ul class="context-menu @(Expanded ? "expanded" : string.Empty)" @attributes="@Attributes" style="top: @(top)px; left: @(left)px; @AddStyles()">
     <CascadingValue Name="Parent" Value="(ListholdingComponentBase<ContextSubMenu>)this" IsFixed="true">
         @ChildContent
     </CascadingValue>

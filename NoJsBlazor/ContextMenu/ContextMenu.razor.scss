@@ -1,97 +1,87 @@
-﻿$dropright-arrow-size: 10px;
-$background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230,230,255,0.8), rgba(200, 200, 255, 0.8));
+﻿.context-menu {
+    --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
+    --arrow-size: 10px;
+    --arrow-color: #000B;
+    --arrow-hover-color: #FFFB;
+    --arrow-hover-stroke: #000;
+    --hover-background-color: #FFF6;
+    --hover-shadow-color: #FFF;
 
-.context-menu {
+    // cannot invert value to get -desktop-dropdown-padding in css variable
+    $menu-padding: 5px;
+
+
     position: absolute;
+    margin: 0;
+    padding: $menu-padding 0;
     display: flex;
     flex-direction: column;
-    padding: 5px 0 5px 5px;
-    margin: 0;
+    background-image: var(--background-image);
     z-index: 999;
-    background-image: $background-image;
-    border-radius: 10px;
+    border-radius: 5px;
+    list-style: none;
     transform: rotate3d(1, 0, 0, 90deg);
     transition: transform 0.2s;
 
-    .context-item {
-        display: grid;
-        grid-template-columns: auto $dropright-arrow-size;
+    .context-menu {
+        top: -$menu-padding;
+        left: 100%;
+    }
+
+    &.expanded {
+        transform: none;
+    }
+
+    .context-element {
+        position: relative;
+        margin: 0;
+        padding: $menu-padding #{2 * $menu-padding};
+        cursor: default;
+        white-space: nowrap;
+
+        &:hover > .context-div, &.expanded > .context-menu {
+            background-color: var(--hover-background-color);
+            box-shadow: 0 0 15px var(--hover-shadow-color);
+        }
+
+        &:hover > .context-menu, &.expanded > .context-menu {
+            transform: rotate3d(0, 0, 0, 90deg);
+        }
+    }
+
+    .context-div {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        width: 100%;
-        padding: 5px 10px;
-        color: #000;
-        cursor: pointer;
-        transition: color 0.1s;
-        transition: text-shadow 0.1s;
-
-        p {
-            display: inline-block;
-            margin: 0 10px 0 0;
-            white-space: nowrap;
-        }
-
-        div {
-            display: contents;
-        }
-
-        &:hover, &:active {
-            & > p, & > span, & > div p, & > div span {
-                transition: color 0.3s;
-                transition: text-shadow 0.3s;
-                color: #FFF;
-                text-shadow: 0 0 5px #000;
-            }
-
-
-            .dropright-arrow {
-                fill: #D8D8D8;
-            }
-        }
-
-        .dropright-menu {
-            position: absolute;
-            left: 100%;
-            margin: 0;
-            padding: 5px 0 5px 5px;
-            background-image: $background-image;
-            border-radius: 10px;
-            transform: rotate3d(1, 0, 0, 90deg);
-            transition: transform 0.2s;
-        }
-    }
-}
-
-.context-item.dropright {
-    cursor: default;
-
-    & > p {
-        width: 90%;
+        gap: 10px;
     }
 
-    // on hover trigger
-    &:hover > .dropright-menu {
-        transform: rotate3d(1, 1, 1, 0deg) translateY(-5px);
-    }
-}
+    // right arrow
+    .context-arrow {
+        width: var(--arrow-size);
+        height: auto;
+        margin: 0px 5px 0 2px;
+        cursor: auto;
+        transform: rotate(270deg);
+        transition: fill, transform 0.1s;
 
-// on expanded trigger
-.context-menu.expanded, .dropright-menu.expanded {
-    transform: rotate3d(1, 1, 1, 0deg) !important;
-}
+        & > polygon {
+            fill: var(--arrow-color);
+        }
 
-
-// little right arrow at submenus
-.context-menu {
-    .dropright-arrow {
-        width: $dropright-arrow-size;
-        height: $dropright-arrow-size;
-        margin-top: 2px;
-        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon fill='rgb(0,0,0,0.7)' points='0,0 3,5 0,10 10,5'/></svg>");
-        background-repeat: no-repeat;
+        & > circle, & > line {
+            display: none;
+        }
     }
 
-    .context-item.dropright:hover > div > .dropright-arrow {
-        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><polygon fill='rgb(255,255,255,0.7)' stroke='black' stroke-width='1' points='0,0 3,5 0,10 10,5'/></svg>");
-        background-repeat: no-repeat;
+    .context-element:hover > .context-div > .context-arrow {
+        transform: translateX(3px) rotate(270deg);
+
+        & > polygon {
+            fill: var(--arrow-hover-color);
+            stroke: var(--arrow-hover-stroke);
+        }
     }
 }
