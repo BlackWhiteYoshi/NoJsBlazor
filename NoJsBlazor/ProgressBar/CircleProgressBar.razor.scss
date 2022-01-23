@@ -1,14 +1,16 @@
 ﻿.circle-progress-bar {
+    --border-color: #444;
+
     & > svg {
         & > circle {
             fill: none;
-            stroke: #444;
+            stroke: var(--border-color);
         }
     }
 
     // text under the bar
     & > p {
-        margin-top: 3px;
-        font-size: 18px;
+        margin-top: 0.15em;
+        font-size: 1.125rem;
     }
 }

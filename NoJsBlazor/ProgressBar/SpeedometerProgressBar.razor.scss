@@ -1,26 +1,30 @@
 ﻿.speedometer-progress-bar {
+    --border-color: #444;
+    --middle-circle-color: #0006;
+    --meter-width: 5;
+    --meter-transition-speed: 500ms;
+
     & > svg {
         & > .inner-circle {
-            fill: #000;
-            fill-opacity: 0.4;
+            fill: var(--middle-circle-color);
             stroke: none;
         }
 
         & > .outer-circle {
-            stroke: #444;
+            stroke: var(--border-color);
             fill: none;  
         }
 
         & > .meter {
-            stroke-width: 5;
+            stroke-width: var(--meter-width);
             stroke-linecap: round;
-            transition: transform ease-in-out 300ms;
+            transition: transform ease-out var(--meter-transition-speed);
         }
     }
 
     // text under the bar
     & > p {
-        margin-top: 3px;
-        font-size: 18px;
+        margin-top: 0.15em;
+        font-size: 1.125rem;
     }
 }

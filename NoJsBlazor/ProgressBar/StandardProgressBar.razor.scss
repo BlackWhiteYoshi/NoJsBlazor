@@ -1,23 +1,25 @@
-﻿$border-radius: 20px;
+﻿.standard-progress-bar {
+    --border-color: #444;
+    --border-radius: 20px;
+    --bar-margin: 0.125em;
+    --bar-transition-speed: 300ms;
 
-.standard-progress-bar {
     // border of bar
     & > div {
-        // don't change border, or change also "BORDER_THICK" in component
-        border: solid 1px #444;
-        border-radius: $border-radius;
+        border: solid 1px var(--border-color);
+        border-radius: var(--border-radius);
 
         // bar itself
         & > div {
-            margin: 2px;
-            border-radius: $border-radius;
-            transition: border-left ease-in-out 300ms
+            margin: var(--bar-margin);
+            border-radius: var(--border-radius);
+            transition: border-left ease-in-out var(--bar-transition-speed);
         }
     }
 
     // text under the bar
     & > p {
-        margin-top: 2px;
-        font-size: 18px;
+        margin-top: 0.15em;
+        font-size: 1.125rem;
     }
 }
