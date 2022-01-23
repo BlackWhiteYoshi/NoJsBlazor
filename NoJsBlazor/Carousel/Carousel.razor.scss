@@ -1,15 +1,20 @@
 ﻿.carousel {
     --swap-duration: 500ms;
 
+    --overlay-position: auto auto 20% 20%;
+
+    --arrow-left-position: 0 auto 0 5%;
+    --arrow-right-position: 0 5% 0 auto;
     --arrow-size: 6%;
     --arrow-color: #FFF;
 
-    --indicator-bottom-distance: 1em;
+    --indicator-list-position: auto 0 1em 0;
     --indicator-list-width: 60%;
     --indicator-gap: 5px;
     --indicator-color: #FFF;
     --indicator-progress-color: #0AA;
 
+    --play-button-position: auto auto calc(1em + 25px) 15%;
     --play-button-size: 6%;
     --play-button-color: #FFF;
 
@@ -42,15 +47,13 @@
 
     & > .carousel-overlay {
         position: absolute;
+        inset: var(--overlay-position);
         z-index: 30;
-        bottom: 20%;
-        left: 20%;
     }
 
     & > .carousel-arrow {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        margin: auto;
         width: auto;
         height: calc(var(--arrow-size) + 20px);
         padding: 10px;
@@ -70,25 +73,23 @@
         }
 
         &.prev {
-            left: 5%;
+            inset: var(--arrow-left-position);
         }
 
         &.next {
-            right: 5%;
+            inset: var(--arrow-right-position);
         }
     }
 
     & > .carousel-indicators {
         position: absolute;
-        left: 50%;
-        transform: translate(-50%);
-        bottom: var(--indicator-bottom-distance);
+        inset: var(--indicator-list-position);
+        margin: auto;
+        padding: 0;
         width: var(--indicator-list-width);
         display: flex;
         flex-direction: row;
         gap: var(--indicator-gap);
-        padding: 0;
-        margin: 0;
         list-style: none;
         z-index: 40;
 
@@ -119,8 +120,7 @@
 
     & > .carousel-play-button {
         position: absolute;
-        bottom: calc(1em + 25px);
-        left: 15%;
+        inset: var(--play-button-position);
         width: auto;
         height: calc(var(--play-button-size) + 20px);
         padding: 10px;
