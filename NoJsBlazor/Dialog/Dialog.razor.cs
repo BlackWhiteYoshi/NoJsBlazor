@@ -72,6 +72,8 @@ public partial class Dialog : ComponentBase {
     /// </summary>
     public double YMovement { get; set; } = 0.0;
 
+
+    private bool _active;
     /// <summary>
     /// <para>true -> window is shown;</para>
     /// <para>false -> window is closed</para>
@@ -89,7 +91,6 @@ public partial class Dialog : ComponentBase {
             }
         }
     }
-    private bool _active;
 
     /// <summary>
     /// Sets the state of <see cref="Active"/> without notifying <see cref="OnOpen"/> nor <see cref="OnClose"/>.
