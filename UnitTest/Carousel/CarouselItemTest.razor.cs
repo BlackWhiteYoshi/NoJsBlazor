@@ -9,7 +9,7 @@ public partial class CarouselItemTest : TestContext {
 
         IRenderedFragment fragment = RenderCarouselWithOneItem(TEST_HTML);
 
-        IElement itemDiv = fragment.Find(".carousel-item");
+        IElement itemDiv = fragment.Find(".carousel-element");
         Assert.Equal(TEST_HTML.Value, itemDiv.InnerHtml);
     }
 }

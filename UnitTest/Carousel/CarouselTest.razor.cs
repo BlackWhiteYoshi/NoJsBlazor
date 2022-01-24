@@ -21,7 +21,7 @@ public partial class CarouselTest : TestContext {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
         });
 
-        IRefreshableElementCollection<IElement> divCollection = carouselContainer.FindAll(".carousel-item");
+        IRefreshableElementCollection<IElement> divCollection = carouselContainer.FindAll(".carousel-element");
 
         Assert.Equal(4, divCollection.Count);
         Assert.Equal(TestDiv("red"), divCollection[0].InnerHtml);
@@ -130,9 +130,9 @@ public partial class CarouselTest : TestContext {
         });
 
         if (enabled)
-            Assert.Single(carouselContainer.FindAll(".carousel-indicators"));
+            Assert.Single(carouselContainer.FindAll(".carousel-indicator-list"));
         else
-            Assert.Empty(carouselContainer.FindAll(".carousel-indicators"));
+            Assert.Empty(carouselContainer.FindAll(".carousel-indicator-list"));
     }
 
     [Theory]
@@ -205,7 +205,7 @@ public partial class CarouselTest : TestContext {
         carouselContainer.Render();
         Carousel carousel = carouselContainer.Instance;
 
-        IElement indicatorList = carouselContainer.Find(".carousel-indicators");
+        IElement indicatorList = carouselContainer.Find(".carousel-indicator-list");
 
         int index2 = (index + 1) % carousel.ItemCount;
         int index3 = (index + 3) % carousel.ItemCount;
@@ -311,7 +311,7 @@ public partial class CarouselTest : TestContext {
         });
         Carousel carousel = carouselContainer.Instance;
 
-        IRefreshableElementCollection<IElement>? itemDivs = carouselContainer.FindAll(".carousel-item");
+        IRefreshableElementCollection<IElement>? itemDivs = carouselContainer.FindAll(".carousel-element");
         string item0 = itemDivs[0].InnerHtml;
         string item1 = itemDivs[1].InnerHtml;
 
@@ -319,7 +319,7 @@ public partial class CarouselTest : TestContext {
         carousel.SwapItem(0, 1);
 
 
-        IRefreshableElementCollection<IElement>? itemDivsAfter = carouselContainer.FindAll(".carousel-item");
+        IRefreshableElementCollection<IElement>? itemDivsAfter = carouselContainer.FindAll(".carousel-element");
         Assert.Equal(item0, itemDivsAfter[1].InnerHtml);
         Assert.Equal(item1, itemDivsAfter[0].InnerHtml);
     }

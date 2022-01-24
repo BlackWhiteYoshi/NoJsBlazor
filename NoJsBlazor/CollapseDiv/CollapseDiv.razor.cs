@@ -18,21 +18,6 @@ public partial class CollapseDiv : ComponentBase {
     public RenderFragment? Content { get; set; }
 
     /// <summary>
-    /// <para>Height in px of the head of the Component which also functions as the collapse/expand button.</para>
-    /// <para>It is also the height of the Component when it is collapsed.</para>
-    /// <para>Default is 62.</para>
-    /// </summary>
-    [Parameter]
-    public int HeadHeight { get; set; } = 62;
-
-    /// <summary>
-    /// <para>Height of the Component when it is expanded.</para>
-    /// <para>Default is 173.</para>
-    /// </summary>
-    [Parameter]
-    public int ContentHeight { get; set; } = 173;
-
-    /// <summary>
     /// <para>Initializing collapsed or expanded.</para>
     /// <para>Default is true.</para>
     /// </summary>

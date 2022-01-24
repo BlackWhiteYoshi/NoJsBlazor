@@ -21,11 +21,11 @@
 
     position: relative;
 
-    & > .carousel-inner {
+    & > .carousel-content {
         display: grid;
         overflow: hidden;
 
-        & > .carousel-item {
+        & > .carousel-element {
             grid-row: 1;
             grid-column: 1;
             transition: opacity ease-out var(--swap-duration);
@@ -81,7 +81,7 @@
         }
     }
 
-    & > .carousel-indicators {
+    & > .carousel-indicator-list {
         position: absolute;
         inset: var(--indicator-list-position);
         margin: auto;

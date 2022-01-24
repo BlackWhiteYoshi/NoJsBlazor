@@ -4,8 +4,9 @@
     --arrow-color: #000B;
     --arrow-hover-color: #FFFB;
     --arrow-hover-stroke: #000;
-    --hover-background-color: #FFF6;
-    --hover-shadow-color: #FFF;
+    --hover-dropright-background-color: #FFF6;
+    --hover-dropright-shadow-color: #FFF;
+    --hover-item-background-color: #FFF8;
 
     // cannot invert value to get -desktop-dropdown-padding in css variable
     $menu-padding: 5px;
@@ -40,12 +41,20 @@
         white-space: nowrap;
 
         &:hover > .context-div, &.expanded > .context-menu {
-            background-color: var(--hover-background-color);
-            box-shadow: 0 0 15px var(--hover-shadow-color);
+            background-color: var(--hover-dropright-background-color);
+            box-shadow: 0 0 15px var(--hover-dropright-shadow-color);
         }
 
         &:hover > .context-menu, &.expanded > .context-menu {
             transform: rotate3d(0, 0, 0, 90deg);
+        }
+
+        &.context-item {
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--hover-item-background-color);
+            }
         }
     }
 
@@ -56,6 +65,7 @@
         justify-content: space-between;
         align-items: center;
         gap: 10px;
+        cursor: default;
     }
 
     // right arrow

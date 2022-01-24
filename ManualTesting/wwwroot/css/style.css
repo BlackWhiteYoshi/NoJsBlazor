@@ -188,8 +188,9 @@
   --arrow-color: #000B;
   --arrow-hover-color: #FFFB;
   --arrow-hover-stroke: #000;
-  --hover-background-color: #FFF6;
-  --hover-shadow-color: #FFF;
+  --hover-dropright-background-color: #FFF6;
+  --hover-dropright-shadow-color: #FFF;
+  --hover-item-background-color: #FFF8;
   position: absolute;
   margin: 0;
   padding: 5px 0;
@@ -217,11 +218,17 @@
   white-space: nowrap;
 }
 .context-menu .context-element:hover > .context-div, .context-menu .context-element.expanded > .context-menu {
-  background-color: var(--hover-background-color);
-  box-shadow: 0 0 15px var(--hover-shadow-color);
+  background-color: var(--hover-dropright-background-color);
+  box-shadow: 0 0 15px var(--hover-dropright-shadow-color);
 }
 .context-menu .context-element:hover > .context-menu, .context-menu .context-element.expanded > .context-menu {
   transform: rotate3d(0, 0, 0, 90deg);
+}
+.context-menu .context-element.context-item {
+  cursor: pointer;
+}
+.context-menu .context-element.context-item:hover {
+  background-color: var(--hover-item-background-color);
 }
 .context-menu .context-div {
   height: 100%;
@@ -230,6 +237,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  cursor: default;
 }
 .context-menu .context-arrow {
   width: var(--arrow-size);
@@ -458,7 +466,7 @@
 .nav-root {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -682,7 +690,7 @@
 .nav-root-100 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -906,7 +914,7 @@
 .nav-root-200 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -1130,7 +1138,7 @@
 .nav-root-300 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -1354,7 +1362,7 @@
 .nav-root-400 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -1578,7 +1586,7 @@
 .nav-root-500 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -1802,7 +1810,7 @@
 .nav-root-600 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -2026,7 +2034,7 @@
 .nav-root-700 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -2250,7 +2258,7 @@
 .nav-root-800 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -2474,7 +2482,7 @@
 .nav-root-900 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -2698,7 +2706,7 @@
 .nav-root-1000 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -2922,7 +2930,7 @@
 .nav-root-1100 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -3146,7 +3154,7 @@
 .nav-root-1200 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -3370,7 +3378,7 @@
 .nav-root-1300 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -3594,7 +3602,7 @@
 .nav-root-1400 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -3818,7 +3826,7 @@
 .nav-root-1500 {
   --phone-menu-max-width: 330px;
   --phone-menu-max-height: calc(100vh - 100px);
-  --phone-nav-dropdown-transition-max-height: 300px;
+  --phone-nav-dropdown-transition-max-height: 500px;
   --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
   --font-color: #000;
   --desktop-link-padding: 13px;
@@ -4117,6 +4125,7 @@
   display: table;
   margin-inline: auto;
   margin-bottom: 0.5em;
+  white-space: nowrap;
 }
 .slider > .slider-buttons {
   display: flex;
