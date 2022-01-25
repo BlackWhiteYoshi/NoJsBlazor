@@ -19,20 +19,20 @@
   --play-button-color: #FFF;
   position: relative;
 }
-.carousel > .carousel-inner {
+.carousel > .carousel-content {
   display: grid;
   overflow: hidden;
 }
-.carousel > .carousel-inner > .carousel-item {
+.carousel > .carousel-content > .carousel-element {
   grid-row: 1;
   grid-column: 1;
   transition: opacity ease-out var(--swap-duration);
 }
-.carousel > .carousel-inner > .carousel-item img {
+.carousel > .carousel-content > .carousel-element img {
   width: 100%;
   height: auto;
 }
-.carousel > .carousel-inner > .carousel-item.slide {
+.carousel > .carousel-content > .carousel-element.slide {
   transition: transform ease-out var(--swap-duration);
 }
 .carousel > .carousel-overlay {
@@ -65,7 +65,7 @@
 .carousel > .carousel-arrow.next {
   inset: var(--arrow-right-position);
 }
-.carousel > .carousel-indicators {
+.carousel > .carousel-indicator-list {
   position: absolute;
   inset: var(--indicator-list-position);
   margin: auto;
@@ -77,11 +77,11 @@
   list-style: none;
   z-index: 40;
 }
-.carousel > .carousel-indicators > li {
+.carousel > .carousel-indicator-list > li {
   flex-grow: 1;
   cursor: pointer;
 }
-.carousel > .carousel-indicators > li > div {
+.carousel > .carousel-indicator-list > li > div {
   height: 5px;
   margin: 10px 0;
   background-color: var(--indicator-color);
@@ -89,11 +89,11 @@
   overflow: hidden;
   transition: opacity 0.3s;
 }
-.carousel > .carousel-indicators > li > div > div {
+.carousel > .carousel-indicator-list > li > div > div {
   height: 100%;
   background-color: var(--indicator-progress-color);
 }
-.carousel > .carousel-indicators > li:hover > div {
+.carousel > .carousel-indicator-list > li:hover > div {
   opacity: 1 !important;
 }
 .carousel > .carousel-play-button {

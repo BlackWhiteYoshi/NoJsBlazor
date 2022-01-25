@@ -65,7 +65,7 @@
 .carousel > .carousel-arrow.next {
   inset: var(--arrow-right-position);
 }
-.carousel > .carousel-asdf {
+.carousel > .carousel-indicator-list {
   position: absolute;
   inset: var(--indicator-list-position);
   margin: auto;
@@ -77,11 +77,11 @@
   list-style: none;
   z-index: 40;
 }
-.carousel > .carousel-asdf > li {
+.carousel > .carousel-indicator-list > li {
   flex-grow: 1;
   cursor: pointer;
 }
-.carousel > .carousel-asdf > li > div {
+.carousel > .carousel-indicator-list > li > div {
   height: 5px;
   margin: 10px 0;
   background-color: var(--indicator-color);
@@ -89,11 +89,11 @@
   overflow: hidden;
   transition: opacity 0.3s;
 }
-.carousel > .carousel-asdf > li > div > div {
+.carousel > .carousel-indicator-list > li > div > div {
   height: 100%;
   background-color: var(--indicator-progress-color);
 }
-.carousel > .carousel-asdf > li:hover > div {
+.carousel > .carousel-indicator-list > li:hover > div {
   opacity: 1 !important;
 }
 .carousel > .carousel-play-button {
