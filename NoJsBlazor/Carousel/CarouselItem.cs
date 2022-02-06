@@ -38,12 +38,12 @@ public class CarouselItem : ListableComponentBase<CarouselItem> {
     /// <param name="builder"></param>
     protected override void BuildRenderTree(RenderTreeBuilder builder) {
         /***
-            * <div class="carousel-item" @if (active) { style="z-index: 20;" }>
+            * <div class="carousel-element" @if (active) { style="z-index: 20;" }>
             *     @ChildContent
             * </div>
             ***/
         builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", "carousel-item");
+        builder.AddAttribute(1, "class", "carousel-element");
         if (active)
             builder.AddAttribute(2, "style", "z-index: 20;");
         builder.AddContent(3, ChildContent);
