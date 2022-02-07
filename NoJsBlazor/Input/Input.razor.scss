@@ -19,7 +19,7 @@
         outline: none;
 
         &:focus {
-            border: solid var(--focus-color) 2px;
+            box-shadow: 0 0 1px var(--focus-color);
         }
     }
 

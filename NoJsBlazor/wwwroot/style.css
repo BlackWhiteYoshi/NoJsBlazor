@@ -328,7 +328,7 @@
   outline: none;
 }
 .input-field-container > input:focus {
-  border: solid var(--focus-color) 2px;
+  box-shadow: 0 0 1px var(--focus-color);
 }
 .input-field-container > label {
   position: absolute;
