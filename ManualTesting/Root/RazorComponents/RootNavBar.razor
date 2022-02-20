@@ -61,22 +61,22 @@
 
 @code {
     private void RenderHeaderFlag(RenderTreeBuilder builder, Language language) {
-        OpenFlag(builder, language);
+        OpenFlag(builder, language); // index 0
 
-        builder.AddAttribute(0, "class", (dialog?.Active ?? false) ? "header-flag active" : "header-flag");
-        builder.AddAttribute(1, "role", "button");
-        builder.AddAttribute(2, "onmousedown", EventCallback.Factory.Create<MouseEventArgs>(this, toogleDialogTC.OnMouseDown));
-        builder.AddAttribute(3, "ontouchstart", EventCallback.Factory.Create<TouchEventArgs>(this, toogleDialogTC.OnTouchStart));
+        builder.AddAttribute(1, "class", (dialog?.Active ?? false) ? "header-flag active" : "header-flag");
+        builder.AddAttribute(2, "role", "button");
+        builder.AddAttribute(3, "onmousedown", EventCallback.Factory.Create<MouseEventArgs>(this, toogleDialogTC.OnMouseDown));
+        builder.AddAttribute(4, "ontouchstart", EventCallback.Factory.Create<TouchEventArgs>(this, toogleDialogTC.OnTouchStart));
 
         builder.CloseComponent();
     }
 
     private static RenderFragment CreateDialogFlagRenderFragment(Language language) {
         return (RenderTreeBuilder builder) => {
-            OpenFlag(builder, language);
+            OpenFlag(builder, language); // index 0
 
-            builder.AddAttribute(0, "height", "15");
-            builder.AddAttribute(1, "style", "margin-right: 5px;");
+            builder.AddAttribute(1, "height", "15");
+            builder.AddAttribute(2, "style", "margin-right: 5px;");
 
             builder.CloseComponent();
         };

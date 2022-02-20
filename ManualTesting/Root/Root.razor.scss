@@ -24,46 +24,48 @@ body {
 
 #blazor-error-ui {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    max-width: 600px;
+    inset: auto 0 0 0;
     z-index: 1000;
     display: none;
-    background-image: linear-gradient(90deg,#ff7,#ff4,#ff7);
+    background-image: linear-gradient(90deg, #FF7, #FF4, #FF7);
 
-    @media(min-width: 600px) {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    & > p {
-        margin: 10px 40px 10px 10px;
-        text-align: center;
-    }
-
-    & > .dismiss {
-        position: absolute;
-        top: 11px;
-        right: 25px;
-        cursor: pointer;
-    }
-
-    @media(max-width: 600px) {
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8em;
+        padding: 0.6em 1.2em;
+        
         & > p {
-            display: table;
-            margin: 10px auto;
-            text-align: left;
+            margin: 0 0 0 auto;
+
+            & > span {
+                display: inline-block;
+
+                &:first-child {
+                    margin-right: 0.4em;
+                }
+            }
         }
 
         & > .dismiss {
-            top: 18px;
-            right: 20px;
-            font-size: 20px;
-        }
+            cursor: pointer;
+            margin-left: auto;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: stroke 0.1s;
+            
+            & > line {
+                stroke: #000;
+                stroke-width: 2;
+                stroke-linecap: round;
+            }
 
-        .sentence, .sentence {
-            display: block;
+            &:hover > line {
+                stroke: #04b;
+                transition: stroke 0.3s;
+            }
         }
     }
 }

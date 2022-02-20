@@ -43,14 +43,16 @@
     </div>
 
     <div id="blazor-error-ui">
-        <p>
-            <span class="sentence">An unexpected error has occurred.</span>
-            <span class="sentence"><a href="/" class="reload">Reload Website</a> if not working as expected.</span>
-        </p>
-        <a class="dismiss">🗙</a>
+        <div>
+            <p><span>An unexpected error has occurred.</span><span><a href="/">Reload Website</a> if not working as expected.</span></p>
+            <svg class="dismiss" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+                <line x1="2" y1="2" x2="8" y2="8" />
+                <line x1="2" y1="8" x2="8" y2="2" />
+            </svg>
+        </div>
     </div>
 
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="/_framework/blazor.webassembly.js"></script>
 </body>
 
 </html>
