@@ -35,6 +35,9 @@
 .carousel > .carousel-content > .carousel-element.slide {
   transition: transform ease-out var(--swap-duration);
 }
+.carousel > .carousel-content > .carousel-element.active {
+  z-index: 20;
+}
 .carousel > .carousel-overlay {
   position: absolute;
   inset: var(--overlay-position);

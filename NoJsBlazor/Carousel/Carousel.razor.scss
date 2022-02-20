@@ -41,6 +41,10 @@
             &.slide {
                 transition: transform ease-out var(--swap-duration);
             }
+
+            &.active {
+                z-index: 20;
+            }
         }
     }
 

@@ -4,7 +4,7 @@
 /// <para>Wrapper for the content that will be a carousel item.</para>
 /// <para>This should be placed inside Renderfragment <b>Items</b> of a <see cref="Carousel"/> instance.</para>
 /// </summary>
-public class CarouselItem : ListableComponentBase<CarouselItem> {
+public partial class CarouselItem : ListableComponentBase<CarouselItem> {
     /// <summary>
     /// Content of this component.
     /// </summary>
@@ -24,29 +24,11 @@ public class CarouselItem : ListableComponentBase<CarouselItem> {
     public CarouselItem(RenderFragment child) : base() => ChildContent = child;
 
 
-    private bool active = false;
+    private string cssClass = "carousel-element";
 
     protected override void OnInitialized() {
         if (((Carousel)Parent).ActiveStart == Parent.ChildCount)
-            active = true;
+            cssClass = "carousel-element active";
         base.OnInitialized();
-    }
-
-    /// <summary>
-    /// How this component renders, what is normally written in razor-syntax
-    /// </summary>
-    /// <param name="builder"></param>
-    protected override void BuildRenderTree(RenderTreeBuilder builder) {
-        /***
-            * <div class="carousel-element" @if (active) { style="z-index: 20;" }>
-            *     @ChildContent
-            * </div>
-            ***/
-        builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", "carousel-element");
-        if (active)
-            builder.AddAttribute(2, "style", "z-index: 20;");
-        builder.AddContent(3, ChildContent);
-        builder.CloseElement();
     }
 }
