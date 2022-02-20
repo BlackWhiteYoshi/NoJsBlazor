@@ -1,0 +1,64 @@
+﻿html, body {
+    font-family: "Calibri";
+    height: 100%;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 40px 0 150px 0;
+    min-height: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background: #EEEEEE;
+    background-size: 100%;
+}
+
+#blazor-error-ui {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 1000;
+    display: none;
+    background-image: linear-gradient(90deg, #FF7, #FF4, #FF7);
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8em;
+        padding: 0.6em 1.2em;
+        
+        & > p {
+            margin: 0 0 0 auto;
+
+            & > span {
+                display: inline-block;
+
+                &:first-child {
+                    margin-right: 0.4em;
+                }
+            }
+        }
+
+        & > .dismiss {
+            cursor: pointer;
+            margin-left: auto;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: stroke 0.1s;
+            
+            & > line {
+                stroke: #000;
+                stroke-width: 2;
+                stroke-linecap: round;
+            }
+
+            &:hover > line {
+                stroke: #04b;
+                transition: stroke 0.3s;
+            }
+        }
+    }
+}

@@ -1,0 +1,92 @@
+﻿@using ManualTesting.Client.Languages
+
+@namespace ManualTesting.Client
+
+<header class="header-navbar" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
+    <NavBar @ref="navBar" Breakpoint="NavBarBreakpoint.px800" OnToggle="PhoneToggle">
+        <Brand>
+            <a href="/">
+                <p>My Website</p>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                </svg>
+            </a>
+        </Brand>
+        <Items>
+            <NavBarLink href="/">Test</NavBarLink>
+            <NavBarMenu>
+                <Head>
+                    <NavBarLink href="/">@Lang.Print("Example", "Beispiel")</NavBarLink>
+                </Head>
+                <Items>
+                    <NavBarLink href="/">@Lang.Print("Example 3", "Beispiel 3")</NavBarLink>
+                    <NavBarMenu>
+                        <Head>
+                            <NavBarLink href="/">@Lang.Print("Example 2", "Beispiel 2")</NavBarLink>
+                        </Head>
+                        <Items>
+                            <NavBarLink href="/">@Lang.Print("Example 3", "Beispiel 3")</NavBarLink>
+                        </Items>
+                    </NavBarMenu>
+                </Items>
+            </NavBarMenu>
+            <NavBarLink href="/">@Lang.Print("Example 2", "Beispiel 2")</NavBarLink>
+            <NavBarLink href="/">@Lang.Print("Example 3", "Beispiel 3")</NavBarLink>
+        </Items>
+    </NavBar>
+    @{ RenderHeaderFlag(__builder, Lang.Language); }
+</header>
+
+<Dialog @ref="dialog" ModalScreen="false" id="language-dialog" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
+    <Title>
+        @CreateDialogFlagRenderFragment(Lang.Language)
+        <p>@Lang.Print("Select Language", "Wähle Sprache")</p>
+    </Title>
+    <Content>
+        <button class="@(Lang.Language == Language.English ? "selected" : string.Empty)"
+                @onmousedown="(MouseEventArgs e) => setLanguageTC.OnMouseDown(e, Language.English)"
+                @ontouchstart="(TouchEventArgs e) => setLanguageTC.OnTouchStart(e, Language.English)">
+            <UKFlag />
+            <p>English</p>
+        </button>
+        <button class="@(Lang.Language == Language.German ? "selected" : string.Empty)"
+                @onmousedown="(MouseEventArgs e) => setLanguageTC.OnMouseDown(e, Language.German)"
+                @ontouchstart="(TouchEventArgs e) => setLanguageTC.OnTouchStart(e, Language.German)">
+            <GermanFlag />
+            <p>Deutsch</p>
+        </button>
+    </Content>
+</Dialog>
+
+
+@code {
+    private void RenderHeaderFlag(RenderTreeBuilder builder, Language language) {
+        OpenFlag(builder, language); // index 0
+
+        builder.AddAttribute(1, "class", (dialog?.Active ?? false) ? "header-flag active" : "header-flag");
+        builder.AddAttribute(2, "role", "button");
+        builder.AddAttribute(3, "onmousedown", EventCallback.Factory.Create<MouseEventArgs>(this, toogleDialogTC.OnMouseDown));
+        builder.AddAttribute(4, "ontouchstart", EventCallback.Factory.Create<TouchEventArgs>(this, toogleDialogTC.OnTouchStart));
+
+        builder.CloseComponent();
+    }
+
+    private static RenderFragment CreateDialogFlagRenderFragment(Language language) {
+        return (RenderTreeBuilder builder) => {
+            OpenFlag(builder, language); // index 0
+
+            builder.AddAttribute(1, "height", "15");
+            builder.AddAttribute(2, "style", "margin-right: 5px;");
+
+            builder.CloseComponent();
+        };
+    }
+
+    private static void OpenFlag(RenderTreeBuilder builder, Language language) {
+        switch (language) {
+            case Language.English: builder.OpenComponent<UKFlag>(0); break;
+            case Language.German: builder.OpenComponent<GermanFlag>(0); break;
+            default: throw new Exception("invalid enum or not all enums are present in this switch");
+        }
+    }
+}

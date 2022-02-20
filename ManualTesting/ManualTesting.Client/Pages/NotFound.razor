@@ -1,0 +1,36 @@
+﻿@namespace ManualTesting.Client
+@inherits PageComponentBase
+
+<div id="not-found" class="fade-in">
+    <header class="headline-div">
+        <p>Not Found</p>
+    </header>
+
+    <section class="center">
+        <p>@Lang.Print("The site at the specified URL could not be found.", "Die Seite an der angegebenen URL konnte nicht gefunden werden.")</p>
+        <a href="/">
+            <p class="text-center" style="margin: 50px 0;">@Lang.Print("Back to Home Page", "Zurück zur Startseite")</p>
+        </a>
+        
+        @((RenderFragment)SortAndRenderUrls)
+    </section>
+</div>
+
+@code {
+    private unsafe void RenderUrls(RenderTreeBuilder __builder, int** buckets, bool atLeastOneItem) {
+        if (atLeastOneItem) {
+            <p class="text-center">@Lang.Print("Similar URLs", "Ähnliche URLs")</p>
+
+            <ul class="center">
+                @for (int distance = 1; distance <= BAD_REQUEST_LIST_MAX_DISTANCE; distance++) {
+                    for (int entry = 0; entry < buckets[0][distance]; entry++) {
+                        string url = UrlList[buckets[distance][entry]];
+                        <li style="margin: 5px 0;">
+                            <a href=@url>@url</a>
+                        </li>
+                    }
+                }
+            </ul>
+        }
+    }
+}

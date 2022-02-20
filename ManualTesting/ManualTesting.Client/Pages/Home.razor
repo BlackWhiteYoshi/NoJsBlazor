@@ -1,0 +1,144 @@
+﻿@namespace ManualTesting.Client
+@inherits PageComponentBase
+@page "/"
+
+<div id="home">
+    <h1 class="headline-background">@Lang.Print("My Home Page", "Meine Startseite")</h1>
+    
+    <section>
+        <h2 class="headline">Carousel</h2>
+
+        @{
+            const int HEIGHT = 450;
+        }
+        <div class="center" style="width: 80%; max-width: 900px">
+            <Carousel ActiveStart="1" Animation="CarouselAnimation.Slide" BeginRunning="false" IntervalTime="4000">
+                <Items>
+                    <CarouselItem>
+                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, red, blue);"></div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, blue, yellow);"></div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, yellow, green);"></div>
+                    </CarouselItem>
+                    <CarouselItem>
+                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, green, red);"></div>
+                    </CarouselItem>
+                </Items>
+                <Overlay>
+                    <p>Ich bin ein Overlay!</p>
+                </Overlay>
+            </Carousel>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="headline">CollapseDiv</h2>
+
+        <div class="center" style="width: 300px">
+            <CollapseDiv>
+                <Head>
+                    <p>press me!</p><CollapseDivArrow />
+                </Head>
+                <Content>
+                    <p>Item 1</p>
+                    <p>Item 2</p>
+                    <p>Item 3</p>
+                </Content>
+            </CollapseDiv>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="headline">ContextMenu</h2>
+
+        <div class="center" style="position: relative; padding: 20px; background-color: #DDD;">
+            <div style="width: 300px; height: 200px; background-color: #333;" @onclick="OpenContextMenu"></div>
+            <ContextMenu @ref="contextMenu">
+                <ContextSubMenu>
+                    <Head>First</Head>
+                    <Items>
+                        <ContextMenuItem>Nested First</ContextMenuItem>
+                    </Items>
+                </ContextSubMenu>
+                <ContextSubMenu>
+                    <Head>Second</Head>
+                    <Items>
+                        <ContextMenuItem>Nested Second</ContextMenuItem>
+                    </Items>
+                </ContextSubMenu>
+                <ContextMenuItem>Third</ContextMenuItem>
+            </ContextMenu>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="headline">Dialog</h2>
+
+        <button class="button-blue center" @onclick="OpenDialog">open dialog</button>
+
+        <Dialog @ref="dialog">
+            <Title>
+                <p style="margin: 0;">My Test Dialog</p>
+            </Title>
+            <Content>
+                <p style="margin: 0;">
+                    Ich bin irgendein Text.<br />
+                    Ich habe keinen Sinn.<br />
+                    Mich zu lesen bringt gar nichts.</p>
+                <button class="button-blue center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
+            </Content>
+        </Dialog>
+    </section>
+
+    <section>
+        <h2 class="headline">Input</h2>
+
+        <Input Title="Eingabe"/>
+    </section>
+
+    <section>
+        <h2 class="headline">Loader Icon</h2>
+
+        <div class="center">
+            <LoaderIcon />
+        </div>
+    </section>
+
+    <section>
+        <h2 class="headline">ProgressBar</h2>
+
+        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="StandardProgressBarButtonClick">Add 1%</button>
+        <div class="center">
+            <StandardProgressBar Progress="standardBarProgress" Text="@standardBarText" />
+        </div>
+
+        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="CircleProgressBarButtonClick">Add 1%</button>
+        <div class="center">
+            <CircleProgressBar @ref="circleProgress" />
+        </div>
+
+        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="SpeedometerProgressBarButtonClick">Add 10%</button>
+        <div class="center">
+            <SpeedometerProgressBar @ref="speedometerProgress" />
+        </div>
+    </section>
+
+    <section>
+        <h2 class="headline">Slider</h2>
+
+        <div class="center">
+            <Slider Title="Test1" Display="@((int value) => $"{value}%")" />
+        </div>
+
+        <div class="center">
+            <Slider Editable="true" style="width: 200px;" />
+        </div>
+
+        <div class="center">
+            <DecimalSlider />
+        </div>
+    </section>
+</div>

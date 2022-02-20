@@ -1,0 +1,35 @@
+﻿@namespace ManualTesting.Client
+
+<body @onmousedown="(MouseEventArgs e) => MouseDown?.Invoke(e)" @ontouchstart="(TouchEventArgs e) => TouchStart?.Invoke(e)"
+      @onmousemove="(MouseEventArgs e) => MouseMove?.Invoke(e)" @ontouchmove="(TouchEventArgs e) => TouchMove?.Invoke(e)"
+      @onmouseup="(MouseEventArgs e) => MouseUp?.Invoke(e)" @ontouchend="(TouchEventArgs e) => TouchEnd?.Invoke(e)">
+
+    @if (PreRendering) {
+        <LoaderIcon style="position: fixed; top: 80px; right: 30px; z-index: 999;" />
+    }
+
+    <RootNavBar @ref="navBar" Root="this" />
+
+    <main>
+        <CascadingValue Value="this" IsFixed="true">
+            <Router AppAssembly="@typeof(Root).Assembly">
+                <Found Context="routeData">
+                    <RouteView RouteData="@routeData" />
+                </Found>
+                <NotFound>
+                    <NotFound />
+                </NotFound>
+            </Router>
+        </CascadingValue>
+    </main>
+
+    <div id="blazor-error-ui">
+        <div>
+            <p><span>An unexpected error has occurred.</span><span><a href="/">Reload Website</a> if not working as expected.</span></p>
+            <svg class="dismiss" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+                <line x1="2" y1="2" x2="8" y2="8" />
+                <line x1="2" y1="8" x2="8" y2="2" />
+            </svg>
+        </div>
+    </div>
+</body>

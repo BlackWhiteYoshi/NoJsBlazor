@@ -1,0 +1,60 @@
+﻿@page
+@namespace ManualTesting.Server
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using ManualTesting.Client
+@using ManualTesting.Client.Languages
+
+@{
+    Language language;
+    if (HttpContext.Request.Cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? stringValue))
+        if (Enum.TryParse(stringValue, false, out language))
+            if (0 <= language || language < (Language)Enum.GetValues(typeof(Language)).Length)
+                goto LanguageIsAssigned;
+    // else
+    {
+        // no or invalid cookie
+        language = ILanguageProvider.GetLanguage(Request.Headers["Accept-Language"].ToString());
+    }
+    LanguageIsAssigned:
+}
+
+<!DOCTYPE html>
+<html lang="@ILanguageProvider.GetAbbreviation(language)">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Test NoJsBlazor</title>
+        <base href="~/" />
+
+        <link rel="stylesheet" href="~/css/style.min.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" />
+
+        <script src="~/_framework/blazor.webassembly.js" autostart="false"></script>
+        <script>
+            function GetCookies() {
+                return document.cookie;
+            }
+
+            function SetCookie(key, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + days * 86400000); @* 86400000 = 24 * 60 * 60 * 1000 *@
+                document.cookie = key + "=" + value + "; expires=" + date.toGMTString() + "; samesite=lax; secure; path=/";
+            }
+
+            function SetHtmlLanguage(language) {
+                document.documentElement.lang = language;
+            }
+
+            function GetBrowserLanguage() {
+                return navigator.language;
+            }
+
+
+            document.addEventListener("DOMContentLoaded", Blazor.start);
+        </script>
+    </head>
+
+    <component type="typeof(Root)" render-mode="WebAssemblyPrerendered" param-Language="(int)language" />
+    <persist-component-state />
+</html>

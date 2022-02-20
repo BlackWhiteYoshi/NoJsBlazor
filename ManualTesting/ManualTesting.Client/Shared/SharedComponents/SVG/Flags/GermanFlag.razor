@@ -1,0 +1,12 @@
+﻿@namespace ManualTesting.Client
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3" @attributes="@Attributes">
+    <polygon points="0,0 0,1 5,1 5,0" fill="#000" />
+    <polygon points="0,1 0,2 5,2 5,1" fill="#D00" />
+    <polygon points="0,2 0,3 5,3 5,2" fill="#FFCE00" />
+</svg>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? Attributes { get; set; }
+}
