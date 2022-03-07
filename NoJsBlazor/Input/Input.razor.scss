@@ -1,4 +1,8 @@
 ﻿.input-field-container {
+    --input-width: 12.5em;
+    --padding-top-bottom: 0.6em;
+    --padding-left-right: 1.2em;
+    --label-top-offset-left: 0.5em;
     --background-color: #FFF;
     --border-color: #444;
     --focus-color: #00F;
@@ -10,12 +14,11 @@
 
     & > input {
         position: relative;
-        padding: 0.5em 1em;
-        width: 12.5rem;
-        height: 2.5rem;
+        width: var(--input-width);
+        padding: var(--padding-top-bottom) var(--padding-left-right);
         background-color: var(--background-color);
         border: solid var(--border-color) 1px;
-        border-radius: 20px;
+        border-radius: 1.5em;
         outline: none;
 
         &:focus {
@@ -25,10 +28,10 @@
 
     & > label {
         position: absolute;
-        left: 1em;
+        left: var(--padding-left-right);
         top: 50%;
         transform: translateY(-50%);
-        font-size: 1rem;
+        font-size: 1em;
         opacity: 0.7;
         background: linear-gradient(180deg, #0000 49%, var(--background-color) 1%, var(--background-color));
         pointer-events: none;
@@ -37,7 +40,8 @@
 
     & > input:focus + label, .filled-input-label {
         top: 0;
-        font-size: 0.8rem;
+        transform: translate(var(--label-top-offset-left), -50%);
+        font-size: 0.8em;
         padding: 0 0.2em;
         opacity: 1;
         transition: all 0.2s;
