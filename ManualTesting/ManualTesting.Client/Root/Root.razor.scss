@@ -1,16 +1,12 @@
 ﻿html {
-    font-family: "Calibri";
-    height: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
     position: relative;
+    min-height: 100vh;
     margin: 0;
     padding: 40px 0 150px 0;
-    min-height: 100%;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
     background: #EEE;
 }
 
