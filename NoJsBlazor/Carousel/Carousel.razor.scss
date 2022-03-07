@@ -28,8 +28,8 @@
         & > .carousel-element {
             grid-row: 1;
             grid-column: 1;
+            z-index: 10;
             transition: opacity ease-out var(--swap-duration);
-            // z-index of active item will be 20, all others have 10
 
             img {
                 // all images should have the same aspect ratios, otherwise ugly height changes happens
