@@ -8,22 +8,7 @@ public enum NavBarBreakpoint {
     /// Changes never, stays always at desktop view.
     /// </summary>
     none,
-    /// <summary>
-    /// Below width of 100px is phone view.
-    /// </summary>
-    px100,
-    /// <summary>
-    /// Below width of 200px is phone view.
-    /// </summary>
-    px200,
-    /// <summary>
-    /// Below width of 300px is phone view.
-    /// </summary>
-    px300,
-    /// <summary>
-    /// Below width of 400px is phone view.
-    /// </summary>
-    px400,
+
     /// <summary>
     /// Below width of 500px is phone view.
     /// </summary>
@@ -67,5 +52,38 @@ public enum NavBarBreakpoint {
     /// <summary>
     /// Below width of 1500px is phone view.
     /// </summary>
-    px1500
+    px1500,
+
+    /// <summary>
+    /// Below width of 30em is phone view.
+    /// </summary>
+    em30,
+    /// <summary>
+    /// Below width of 40em is phone view.
+    /// </summary>
+    em40,
+    /// <summary>
+    /// Below width of 50em is phone view.
+    /// </summary>
+    em50,
+    /// <summary>
+    /// Below width of 60em is phone view.
+    /// </summary>
+    em60,
+    /// <summary>
+    /// Below width of 70em is phone view.
+    /// </summary>
+    em70,
+    /// <summary>
+    /// Below width of 80em is phone view.
+    /// </summary>
+    em80,
+    /// <summary>
+    /// Below width of 90em is phone view.
+    /// </summary>
+    em90,
+    /// <summary>
+    /// Below width of 100em is phone view.
+    /// </summary>
+    em100
 }

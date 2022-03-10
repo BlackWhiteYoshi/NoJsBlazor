@@ -64,30 +64,29 @@ public partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     }
 
 
-    [AllowNull]
-    private string navRootClass;
-
-    protected override void OnInitialized() {
-        navRootClass = Breakpoint switch {
-            NavBarBreakpoint.none => "nav-root",
-            NavBarBreakpoint.px100 => "nav-root-100",
-            NavBarBreakpoint.px200 => "nav-root-200",
-            NavBarBreakpoint.px300 => "nav-root-300",
-            NavBarBreakpoint.px400 => "nav-root-400",
-            NavBarBreakpoint.px500 => "nav-root-500",
-            NavBarBreakpoint.px600 => "nav-root-600",
-            NavBarBreakpoint.px700 => "nav-root-700",
-            NavBarBreakpoint.px800 => "nav-root-800",
-            NavBarBreakpoint.px900 => "nav-root-900",
-            NavBarBreakpoint.px1000 => "nav-root-1000",
-            NavBarBreakpoint.px1100 => "nav-root-1100",
-            NavBarBreakpoint.px1200 => "nav-root-1200",
-            NavBarBreakpoint.px1300 => "nav-root-1300",
-            NavBarBreakpoint.px1400 => "nav-root-1400",
-            NavBarBreakpoint.px1500 => "nav-root-1500",
-            _ => "nav-root"
-        };
-    }
+    private string NavRootClass => Breakpoint switch {
+        NavBarBreakpoint.none => "nav-root",
+        NavBarBreakpoint.px500 => "nav-root-500px",
+        NavBarBreakpoint.px600 => "nav-root-600px",
+        NavBarBreakpoint.px700 => "nav-root-700px",
+        NavBarBreakpoint.px800 => "nav-root-800px",
+        NavBarBreakpoint.px900 => "nav-root-900px",
+        NavBarBreakpoint.px1000 => "nav-root-1000px",
+        NavBarBreakpoint.px1100 => "nav-root-1100px",
+        NavBarBreakpoint.px1200 => "nav-root-1200px",
+        NavBarBreakpoint.px1300 => "nav-root-1300px",
+        NavBarBreakpoint.px1400 => "nav-root-1400px",
+        NavBarBreakpoint.px1500 => "nav-root-1500px",
+        NavBarBreakpoint.em30 => "nav-root-30em",
+        NavBarBreakpoint.em40 => "nav-root-40em",
+        NavBarBreakpoint.em50 => "nav-root-50em",
+        NavBarBreakpoint.em60 => "nav-root-60em",
+        NavBarBreakpoint.em70 => "nav-root-70em",
+        NavBarBreakpoint.em80 => "nav-root-80em",
+        NavBarBreakpoint.em90 => "nav-root-90em",
+        NavBarBreakpoint.em100 => "nav-root-100em",
+        _ => "nav-root"
+    };
     
     
     private readonly TouchClick ToggleTC;

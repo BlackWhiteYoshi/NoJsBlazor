@@ -1,7 +1,7 @@
 ﻿@namespace NoJsBlazor
 @inherits ListholdingComponentBase<NavBarMenu>
 
-<nav class="@navRootClass" @attributes="@Attributes">
+<nav class="@NavRootClass" @attributes="@Attributes">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"
             class="nav-toggle @(Expanded ? "expanded" : string.Empty)" aria-label="Toggle navigation" role="button"
             @onmousedown="ToggleTC.OnMouseDown" @ontouchstart="ToggleTC.OnTouchStart">

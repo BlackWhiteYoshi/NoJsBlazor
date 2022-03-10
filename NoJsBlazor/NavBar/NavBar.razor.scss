@@ -279,8 +279,15 @@
 
 
 .nav-root { @include nav-content(0px); }
-$i: 100;
+
+$i: 500;
 @while $i <= 1500 {
-    .nav-root-#{$i} { @include nav-content($i + px);}
+    .nav-root-#{$i}px { @include nav-content($i + px);}
     $i: $i + 100;
+}
+
+$i: 30;
+@while $i <= 100 {
+    .nav-root-#{$i}em { @include nav-content($i + em);}
+    $i: $i + 10;
 }
