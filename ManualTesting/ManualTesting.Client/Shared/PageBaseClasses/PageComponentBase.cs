@@ -5,7 +5,7 @@ namespace ManualTesting.Client;
 /// <summary>
 /// A normal component that register itself on initializing at the Layout, so the Layout can call Rerender()
 /// </summary>
-public class PageComponentBase : ComponentBase {
+public abstract class PageComponentBase : ComponentBase {
     [Inject]
     [AllowNull]
     protected ILanguageProvider Lang { get; init; }
