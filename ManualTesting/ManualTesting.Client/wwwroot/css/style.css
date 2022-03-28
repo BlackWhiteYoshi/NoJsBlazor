@@ -423,8 +423,8 @@
     height: var(--size);
   }
   to {
-    width: calc(2 * var(--size) + 20px);
-    height: calc(2 * var(--size) + 20px);
+    width: calc(2 * var(--size) + var(--move-size));
+    height: calc(2 * var(--size) + var(--move-size));
   }
 }
 .loader-icon .ball-top-left {
