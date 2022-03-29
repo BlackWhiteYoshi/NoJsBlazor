@@ -1,5 +1,5 @@
-﻿using BlazorTemplate.Shared.PreRendering;
-using ManualTesting.Client.Languages;
+﻿using ManualTesting.Client.Languages;
+using ManualTesting.Client.PreRendering;
 
 namespace ManualTesting.Client;
 

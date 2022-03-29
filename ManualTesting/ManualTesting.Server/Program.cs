@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using ManualTesting.Client.Languages;
+using ManualTesting.Client.PreRendering;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.JSInterop;
-using ManualTesting.Client.Languages;
-using BlazorTemplate.Shared.PreRendering;
 
 namespace ManualTesting.Server;
 
