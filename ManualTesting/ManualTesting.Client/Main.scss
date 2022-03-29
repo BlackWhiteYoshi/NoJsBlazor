@@ -1,6 +1,7 @@
-﻿@import 'Shared/Shared.scss';
+﻿@use 'Shared/Shared.scss';
 
-@import 'Root/Root.razor.scss';
-@import 'Root/RazorComponents/RootNavBar.razor.scss';
+@use 'Root/Root.razor.scss';
+@use 'Root/RazorComponents/RootNavBar.razor.scss';
 
-@import 'Pages/Home.razor.scss';
+@use 'Pages/Home.razor.scss';
+@use 'Pages/NotFound.razor.scss';

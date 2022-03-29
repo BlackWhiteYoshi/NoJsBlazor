@@ -20,8 +20,7 @@ public class Program {
     private static void ConfigureServices(IServiceCollection services) {
         services.AddRazorPages((RazorPagesOptions options) => options.RootDirectory = "/");
 
-        services.AddResponseCompression((ResponseCompressionOptions options) =>
-            options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" }));
+        services.AddResponseCompression((ResponseCompressionOptions options) => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" }));
 
         services.AddSingleton<IJSInProcessRuntime, UnsupportedJSInProcessRuntime>();
         services.AddScoped<ILanguageProvider, LanguageProvider>();
@@ -31,14 +30,12 @@ public class Program {
         if (app.Environment.IsDevelopment()) {
             app.UseDeveloperExceptionPage();
             app.UseWebAssemblyDebugging();
-
-            // in production: static files are served by nginx directly
-            app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();
         }
         else
             app.UseExceptionHandler("/");
 
+        app.UseBlazorFrameworkFiles();
+        app.UseStaticFiles();
         app.UseRouting();
         app.MapFallbackToPage("/_Host");
     }
