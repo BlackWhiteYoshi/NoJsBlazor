@@ -1,4 +1,5 @@
-﻿using ManualTesting.Client.Languages;
+﻿using BlazorTemplate.Shared.PreRendering;
+using ManualTesting.Client.Languages;
 
 namespace ManualTesting.Client;
 
@@ -11,6 +12,10 @@ public partial class Root : ComponentBase, IDisposable {
     public PageComponentBase? PageComponent { get; set; }
 
 
+    [AllowNull]
+    private RootNavBar navBar;
+
+
     public event Action<MouseEventArgs>? MouseDown;
     public event Action<TouchEventArgs>? TouchStart;
     public event Action<MouseEventArgs>? MouseMove;
@@ -19,26 +24,29 @@ public partial class Root : ComponentBase, IDisposable {
     public event Action<TouchEventArgs>? TouchEnd;
 
 
-    [AllowNull]
-    private RootNavBar navBar;
-
-
     protected override void OnInitialized() {
         Lang.SilentLanguageSetter = Language;
         Lang.OnLanguageChanged += OnLanguageChanged;
-
-        subscription = ComponentState.RegisterOnPersisting(PersistPreRendering);
-        if (ComponentState.TryTakeFromJson<int>(KEY, out _))
-            PreRendering = false;
-        else
-            PreRendering = true;
     }
 
     public void Dispose() {
         Lang.OnLanguageChanged -= OnLanguageChanged;
-        subscription.Dispose();
         GC.SuppressFinalize(this);
     }
+
+
+    #region PreRendering
+
+    [Inject]
+    [AllowNull]
+    private IPreRenderFlag PreRenderFlag { get; init; }
+
+    /// <summary>
+    /// Is this App executed on the server or on the client.
+    /// </summary>
+    public bool PreRendering => PreRenderFlag.Flag;
+
+    #endregion
 
 
     #region Language
@@ -57,30 +65,6 @@ public partial class Root : ComponentBase, IDisposable {
     private void OnLanguageChanged(Language language) {
         JsRuntime.InvokeVoid("SetHtmlLanguage", ILanguageProvider.GetAbbreviation(language));
         Rerender();
-    }
-
-    #endregion
-
-
-    #region PreRendering
-
-    private const string KEY = "PreRendering";
-
-    [Inject]
-    [AllowNull]
-    private PersistentComponentState ComponentState { get; init; }
-
-    /// <summary>
-    /// Is this App executed on the server or on the client.
-    /// </summary>
-    public bool PreRendering { get; private set; }
-
-    PersistingComponentStateSubscription subscription;
-
-
-    private Task PersistPreRendering() {
-        ComponentState.PersistAsJson(KEY, 0);
-        return Task.CompletedTask;
     }
 
     #endregion

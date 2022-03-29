@@ -1,4 +1,5 @@
-﻿using ManualTesting.Client.Languages;
+﻿using BlazorTemplate.Shared.PreRendering;
+using ManualTesting.Client.Languages;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace ManualTesting.Client;
@@ -12,7 +13,14 @@ public class Program {
 
     private static void ConfigureServices(IServiceCollection services) {
         services.AddSingleton((IServiceProvider serviceProvider) => (IJSInProcessRuntime)serviceProvider.GetRequiredService<IJSRuntime>());
+        services.AddSingleton<IPreRenderFlag, PreRenderFlag>();
         services.AddSingleton<ILanguageProvider, LanguageProvider>();
+    }
+
+
+
+    private class PreRenderFlag : IPreRenderFlag {
+        public bool Flag => false;
     }
 }
 

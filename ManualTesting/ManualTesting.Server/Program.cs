@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.JSInterop;
 using ManualTesting.Client.Languages;
+using BlazorTemplate.Shared.PreRendering;
 
 namespace ManualTesting.Server;
 
@@ -19,10 +20,10 @@ public class Program {
 
     private static void ConfigureServices(IServiceCollection services) {
         services.AddRazorPages((RazorPagesOptions options) => options.RootDirectory = "/");
-
         services.AddResponseCompression((ResponseCompressionOptions options) => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" }));
 
         services.AddSingleton<IJSInProcessRuntime, UnsupportedJSInProcessRuntime>();
+        services.AddSingleton<IPreRenderFlag, PreRenderFlag>();
         services.AddScoped<ILanguageProvider, LanguageProvider>();
     }
 
@@ -46,5 +47,9 @@ public class Program {
         public TResult Invoke<TResult>(string identifier, params object?[]? args) => throw new NotSupportedException();
         public ValueTask<TValue> InvokeAsync<TValue>(string identifier, object?[]? args) => throw new NotSupportedException();
         public ValueTask<TValue> InvokeAsync<TValue>(string identifier, CancellationToken cancellationToken, object?[]? args) => throw new NotSupportedException();
+    }
+
+    private class PreRenderFlag : IPreRenderFlag {
+        public bool Flag => true;
     }
 }
