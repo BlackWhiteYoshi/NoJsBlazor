@@ -8,8 +8,7 @@ public partial class CarouselItem : ListableComponentBase<CarouselItem> {
     /// <summary>
     /// Content of this component.
     /// </summary>
-    [Parameter]
-    [AllowNull]
+    [Parameter, AllowNull]
     public RenderFragment ChildContent { get; set; }
 
     /// <summary>

@@ -13,8 +13,7 @@ else {
     /// <summary>
     /// Will be automatically set by the parent.
     /// </summary>
-    [CascadingParameter(Name = "Head")]
-    [System.Diagnostics.CodeAnalysis.AllowNull]
+    [CascadingParameter(Name = "Head"), System.Diagnostics.CodeAnalysis.AllowNull]
     public bool Head { get; init; }
 
     /// <summary>

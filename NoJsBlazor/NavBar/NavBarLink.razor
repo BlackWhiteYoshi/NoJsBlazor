@@ -14,8 +14,7 @@ else {
     /// <summary>
     /// Will be automatically set by the root.
     /// </summary>
-    [CascadingParameter(Name = "Parent")]
-    [System.Diagnostics.CodeAnalysis.AllowNull]
+    [CascadingParameter(Name = "Parent"), System.Diagnostics.CodeAnalysis.AllowNull]
     public ListholdingComponentBase<NavBarMenu> Parent { get; set; }
 
     /// <summary>
