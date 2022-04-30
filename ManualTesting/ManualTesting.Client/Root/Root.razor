@@ -8,10 +8,10 @@
         <LoaderIcon style="position: fixed; inset: 10% max(5%, 30px) auto auto; z-index: 999;" />
     }
 
-    <RootNavBar @ref="navBar" Root="this" />
+    <CascadingValue Value="this" IsFixed="true">
+        <RootNavBar @ref="navBar" />
 
-    <main>
-        <CascadingValue Value="this" IsFixed="true">
+        <main>
             <Router AppAssembly="@typeof(Root).Assembly">
                 <Found Context="routeData">
                     <RouteView RouteData="@routeData" />
@@ -20,8 +20,8 @@
                     <NotFound />
                 </NotFound>
             </Router>
-        </CascadingValue>
-    </main>
+        </main>
+    </CascadingValue>
 
     <div id="blazor-error-ui">
         <div>

@@ -1,8 +1,7 @@
 ﻿namespace ManualTesting.Client;
 
 public partial class NotFound : PageComponentBase {
-    [Inject]
-    [AllowNull]
+    [Inject, AllowNull]
     private NavigationManager NavigationManager { get; init; }
 
 

@@ -6,12 +6,10 @@ namespace ManualTesting.Client;
 /// A normal component that register itself on initializing at the Layout, so the Layout can call Rerender()
 /// </summary>
 public abstract class PageComponentBase : ComponentBase {
-    [Inject]
-    [AllowNull]
+    [Inject, AllowNull]
     protected ILanguageProvider Lang { get; init; }
 
-    [CascadingParameter]
-    [AllowNull]
+    [CascadingParameter, AllowNull]
     protected Root Root { get; init; }
 
     protected override void OnInitialized() => Root.PageComponent = this;

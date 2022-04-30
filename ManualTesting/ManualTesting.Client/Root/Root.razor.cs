@@ -4,8 +4,7 @@ using ManualTesting.Client.PreRendering;
 namespace ManualTesting.Client;
 
 public partial class Root : ComponentBase, IDisposable {
-    [Inject]
-    [AllowNull]
+    [Inject, AllowNull]
     private IJSInProcessRuntime JsRuntime { get; init; }
 
 
@@ -37,8 +36,7 @@ public partial class Root : ComponentBase, IDisposable {
 
     #region PreRendering
 
-    [Inject]
-    [AllowNull]
+    [Inject, AllowNull]
     private IPreRenderFlag PreRenderFlag { get; init; }
 
     /// <summary>
@@ -51,8 +49,7 @@ public partial class Root : ComponentBase, IDisposable {
 
     #region Language
 
-    [Inject]
-    [AllowNull]
+    [Inject, AllowNull]
     private ILanguageProvider Lang { get; init; }
 
     /// <summary>
