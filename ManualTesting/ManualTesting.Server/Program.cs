@@ -1,5 +1,6 @@
 ﻿using ManualTesting.Client.Languages;
 using ManualTesting.Client.PreRendering;
+using ManualTesting.Server.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.JSInterop;
@@ -23,7 +24,7 @@ public class Program {
         services.AddResponseCompression((ResponseCompressionOptions options) => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" }));
 
         services.AddSingleton<IJSInProcessRuntime, UnsupportedJSInProcessRuntime>();
-        services.AddSingleton<IPreRenderFlag, PreRenderFlag>();
+        services.AddSingleton<IPreRenderFlag, Services.PreRenderFlag>();
         services.AddScoped<ILanguageProvider, LanguageProvider>();
     }
 
@@ -39,17 +40,5 @@ public class Program {
         app.UseStaticFiles();
         app.UseRouting();
         app.MapFallbackToPage("/_Host");
-    }
-
-
-
-    private class UnsupportedJSInProcessRuntime : IJSInProcessRuntime {
-        public TResult Invoke<TResult>(string identifier, params object?[]? args) => throw new NotSupportedException();
-        public ValueTask<TValue> InvokeAsync<TValue>(string identifier, object?[]? args) => throw new NotSupportedException();
-        public ValueTask<TValue> InvokeAsync<TValue>(string identifier, CancellationToken cancellationToken, object?[]? args) => throw new NotSupportedException();
-    }
-
-    private class PreRenderFlag : IPreRenderFlag {
-        public bool Flag => true;
     }
 }

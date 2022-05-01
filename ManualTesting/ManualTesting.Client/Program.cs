@@ -19,9 +19,7 @@ public class Program {
 
 
 
-    private class PreRenderFlag : IPreRenderFlag {
-        public bool Flag => false;
-    }
+    
 }
 
 /**
