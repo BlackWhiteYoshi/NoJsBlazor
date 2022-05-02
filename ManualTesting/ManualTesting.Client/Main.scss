@@ -1,7 +1,7 @@
 ﻿@use 'Shared/Shared.scss';
 
 @use 'Root/Root.razor.scss';
-@use 'Root/RazorComponents/RootNavBar.razor.scss';
+@use 'Root/RootNavBar/RootNavBar.razor.scss';
 
 @use 'Pages/Home.razor.scss';
 @use 'Pages/NotFound.razor.scss';
