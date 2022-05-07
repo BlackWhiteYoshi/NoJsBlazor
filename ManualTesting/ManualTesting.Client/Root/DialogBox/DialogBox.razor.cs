@@ -3,12 +3,12 @@
 public partial class DialogBox : ComponentBase {
     private readonly List<RenderFragment> dialogList = new();
 
-    public void AddDialog(RenderFragment renderFragment) {
+    public void Add(RenderFragment renderFragment) {
         dialogList.Add(renderFragment);
         InvokeAsync(StateHasChanged);
     }
 
-    public void RemoveDialog(RenderFragment renderFragment) {
+    public void Remove(RenderFragment renderFragment) {
         dialogList.Remove(renderFragment);
         InvokeAsync(StateHasChanged);
     }

@@ -76,21 +76,7 @@
 
     <section>
         <h2 class="headline">Dialog</h2>
-
         <button class="button-blue center" @onclick="OpenDialog">open dialog</button>
-
-        <Dialog @ref="dialog">
-            <Title>
-                <p style="margin: 0;">My Test Dialog</p>
-            </Title>
-            <Content>
-                <p style="margin: 0;">
-                    Ich bin irgendein Text.<br />
-                    Ich habe keinen Sinn.<br />
-                    Mich zu lesen bringt gar nichts.</p>
-                <button class="button-blue center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
-            </Content>
-        </Dialog>
     </section>
 
     <section>
@@ -142,3 +128,21 @@
         </div>
     </section>
 </div>
+
+
+@code {
+    public void RenderDialog(RenderTreeBuilder __builder) {
+        <Dialog @ref="dialog">
+            <Title>
+                <p style="margin: 0;">My Test Dialog</p>
+            </Title>
+            <Content>
+                <p style="margin: 0;">
+                    Ich bin irgendein Text.<br />
+                    Ich habe keinen Sinn.<br />
+                    Mich zu lesen bringt gar nichts.</p>
+                <button class="button-blue center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
+            </Content>
+        </Dialog>
+    }
+}

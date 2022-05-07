@@ -32,7 +32,7 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
 
 
     protected override void OnInitialized() {
-        Root.DialogBox.AddDialog(RenderLanguageDialog);
+        Root.DialogBox.Add(RenderLanguageDialog);
     }
 
 
@@ -63,7 +63,7 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
 
 
     public void Dispose() {
-        Root.DialogBox.RemoveDialog(RenderLanguageDialog);
+        Root.DialogBox.Remove(RenderLanguageDialog);
         GC.SuppressFinalize(this);
     }
 }
