@@ -26,6 +26,7 @@
         color: var(--font-color);
 
         p {
+            color: inherit;
             margin: 2px 0 0 0;
             font-size: 30px;
             font-family: "Great Vibes", Calibri;
@@ -47,64 +48,6 @@
                 fill: rgba(0, 0, 0, 1);
                 transition: background-color 0.3s, fill 0.3s;
             }
-        }
-    }
-}
-
-
-.header-flag {
-    height: 30px;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: box-shadow 0.1s;
-    border: 2px outset #eee;
-
-    &:hover:not(.active) {
-        opacity: 1;
-        box-shadow: 0 0 10px #88F;
-        transition: box-shadow 0.3s;
-    }
-
-    &.active {
-        opacity: 1;
-        border: 2px inset #eee;
-    }
-}
-
-#language-dialog {
-    min-width: 180px;
-
-    p {
-        margin: 0;
-    }
-
-    & > .title {
-        justify-content: center;
-        padding: 0.4em;
-    }
-
-    & > .content {
-        padding: 0;
-
-        & > button {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 1.25em;
-            border: none;
-
-            & > * {
-                flex-basis: 100%;
-            }
-
-            & > svg {
-                height: 25px;
-            }
-        }
-        
-        & > .selected {
-            background-color: #07D;
         }
     }
 }

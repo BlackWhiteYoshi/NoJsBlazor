@@ -325,6 +325,7 @@ body {
   color: var(--font-color);
 }
 .nav-brand a p {
+  color: inherit;
   margin: 2px 0 0 0;
   font-size: 30px;
   font-family: "Great Vibes", Calibri;
@@ -350,6 +351,7 @@ body {
   opacity: 0.8;
   transition: box-shadow 0.1s;
   border: 2px outset #eee;
+  border-radius: 2px;
 }
 .header-flag:hover:not(.active) {
   opacity: 1;
@@ -362,7 +364,7 @@ body {
 }
 
 #language-dialog {
-  min-width: 180px;
+  min-width: 11em;
 }
 #language-dialog p {
   margin: 0;
@@ -370,6 +372,10 @@ body {
 #language-dialog > .title {
   justify-content: center;
   padding: 0.4em;
+}
+#language-dialog > .title svg {
+  height: 1em;
+  margin-right: 0.5em;
 }
 #language-dialog > .content {
   padding: 0;
@@ -386,7 +392,7 @@ body {
   flex-basis: 100%;
 }
 #language-dialog > .content > button > svg {
-  height: 25px;
+  height: 2em;
 }
 #language-dialog > .content > .selected {
   background-color: #07D;

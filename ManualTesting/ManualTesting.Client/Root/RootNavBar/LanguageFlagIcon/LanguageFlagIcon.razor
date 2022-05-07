@@ -1,0 +1,56 @@
+﻿@using ManualTesting.Client.Languages
+
+@namespace ManualTesting.Client
+
+@((RenderFragment)RenderHeaderFlag)
+
+
+@code {
+    public void RenderLanguageDialog(RenderTreeBuilder __builder) {
+        <Dialog @ref="dialog" ModalScreen="false" id="language-dialog" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
+            <Title>
+                @((RenderFragment)CreateDialogFlagRenderFragment)
+                <p>@Lang.Print("Select Language", "Sprache Wählen")</p>
+            </Title>
+            <Content>
+                <button class="@(Lang.Language == Language.English ? "selected" : string.Empty)"
+                        @onmousedown="(MouseEventArgs e) => setLanguageTC.OnMouseDown(e, Language.English)"
+                        @ontouchstart="(TouchEventArgs e) => setLanguageTC.OnTouchStart(e, Language.English)">
+                    <UKFlag />
+                    <p>English</p>
+                </button>
+                <button class="@(Lang.Language == Language.German ? "selected" : string.Empty)"
+                        @onmousedown="(MouseEventArgs e) => setLanguageTC.OnMouseDown(e, Language.German)"
+                        @ontouchstart="(TouchEventArgs e) => setLanguageTC.OnTouchStart(e, Language.German)">
+                    <GermanFlag />
+                    <p>Deutsch</p>
+                </button>
+            </Content>
+        </Dialog>
+    }
+
+
+    private void RenderHeaderFlag(RenderTreeBuilder builder) {
+        OpenFlag(builder); // index 0
+
+        builder.AddAttribute(1, "class", (dialog?.Active ?? false) ? "header-flag active" : "header-flag");
+        builder.AddAttribute(2, "role", "button");
+        builder.AddAttribute(3, "onmousedown", EventCallback.Factory.Create<MouseEventArgs>(this, toogleDialogTC.OnMouseDown));
+        builder.AddAttribute(4, "ontouchstart", EventCallback.Factory.Create<TouchEventArgs>(this, toogleDialogTC.OnTouchStart));
+
+        builder.CloseComponent();
+    }
+
+    private void CreateDialogFlagRenderFragment(RenderTreeBuilder builder) {
+        OpenFlag(builder);
+        builder.CloseComponent();
+    }
+
+    private void OpenFlag(RenderTreeBuilder builder) {
+        switch (Lang.Language) {
+            case Language.English: builder.OpenComponent<UKFlag>(0); break;
+            case Language.German: builder.OpenComponent<GermanFlag>(0); break;
+            default: throw new Exception("invalid enum or not all enums are present in this switch");
+        }
+    }
+}

@@ -8,6 +8,9 @@ public partial class Root : ComponentBase, IDisposable {
     private IJSInProcessRuntime JsRuntime { get; init; }
 
 
+    [AllowNull]
+    public DialogBox DialogBox { get; private set; }
+
     public PageComponentBase? PageComponent { get; set; }
 
 
