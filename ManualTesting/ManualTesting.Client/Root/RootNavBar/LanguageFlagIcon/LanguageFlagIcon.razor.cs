@@ -4,16 +4,13 @@ using NoJsBlazor;
 namespace ManualTesting.Client;
 
 public partial class LanguageFlagIcon : ComponentBase, IDisposable {
-    [Inject]
-    [AllowNull]
+    [Inject, AllowNull]
     private IJSInProcessRuntime JsRuntime { get; init; }
 
-    [Inject]
-    [AllowNull]
+    [Inject, AllowNull]
     private ILanguageProvider Lang { get; init; }
 
-    [CascadingParameter]
-    [AllowNull]
+    [CascadingParameter, AllowNull]
     private Root Root { get; init; }
 
 
