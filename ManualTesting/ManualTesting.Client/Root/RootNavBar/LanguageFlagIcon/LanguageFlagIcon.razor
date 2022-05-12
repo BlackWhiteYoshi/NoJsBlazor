@@ -2,14 +2,14 @@
 
 @namespace ManualTesting.Client
 
-@((RenderFragment)RenderHeaderFlag)
+<DynamicComponent Type="FlagComponentType" Parameters="FlagHeaderParameters" />
 
 
 @code {
     public void RenderLanguageDialog(RenderTreeBuilder __builder) {
         <Dialog @ref="dialog" ModalScreen="false" id="language-dialog" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
             <Title>
-                @((RenderFragment)CreateDialogFlagRenderFragment)
+                <DynamicComponent Type="FlagComponentType" />
                 <p>@Lang.Print("Select Language", "Sprache Wählen")</p>
             </Title>
             <Content>
@@ -30,27 +30,21 @@
     }
 
 
-    private void RenderHeaderFlag(RenderTreeBuilder builder) {
-        OpenFlag(builder); // index 0
+    private Dictionary<string, object> _flagHeaderParameters;
+    private Dictionary<string, object> FlagHeaderParameters {
+        get {
+            if (dialog?.Active ?? false)
+                _flagHeaderParameters["class"] = "header-flag active";
+            else
+                _flagHeaderParameters["class"] = "header-flag";
 
-        builder.AddAttribute(1, "class", (dialog?.Active ?? false) ? "header-flag active" : "header-flag");
-        builder.AddAttribute(2, "role", "button");
-        builder.AddAttribute(3, "onmousedown", EventCallback.Factory.Create<MouseEventArgs>(this, toogleDialogTC.OnMouseDown));
-        builder.AddAttribute(4, "ontouchstart", EventCallback.Factory.Create<TouchEventArgs>(this, toogleDialogTC.OnTouchStart));
-
-        builder.CloseComponent();
-    }
-
-    private void CreateDialogFlagRenderFragment(RenderTreeBuilder builder) {
-        OpenFlag(builder);
-        builder.CloseComponent();
-    }
-
-    private void OpenFlag(RenderTreeBuilder builder) {
-        switch (Lang.Language) {
-            case Language.English: builder.OpenComponent<UKFlag>(0); break;
-            case Language.German: builder.OpenComponent<GermanFlag>(0); break;
-            default: throw new Exception("invalid enum or not all enums are present in this switch");
+            return _flagHeaderParameters;
         }
     }
+
+    private Type FlagComponentType => Lang.Language switch {
+        Language.English => typeof(UKFlag),
+        Language.German => typeof(GermanFlag),
+        _ => throw new Exception("invalid enum or not all enums are present in this switch")
+    };
 }

@@ -12,4 +12,7 @@ public partial class DialogBox : ComponentBase {
         dialogList.Remove(renderFragment);
         InvokeAsync(StateHasChanged);
     }
+
+
+    public void Rerender() => InvokeAsync(StateHasChanged);
 }

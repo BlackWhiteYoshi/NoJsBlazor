@@ -25,6 +25,13 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
     public LanguageFlagIcon() {
         toogleDialogTC = new(ToggleLanguageDialog);
         setLanguageTC = new(SetLanguage);
+
+        _flagHeaderParameters = new(3) {
+            ["class"] = "flag",
+            ["role"] = "button",
+            ["onmousedown"] = EventCallback.Factory.Create(this, toogleDialogTC.OnMouseDown),
+            ["ontouchstart"] = EventCallback.Factory.Create(this, toogleDialogTC.OnTouchStart)
+        };
     }
 
 
@@ -55,8 +62,11 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
             StateHasChanged();
         }
     }
-    
-    private void SetLanguage(EventArgs e) => Lang.Language = setLanguageTC.Parameter;
+
+    private void SetLanguage(EventArgs e) {
+        Lang.Language = setLanguageTC.Parameter;
+        Root.DialogBox.Rerender();
+    }
 
 
     public void Dispose() {
