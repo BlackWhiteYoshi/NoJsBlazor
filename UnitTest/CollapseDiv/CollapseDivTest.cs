@@ -56,7 +56,7 @@ public class CollapseDivTest : TestContext {
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
         Assert.False(collapseDiv.Collapsed);
-        collapseDivContainer.Find(".head").MouseDown();
+        collapseDivContainer.Find(".head").Click();
         Assert.True(collapseDiv.Collapsed);
     }
 

@@ -160,7 +160,7 @@ public class SliderTest : TestContext {
         });
 
         IElement button = sliderContainer.Find("button");
-        button.MouseDown();
+        button.Click();
         Assert.Equal(1, fired);
     }
 
@@ -176,7 +176,7 @@ public class SliderTest : TestContext {
         });
 
         IElement button = sliderContainer.Find("button");
-        button.MouseDown();
+        button.Click();
         Assert.Equal(1, fired);
     }
 

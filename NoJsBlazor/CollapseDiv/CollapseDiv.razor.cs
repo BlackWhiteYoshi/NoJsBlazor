@@ -63,11 +63,7 @@ public partial class CollapseDiv : ComponentBase {
     }
 
 
-    private readonly TouchClick touchClick;
-
-    public CollapseDiv() => touchClick = new TouchClick(ButtonDown);
-
     protected override void OnInitialized() => _collapsed = StartCollapsed;
 
-    private void ButtonDown(EventArgs e) => Collapsed = !Collapsed;
+    private void HeadClick(MouseEventArgs e) => Collapsed = !Collapsed;
 }

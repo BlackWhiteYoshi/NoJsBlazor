@@ -110,7 +110,7 @@ public class DialogTest : TestContext {
         dialog.Open();
 
         IElement modalDiv = dialogContainer.Find(".dialog-modal-background");
-        modalDiv.MouseDown();
+        modalDiv.Click();
 
         Assert.Equal(!enabled, dialog.Active);
     }

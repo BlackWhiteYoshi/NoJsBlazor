@@ -166,11 +166,11 @@ public partial class CarouselTest : TestContext {
         IElement nextButton = carouselContainer.Find(".carousel-arrow.next");
 
         Assert.Equal(1, carousel.Active);
-        nextButton.MouseDown();
+        nextButton.Click();
         Assert.Equal(2, carousel.Active);
-        nextButton.MouseDown();
+        nextButton.Click();
         Assert.Equal(3, carousel.Active);
-        nextButton.MouseDown();
+        nextButton.Click();
         Assert.Equal(0, carousel.Active);
     }
 
@@ -185,11 +185,11 @@ public partial class CarouselTest : TestContext {
         IElement prevButton = carouselContainer.Find(".carousel-arrow.prev");
 
         Assert.Equal(2, carousel.Active);
-        prevButton.MouseDown();
+        prevButton.Click();
         Assert.Equal(1, carousel.Active);
-        prevButton.MouseDown();
+        prevButton.Click();
         Assert.Equal(0, carousel.Active);
-        prevButton.MouseDown();
+        prevButton.Click();
         Assert.Equal(3, carousel.Active);
     }
 
@@ -211,13 +211,13 @@ public partial class CarouselTest : TestContext {
         int index3 = (index + 3) % carousel.ItemCount;
 
 
-        indicatorList.Children[index].MouseDown();
+        indicatorList.Children[index].Click();
         Assert.Equal(index, carousel.Active);
 
-        indicatorList.Children[index2].MouseDown();
+        indicatorList.Children[index2].Click();
         Assert.Equal(index2, carousel.Active);
 
-        indicatorList.Children[index3].MouseDown();
+        indicatorList.Children[index3].Click();
         Assert.Equal(index3, carousel.Active);
     }
 
@@ -234,9 +234,9 @@ public partial class CarouselTest : TestContext {
         IElement playButton = carouselContainer.Find(".carousel-play-button");
 
         Assert.Equal(runAtBeginning, carousel.Running);
-        playButton.MouseDown();
+        playButton.Click();
         Assert.NotEqual(runAtBeginning, carousel.Running);
-        playButton.MouseDown();
+        playButton.Click();
         Assert.Equal(runAtBeginning, carousel.Running);
     }
 

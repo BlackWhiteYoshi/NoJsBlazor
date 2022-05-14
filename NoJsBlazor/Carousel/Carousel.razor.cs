@@ -168,23 +168,11 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
     public bool Running => interval.Enabled;
 
 
-    private readonly TouchClick prevTC;
-    private readonly TouchClick nextTC;
-    private readonly TouchClick<int> indicatorTC;
-    private readonly TouchClick playButtonTC;
-
     private readonly Timer interval = new();
     private readonly Timer autoStart = new();
 
     #endregion
 
-
-    public Carousel() {
-        prevTC = new TouchClick(PrevButton);
-        nextTC = new TouchClick(NextButton);
-        indicatorTC = new TouchClick<int>(IndicatorButton);
-        playButtonTC = new TouchClick(PlayButton);
-    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender) {
@@ -206,22 +194,22 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
 
     #region input Funtions
 
-    private void PrevButton(EventArgs e) {
+    private void PrevButton(MouseEventArgs e) {
         StopInterval();
         Prev();
     }
 
-    private void NextButton(EventArgs e) {
+    private void NextButton(MouseEventArgs e) {
         StopInterval();
         Next();
     }
 
-    private void IndicatorButton(EventArgs e) {
+    private void IndicatorButton(int indicatorIndex) {
         StopInterval();
-        SwapItems(Active, indicatorTC.Parameter, indicatorTC.Parameter - Active);
+        SwapItems(Active, indicatorIndex, indicatorIndex - Active);
     }
 
-    private void PlayButton(EventArgs e) {
+    private void PlayButton(MouseEventArgs e) {
         if (!interval.Enabled)
             StartInterval();
         else

@@ -26,7 +26,7 @@ public partial class NavBarMenuTest : TestContext {
         Assert.False(navBarMenu.Expanded);
 
         IElement div = fragment.Find(".nav-dropdown-arrow");
-        div.TouchStart();
+        div.Click();
         Assert.True(navBarMenu.Expanded);
     }
 

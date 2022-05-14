@@ -46,10 +46,10 @@ public partial class NavBarTest : TestContext {
 
         IElement toggle = navBarContainer.Find(".nav-toggle");
 
-        toggle.MouseDown();
+        toggle.Click();
         Assert.True(navBar.Expanded);
 
-        toggle.MouseDown();
+        toggle.Click();
         Assert.False(navBar.Expanded);
     }
 

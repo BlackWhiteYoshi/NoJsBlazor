@@ -6,9 +6,7 @@
         <CascadingValue Name="Head" Value="true" IsFixed="true">
             @Head
         </CascadingValue>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"
-                class="nav-dropdown-arrow @(Expanded ? "expanded" : string.Empty)" role="button"
-                @onmousedown="dropDownTC.OnMouseDown" @ontouchstart="dropDownTC.OnTouchStart">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" class="nav-dropdown-arrow @(Expanded ? "expanded" : string.Empty)" role="button" @onclick="Toggle">
             <defs>
                 <linearGradient id="border-color" gradientTransform="rotate(45)">
                     <stop offset="0.4" stop-color="#EEEEEE" />

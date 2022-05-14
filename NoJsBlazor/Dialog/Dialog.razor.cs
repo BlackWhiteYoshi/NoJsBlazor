@@ -107,15 +107,13 @@ public partial class Dialog : ComponentBase {
     /// Use this to fill the @onmove and @onup event of the object behind this window if you don't enable <see cref="ModalScreen">ModalScreen</see>
     /// </summary>
     public readonly TouchClick headBarTC;
-    private readonly TouchClick modalBackgroundTC;
     private CoordinateTracker tracker;
 
     public Dialog() {
-        modalBackgroundTC = new TouchClick(ModalBackgroundClick);
         headBarTC = new TouchClick(HeadBarDown, HeadBarMove);
     }
 
-    private void ModalBackgroundClick(EventArgs e) {
+    private void ModalBackgroundClick(MouseEventArgs e) {
         if (CloseOnModalBackground)
             Active = false;
     }

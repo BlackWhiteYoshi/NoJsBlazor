@@ -95,14 +95,8 @@ public partial class Slider : ComponentBase {
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object>? Attributes { get; set; }
 
-    private readonly TouchClick leftButtonTC;
-    private readonly TouchClick rightButtonTC;
-
 
     public Slider() {
-        leftButtonTC = new TouchClick(LeftButton);
-        rightButtonTC = new TouchClick(RightButton);
-
         LeftButtonContent = DefaultLeftButton;
         RightButtonContent = DefaultRightButton;
         Display = DefaultDisplay;
@@ -112,7 +106,7 @@ public partial class Slider : ComponentBase {
 
     #region private Methods
 
-    private void LeftButton(EventArgs e) {
+    private void LeftButton(MouseEventArgs e) {
         if (Value > Min) {
             Value -= Step;
             ValueChanged.InvokeAsync(Value);
@@ -120,7 +114,7 @@ public partial class Slider : ComponentBase {
         }
     }
 
-    private void RightButton(EventArgs e) {
+    private void RightButton(MouseEventArgs e) {
         if (Value < Max) {
             Value += Step;
             ValueChanged.InvokeAsync(Value);

@@ -2,11 +2,11 @@
 
 @if (Active) {
     <div class="dialog-modal-background" style="@(!ModalScreen ? "background: #0000; pointer-events: none;" : string.Empty)"
-            @onmousedown="modalBackgroundTC.OnMouseDown" @ontouchstart="modalBackgroundTC.OnTouchStart"
+            @onclick="ModalBackgroundClick"
             @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
             @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd">
         <div class="dialog-window" @attributes="@Attributes" style="transform: translate(@(XMovement)px, @(YMovement)px); @AddStyles()"
-                @onmousedown:stopPropagation="true" @ontouchstart:stopPropagation="true"
+                @onclick:stopPropagation
                 @onmousemove="headBarTC.OnMouseMove" @ontouchmove="headBarTC.OnTouchMove"
                 @onmouseup="headBarTC.OnMouseUp" @ontouchend="headBarTC.OnTouchEnd">
             @if (ShowTitle) {

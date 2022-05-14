@@ -20,21 +20,13 @@ public partial class ContextMenuItemTest : TestContext {
 
     #region interavtive
 
-    public enum ClickType { mouse, touch }
-
-    [Theory]
-    [InlineData(ClickType.mouse)]
-    [InlineData(ClickType.touch)]
-    public void OnClick_Triggers_EventCallback(ClickType type) {
+    [Fact]
+    public void OnClick_Triggers_EventCallback() {
         int fired = 0;
 
         (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((EventArgs e) => fired++);
 
-        IElement li = fragment.FindAll(".context-element")[1];
-        if (type == ClickType.mouse)
-            li.MouseDown();
-        else
-            li.TouchStart();
+        fragment.FindAll(".context-element")[1].Click();
         Assert.Equal(1, fired);
     }
 

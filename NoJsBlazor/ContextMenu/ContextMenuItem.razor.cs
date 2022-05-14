@@ -19,9 +19,5 @@ public partial class ContextMenuItem : ComponentBase {
     public EventCallback<EventArgs> OnPressed { get; set; }
 
 
-    private readonly TouchClick touchClick;
-
-    public ContextMenuItem() => touchClick = new TouchClick(OnDown);
-
-    private void OnDown(EventArgs e) => OnPressed.InvokeAsync(e);
+    private void OnClick(EventArgs e) => OnPressed.InvokeAsync(e);
 }

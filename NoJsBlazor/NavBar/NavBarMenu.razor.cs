@@ -51,13 +51,6 @@ public partial class NavBarMenu : ListableComponentBase<NavBarMenu> {
     }
 
 
-    private readonly TouchClick dropDownTC;
-
-    public NavBarMenu() => dropDownTC = new TouchClick(PhoneDropDownHandler);
-
-
-    private void PhoneDropDownHandler(EventArgs e) => Toggle();
-
     /// <summary>
     /// <para>Expands/Collapses this menu.</para>
     /// <para>Shorthand for: <see cref="Expanded">Expanded</see> = !<see cref="Expanded">Expanded</see>;</para>

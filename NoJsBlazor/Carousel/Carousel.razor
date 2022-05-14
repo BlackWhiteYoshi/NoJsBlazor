@@ -26,13 +26,13 @@
     }
     @if (ControlArrowsEnable) {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"
-                class="carousel-arrow prev" role="button" @onmousedown="prevTC.OnMouseDown" @ontouchstart="prevTC.OnTouchStart">
+                class="carousel-arrow prev" role="button" @onclick="PrevButton">
             <line x1="-1.5" y1="0" x2="1.5" y2="-3" />
             <line x1="-1.5" y1="0" x2="1.5" y2="3" />
         </svg>
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"
-                class="carousel-arrow next" role="button" @onmousedown="nextTC.OnMouseDown" @ontouchstart="nextTC.OnTouchStart">
+                class="carousel-arrow next" role="button" @onclick="NextButton">
             <line x1="1.5" y1="0" x2="-1.5" y2="-3" />
             <line x1="1.5" y1="0" x2="-1.5" y2="3" />
         </svg>
@@ -40,7 +40,7 @@
     @if (IndicatorsEnable) {
         <ol class="carousel-indicator-list">
             @foreach (int i in Enumerable.Range(0, ItemContainer.Length)) {
-                <li role="button" @onmousedown="(MouseEventArgs e) => indicatorTC.OnMouseDown(e, i)" @ontouchstart="(TouchEventArgs e) => indicatorTC.OnTouchStart(e, i)">
+                <li role="button" @onclick="_ => IndicatorButton(i)">
                     <div style="opacity: @ItemContainer[i].indicatorOpacity">
                         <div style="width:@(ItemContainer[i].progressBar)%; transition: width @(ItemContainer[i].progressBarTransition)ms linear;"></div>
                     </div>
@@ -50,7 +50,7 @@
     }
     @if (PlayButtonEnable) {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.7 -1.1 1.95 2.2"
-                class="carousel-play-button @(!Running ? "play" : "pause")" role="button" @onmousedown="playButtonTC.OnMouseDown" @ontouchstart="playButtonTC.OnTouchStart">
+                class="carousel-play-button @(!Running ? "play" : "pause")" role="button" @onclick="PlayButton">
             @* 1/3 circle => cbrt(1) = (1,0),(-0.5,-0.866),(.0.5,0.866) *@
             @* play trianlge: right, top-left, bottom-left *@
             <polygon points="1,0 -0.5,-0.866 -0.5,0.866" />

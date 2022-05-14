@@ -89,11 +89,7 @@ public partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     };
     
     
-    private readonly TouchClick ToggleTC;
-
-    public NavBar() => ToggleTC = new TouchClick(ToggleNavBar);
-
-    private void ToggleNavBar(EventArgs e) {
+    private void ToggleNavBar(MouseEventArgs e) {
         if (Expanded)
             Reset();
         else
