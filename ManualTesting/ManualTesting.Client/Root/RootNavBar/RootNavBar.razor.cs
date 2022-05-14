@@ -16,60 +16,16 @@ public partial class RootNavBar : ComponentBase {
 
     [AllowNull]
     private NavBar navBar;
-    [AllowNull]
-    private Dialog dialog;
 
-
-    private readonly TouchClick toogleDialogTC;
-    private readonly TouchClick<Language> setLanguageTC;
-
-
-    public RootNavBar() {
-        toogleDialogTC = new(ToggleDialog);
-        setLanguageTC = new(SetLanguage);
-    }
-
-    #region OnClick/OnTouch
 
     private void PhoneToggle(bool expanded) {
-        if (expanded) {
-            Root.MouseDown += Reset;
-            Root.TouchStart += Reset;
-        }
-        else {
-            Root.MouseDown -= Reset;
-            Root.TouchStart -= Reset;
-        }
+        if (expanded)
+            Root.Click += Reset;
+        else
+            Root.Click -= Reset;
     }
 
-    private void Reset(EventArgs e) => navBar.Reset();
-
-
-    private void ToggleDialog(EventArgs e) {
-        if (!dialog.Active) {
-            Root.MouseDown += toogleDialogTC.OnMouseDown;
-            Root.TouchStart += toogleDialogTC.OnTouchStart;
-            Root.MouseMove += dialog.headBarTC.OnMouseMove;
-            Root.TouchMove += dialog.headBarTC.OnTouchMove;
-            Root.MouseUp += dialog.headBarTC.OnMouseUp;
-            Root.TouchEnd += dialog.headBarTC.OnTouchEnd;
-            dialog.Open();
-        }
-        else {
-            Root.MouseDown -= toogleDialogTC.OnMouseDown;
-            Root.TouchStart -= toogleDialogTC.OnTouchStart;
-            Root.MouseMove -= dialog.headBarTC.OnMouseMove;
-            Root.TouchMove -= dialog.headBarTC.OnTouchMove;
-            Root.MouseUp -= dialog.headBarTC.OnMouseUp;
-            Root.TouchEnd -= dialog.headBarTC.OnTouchEnd;
-            JsRuntime.InvokeVoid("SetCookie", CBox.COOKIE_KEY_LANGUAGE, Lang.Language.ToString(), 365);
-            dialog.Close();
-        }
-    }
-
-    private void SetLanguage(EventArgs e) => Lang.Language = setLanguageTC.Parameter;
-
-    #endregion
+    private void Reset(MouseEventArgs e) => navBar.Reset();
 
 
     public void Rerender() => InvokeAsync(StateHasChanged);
