@@ -18,32 +18,14 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
     private Dialog dialog;
     
     
-    private readonly TouchClick toogleDialogTC;
-    private readonly TouchClick<Language> setLanguageTC;
-
-
-    public LanguageFlagIcon() {
-        toogleDialogTC = new(ToggleLanguageDialog);
-        setLanguageTC = new(SetLanguage);
-
-        _flagHeaderParameters = new(3) {
-            ["class"] = "flag",
-            ["role"] = "button",
-            ["onmousedown"] = EventCallback.Factory.Create(this, toogleDialogTC.OnMouseDown),
-            ["ontouchstart"] = EventCallback.Factory.Create(this, toogleDialogTC.OnTouchStart)
-        };
-    }
-
-
     protected override void OnInitialized() {
         Root.DialogBox.Add(RenderLanguageDialog);
     }
 
 
-    private void ToggleLanguageDialog(EventArgs e) {
+    private void ToggleLanguageDialog(MouseEventArgs e) {
         if (!dialog.Active) {
-            Root.MouseDown += ToggleLanguageDialog;
-            Root.TouchStart += ToggleLanguageDialog;
+            Root.Click += ToggleLanguageDialog;
             Root.MouseMove += dialog.headBarTC.OnMouseMove;
             Root.TouchMove += dialog.headBarTC.OnTouchMove;
             Root.MouseUp += dialog.headBarTC.OnMouseUp;
@@ -51,8 +33,7 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
             dialog.Open();
         }
         else {
-            Root.MouseDown -= ToggleLanguageDialog;
-            Root.TouchStart -= ToggleLanguageDialog;
+            Root.Click -= ToggleLanguageDialog;
             Root.MouseMove -= dialog.headBarTC.OnMouseMove;
             Root.TouchMove -= dialog.headBarTC.OnTouchMove;
             Root.MouseUp -= dialog.headBarTC.OnMouseUp;
@@ -63,8 +44,8 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
         }
     }
 
-    private void SetLanguage(EventArgs e) {
-        Lang.Language = setLanguageTC.Parameter;
+    private void SetLanguage(Language language) {
+        Lang.Language = language;
         Root.DialogBox.Rerender();
     }
 

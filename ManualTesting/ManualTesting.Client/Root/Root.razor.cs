@@ -18,6 +18,7 @@ public partial class Root : ComponentBase, IDisposable {
     private RootNavBar navBar;
 
 
+    public event Action<MouseEventArgs>? Click;
     public event Action<MouseEventArgs>? MouseDown;
     public event Action<TouchEventArgs>? TouchStart;
     public event Action<MouseEventArgs>? MouseMove;

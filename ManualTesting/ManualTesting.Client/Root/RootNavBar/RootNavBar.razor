@@ -2,7 +2,7 @@
 
 @namespace ManualTesting.Client
 
-<header class="header-navbar" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
+<header class="header-navbar" @onclick:stopPropagation>
     <NavBar @ref="navBar" Breakpoint="NavBarBreakpoint.em50" OnToggle="PhoneToggle">
         <Brand>
             <a href="/">

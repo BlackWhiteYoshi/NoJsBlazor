@@ -7,21 +7,17 @@
 
 @code {
     public void RenderLanguageDialog(RenderTreeBuilder __builder) {
-        <Dialog @ref="dialog" ModalScreen="false" id="language-dialog" @onmousedown:stopPropagation @ontouchstart:stopPropagation>
+        <Dialog @ref="dialog" ModalScreen="false" id="language-dialog" @onclick:stopPropagation>
             <Title>
                 <DynamicComponent Type="FlagComponentType" />
                 <p>@Lang.Print("Select Language", "Sprache Wählen")</p>
             </Title>
             <Content>
-                <button class="@(Lang.Language == Language.English ? "selected" : string.Empty)"
-                        @onmousedown="(MouseEventArgs e) => setLanguageTC.OnMouseDown(e, Language.English)"
-                        @ontouchstart="(TouchEventArgs e) => setLanguageTC.OnTouchStart(e, Language.English)">
+                <button class="@(Lang.Language == Language.English ? "selected" : string.Empty)" @onclick="_ => SetLanguage(Language.English)">
                     <UKFlag />
                     <p>English</p>
                 </button>
-                <button class="@(Lang.Language == Language.German ? "selected" : string.Empty)"
-                        @onmousedown="(MouseEventArgs e) => setLanguageTC.OnMouseDown(e, Language.German)"
-                        @ontouchstart="(TouchEventArgs e) => setLanguageTC.OnTouchStart(e, Language.German)">
+                <button class="@(Lang.Language == Language.German ? "selected" : string.Empty)" @onclick="_ => SetLanguage(Language.German)">
                     <GermanFlag />
                     <p>Deutsch</p>
                 </button>
@@ -30,6 +26,14 @@
     }
 
 
+    public LanguageFlagIcon() {
+        _flagHeaderParameters = new(3) {
+            ["class"] = "flag",
+            ["role"] = "button",
+            ["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, ToggleLanguageDialog)
+        };
+    }
+    
     private Dictionary<string, object> _flagHeaderParameters;
     private Dictionary<string, object> FlagHeaderParameters {
         get {

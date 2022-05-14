@@ -1,6 +1,7 @@
 ﻿@namespace ManualTesting.Client
 
-<body @onmousedown="(MouseEventArgs e) => MouseDown?.Invoke(e)" @ontouchstart="(TouchEventArgs e) => TouchStart?.Invoke(e)"
+<body @onclick="(MouseEventArgs e) => Click?.Invoke(e)"
+      @onmousedown="(MouseEventArgs e) => MouseDown?.Invoke(e)" @ontouchstart="(TouchEventArgs e) => TouchStart?.Invoke(e)"
       @onmousemove="(MouseEventArgs e) => MouseMove?.Invoke(e)" @ontouchmove="(TouchEventArgs e) => TouchMove?.Invoke(e)"
       @onmouseup="(MouseEventArgs e) => MouseUp?.Invoke(e)" @ontouchend="(TouchEventArgs e) => TouchEnd?.Invoke(e)">
 
