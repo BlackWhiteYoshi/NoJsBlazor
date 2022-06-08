@@ -46,16 +46,11 @@ public partial class Dialog : ComponentBase {
     public bool CloseOnModalBackground { get; set; } = true;
 
     /// <summary>
-    /// <para>Invokes every time when the Dialog get opened.</para>
+    /// <para>Invokes every time when the Dialog opens or closes.</para>
+    /// <para>true: dialog got from close to open, false: dialog got from open to closed.</para>
     /// </summary>
     [Parameter]
-    public EventCallback OnOpen { get; set; }
-
-    /// <summary>
-    /// <para>Invokes every time when the Dialog get closed.</para>
-    /// </summary>
-    [Parameter]
-    public EventCallback OnClose { get; set; }
+    public EventCallback<bool> OnActiveChanged { get; set; }
 
     /// <summary>
     /// Captures unmatched values
@@ -83,10 +78,7 @@ public partial class Dialog : ComponentBase {
         set {
             if (value != _active) {
                 _active = value;
-                if (value)
-                    OnOpen.InvokeAsync();
-                else
-                    OnClose.InvokeAsync();
+                OnActiveChanged.InvokeAsync(value);
                 InvokeAsync(StateHasChanged);
             }
         }

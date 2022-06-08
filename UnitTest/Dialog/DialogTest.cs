@@ -176,8 +176,7 @@ public class DialogTest : TestContext {
         int fired = 0;
 
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
-            builder.Add((Dialog dialog) => dialog.OnOpen, () => fired++);
-            builder.Add((Dialog dialog) => dialog.OnClose, () => fired++);
+            builder.Add((Dialog dialog) => dialog.OnActiveChanged, () => fired++);
         });
         Dialog dialog = dialogContainer.Instance;
 
@@ -196,30 +195,27 @@ public class DialogTest : TestContext {
     #region events
 
     [Fact]
-    public void OnOpen_Fires_When_Dialog_Opens() {
-        int fired = 0;
+    public void OnActiveChanged_Fires_When_Dialog_Active_Changed() {
+        int open = 0;
+        int close = 0;
 
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
-            builder.Add((Dialog dialog) => dialog.OnOpen, () => fired++);
+            builder.Add((Dialog dialog) => dialog.OnActiveChanged, (bool value) => {
+                if (value)
+                    open++;
+                else
+                    close++;
+            });
         });
         Dialog dialog = dialogContainer.Instance;
+        
         dialog.Open();
+        Assert.Equal(1, open);
+        Assert.Equal(0, close);
 
-        Assert.Equal(1, fired);
-    }
-
-    [Fact]
-    public void OnClose_Fires_When_Dialog_Closes() {
-        int fired = 0;
-
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
-            builder.Add((Dialog dialog) => dialog.OnClose, () => fired++);
-        });
-        Dialog dialog = dialogContainer.Instance;
-        dialog.Open();
         dialog.Close();
-
-        Assert.Equal(1, fired);
+        Assert.Equal(1, open);
+        Assert.Equal(1, close);
     }
 
     #endregion
