@@ -13,7 +13,6 @@ public abstract class ServiceComponentBase<T> : ComponentBase, IDisposable {
 
     protected override void OnInitialized() {
         base.OnInitialized();
-
         Mediator.Register<T>(this);
     }
 
