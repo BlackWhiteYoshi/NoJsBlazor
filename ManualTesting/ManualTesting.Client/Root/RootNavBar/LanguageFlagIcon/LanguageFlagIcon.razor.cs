@@ -1,4 +1,4 @@
-﻿using ManualTesting.Client.Languages;
+﻿using ManualTesting.Client.Services;
 using NoJsBlazor;
 
 namespace ManualTesting.Client;
@@ -10,8 +10,11 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
     [Inject, AllowNull]
     private ILanguageProvider Lang { get; init; }
 
-    [CascadingParameter, AllowNull]
-    private Root Root { get; init; }
+    [Inject, AllowNull]
+    private IRoot Root { get; init; }
+
+    [Inject, AllowNull]
+    private IDialogBox DialogBox { get; init; }
 
 
     [AllowNull]
@@ -19,7 +22,7 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
     
     
     protected override void OnInitialized() {
-        Root.DialogBox.Add(RenderLanguageDialog);
+        DialogBox.Add(RenderLanguageDialog);
     }
 
 
@@ -46,12 +49,12 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
 
     private void SetLanguage(Language language) {
         Lang.Language = language;
-        Root.DialogBox.Rerender();
+        DialogBox.Rerender();
     }
 
 
     public void Dispose() {
-        Root.DialogBox.Remove(RenderLanguageDialog);
+        DialogBox.Remove(RenderLanguageDialog);
         GC.SuppressFinalize(this);
     }
 }

@@ -1,15 +1,24 @@
-﻿using ManualTesting.Client.Languages;
-using ManualTesting.Client.PreRendering;
+﻿using ManualTesting.Client.Services;
 
 namespace ManualTesting.Client;
 
-public partial class Root : ComponentBase, IDisposable {
+public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
     [Inject, AllowNull]
     private IJSInProcessRuntime JsRuntime { get; init; }
 
+    [Inject, AllowNull]
+    private IPreRenderFlag PreRenderFlag { get; init; }
 
-    [AllowNull]
-    public DialogBox DialogBox { get; private set; }
+    [Inject, AllowNull]
+    private ILanguageProvider Lang { get; init; }
+
+
+    /// <summary>
+    /// <para>Initial value for ILanguageProvider.</para>
+    /// <para>Derives from cookie when present.</para>
+    /// </summary>
+    [Parameter]
+    public Language Language { private get; init; }
 
     public PageComponentBase? PageComponent { get; set; }
 
@@ -28,51 +37,25 @@ public partial class Root : ComponentBase, IDisposable {
 
 
     protected override void OnInitialized() {
+        base.OnInitialized();
         Lang.SilentLanguageSetter = Language;
         Lang.OnLanguageChanged += OnLanguageChanged;
     }
 
-    public void Dispose() {
+    public new void Dispose() {
+        base.OnInitialized();
         Lang.OnLanguageChanged -= OnLanguageChanged;
-        GC.SuppressFinalize(this);
     }
 
-
-    #region PreRendering
-
-    [Inject, AllowNull]
-    private IPreRenderFlag PreRenderFlag { get; init; }
-
-    /// <summary>
-    /// Is this App executed on the server or on the client.
-    /// </summary>
-    public bool PreRendering => PreRenderFlag.Flag;
-
-    #endregion
-
-
-    #region Language
-
-    [Inject, AllowNull]
-    private ILanguageProvider Lang { get; init; }
-
-    /// <summary>
-    /// <para>Initial value for ILanguageProvider.</para>
-    /// <para>Derives from cookie when present.</para>
-    /// </summary>
-    [Parameter]
-    public Language Language { private get; init; }
 
     private void OnLanguageChanged(Language language) {
         JsRuntime.InvokeVoid("SetHtmlLanguage", ILanguageProvider.GetAbbreviation(language));
         Rerender();
     }
 
-    #endregion
-
 
     /// <summary>
-    /// <para>This will notify the <see cref="Root"/> to Rerender.</para>
+    /// This will notify all components to Rerender.
     /// </summary>
     public void Rerender() {
         InvokeAsync(StateHasChanged);

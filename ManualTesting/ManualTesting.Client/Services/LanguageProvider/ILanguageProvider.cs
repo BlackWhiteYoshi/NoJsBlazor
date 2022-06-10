@@ -1,4 +1,4 @@
-﻿namespace ManualTesting.Client.Languages;
+﻿namespace ManualTesting.Client.Services;
 
 public interface ILanguageProvider {
     /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace ManualTesting.Client.Languages;
+﻿namespace ManualTesting.Client.Services;
 
 public class LanguageProvider : ILanguageProvider {
     private Language _language = Language.English;

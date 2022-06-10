@@ -1,4 +1,4 @@
-﻿using ManualTesting.Client.Languages;
+﻿using ManualTesting.Client.Services;
 
 namespace ManualTesting.Client;
 
@@ -9,8 +9,8 @@ public abstract class PageComponentBase : ComponentBase {
     [Inject, AllowNull]
     protected ILanguageProvider Lang { get; init; }
 
-    [CascadingParameter, AllowNull]
-    protected Root Root { get; init; }
+    [Inject, AllowNull]
+    protected IRoot Root { get; init; }
 
     protected override void OnInitialized() => Root.PageComponent = this;
 

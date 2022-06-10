@@ -1,4 +1,4 @@
-﻿using ManualTesting.Client.Languages;
+﻿using ManualTesting.Client.Services;
 using NoJsBlazor;
 
 namespace ManualTesting.Client;
@@ -10,8 +10,8 @@ public partial class RootNavBar : ComponentBase {
     [Inject, AllowNull]
     private ILanguageProvider Lang { get; init; }
 
-    [CascadingParameter, AllowNull]
-    private Root Root { get; init; }
+    [Inject, AllowNull]
+    private IRoot Root { get; init; }
 
 
     [AllowNull]

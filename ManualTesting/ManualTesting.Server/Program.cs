@@ -1,5 +1,4 @@
-﻿using ManualTesting.Client.Languages;
-using ManualTesting.Client.PreRendering;
+﻿using ManualTesting.Client.Services;
 using ManualTesting.Server.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -25,7 +24,7 @@ public class Program {
 
         services.AddSingleton<IJSInProcessRuntime, UnsupportedJSInProcessRuntime>();
         services.AddSingleton<IPreRenderFlag, Services.PreRenderFlag>();
-        services.AddScoped<ILanguageProvider, LanguageProvider>();
+        services.AddCoreServices();
     }
 
     private static void ConfigurePipeline(WebApplication app) {

@@ -1,5 +1,4 @@
-﻿using ManualTesting.Client.Languages;
-using ManualTesting.Client.PreRendering;
+﻿using ManualTesting.Client.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace ManualTesting.Client;
@@ -14,7 +13,7 @@ public class Program {
     private static void ConfigureServices(IServiceCollection services) {
         services.AddSingleton((IServiceProvider serviceProvider) => (IJSInProcessRuntime)serviceProvider.GetRequiredService<IJSRuntime>());
         services.AddSingleton<IPreRenderFlag, PreRenderFlag>();
-        services.AddSingleton<ILanguageProvider, LanguageProvider>();
+        services.AddCoreServices();
     }
 
 

@@ -3,8 +3,12 @@
 namespace ManualTesting.Client;
 
 public partial class Home : PageComponentBase, IDisposable {
+    [Inject, AllowNull]
+    private IDialogBox DialogBox { get; init; }
+
+
     protected override void OnInitialized() {
-        Root.DialogBox.Add(RenderDialog);
+        DialogBox.Add(RenderDialog);
     }
 
 
@@ -85,7 +89,7 @@ public partial class Home : PageComponentBase, IDisposable {
 
     public void Dispose() {
         Root.MouseDown -= CloseContextMenu;
-        Root.DialogBox.Remove(RenderDialog);
+        DialogBox.Remove(RenderDialog);
         GC.SuppressFinalize(this);
     }
 }

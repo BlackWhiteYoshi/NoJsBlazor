@@ -1,4 +1,4 @@
-﻿using ManualTesting.Client.PreRendering;
+﻿using ManualTesting.Client.Services;
 
 namespace ManualTesting.Server.Services;
 

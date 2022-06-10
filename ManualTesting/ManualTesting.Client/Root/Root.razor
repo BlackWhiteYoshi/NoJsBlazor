@@ -1,30 +1,31 @@
 ﻿@namespace ManualTesting.Client
+@inherits ServiceComponentBase<IRoot>
 
 <body @onclick="(MouseEventArgs e) => Click?.Invoke(e)"
       @onmousedown="(MouseEventArgs e) => MouseDown?.Invoke(e)" @ontouchstart="(TouchEventArgs e) => TouchStart?.Invoke(e)"
       @onmousemove="(MouseEventArgs e) => MouseMove?.Invoke(e)" @ontouchmove="(TouchEventArgs e) => TouchMove?.Invoke(e)"
       @onmouseup="(MouseEventArgs e) => MouseUp?.Invoke(e)" @ontouchend="(TouchEventArgs e) => TouchEnd?.Invoke(e)">
 
-    @if (PreRendering) {
+    @if (PreRenderFlag.Flag) {
         <LoaderIcon style="position: fixed; inset: 10% max(5%, 30px) auto auto; z-index: 999;" />
     }
 
-    <DialogBox @ref="DialogBox" />
+    <DialogBox />
 
-    <CascadingValue Value="this" IsFixed="true">
-        <RootNavBar @ref="navBar" />
 
-        <main>
-            <Router AppAssembly="@typeof(Root).Assembly">
-                <Found Context="routeData">
-                    <RouteView RouteData="@routeData" />
-                </Found>
-                <NotFound>
-                    <NotFound />
-                </NotFound>
-            </Router>
-        </main>
-    </CascadingValue>
+    <RootNavBar @ref="navBar" />
+
+    <main>
+        <Router AppAssembly="@typeof(Root).Assembly">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" />
+            </Found>
+            <NotFound>
+                <NotFound />
+            </NotFound>
+        </Router>
+    </main>
+
 
     <div id="blazor-error-ui">
         <div>

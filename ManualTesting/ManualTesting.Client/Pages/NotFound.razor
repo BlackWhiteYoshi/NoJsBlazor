@@ -7,7 +7,7 @@
     <section class="center">
         <p>@Lang.Print("The site at the specified URL could not be found.", "Die Seite an der angegebenen URL konnte nicht gefunden werden.")</p>
         <a href="/" class="center" style="margin-block: 50px;">@Lang.Print("Back to Home Page", "Zurück zur Startseite")</a>
-        @if (Root.PreRendering) {
+        @if (PreRenderFlag.Flag) {
             <p style="text-align: center; font-size: 0.8rem;">@Lang.Print("Loading app to suggest similar URLs.", "Applikation wird geladen, um ähnliche URLs vorzuschlagen.")</p>
             <div class="center">
                 <LoaderIcon />

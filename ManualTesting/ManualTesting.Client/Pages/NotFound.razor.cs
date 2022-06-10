@@ -1,8 +1,13 @@
-﻿namespace ManualTesting.Client;
+﻿using ManualTesting.Client.Services;
+
+namespace ManualTesting.Client;
 
 public partial class NotFound : PageComponentBase {
     [Inject, AllowNull]
     private NavigationManager NavigationManager { get; init; }
+
+    [Inject, AllowNull]
+    private IPreRenderFlag  PreRenderFlag { get; init; }
 
 
     private const int BAD_REQUEST_LIST_MAX_DISTANCE = 8;
