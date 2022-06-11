@@ -20,11 +20,8 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
     [Parameter]
     public Language Language { private get; init; }
 
-    public PageComponentBase? PageComponent { get; set; }
-
-
     [AllowNull]
-    private RootNavBar navBar;
+    public PageComponentBase PageComponent { get; set; }
 
 
     public event Action<MouseEventArgs>? Click;
@@ -43,25 +40,12 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
     }
 
     public new void Dispose() {
-        base.OnInitialized();
+        base.Dispose();
         Lang.OnLanguageChanged -= OnLanguageChanged;
     }
 
 
     private void OnLanguageChanged(Language language) {
         JsRuntime.InvokeVoid("SetHtmlLanguage", ILanguageProvider.GetAbbreviation(language));
-        Rerender();
-    }
-
-
-    /// <summary>
-    /// This will notify all components to Rerender.
-    /// </summary>
-    public void Rerender() {
-        InvokeAsync(StateHasChanged);
-        
-        navBar.Rerender();
-        
-        PageComponent?.Rerender();
     }
 }

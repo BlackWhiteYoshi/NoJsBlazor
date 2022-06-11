@@ -3,10 +3,7 @@ using NoJsBlazor;
 
 namespace ManualTesting.Client;
 
-public partial class RootNavBar : ComponentBase {
-    [Inject, AllowNull]
-    private IJSInProcessRuntime JsRuntime { get; init; }
-
+public partial class RootNavBar : ComponentBase, IDisposable {
     [Inject, AllowNull]
     private ILanguageProvider Lang { get; init; }
 
@@ -18,6 +15,16 @@ public partial class RootNavBar : ComponentBase {
     private NavBar navBar;
 
 
+    protected override void OnInitialized() {
+        base.OnInitialized();
+        Lang.OnLanguageChanged += Rerender;
+    }
+
+    public void Dispose() => Lang.OnLanguageChanged -= Rerender;
+
+    private void Rerender(Language language) => InvokeAsync(StateHasChanged);
+
+
     private void PhoneToggle(bool expanded) {
         if (expanded)
             Root.Click += Reset;
@@ -26,7 +33,4 @@ public partial class RootNavBar : ComponentBase {
     }
 
     private void Reset(MouseEventArgs e) => navBar.Reset();
-
-
-    public void Rerender() => InvokeAsync(StateHasChanged);
 }

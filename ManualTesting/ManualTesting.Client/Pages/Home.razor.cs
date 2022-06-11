@@ -8,6 +8,7 @@ public partial class Home : PageComponentBase, IDisposable {
 
 
     protected override void OnInitialized() {
+        base.OnInitialized();
         DialogBox.Add(RenderDialog);
     }
 
@@ -87,9 +88,9 @@ public partial class Home : PageComponentBase, IDisposable {
     #endregion
 
 
-    public void Dispose() {
+    public new void Dispose() {
+        base.Dispose();
         Root.MouseDown -= CloseContextMenu;
         DialogBox.Remove(RenderDialog);
-        GC.SuppressFinalize(this);
     }
 }

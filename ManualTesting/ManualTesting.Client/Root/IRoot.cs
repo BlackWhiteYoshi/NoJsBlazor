@@ -10,9 +10,4 @@ public interface IRoot {
     public event Action<TouchEventArgs>? TouchMove;
     public event Action<MouseEventArgs>? MouseUp;
     public event Action<TouchEventArgs>? TouchEnd;
-
-    /// <summary>
-    /// This will notify all components to Rerender.
-    /// </summary>
-    public void Rerender();
 }
