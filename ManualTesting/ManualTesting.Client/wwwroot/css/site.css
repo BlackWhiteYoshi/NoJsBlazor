@@ -6,6 +6,7 @@
 
 h1, h2, h3, h4, h5, h6, p {
   color: #222;
+  outline: none;
 }
 
 ul {
@@ -67,8 +68,7 @@ pre .outcommented {
   font-size: calc(1.3rem + 0.6vw);
   line-height: 1.3;
   text-align: center;
-  padding-top: 50px;
-  margin: 0 auto 1.2em auto;
+  margin: 1.4em auto 1.2em auto;
 }
 
 .image-div img, .image-div video {
@@ -247,6 +247,7 @@ button:not(:disabled) {
 }
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 50px;
 }
 
 body {

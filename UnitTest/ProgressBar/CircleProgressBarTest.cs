@@ -24,10 +24,9 @@ public class CircleProgressBarTest : TestContext {
 
         IRenderedComponent<CircleProgressBar> circleProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<CircleProgressBar> builder) => {
             builder.Add((CircleProgressBar circleProgressBar) => circleProgressBar.Margin, MARGIN);
+            builder.Add((CircleProgressBar circleProgressBar) => circleProgressBar.Progress, 1.0f);
         });
         CircleProgressBar circleProgressBar = circleProgressBarContainer.Instance;
-
-        circleProgressBar.Progress = 1.0f;
 
         IElement circle = circleProgressBarContainer.FindAll("circle")[1];
         IAttr r = circle.Attributes["r"]!;
