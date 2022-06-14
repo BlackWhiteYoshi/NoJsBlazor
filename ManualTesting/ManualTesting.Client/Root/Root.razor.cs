@@ -53,7 +53,7 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
             if (!Enum.TryParse(language, out Language result))
                 return Language.English;
 
-            if (result == Language.NotInitialized)
+            if (result < 0 || (Language)(Enum.GetValues(typeof(Language)).Length - 1) <= result)
                 return Language.English;
 
             return result;
