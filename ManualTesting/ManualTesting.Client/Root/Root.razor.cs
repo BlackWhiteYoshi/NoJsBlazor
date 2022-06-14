@@ -47,16 +47,13 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
                 return Language.English;
 
             Dictionary<string, string> cookies = CBox.SplitCookies(JsRuntime.Invoke<string>("GetCookies"));
-            if (!cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? language))
+            if (!cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? languageString))
+                return Language.English;
+            
+            if (!ILanguageProvider.TryParse(languageString, out Language language))
                 return Language.English;
 
-            if (!Enum.TryParse(language, out Language result))
-                return Language.English;
-
-            if (result < 0 || (Language)(Enum.GetValues(typeof(Language)).Length - 1) <= result)
-                return Language.English;
-
-            return result;
+            return language;
         }
     }
 

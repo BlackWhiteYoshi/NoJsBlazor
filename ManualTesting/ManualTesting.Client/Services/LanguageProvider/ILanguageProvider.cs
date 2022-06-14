@@ -32,6 +32,24 @@ public interface ILanguageProvider {
 
 
     /// <summary>
+    /// <para>Converts the string representation of the name or numeric value to the equivalent <see cref="Language"/> representation.<br />
+    /// The return value indicates whether the conversion succeeded.</para>
+    /// <para><see cref="Language.NotInitialized"/> and out of range values don't succeed.</para>
+    /// </summary>
+    /// <param name="language">The case-sensitive string representation of the language or underlying value to convert.</param>
+    /// <param name="result">
+    /// When this method returns successfully, result contains the converted value.<br />
+    /// If the parse operation fails, result contains the default value.</param>
+    /// <returns>true if the value parameter was converted successfully; otherwise, false.</returns>
+    public static bool TryParse(string? language, out Language result) {
+        if (!Enum.TryParse(language, out result))
+            return false;
+
+        // result is not "NotInitialized" and result is in range, so smaller than biggest enum (Count without "NotInitialized")
+        return 0 <= result && result < (Language)(Enum.GetValues(typeof(Language)).Length - 1);
+    }
+    
+    /// <summary>
     /// <para>Parses a string to an enum.</para>
     /// <para>Only the first 2 characters are checked for determining the result.</para>
     /// <para>if string is less than 2 characters or no match is found, the result will be English.</para>

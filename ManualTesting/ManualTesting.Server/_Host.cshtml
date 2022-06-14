@@ -5,17 +5,9 @@
 @using ManualTesting.Client.Services
 
 @{
-    Language language;
-    if (HttpContext.Request.Cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? stringValue))
-        if (Enum.TryParse(stringValue, false, out language))
-            if (0 <= language || language < (Language)(Enum.GetValues(typeof(Language)).Length - 1))
-                goto LanguageIsAssigned;
-    // else
-    {
+    if (!HttpContext.Request.Cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? languageString) || !ILanguageProvider.TryParse(languageString, out Language language))
         // no or invalid cookie
         language = ILanguageProvider.GetLanguage(Request.Headers["Accept-Language"].ToString());
-    }
-    LanguageIsAssigned:
 }
 
 <!DOCTYPE html>
