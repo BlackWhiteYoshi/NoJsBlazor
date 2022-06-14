@@ -56,4 +56,22 @@ public static class CBox {
         // after the last copy, the results of v1 are equal v0
         return v0[t.Length];
     }
+
+    /// <summary>
+    /// Takes a raw cookieString and returns a key,value array.
+    /// </summary>
+    /// <param name="cookieString">string with ';' seperated cookies</param>
+    /// <returns></returns>
+    public static Dictionary<string, string> SplitCookies(string cookieString) {
+        string[] cookies = cookieString.Split(';');
+
+        Dictionary<string, string> cookieDic = new(cookies.Length);
+        foreach (string cookie in cookies) {
+            string[] pairs = cookie.Split('=');
+            if (pairs.Length == 2)
+                cookieDic.Add(pairs[0].Trim(), pairs[1].Trim());
+        }
+
+        return cookieDic;
+    }
 }

@@ -18,7 +18,7 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
     /// <para>Derives from cookie when present.</para>
     /// </summary>
     [Parameter]
-    public Language Language { private get; init; }
+    public Language Language { private get; init; } = Language.NotInitialized;
 
     [AllowNull]
     public PageComponentBase PageComponent { get; set; }
@@ -35,8 +35,29 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
 
     protected override void OnInitialized() {
         base.OnInitialized();
-        Lang.SilentLanguageSetter = Language;
+        Lang.SilentLanguageSetter = InitLanguage();
         Lang.OnLanguageChanged += OnLanguageChanged;
+
+
+        Language InitLanguage() {
+            if (Language != Language.NotInitialized)
+                return Language;
+
+            if (PreRenderFlag.Flag)
+                return Language.English;
+
+            Dictionary<string, string> cookies = CBox.SplitCookies(JsRuntime.Invoke<string>("GetCookies"));
+            if (!cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? language))
+                return Language.English;
+
+            if (!Enum.TryParse(language, out Language result))
+                return Language.English;
+
+            if (result == Language.NotInitialized)
+                return Language.English;
+
+            return result;
+        }
     }
 
     public new void Dispose() {
