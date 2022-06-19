@@ -34,7 +34,7 @@ public interface ILanguageProvider {
     /// <summary>
     /// <para>Converts the string representation of the name or numeric value to the equivalent <see cref="Language"/> representation.<br />
     /// The return value indicates whether the conversion succeeded.</para>
-    /// <para><see cref="Language.NotInitialized"/> and out of range values don't succeed.</para>
+    /// <para>Out of range values don't succeed.</para>
     /// </summary>
     /// <param name="language">The case-sensitive string representation of the language or underlying value to convert.</param>
     /// <param name="result">
@@ -45,8 +45,8 @@ public interface ILanguageProvider {
         if (!Enum.TryParse(language, out result))
             return false;
 
-        // result is not "NotInitialized" and result is in range, so smaller than biggest enum (Count without "NotInitialized")
-        return 0 <= result && result < (Language)(Enum.GetValues(typeof(Language)).Length - 1);
+        // result is in range
+        return 0 <= result && result < (Language)Enum.GetValues(typeof(Language)).Length;
     }
     
     /// <summary>

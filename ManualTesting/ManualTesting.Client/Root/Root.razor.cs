@@ -14,11 +14,10 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
 
 
     /// <summary>
-    /// <para>Initial value for ILanguageProvider.</para>
-    /// <para>Derives from cookie when present.</para>
+    /// Initial value for ILanguageProvider.
     /// </summary>
     [Parameter]
-    public Language Language { private get; init; } = Language.NotInitialized;
+    public Language? StartLanguage { private get; init; }
 
     [AllowNull]
     public PageComponentBase PageComponent { get; set; }
@@ -40,8 +39,8 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
 
 
         Language InitLanguage() {
-            if (Language != Language.NotInitialized)
-                return Language;
+            if (StartLanguage != null)
+                return StartLanguage.Value;
 
             if (PreRenderFlag.Flag)
                 return Language.English;
