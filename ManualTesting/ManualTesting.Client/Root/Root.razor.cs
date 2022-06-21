@@ -34,6 +34,7 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
 
     protected override void OnInitialized() {
         base.OnInitialized();
+
         Lang.SilentLanguageSetter = InitLanguage();
         Lang.OnLanguageChanged += OnLanguageChanged;
 
@@ -43,16 +44,19 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
                 return StartLanguage.Value;
 
             if (PreRenderFlag.Flag)
-                return Language.English;
+                return Default();
 
             Dictionary<string, string> cookies = CBox.SplitCookies(JsRuntime.Invoke<string>("GetCookies"));
             if (!cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? languageString))
-                return Language.English;
+                return Default();
             
             if (!ILanguageProvider.TryParse(languageString, out Language language))
-                return Language.English;
+                return Default();
 
             return language;
+
+
+            Language Default() => ILanguageProvider.GetLanguage(JsRuntime.Invoke<string>("GetBrowserLanguage"));
         }
     }
 

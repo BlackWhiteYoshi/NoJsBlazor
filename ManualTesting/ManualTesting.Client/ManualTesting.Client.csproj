@@ -18,8 +18,6 @@
     <Using Include="Microsoft.AspNetCore.Components.Routing" />
     <Using Include="Microsoft.AspNetCore.Components.Web" />
     <Using Include="Microsoft.JSInterop" />
-    
-    <Using Remove="System.Threading" />
   </ItemGroup>
 
   <ItemGroup>
