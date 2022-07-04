@@ -21,9 +21,20 @@
 
         <link rel="stylesheet" href="~/css/style.min.css" />
         <link rel="stylesheet" href="~/css/site.min.css" />
+    </head>
 
-        <script src="~/_framework/blazor.webassembly.js" autostart="false"></script>
+    <body>
+        <component type="typeof(Root)" render-mode="WebAssemblyPrerendered" param-StartLanguage="language" />
+
         <script>
+            function SetPointerCapture(targetElement, pointerId) {
+                targetElement.setPointerCapture(pointerId);
+            }
+
+            function ReleasePointerCapture(targetElement, pointerId) {
+                targetElement.releasePointerCapture(pointerId);
+            }
+
             function GetCookies() {
                 return document.cookie;
             }
@@ -41,11 +52,7 @@
             function GetBrowserLanguage() {
                 return navigator.language;
             }
-
-
-            document.addEventListener("DOMContentLoaded", Blazor.start);
         </script>
-    </head>
-
-    <component type="typeof(Root)" render-mode="WebAssemblyPrerendered" param-StartLanguage="language" />
+        <script src="~/_framework/blazor.webassembly.js"></script>
+    </body>
 </html>

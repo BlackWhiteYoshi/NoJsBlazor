@@ -53,6 +53,24 @@ public partial class Dialog : ComponentBase {
     public EventCallback<bool> OnActiveChanged { get; set; }
 
     /// <summary>
+    /// Fires if pointer starts on title div.
+    /// </summary>
+    [Parameter]
+    public EventCallback<PointerEventArgs> OnTitlePointerDown { get; set; }
+
+    /// <summary>
+    /// Fires if pointer moves on title div, but only if pointer down is active.
+    /// </summary>
+    [Parameter]
+    public EventCallback<PointerEventArgs> OnTitlePointerMove { get; set; }
+
+    /// <summary>
+    /// Fires if pointer releases on title div.
+    /// </summary>
+    [Parameter]
+    public EventCallback<PointerEventArgs> OnTitlePointerUp { get; set; }
+
+    /// <summary>
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
@@ -95,33 +113,42 @@ public partial class Dialog : ComponentBase {
     }
 
 
-    /// <summary>
-    /// Use this to fill the @onmove and @onup event of the object behind this window if you don't enable <see cref="ModalScreen">ModalScreen</see>
-    /// </summary>
-    public readonly TouchClick headBarTC;
     private CoordinateTracker tracker;
-
-    public Dialog() {
-        headBarTC = new TouchClick(HeadBarDown, HeadBarMove);
-    }
 
     private void ModalBackgroundClick(MouseEventArgs e) {
         if (CloseOnModalBackground)
             Active = false;
     }
 
+    /// <summary>
+    /// <para>The Container Element of the title head bar.</para>
+    /// <para>You can use this to register mouse capture.</para>
+    /// </summary>
+    public ElementReference TitleDiv { get; private set; }
+    private bool isTitleGrabbed = false;
 
-    private void HeadBarDown(EventArgs e) => tracker.SetCoordinate(e);
+    private void TitleDown(PointerEventArgs e) {
+        isTitleGrabbed = true;
+        tracker.SetCoordinate(e);
+        OnTitlePointerDown.InvokeAsync(e);
+    }
 
-    private void HeadBarMove(EventArgs e) {
-        if (!Moveable)
+    private void TitleMove(PointerEventArgs e) {
+        if (!Moveable || !isTitleGrabbed)
             return;
 
         (double dx, double dy) = tracker.MoveCoordinate(e);
 
         XMovement += dx;
         YMovement += dy;
+
+        OnTitlePointerMove.InvokeAsync(e);
         StateHasChanged();
+    }
+
+    private void TitleUp(PointerEventArgs e) {
+        isTitleGrabbed = false;
+        OnTitlePointerUp.InvokeAsync(e);
     }
 
 

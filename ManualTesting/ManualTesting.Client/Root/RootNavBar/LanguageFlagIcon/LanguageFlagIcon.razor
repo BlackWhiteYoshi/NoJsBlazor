@@ -7,7 +7,7 @@
 
 @code {
     public void RenderLanguageDialog(RenderTreeBuilder __builder) {
-        <Dialog @ref="dialog" ModalScreen="false" id="language-dialog" @onclick:stopPropagation>
+        <Dialog @ref="dialog" ModalScreen="false" id="language-dialog" OnTitlePointerDown="OnTitleDown" OnTitlePointerUp="OnTitleUp" @onclick:stopPropagation>
             <Title>
                 <DynamicComponent Type="FlagComponentType" />
                 <p>@Lang.Print("Select Language", "Sprache Wählen")</p>

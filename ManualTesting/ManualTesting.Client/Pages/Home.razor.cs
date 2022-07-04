@@ -4,6 +4,9 @@ namespace ManualTesting.Client;
 
 public partial class Home : PageComponentBase, IDisposable {
     [Inject, AllowNull]
+    private IJSInProcessRuntime JsRuntime { get; set; }
+
+    [Inject, AllowNull]
     private IDialogBox DialogBox { get; init; }
 
 
@@ -21,12 +24,12 @@ public partial class Home : PageComponentBase, IDisposable {
     private void OpenContextMenu(MouseEventArgs e) {
         // padding-left = 20px, padding-top = 20px
         contextMenu.Open(e.OffsetX + 20, e.OffsetY + 20);
-        Root.MouseDown += CloseContextMenu;
+        Root.Click += CloseContextMenu;
     }
 
     private void CloseContextMenu(MouseEventArgs e) {
         contextMenu.Close();
-        Root.MouseDown -= CloseContextMenu;
+        Root.Click -= CloseContextMenu;
     }
 
     #endregion
@@ -90,7 +93,7 @@ public partial class Home : PageComponentBase, IDisposable {
 
     public new void Dispose() {
         base.Dispose();
-        Root.MouseDown -= CloseContextMenu;
+        Root.Click -= CloseContextMenu;
         DialogBox.Remove(RenderDialog);
     }
 }

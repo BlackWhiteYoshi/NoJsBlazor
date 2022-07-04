@@ -680,8 +680,6 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
     public void Dispose() {
         interval?.Dispose();
         autoStart?.Dispose();
-
-        GC.SuppressFinalize(this);
     }
 
     #endregion

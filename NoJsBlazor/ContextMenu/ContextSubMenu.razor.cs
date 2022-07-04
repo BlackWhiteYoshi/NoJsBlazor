@@ -50,12 +50,7 @@ public partial class ContextSubMenu : ListableComponentBase<ContextSubMenu> {
     }
 
 
-    private readonly TouchClick dropRightTC;
-
-    public ContextSubMenu() => dropRightTC = new TouchClick(PhoneDropRightHandler);
-
-
-    private void PhoneDropRightHandler(EventArgs e) => Toggle();
+    private void DropRightClick(MouseEventArgs e) => Toggle();
 
     /// <summary>
     /// <para>Expands/Collapses this menu.</para>

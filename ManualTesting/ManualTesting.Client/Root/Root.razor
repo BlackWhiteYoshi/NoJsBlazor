@@ -1,11 +1,7 @@
 ﻿@namespace ManualTesting.Client
 @inherits ServiceComponentBase<IRoot>
 
-<body @onclick="(MouseEventArgs e) => Click?.Invoke(e)"
-      @onmousedown="(MouseEventArgs e) => MouseDown?.Invoke(e)" @ontouchstart="(TouchEventArgs e) => TouchStart?.Invoke(e)"
-      @onmousemove="(MouseEventArgs e) => MouseMove?.Invoke(e)" @ontouchmove="(TouchEventArgs e) => TouchMove?.Invoke(e)"
-      @onmouseup="(MouseEventArgs e) => MouseUp?.Invoke(e)" @ontouchend="(TouchEventArgs e) => TouchEnd?.Invoke(e)">
-
+<div id="root" @onclick="(MouseEventArgs e) => Click?.Invoke(e)">
     @if (PreRenderFlag.Flag) {
         <LoaderIcon style="position: fixed; inset: 10% max(5%, 30px) auto auto; z-index: 999;" />
     }
@@ -37,4 +33,4 @@
             </svg>
         </div>
     </div>
-</body>
+</div>

@@ -64,10 +64,10 @@ public class DialogTest : TestContext {
         dialog.Open();
 
         IElement titleDiv = dialogContainer.Find(".title");
-        titleDiv.MouseDown(clientX: 0, clientY: 0);
+        titleDiv.PointerDown(clientX: 0, clientY: 0);
 
         IElement windowDiv = dialogContainer.Find(".dialog-window");
-        windowDiv.MouseMove(clientX: xMovement, clientY: yMovement, buttons: 1);
+        windowDiv.PointerMove(clientX: xMovement, clientY: yMovement, buttons: 1);
 
         if (moveable) {
             Assert.Equal(xMovement, dialog.XMovement);
@@ -149,13 +149,13 @@ public class DialogTest : TestContext {
         dialog.Open();
 
         IElement titleDiv = dialogContainer.Find(".title");
-        titleDiv.MouseDown(clientX: 0, clientY: 0);
+        titleDiv.PointerDown(clientX: 0, clientY: 0);
 
         const double X_MOVEMENT = 20.0;
         const double Y_MOVEMENT = 30.0;
 
         IElement windowDiv = dialogContainer.Find(".dialog-window");
-        windowDiv.MouseMove(clientX: X_MOVEMENT, clientY: Y_MOVEMENT, buttons: 1);
+        windowDiv.PointerMove(clientX: X_MOVEMENT, clientY: Y_MOVEMENT, buttons: 1);
 
         dialog.Close();
         Assert.Equal(X_MOVEMENT, dialog.XMovement);
@@ -216,6 +216,56 @@ public class DialogTest : TestContext {
         dialog.Close();
         Assert.Equal(1, open);
         Assert.Equal(1, close);
+    }
+
+    [Fact]
+    public void OnTitlePointerDown_Fires_When_Title_PointerDown() {
+        int fired = 0;
+
+        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+            builder.Add((Dialog dialog) => dialog.OnTitlePointerDown, (PointerEventArgs e) => fired++);
+        });
+        Dialog dialog = dialogContainer.Instance;
+        dialog.Open();
+
+        IElement titleDiv = dialogContainer.Find(".title");
+        titleDiv.PointerDown(clientX: 0, clientY: 0);
+        Assert.Equal(1, fired);
+    }
+
+    [Fact]
+    public void OnTitlePointerMove_Fires_When_Title_PointerMove_After_OnTitlePointerDown() {
+        int fired = 0;
+
+        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+            builder.Add((Dialog dialog) => dialog.OnTitlePointerMove, (PointerEventArgs e) => fired++);
+        });
+        Dialog dialog = dialogContainer.Instance;
+        dialog.Open();
+
+        IElement titleDiv = dialogContainer.Find(".title");
+        titleDiv.PointerMove(clientX: 0, clientY: 0);
+        Assert.Equal(0, fired);
+
+        titleDiv.PointerDown(clientX: 0, clientY: 0);
+        titleDiv.PointerMove(clientX: 0, clientY: 0);
+        Assert.Equal(1, fired);
+    }
+
+
+    [Fact]
+    public void OnTitlePointerUp_Fires_When_Title_PointerUp() {
+        int fired = 0;
+
+        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+            builder.Add((Dialog dialog) => dialog.OnTitlePointerUp, (PointerEventArgs e) => fired++);
+        });
+        Dialog dialog = dialogContainer.Instance;
+        dialog.Open();
+
+        IElement titleDiv = dialogContainer.Find(".title");
+        titleDiv.PointerUp(clientX: 0, clientY: 0);
+        Assert.Equal(1, fired);
     }
 
     #endregion

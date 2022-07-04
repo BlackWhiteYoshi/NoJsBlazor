@@ -54,7 +54,7 @@
     <section>
         <h2 class="headline">ContextMenu</h2>
 
-        <div class="center" style="position: relative; padding: 20px; background-color: #DDD;">
+        <div class="center" style="position: relative; padding: 20px; background-color: #DDD;" @onclick:stopPropagation>
             <div style="width: 300px; height: 200px; background-color: #333;" @onclick="OpenContextMenu"></div>
             <ContextMenu @ref="contextMenu">
                 <ContextSubMenu>
@@ -76,7 +76,7 @@
 
     <section>
         <h2 class="headline">Dialog</h2>
-        <button class="button-blue center" @onclick="OpenDialog">open dialog</button>
+        <button class="button-blue center" @onclick="OpenDialog" @onclick:stopPropagation>open dialog</button>
     </section>
 
     <section>
@@ -132,7 +132,7 @@
 
 @code {
     public void RenderDialog(RenderTreeBuilder __builder) {
-        <Dialog @ref="dialog">
+        <Dialog @ref="dialog" ModalScreen="false">
             <Title>
                 <p style="margin: 0;">My Test Dialog</p>
             </Title>

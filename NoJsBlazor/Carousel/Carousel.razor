@@ -3,6 +3,11 @@
 
 <div class="carousel" @attributes="@Attributes">
     <div class="carousel-content">
+        @*
+            TODO
+            remove if branch and ItemContainer
+            using @key optimising
+        *@
         @if (ItemContainer.Length > 0) {
             @for (int i = 0; i < ItemContainer.Length; i++) {
                 <div class="carousel-element @ItemContainer[i].slideClass" style="

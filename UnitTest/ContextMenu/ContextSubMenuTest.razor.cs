@@ -21,12 +21,12 @@ public partial class ContextSubMenuTest : TestContext {
     #region interavtive
 
     [Fact]
-    public void OnTouch_Triggers_Expanding() {
+    public void OnClick_Triggers_Expanding() {
         (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuTree(default);
         Assert.False(contextSubMenu.Expanded);
 
         IElement div = fragment.Find(".context-div");
-        div.TouchStart();
+        div.Click();
         Assert.True(contextSubMenu.Expanded);
     }
 

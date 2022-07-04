@@ -2,7 +2,7 @@
 @inherits ListableComponentBase<ContextSubMenu>
 
 <li class="context-element">
-    <div class="context-div" role="button" @ontouchstart="dropRightTC.OnTouchStart">
+    <div class="context-div" role="button" @onclick="DropRightClick">
         <CascadingValue Name="Head" Value="true" IsFixed="true">
             @Head
         </CascadingValue>

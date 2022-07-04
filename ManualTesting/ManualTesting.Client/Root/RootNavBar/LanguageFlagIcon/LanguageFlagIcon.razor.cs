@@ -29,23 +29,24 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
     private void ToggleLanguageDialog(MouseEventArgs e) {
         if (!dialog.Active) {
             Root.Click += ToggleLanguageDialog;
-            Root.MouseMove += dialog.headBarTC.OnMouseMove;
-            Root.TouchMove += dialog.headBarTC.OnTouchMove;
-            Root.MouseUp += dialog.headBarTC.OnMouseUp;
-            Root.TouchEnd += dialog.headBarTC.OnTouchEnd;
             dialog.Open();
         }
         else {
             Root.Click -= ToggleLanguageDialog;
-            Root.MouseMove -= dialog.headBarTC.OnMouseMove;
-            Root.TouchMove -= dialog.headBarTC.OnTouchMove;
-            Root.MouseUp -= dialog.headBarTC.OnMouseUp;
-            Root.TouchEnd -= dialog.headBarTC.OnTouchEnd;
             JsRuntime.InvokeVoid("SetCookie", CBox.COOKIE_KEY_LANGUAGE, Lang.Language.ToString(), 365);
             dialog.Close();
             StateHasChanged();
         }
     }
+
+    private void OnTitleDown(PointerEventArgs e) {
+        JsRuntime.InvokeVoid("SetPointerCapture", dialog.TitleDiv, e.PointerId);
+    }
+
+    private void OnTitleUp(PointerEventArgs e) {
+        JsRuntime.InvokeVoid("ReleasePointerCapture", dialog.TitleDiv, e.PointerId);
+    }
+    
 
     private void SetLanguage(Language language) {
         Lang.Language = language;
@@ -55,6 +56,5 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
 
     public void Dispose() {
         DialogBox.Remove(RenderLanguageDialog);
-        GC.SuppressFinalize(this);
     }
 }
