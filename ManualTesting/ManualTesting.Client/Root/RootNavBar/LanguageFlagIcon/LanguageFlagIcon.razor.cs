@@ -22,7 +22,12 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
     
     
     protected override void OnInitialized() {
+        base.OnInitialized();
         DialogBox.Add(RenderLanguageDialog);
+    }
+
+    public void Dispose() {
+        DialogBox.Remove(RenderLanguageDialog);
     }
 
 
@@ -45,16 +50,5 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
 
     private void OnTitleUp(PointerEventArgs e) {
         JsRuntime.InvokeVoid("ReleasePointerCapture", dialog.TitleDiv, e.PointerId);
-    }
-    
-
-    private void SetLanguage(Language language) {
-        Lang.Language = language;
-        DialogBox.Rerender();
-    }
-
-
-    public void Dispose() {
-        DialogBox.Remove(RenderLanguageDialog);
     }
 }

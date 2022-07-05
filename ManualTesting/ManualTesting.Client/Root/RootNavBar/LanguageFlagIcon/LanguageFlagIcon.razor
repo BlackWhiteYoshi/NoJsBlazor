@@ -7,17 +7,17 @@
 
 @code {
     public void RenderLanguageDialog(RenderTreeBuilder __builder) {
-        <Dialog @ref="dialog" ModalScreen="false" id="language-dialog" OnTitlePointerDown="OnTitleDown" OnTitlePointerUp="OnTitleUp" @onclick:stopPropagation>
+        <Dialog id="language-dialog" @ref="dialog" ModalScreen="false" OnTitlePointerDown="OnTitleDown" OnTitlePointerUp="OnTitleUp" @onclick:stopPropagation>
             <Title>
                 <DynamicComponent Type="FlagComponentType" />
                 <p>@Lang.Print("Select Language", "Sprache Wählen")</p>
             </Title>
             <Content>
-                <button class="@(Lang.Language == Language.English ? "selected" : string.Empty)" @onclick="_ => SetLanguage(Language.English)">
+                <button class="@(Lang.Language == Language.English ? "selected" : string.Empty)" @onclick="_ => Lang.Language = Language.English">
                     <UKFlag />
                     <p>English</p>
                 </button>
-                <button class="@(Lang.Language == Language.German ? "selected" : string.Empty)" @onclick="_ => SetLanguage(Language.German)">
+                <button class="@(Lang.Language == Language.German ? "selected" : string.Empty)" @onclick="_ => Lang.Language = Language.German">
                     <GermanFlag />
                     <p>Deutsch</p>
                 </button>
