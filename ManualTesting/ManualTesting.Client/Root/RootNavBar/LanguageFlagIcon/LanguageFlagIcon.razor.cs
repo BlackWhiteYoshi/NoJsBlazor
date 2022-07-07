@@ -24,11 +24,15 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
     protected override void OnInitialized() {
         base.OnInitialized();
         DialogBox.Add(RenderLanguageDialog);
+        Lang.OnLanguageChanged += Rerender;
     }
 
     public void Dispose() {
         DialogBox.Remove(RenderLanguageDialog);
+        Lang.OnLanguageChanged -= Rerender;
     }
+    
+    private void Rerender(Language language) => InvokeAsync(StateHasChanged);
 
 
     private void ToggleLanguageDialog(MouseEventArgs e) {
