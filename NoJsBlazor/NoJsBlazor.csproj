@@ -33,19 +33,16 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Include="compilerconfig.json" />
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="compilerconfig.json" />
   </ItemGroup>
 
 </Project>
