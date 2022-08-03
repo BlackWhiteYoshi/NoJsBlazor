@@ -15,13 +15,4 @@ public class Program {
         services.AddSingleton<IPreRenderFlag, PreRenderFlag>();
         services.AddCoreServices();
     }
-
-
-
-    
 }
-
-/**
- * useful signs
- * „“ … ⋅ × ÷
- **/
