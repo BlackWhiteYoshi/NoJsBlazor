@@ -76,7 +76,7 @@
 
     <section>
         <h2 class="headline">Dialog</h2>
-        <button class="button-blue center" @onclick="OpenDialog" @onclick:stopPropagation>open dialog</button>
+        <button class="btn-main center" @onclick="OpenDialog" @onclick:stopPropagation>open dialog</button>
     </section>
 
     <section>
@@ -96,17 +96,17 @@
     <section>
         <h2 class="headline">ProgressBar</h2>
 
-        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="StandardProgressBarButtonClick">Add 1%</button>
+        <button class="btn-main center" style="margin: 30px auto 10px auto;" @onclick="StandardProgressBarButtonClick">Add 1%</button>
         <div class="center">
             <StandardProgressBar Progress="standardBarProgress" Text="@standardBarText" />
         </div>
 
-        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="CircleProgressBarButtonClick">Add 1%</button>
+        <button class="btn-main center" style="margin: 30px auto 10px auto;" @onclick="CircleProgressBarButtonClick">Add 1%</button>
         <div class="center">
             <CircleProgressBar @ref="circleProgress" />
         </div>
 
-        <button class="button-blue center" style="margin: 30px auto 10px auto;" @onclick="SpeedometerProgressBarButtonClick">Add 10%</button>
+        <button class="btn-main center" style="margin: 30px auto 10px auto;" @onclick="SpeedometerProgressBarButtonClick">Add 10%</button>
         <div class="center">
             <SpeedometerProgressBar @ref="speedometerProgress" />
         </div>
@@ -141,7 +141,7 @@
                     Ich bin irgendein Text.<br />
                     Ich habe keinen Sinn.<br />
                     Mich zu lesen bringt gar nichts.</p>
-                <button class="button-blue center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
+                <button class="btn-main center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
             </Content>
         </Dialog>
     }

@@ -1,0 +1,124 @@
+﻿.headline-big {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: calc(1.4rem + 1.5vw);
+    line-height: 1.2;
+    text-align: center;
+    margin: 1.5em auto 2.5em auto;
+}
+
+.headline-background {
+    display: table;
+    margin: 1.5em auto 2em auto;
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: calc(1.3rem + 0.8vw);
+    line-height: 1.3;
+    padding: 20px;
+    border-radius: 50%;
+    color: #4F81BD;
+    background-color: #EAF8EA;
+}
+
+.headline {
+    font-size: calc(1.3rem + 0.6vw);
+    line-height: 1.3;
+    text-align: center;
+    margin: 1.4em auto 1.2em auto;
+}
+
+.image-div {
+    img, video {
+        width: 100%;
+        height: auto;
+    }
+
+    & > p, & > div {
+        font-size: 15px;
+        line-height: 120%;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+}
+
+.content-only {
+    margin: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+.center {
+    display: table;
+    margin-inline: auto;
+}
+
+.background-div {
+    display: inline-block;
+    background-color: #EAF8EA; //#F4F8F4;
+    margin: 6px;
+    padding: 10px;
+    border-radius: 10px;
+    vertical-align: top;
+}
+
+.horizontal-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        text-align: center;
+        // space between items
+        margin: 0 5px;
+    }
+}
+
+
+
+// bootstrap equivalents
+
+.container {
+    width:100%;
+    $padding: 5%;
+    padding-left: $padding;
+    padding-right: $padding;
+}
+
+
+button:not(:disabled) { cursor: pointer; }
+
+@mixin button-template($background-color, $hover-background-color, $disabled-color) {
+    $border-width: 2px;
+
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    border: $border-width outset #EEE;
+    border-radius: 0.25rem;
+    color: #FFF;
+    background-color: $background-color;
+    transition: color linear 0.2s, background-color linear 0.2s, border linear 0.2s;
+
+    &:hover {
+        background-color: $hover-background-color;
+        border: $border-width inset #EEE;
+    }
+
+    &:disabled {
+        background-color: $disabled-color;
+        box-shadow: none;
+        border: none;
+        margin: $border-width;
+    }
+}
+
+.btn-main { @include button-template(#17F, #16E, #8AF); }  
+.btn-second { @include button-template(#1AF, #3CF, #ADF); }
+.btn-info { @include button-template(#23F, #00F, #99F); }
+.btn-deny { @include button-template(#060, #040, #7B7); }
+.btn-cancel { @include button-template(#444, #222, #888); }
+.btn-danger { @include button-template(#d34, #e12, #E77); }

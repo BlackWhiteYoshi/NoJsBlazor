@@ -1,4 +1,8 @@
-﻿@use 'Shared/Shared.scss';
+﻿@use 'Shared/SharedCss/Classes.scss';
+@use 'Shared/SharedCss/FlexColumns.scss';
+@use 'Shared/SharedCss/Fonts.scss';
+@use 'Shared/SharedCss/Global.scss';
+@use 'Shared/SharedCss/Grid.scss';
 
 @use 'Root/Root.razor.scss';
 @use 'Root/RootNavBar/RootNavBar.razor.scss';

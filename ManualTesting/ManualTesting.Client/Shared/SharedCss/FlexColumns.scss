@@ -1,0 +1,29 @@
+﻿$xs: 0px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+
+@mixin flex-2-columns($breakpoint) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    row-gap: 40px;
+    column-gap: 15px;
+
+    & > * {
+        width: 100%;
+        
+        @media (min-width: $breakpoint) {
+            width: calc(50% - 10px);
+        }
+    }
+}
+
+.flex-2-columns-sm { @include flex-2-columns($sm); }
+.flex-2-columns-md { @include flex-2-columns($md); }
+.flex-2-columns-lg { @include flex-2-columns($lg); }
+.flex-2-columns-xl { @include flex-2-columns($xl); }
+.flex-2-columns-xxl { @include flex-2-columns($xxl); }
