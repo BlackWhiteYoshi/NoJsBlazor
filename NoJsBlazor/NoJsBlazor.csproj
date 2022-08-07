@@ -27,15 +27,6 @@
     <Using Remove="System.Threading" />
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\BlackWhiteYoshi\Documents\Visual Studio 2019\Projects\_Libraries\NoJsBlazor\NoJsBlazor\NoJsBlazor.xml</DocumentationFile>
-  </PropertyGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.7" />
-  </ItemGroup>
-
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
     <None Include="compilerconfig.json" />
@@ -43,6 +34,14 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DocumentationFile>C:\Users\BlackWhiteYoshi\Documents\Visual Studio 2019\Projects\_Libraries\NoJsBlazor\NoJsBlazor\NoJsBlazor.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.7" />
   </ItemGroup>
 
 </Project>
