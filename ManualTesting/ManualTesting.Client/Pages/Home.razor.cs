@@ -15,6 +15,12 @@ public partial class Home : PageComponentBase, IDisposable {
         DialogBox.Add(RenderDialog);
     }
 
+    public new void Dispose() {
+        base.Dispose();
+        Root.Click -= CloseContextMenu;
+        DialogBox.Remove(RenderDialog);
+    }
+
 
     #region ContextMenu
 
@@ -89,11 +95,4 @@ public partial class Home : PageComponentBase, IDisposable {
     }
 
     #endregion
-
-
-    public new void Dispose() {
-        base.Dispose();
-        Root.Click -= CloseContextMenu;
-        DialogBox.Remove(RenderDialog);
-    }
 }

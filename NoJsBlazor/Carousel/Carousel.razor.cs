@@ -191,6 +191,14 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
         }
     }
 
+    /// <summary>
+    /// Disposes Interval Timer and Autostart Timer.
+    /// </summary>
+    public void Dispose() {
+        interval?.Dispose();
+        autoStart?.Dispose();
+    }
+
 
     #region input Funtions
 
@@ -672,14 +680,6 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
     public void Stop() {
         StopInterval();
         InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// Disposes Interval Timer and Autostart Timer.
-    /// </summary>
-    public void Dispose() {
-        interval?.Dispose();
-        autoStart?.Dispose();
     }
 
     #endregion
