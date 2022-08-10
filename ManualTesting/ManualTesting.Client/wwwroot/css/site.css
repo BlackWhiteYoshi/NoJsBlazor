@@ -418,13 +418,22 @@ button:not(:disabled) {
 }
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
+}
+
+body {
   font-family: "Carlito";
-  font-size: 1.1rem;
   line-height: 1.5;
+  margin: 0;
+  color: #222;
+  background: #EEE;
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  color: #222;
   outline: none;
 }
 
@@ -443,6 +452,9 @@ a:hover {
   color: #FFF !important;
   text-shadow: 0 0 5px #000;
   transition: color 0.3s, text-shadow 0.3s;
+}
+a:hover p {
+  color: #FFF !important;
 }
 
 pre {
@@ -637,21 +649,11 @@ img {
   }
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 50px;
-}
-
-body {
-  margin: 0;
-}
-
 #root {
   position: relative;
   min-height: 100vh;
   margin: 0;
   padding: 40px 0 150px 0;
-  background: #EEE;
 }
 
 #blazor-error-ui {
