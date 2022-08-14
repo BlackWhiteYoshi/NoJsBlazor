@@ -4,7 +4,7 @@ namespace ManualTesting.Client;
 
 public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
     [Inject, AllowNull]
-    private IJSInProcessRuntime JsRuntime { get; init; }
+    private IJSRuntime JsRuntime { get; init; }
 
     [Inject, AllowNull]
     private IPreRenderFlag PreRenderFlag { get; init; }
@@ -25,31 +25,31 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
     public event Action<MouseEventArgs>? Click;
 
 
-    protected override void OnInitialized() {
-        base.OnInitialized();
+    protected override async Task OnInitializedAsync() {
+        _ = base.OnInitializedAsync();
 
-        Lang.SilentLanguageSetter = InitLanguage();
         Lang.OnLanguageChanged += OnLanguageChanged;
+        Lang.SilentLanguageSetter = await InitLanguage();
 
 
-        Language InitLanguage() {
+        async ValueTask<Language> InitLanguage() {
             if (StartLanguage != null)
                 return StartLanguage.Value;
 
             if (PreRenderFlag.Flag)
-                return Default();
+                return await Default();
 
-            Dictionary<string, string> cookies = CBox.SplitCookies(JsRuntime.Invoke<string>("GetCookies"));
+            Dictionary<string, string> cookies = CBox.SplitCookies(await JsRuntime.InvokeAsync<string>("GetCookies"));
             if (!cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? languageString))
-                return Default();
-            
+                return await Default();
+
             if (!ILanguageProvider.TryParse(languageString, out Language language))
-                return Default();
+                return await Default();
 
             return language;
 
 
-            Language Default() => ILanguageProvider.GetLanguage(JsRuntime.Invoke<string>("GetBrowserLanguage"));
+            async ValueTask<Language> Default() => ILanguageProvider.GetLanguage(await JsRuntime.InvokeAsync<string>("GetBrowserLanguage"));
         }
     }
 
@@ -60,6 +60,6 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
 
 
     private void OnLanguageChanged(Language language) {
-        JsRuntime.InvokeVoid("SetHtmlLanguage", ILanguageProvider.GetAbbreviation(language));
+        _ = JsRuntime.InvokeVoidAsync("SetHtmlLanguage", ILanguageProvider.GetAbbreviation(language)).Preserve();
     }
 }

@@ -11,7 +11,6 @@ public class Program {
     }
 
     private static void ConfigureServices(IServiceCollection services) {
-        services.AddSingleton((IServiceProvider serviceProvider) => (IJSInProcessRuntime)serviceProvider.GetRequiredService<IJSRuntime>());
         services.AddSingleton<IPreRenderFlag, PreRenderFlag>();
         services.AddCoreServices();
     }

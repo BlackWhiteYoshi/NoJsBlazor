@@ -4,9 +4,6 @@ namespace ManualTesting.Client;
 
 public partial class Home : PageComponentBase, IDisposable {
     [Inject, AllowNull]
-    private IJSInProcessRuntime JsRuntime { get; set; }
-
-    [Inject, AllowNull]
     private IDialogBox DialogBox { get; init; }
 
 

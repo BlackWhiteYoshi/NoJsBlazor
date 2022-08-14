@@ -1,7 +1,5 @@
 ﻿using ManualTesting.Client.Services;
-using ManualTesting.Server.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.JSInterop;
 
 namespace ManualTesting.Server;
 
@@ -20,7 +18,6 @@ public class Program {
     private static void ConfigureServices(IServiceCollection services) {
         services.AddRazorPages((RazorPagesOptions options) => options.RootDirectory = "/");
         
-        services.AddSingleton<IJSInProcessRuntime, UnsupportedJSInProcessRuntime>();
         services.AddSingleton<IPreRenderFlag, Services.PreRenderFlag>();
         services.AddCoreServices();
     }
