@@ -7,8 +7,9 @@ public static class CoreServicesExtension {
     /// <param name="services"></param>
     /// <returns></returns>
     public static IServiceCollection AddCoreServices(this IServiceCollection services) {
+        services.AddScoped<IJSModuleRuntime, JSModuleRuntime>();
         services.AddScoped<ILanguageProvider, LanguageProvider>();
-        
+
         // component services
         services.AddScoped<IComponentMediator, ComponentMediator>();
         services.AddScoped((IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<IComponentMediator>().Get<IRoot>());

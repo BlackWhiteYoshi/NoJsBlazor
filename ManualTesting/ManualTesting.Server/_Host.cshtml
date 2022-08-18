@@ -19,40 +19,13 @@
         <title>Test NoJsBlazor</title>
         <base href="~/" />
 
-        <link rel="stylesheet" href="~/css/style.min.css" />
-        <link rel="stylesheet" href="~/css/site.min.css" />
+        <link rel="stylesheet" href="~/style.min.css" />
+        <link rel="stylesheet" href="~/site.css" />
     </head>
 
     <body>
         <component type="typeof(Root)" render-mode="WebAssemblyPrerendered" param-StartLanguage="language" />
 
-        <script>
-            function SetPointerCapture(targetElement, pointerId) {
-                targetElement.setPointerCapture(pointerId);
-            }
-
-            function ReleasePointerCapture(targetElement, pointerId) {
-                targetElement.releasePointerCapture(pointerId);
-            }
-
-            function GetCookies() {
-                return document.cookie;
-            }
-
-            function SetCookie(key, value, days) {
-                const date = new Date();
-                date.setTime(date.getTime() + days * 86400000); @* 86400000 = 24 * 60 * 60 * 1000 *@
-                document.cookie = key + "=" + value + "; expires=" + date.toGMTString() + "; samesite=lax; secure; path=/";
-            }
-
-            function SetHtmlLanguage(language) {
-                document.documentElement.lang = language;
-            }
-
-            function GetBrowserLanguage() {
-                return navigator.language;
-            }
-        </script>
         <script src="~/_framework/blazor.webassembly.js"></script>
     </body>
 </html>

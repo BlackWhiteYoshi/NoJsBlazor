@@ -5,7 +5,7 @@ namespace ManualTesting.Client;
 
 public partial class LanguageFlagIcon : ComponentBase, IDisposable {
     [Inject, AllowNull]
-    private IJSRuntime JsRuntime { get; init; }
+    private IJSModuleRuntime JsModuleRuntime { get; init; }
 
     [Inject, AllowNull]
     private ILanguageProvider Lang { get; init; }
@@ -42,17 +42,17 @@ public partial class LanguageFlagIcon : ComponentBase, IDisposable {
         }
         else {
             Root.Click -= ToggleLanguageDialog;
-            _ = JsRuntime.InvokeVoidAsync("SetCookie", CBox.COOKIE_KEY_LANGUAGE, Lang.Language.ToString(), 365).Preserve();
+            _ = JsModuleRuntime.InvokeVoidTrySync(CBox.SHARED_JS, "setCookie", CBox.COOKIE_KEY_LANGUAGE, Lang.Language.ToString(), 365).Preserve();
             dialog.Close();
             StateHasChanged();
         }
     }
 
     private void OnTitleDown(PointerEventArgs e) {
-        _ = JsRuntime.InvokeVoidAsync("SetPointerCapture", dialog.TitleDiv, e.PointerId).Preserve();
+        _ = JsModuleRuntime.InvokeVoidTrySync(CBox.SHARED_JS, "setPointerCapture", dialog.TitleDiv, e.PointerId).Preserve();
     }
 
     private void OnTitleUp(PointerEventArgs e) {
-        _ = JsRuntime.InvokeVoidAsync("ReleasePointerCapture", dialog.TitleDiv, e.PointerId).Preserve();
+        _ = JsModuleRuntime.InvokeVoidTrySync(CBox.SHARED_JS, "releasePointerCapture", dialog.TitleDiv, e.PointerId).Preserve();
     }
 }

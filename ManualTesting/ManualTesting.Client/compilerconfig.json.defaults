@@ -1,17 +1,5 @@
 {
   "compilers": {
-    "less": {
-      "autoPrefix": "",
-      "cssComb": "none",
-      "ieCompat": true,
-      "strictMath": false,
-      "strictUnits": false,
-      "relativeUrls": true,
-      "rootPath": "",
-      "sourceMapRoot": "",
-      "sourceMapBasePath": "",
-      "sourceMap": false
-    },
     "sass": {
       "autoPrefix": "",
       "includePath": "",
@@ -23,38 +11,10 @@
       "sourceMapRoot": "",
       "lineFeed": "",
       "sourceMap": false
-    },
-    "stylus": {
-      "sourceMap": false
-    },
-    "babel": {
-      "sourceMap": false
-    },
-    "coffeescript": {
-      "bare": false,
-      "runtimeMode": "node",
-      "sourceMap": false
-    },
-    "handlebars": {
-      "root": "",
-      "noBOM": false,
-      "name": "",
-      "namespace": "",
-      "knownHelpersOnly": false,
-      "forcePartial": false,
-      "knownHelpers": [],
-      "commonjs": "",
-      "amd": false,
-      "sourceMap": false
     }
   },
   "minifiers": {
     "css": {
-      "enabled": true,
-      "termSemicolons": true,
-      "gzip": false
-    },
-    "javascript": {
       "enabled": false,
       "termSemicolons": true,
       "gzip": false

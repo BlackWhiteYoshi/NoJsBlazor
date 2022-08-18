@@ -9,6 +9,11 @@ public static class CBox {
     /// </summary>
     public const string COOKIE_KEY_LANGUAGE = "Language";
 
+    /// <summary>
+    /// Javascipt module url that contains the common js-functions.
+    /// </summary>
+    public const string SHARED_JS = "/Shared.js";
+
 
     /// <summary>
     /// calculates a distance for two strings

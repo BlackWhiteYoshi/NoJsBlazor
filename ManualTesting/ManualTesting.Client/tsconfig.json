@@ -1,0 +1,22 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": false,
+    "target": "es6",
+    "lib": [
+      "es6",
+      "DOM" // web-worker -> outcomment
+      //"WebWorker"  // web-worker -> remove-comment
+    ]
+  },
+  "exclude": [
+    "Properties",
+    "**/*.js",
+    "**/*.jsx",
+    "wwwroot/service-worker.production.ts" // web-worker -> outcomment
+  ]
+}

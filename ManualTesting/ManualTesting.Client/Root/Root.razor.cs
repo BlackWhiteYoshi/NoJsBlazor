@@ -3,8 +3,11 @@
 namespace ManualTesting.Client;
 
 public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
+    private const string ROOT_JS = "/Root/Root.razor.js";
+
+
     [Inject, AllowNull]
-    private IJSRuntime JsRuntime { get; init; }
+    private IJSModuleRuntime JsModuleRuntime { get; init; }
 
     [Inject, AllowNull]
     private IPreRenderFlag PreRenderFlag { get; init; }
@@ -24,12 +27,16 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
 
     public event Action<MouseEventArgs>? Click;
 
-
     protected override async Task OnInitializedAsync() {
         _ = base.OnInitializedAsync();
 
+        if (!PreRenderFlag.Flag) {
+            JsModuleRuntime.PreLoadModule(CBox.SHARED_JS);
+            JsModuleRuntime.PreLoadModule(ROOT_JS);
+        }
+
         Lang.OnLanguageChanged += OnLanguageChanged;
-        Lang.SilentLanguageSetter = await InitLanguage();
+        Lang.Language = await InitLanguage();
 
 
         async ValueTask<Language> InitLanguage() {
@@ -39,7 +46,7 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
             if (PreRenderFlag.Flag)
                 return await Default();
 
-            Dictionary<string, string> cookies = CBox.SplitCookies(await JsRuntime.InvokeAsync<string>("GetCookies"));
+            Dictionary<string, string> cookies = CBox.SplitCookies(await JsModuleRuntime.InvokeTrySync<string>(CBox.SHARED_JS, "getCookies"));
             if (!cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? languageString))
                 return await Default();
 
@@ -49,7 +56,7 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
             return language;
 
 
-            async ValueTask<Language> Default() => ILanguageProvider.GetLanguage(await JsRuntime.InvokeAsync<string>("GetBrowserLanguage"));
+            async ValueTask<Language> Default() => ILanguageProvider.GetLanguage(await JsModuleRuntime.InvokeTrySync<string>(ROOT_JS, "getBrowserLanguage"));
         }
     }
 
@@ -60,6 +67,6 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
 
 
     private void OnLanguageChanged(Language language) {
-        _ = JsRuntime.InvokeVoidAsync("SetHtmlLanguage", ILanguageProvider.GetAbbreviation(language)).Preserve();
+        _ = JsModuleRuntime.InvokeVoidTrySync(ROOT_JS, "setHtmlLanguage", ILanguageProvider.GetAbbreviation(language)).Preserve();
     }
 }
