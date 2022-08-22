@@ -8,8 +8,8 @@ public class JSModuleRuntime : IJSModuleRuntime, IDisposable, IAsyncDisposable {
     private readonly IJSRuntime _jsRuntime;
 
 
-    public JSModuleRuntime(IJSRuntime jSRuntime) {
-        _jsRuntime = jSRuntime;
+    public JSModuleRuntime(IJSRuntime jsRuntime) {
+        _jsRuntime = jsRuntime;
     }
 
     public void Dispose() {
