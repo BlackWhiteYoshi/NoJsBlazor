@@ -1,6 +1,6 @@
 ﻿namespace ManualTesting.Client.Services;
 
-public class JSModuleRuntime : IJSModuleRuntime, IDisposable, IAsyncDisposable {
+public class JSModuleRuntime : IJSModuleRuntime {
     private readonly Dictionary<string, Task<IJSObjectReference>> moduleList = new();
     private readonly CancellationTokenSource cancellationTokenSource = new();
 
