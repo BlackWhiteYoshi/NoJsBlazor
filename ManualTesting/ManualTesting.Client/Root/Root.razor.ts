@@ -2,6 +2,6 @@
     return navigator.language;
 }
 
-export function setHtmlLanguage(language: string): void {
+export function setHtmlLanguage(language: string) {
     document.documentElement.lang = language;
 }

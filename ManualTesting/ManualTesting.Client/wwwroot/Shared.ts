@@ -1,8 +1,8 @@
-﻿export function setPointerCapture(targetElement: HTMLObjectElement, pointerId: number): void {
+﻿export function setPointerCapture(targetElement: HTMLObjectElement, pointerId: number) {
     targetElement.setPointerCapture(pointerId);
 }
 
-export function releasePointerCapture(targetElement: HTMLObjectElement, pointerId: number): void {
+export function releasePointerCapture(targetElement: HTMLObjectElement, pointerId: number) {
     targetElement.releasePointerCapture(pointerId);
 }
 
