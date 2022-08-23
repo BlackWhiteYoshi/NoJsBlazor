@@ -13,12 +13,7 @@
                 double coordinateY = innerRadius * -Math.Cos(alpha);
                 int overHalfBit = alpha > Math.PI ? 1 : 0;
                 
-                <path d="
-                          M 0 @(-innerRadius)
-                          A @innerRadius @innerRadius 0 @overHalfBit 1 @coordinateX @coordinateY
-                          L 0 0
-                          L 0 @(-innerRadius)"
-                      fill="@Color" />
+                <path d="M 0 @(-innerRadius) A @innerRadius @innerRadius 0 @overHalfBit 1 @coordinateX @coordinateY L 0 0 L 0 @(-innerRadius)" fill="@Color" />
             }
             else {
                 <circle cx="0" cy="0" r="@innerRadius" style="fill: @Color; stroke: none;" />
