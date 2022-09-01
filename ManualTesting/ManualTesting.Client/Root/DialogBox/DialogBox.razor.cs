@@ -42,7 +42,10 @@ public partial class DialogBox : ServiceComponentBase<IDialogBox>, IDialogBox {
         Lang.OnLanguageChanged += Rerender;
     }
 
-    public new void Dispose() => Lang.OnLanguageChanged -= Rerender;
+    public new void Dispose() {
+        base.Dispose();
+        Lang.OnLanguageChanged -= Rerender;
+    }
 
     private void Rerender(Language language) => InvokeAsync(StateHasChanged);
 
