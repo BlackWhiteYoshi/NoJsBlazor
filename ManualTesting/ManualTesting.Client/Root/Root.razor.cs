@@ -31,8 +31,8 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
         _ = base.OnInitializedAsync();
 
         if (!PreRenderFlag.Flag) {
-            JsModuleRuntime.PreLoadModule(CBox.SHARED_JS);
-            JsModuleRuntime.PreLoadModule(ROOT_JS);
+            _ = JsModuleRuntime.PreLoadModule(CBox.SHARED_JS).Preserve();
+            _ = JsModuleRuntime.PreLoadModule(ROOT_JS).Preserve();
         }
 
         Lang.OnLanguageChanged += OnLanguageChanged;
