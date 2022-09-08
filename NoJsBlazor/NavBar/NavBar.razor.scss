@@ -82,7 +82,7 @@
         justify-content: space-between;
 
         &:hover > .nav-dropdown {
-            transform: rotate3d(0, 0, 0, 90deg);
+            rotate: none;
         }
     }
 
@@ -104,8 +104,8 @@
         background-image: var(--background-image);
         z-index: 900;
         border-radius: 5px;
-        transform: rotate3d(1, 0, 0, 90deg);
-        transition: transform 0.2s;
+        rotate: x 90deg;
+        transition: rotate 0.2s;
 
         .nav-dropdown {
             top: -$desktop-dropdown-padding;
@@ -133,7 +133,7 @@
         margin-left: calc(5px - var(--desktop-link-padding));
         margin-right: var(--desktop-link-padding);
         cursor: auto;
-        transition: fill, transform 0.1s;
+        transition: all 0.1s linear;
 
         & > polygon {
             fill: var(--arrow-desktop-color);
@@ -145,7 +145,7 @@
     }
 
     .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-        transform: translateY(3px);
+        translate: 0 3px;
 
         & > polygon {
             fill: var(--arrow-desktop-hover-color);
@@ -159,11 +159,12 @@
             width: var(--arrow-right-size);
             height: auto;
             margin: 0px 5px 0 2px;
-            transform: rotate(270deg);
+            rotate: 270deg;
         }
 
         .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-            transform: translateX(3px) rotate(270deg);
+            translate: 3px;
+            rotate: 270deg;
         }
     }
 
@@ -206,11 +207,11 @@
             border-radius: 10px;
             overflow-y: auto;
             background-image: var(--background-image);
-            transform: rotate3d(1, 0, 0, 90deg);
-            transition: transform 0.2s;
+            rotate: x 90deg;
+            transition: rotate 0.2s;
 
             &.expanded {
-                transform: none;
+                rotate: none;
             }
         }
 
@@ -223,7 +224,7 @@
             padding: 0;
             margin-left: 10px;
             display: flex;
-            transform: none;
+            rotate: none;
             overflow: hidden;
             max-height: 0;
             transition: max-height linear 0.3s;
@@ -245,8 +246,9 @@
             margin: 0;
             opacity: 0.9;
             cursor: pointer;
-            transform: none;
-            transition: transform 0.3s, stroke 0.1s;
+            translate: none;
+            rotate: none;
+            transition: rotate 0.3s linear, stroke 0.1s linear;
         
             & > polygon {
                 display: none;
@@ -271,7 +273,7 @@
             }
 
             &.expanded {
-                transform: rotate(180deg);
+                rotate: 180deg;
             }
         }
     }

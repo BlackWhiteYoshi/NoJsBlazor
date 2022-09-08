@@ -3,7 +3,7 @@
 @if (Active) {
     <div class="dialog-modal-background" style="@(!ModalScreen ? "background: #0000; pointer-events: none;" : string.Empty)"
             @onclick="ModalBackgroundClick" @onpointermove="TitleMove" @onpointerup="TitleUp">
-        <div class="dialog-window" @attributes="@Attributes" style="transform: translate(@(XMovement)px, @(YMovement)px); @AddStyles()" @onclick:stopPropagation>
+        <div class="dialog-window" @attributes="@Attributes" style="translate: @(XMovement)px @(YMovement)px; @AddStyles()" @onclick:stopPropagation>
             @if (ShowTitle) {
                 <div class="title" @ref="TitleDiv" @onpointerdown="TitleDown" @onpointerdown:stopPropagation>
                     @Title

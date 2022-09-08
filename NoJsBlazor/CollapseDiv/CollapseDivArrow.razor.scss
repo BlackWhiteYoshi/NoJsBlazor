@@ -7,7 +7,7 @@
     .collapse-arrow {
         width: var(--arrow-size);
         height: var(--arrow-size);
-        transition: transform 0.3s;
+        transition: rotate 0.3s;
 
         & > circle, & > line {
             stroke: var(--arrow-stroke-color);
@@ -18,10 +18,10 @@
     }
 
     &.collapseable .collapse-arrow {
-        transform: rotate(180deg);
+        rotate: 180deg;
     }
 
     &.collapsed .collapse-arrow {
-        transform: rotate(0deg);
+        rotate: none;
     }
 }

@@ -103,7 +103,7 @@ public partial class Dialog : ComponentBase {
     }
 
     /// <summary>
-    /// Sets the state of <see cref="Active"/> without notifying <see cref="OnOpen"/> nor <see cref="OnClose"/>.
+    /// Sets the state of <see cref="Active"/> without notifying <see cref="OnActiveChanged"/>.
     /// </summary>
     public bool SilentActiveSetter {
         set {

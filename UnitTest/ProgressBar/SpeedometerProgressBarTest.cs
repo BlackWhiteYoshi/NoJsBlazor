@@ -63,7 +63,7 @@ public class SpeedometerProgressBarTest : TestContext {
 
         IElement line = speedometerProgressBarContainer.Find(".meter");
         IAttr style = line.Attributes["style"]!;
-        Assert.Equal($"transform: rotate({(float)(3.0 / 2.0 * Math.PI) * progress + (float)(1.0 / 4.0 * Math.PI)}rad)", style.Value);
+        Assert.Equal($"rotate: {(float)(3.0 / 2.0 * Math.PI) * progress + (float)(1.0 / 4.0 * Math.PI)}rad", style.Value);
     }
 
     [Fact]

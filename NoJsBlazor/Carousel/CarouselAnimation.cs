@@ -9,11 +9,11 @@ public enum CarouselAnimation {
     /// </summary>
     FadeOut,
     /// <summary>
-    /// Transition on transform: x-axis
+    /// Transition on translate x-axis
     /// </summary>
     Slide,
     /// <summary>
-    /// Transition on transform: x-axis and y-axis
+    /// Transition on translate x-axis and rotate y-axis
     /// </summary>
     SlideRotate
 }

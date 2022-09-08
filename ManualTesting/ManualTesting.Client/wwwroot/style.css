@@ -34,7 +34,7 @@
   height: auto;
 }
 .carousel > .carousel-content > .carousel-element.slide {
-  transition: transform ease-out var(--swap-duration);
+  transition: translate ease-out var(--swap-duration), rotate ease-out var(--swap-duration);
 }
 .carousel > .carousel-content > .carousel-element.active {
   z-index: 20;
@@ -171,7 +171,7 @@
 .collapse-div .collapse-arrow {
   width: var(--arrow-size);
   height: var(--arrow-size);
-  transition: transform 0.3s;
+  transition: rotate 0.3s;
 }
 .collapse-div .collapse-arrow > circle, .collapse-div .collapse-arrow > line {
   stroke: var(--arrow-stroke-color);
@@ -180,10 +180,10 @@
   stroke-linecap: round;
 }
 .collapse-div.collapseable .collapse-arrow {
-  transform: rotate(180deg);
+  rotate: 180deg;
 }
 .collapse-div.collapsed .collapse-arrow {
-  transform: rotate(0deg);
+  rotate: none;
 }
 
 .context-menu {
@@ -204,15 +204,15 @@
   z-index: 999;
   border-radius: 5px;
   list-style: none;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .context-menu .context-menu {
   top: -5px;
   left: 100%;
 }
 .context-menu.expanded {
-  transform: none;
+  rotate: none;
 }
 .context-menu .context-element {
   position: relative;
@@ -226,7 +226,7 @@
   box-shadow: 0 0 15px var(--hover-dropright-shadow-color);
 }
 .context-menu .context-element:hover > .context-menu, .context-menu .context-element.expanded > .context-menu {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .context-menu .context-element.context-item {
   cursor: pointer;
@@ -248,8 +248,8 @@
   height: auto;
   margin: 0px 5px 0 2px;
   cursor: auto;
-  transform: rotate(270deg);
-  transition: fill, transform 0.1s;
+  rotate: 270deg;
+  transition: rotate 0.1s linear, fill 0.1s linear;
 }
 .context-menu .context-arrow > polygon {
   fill: var(--arrow-color);
@@ -258,7 +258,8 @@
   display: none;
 }
 .context-menu .context-element:hover > .context-div > .context-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 .context-menu .context-element:hover > .context-div > .context-arrow > polygon {
   fill: var(--arrow-hover-color);
@@ -342,7 +343,7 @@
   position: absolute;
   left: var(--padding-left-right);
   top: 50%;
-  transform: translateY(-50%);
+  translate: 0 -50%;
   font-size: 1em;
   opacity: 0.7;
   background: linear-gradient(180deg, #0000 49%, var(--background-color) 1%, var(--background-color));
@@ -351,7 +352,7 @@
 }
 .input-field-container > input:focus + label, .input-field-container .filled-input-label {
   top: 0;
-  transform: translate(var(--label-top-offset-left), -50%);
+  translate: var(--label-top-offset-left) -50%;
   font-size: 0.8em;
   padding: 0 0.2em;
   opacity: 1;
@@ -390,21 +391,23 @@
 }
 @keyframes spin-type-1 {
   from {
-    transform: rotate(0deg);
+    rotate: 0deg;
   }
   to {
-    transform: rotate(360deg);
+    rotate: 360deg;
   }
 }
 @keyframes spin-type-2 {
   0% {
-    transform: rotate(0deg) skew(-30deg, -30deg);
+    rotate: 0deg;
+    transform: skew(-30deg, -30deg);
   }
   50% {
-    transform: rotate(180deg) skew(30deg, 30deg);
+    transform: skew(30deg, 30deg);
   }
   100% {
-    transform: rotate(360deg) skew(-30deg, -30deg);
+    rotate: 360deg;
+    transform: skew(-30deg, -30deg);
   }
 }
 @keyframes move-type-1 {
@@ -496,21 +499,18 @@
   }
 }
 @keyframes ball-action-square {
-  0% {
-    border-radius: 50%;
-  }
   40% {
     border-radius: 50%;
   }
   60% {
     border-radius: 0%;
-    transform: scale(1, 1);
+    scale: 1;
   }
   70% {
-    transform: scale(0, 1);
+    scale: 0 1;
   }
   80% {
-    transform: scale(1, 1);
+    scale: 1;
   }
   100% {
     border-radius: 50%;
@@ -529,54 +529,59 @@
 }
 @keyframes ball-action-line {
   65% {
-    transform: translate(0);
+    translate: 0;
   }
   70% {
-    transform: translateY(90%);
+    translate: 0 90%;
   }
   75% {
-    transform: translateY(30%);
+    translate: 0 30%;
   }
   80% {
-    transform: translateY(120%);
+    translate: 0 120%;
   }
   85% {
-    transform: translateY(60%);
+    translate: 0 60%;
   }
   90% {
     width: var(--size);
     height: var(--size);
-    transform: translateY(150%);
+    translate: 0 150%;
   }
   95% {
     width: calc(var(--size) * 0.01);
     height: calc(var(--size) * 2);
-    transform: translate(calc(var(--size) / 2), var(--size));
+    translate: calc(var(--size) / 2) var(--size);
   }
   100% {
     width: var(--size);
     height: var(--size);
-    transform: translate(0);
+    translate: 0;
   }
 }
 @keyframes ball-action-big {
   70% {
     z-index: -1;
-    transform: translate(0) scale(1);
+    translate: 0;
+    scale: 1;
   }
   85% {
     z-index: -1;
-    transform: translate(-100%, -100%) scale(3);
+    translate: -100% -100%;
+    scale: 3;
   }
   90% {
     z-index: -1;
-    transform: translate(-100%, -100%) scale(0);
+    translate: -100% -100%;
+    scale: 0;
   }
   95% {
-    transform: translate(0) scale(0);
+    translate: 0;
+    scale: 0;
   }
   100% {
-    transform: translate(0) scale(1);
+    translate: 0;
+    scale: 1;
   }
 }
 
@@ -648,7 +653,7 @@
   justify-content: space-between;
 }
 .nav-root .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root .nav-div {
   height: 100%;
@@ -667,8 +672,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -690,7 +695,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -699,7 +704,7 @@
   display: none;
 }
 .nav-root .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -709,10 +714,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 0px) {
   .nav-root .nav-toggle {
@@ -748,11 +754,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root .nav-element {
     padding: 0;
@@ -762,7 +768,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -780,8 +786,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root .nav-dropdown-arrow > polygon,
 .nav-root .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -819,7 +826,7 @@
 .nav-root .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -872,7 +879,7 @@
   justify-content: space-between;
 }
 .nav-root-500px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-500px .nav-div {
   height: 100%;
@@ -891,8 +898,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-500px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -914,7 +921,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-500px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -923,7 +930,7 @@
   display: none;
 }
 .nav-root-500px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-500px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -933,10 +940,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-500px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 500px) {
   .nav-root-500px .nav-toggle {
@@ -972,11 +980,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-500px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-500px .nav-element {
     padding: 0;
@@ -986,7 +994,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -1004,8 +1012,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-500px .nav-dropdown-arrow > polygon,
 .nav-root-500px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -1043,7 +1052,7 @@
 .nav-root-500px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-500px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-500px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -1096,7 +1105,7 @@
   justify-content: space-between;
 }
 .nav-root-600px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-600px .nav-div {
   height: 100%;
@@ -1115,8 +1124,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-600px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -1138,7 +1147,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-600px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -1147,7 +1156,7 @@
   display: none;
 }
 .nav-root-600px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-600px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -1157,10 +1166,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-600px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 600px) {
   .nav-root-600px .nav-toggle {
@@ -1196,11 +1206,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-600px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-600px .nav-element {
     padding: 0;
@@ -1210,7 +1220,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -1228,8 +1238,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-600px .nav-dropdown-arrow > polygon,
 .nav-root-600px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -1267,7 +1278,7 @@
 .nav-root-600px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-600px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-600px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -1320,7 +1331,7 @@
   justify-content: space-between;
 }
 .nav-root-700px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-700px .nav-div {
   height: 100%;
@@ -1339,8 +1350,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-700px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -1362,7 +1373,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-700px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -1371,7 +1382,7 @@
   display: none;
 }
 .nav-root-700px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-700px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -1381,10 +1392,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-700px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 700px) {
   .nav-root-700px .nav-toggle {
@@ -1420,11 +1432,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-700px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-700px .nav-element {
     padding: 0;
@@ -1434,7 +1446,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -1452,8 +1464,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-700px .nav-dropdown-arrow > polygon,
 .nav-root-700px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -1491,7 +1504,7 @@
 .nav-root-700px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-700px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-700px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -1544,7 +1557,7 @@
   justify-content: space-between;
 }
 .nav-root-800px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-800px .nav-div {
   height: 100%;
@@ -1563,8 +1576,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-800px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -1586,7 +1599,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-800px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -1595,7 +1608,7 @@
   display: none;
 }
 .nav-root-800px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-800px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -1605,10 +1618,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-800px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 800px) {
   .nav-root-800px .nav-toggle {
@@ -1644,11 +1658,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-800px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-800px .nav-element {
     padding: 0;
@@ -1658,7 +1672,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -1676,8 +1690,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-800px .nav-dropdown-arrow > polygon,
 .nav-root-800px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -1715,7 +1730,7 @@
 .nav-root-800px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-800px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-800px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -1768,7 +1783,7 @@
   justify-content: space-between;
 }
 .nav-root-900px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-900px .nav-div {
   height: 100%;
@@ -1787,8 +1802,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-900px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -1810,7 +1825,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-900px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -1819,7 +1834,7 @@
   display: none;
 }
 .nav-root-900px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-900px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -1829,10 +1844,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-900px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 900px) {
   .nav-root-900px .nav-toggle {
@@ -1868,11 +1884,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-900px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-900px .nav-element {
     padding: 0;
@@ -1882,7 +1898,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -1900,8 +1916,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-900px .nav-dropdown-arrow > polygon,
 .nav-root-900px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -1939,7 +1956,7 @@
 .nav-root-900px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-900px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-900px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -1992,7 +2009,7 @@
   justify-content: space-between;
 }
 .nav-root-1000px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-1000px .nav-div {
   height: 100%;
@@ -2011,8 +2028,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-1000px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -2034,7 +2051,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-1000px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -2043,7 +2060,7 @@
   display: none;
 }
 .nav-root-1000px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-1000px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -2053,10 +2070,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-1000px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 1000px) {
   .nav-root-1000px .nav-toggle {
@@ -2092,11 +2110,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-1000px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-1000px .nav-element {
     padding: 0;
@@ -2106,7 +2124,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -2124,8 +2142,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-1000px .nav-dropdown-arrow > polygon,
 .nav-root-1000px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -2163,7 +2182,7 @@
 .nav-root-1000px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-1000px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-1000px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -2216,7 +2235,7 @@
   justify-content: space-between;
 }
 .nav-root-1100px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-1100px .nav-div {
   height: 100%;
@@ -2235,8 +2254,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-1100px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -2258,7 +2277,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-1100px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -2267,7 +2286,7 @@
   display: none;
 }
 .nav-root-1100px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-1100px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -2277,10 +2296,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-1100px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 1100px) {
   .nav-root-1100px .nav-toggle {
@@ -2316,11 +2336,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-1100px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-1100px .nav-element {
     padding: 0;
@@ -2330,7 +2350,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -2348,8 +2368,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-1100px .nav-dropdown-arrow > polygon,
 .nav-root-1100px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -2387,7 +2408,7 @@
 .nav-root-1100px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-1100px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-1100px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -2440,7 +2461,7 @@
   justify-content: space-between;
 }
 .nav-root-1200px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-1200px .nav-div {
   height: 100%;
@@ -2459,8 +2480,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-1200px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -2482,7 +2503,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-1200px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -2491,7 +2512,7 @@
   display: none;
 }
 .nav-root-1200px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-1200px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -2501,10 +2522,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-1200px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 1200px) {
   .nav-root-1200px .nav-toggle {
@@ -2540,11 +2562,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-1200px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-1200px .nav-element {
     padding: 0;
@@ -2554,7 +2576,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -2572,8 +2594,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-1200px .nav-dropdown-arrow > polygon,
 .nav-root-1200px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -2611,7 +2634,7 @@
 .nav-root-1200px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-1200px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-1200px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -2664,7 +2687,7 @@
   justify-content: space-between;
 }
 .nav-root-1300px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-1300px .nav-div {
   height: 100%;
@@ -2683,8 +2706,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-1300px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -2706,7 +2729,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-1300px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -2715,7 +2738,7 @@
   display: none;
 }
 .nav-root-1300px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-1300px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -2725,10 +2748,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-1300px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 1300px) {
   .nav-root-1300px .nav-toggle {
@@ -2764,11 +2788,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-1300px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-1300px .nav-element {
     padding: 0;
@@ -2778,7 +2802,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -2796,8 +2820,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-1300px .nav-dropdown-arrow > polygon,
 .nav-root-1300px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -2835,7 +2860,7 @@
 .nav-root-1300px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-1300px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-1300px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -2888,7 +2913,7 @@
   justify-content: space-between;
 }
 .nav-root-1400px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-1400px .nav-div {
   height: 100%;
@@ -2907,8 +2932,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-1400px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -2930,7 +2955,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-1400px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -2939,7 +2964,7 @@
   display: none;
 }
 .nav-root-1400px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-1400px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -2949,10 +2974,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-1400px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 1400px) {
   .nav-root-1400px .nav-toggle {
@@ -2988,11 +3014,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-1400px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-1400px .nav-element {
     padding: 0;
@@ -3002,7 +3028,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -3020,8 +3046,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-1400px .nav-dropdown-arrow > polygon,
 .nav-root-1400px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -3059,7 +3086,7 @@
 .nav-root-1400px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-1400px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-1400px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -3112,7 +3139,7 @@
   justify-content: space-between;
 }
 .nav-root-1500px .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-1500px .nav-div {
   height: 100%;
@@ -3131,8 +3158,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-1500px .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -3154,7 +3181,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-1500px .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -3163,7 +3190,7 @@
   display: none;
 }
 .nav-root-1500px .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-1500px .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -3173,10 +3200,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-1500px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 1500px) {
   .nav-root-1500px .nav-toggle {
@@ -3212,11 +3240,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-1500px .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-1500px .nav-element {
     padding: 0;
@@ -3226,7 +3254,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -3244,8 +3272,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-1500px .nav-dropdown-arrow > polygon,
 .nav-root-1500px .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -3283,7 +3312,7 @@
 .nav-root-1500px .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-1500px .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-1500px .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -3336,7 +3365,7 @@
   justify-content: space-between;
 }
 .nav-root-30em .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-30em .nav-div {
   height: 100%;
@@ -3355,8 +3384,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-30em .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -3378,7 +3407,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-30em .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -3387,7 +3416,7 @@
   display: none;
 }
 .nav-root-30em .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-30em .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -3397,10 +3426,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-30em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 30em) {
   .nav-root-30em .nav-toggle {
@@ -3436,11 +3466,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-30em .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-30em .nav-element {
     padding: 0;
@@ -3450,7 +3480,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -3468,8 +3498,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-30em .nav-dropdown-arrow > polygon,
 .nav-root-30em .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -3507,7 +3538,7 @@
 .nav-root-30em .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-30em .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-30em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -3560,7 +3591,7 @@
   justify-content: space-between;
 }
 .nav-root-40em .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-40em .nav-div {
   height: 100%;
@@ -3579,8 +3610,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-40em .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -3602,7 +3633,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-40em .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -3611,7 +3642,7 @@
   display: none;
 }
 .nav-root-40em .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-40em .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -3621,10 +3652,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-40em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 40em) {
   .nav-root-40em .nav-toggle {
@@ -3660,11 +3692,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-40em .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-40em .nav-element {
     padding: 0;
@@ -3674,7 +3706,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -3692,8 +3724,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-40em .nav-dropdown-arrow > polygon,
 .nav-root-40em .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -3731,7 +3764,7 @@
 .nav-root-40em .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-40em .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-40em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -3784,7 +3817,7 @@
   justify-content: space-between;
 }
 .nav-root-50em .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-50em .nav-div {
   height: 100%;
@@ -3803,8 +3836,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-50em .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -3826,7 +3859,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-50em .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -3835,7 +3868,7 @@
   display: none;
 }
 .nav-root-50em .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-50em .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -3845,10 +3878,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-50em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 50em) {
   .nav-root-50em .nav-toggle {
@@ -3884,11 +3918,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-50em .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-50em .nav-element {
     padding: 0;
@@ -3898,7 +3932,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -3916,8 +3950,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-50em .nav-dropdown-arrow > polygon,
 .nav-root-50em .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -3955,7 +3990,7 @@
 .nav-root-50em .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-50em .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-50em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -4008,7 +4043,7 @@
   justify-content: space-between;
 }
 .nav-root-60em .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-60em .nav-div {
   height: 100%;
@@ -4027,8 +4062,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-60em .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -4050,7 +4085,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-60em .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -4059,7 +4094,7 @@
   display: none;
 }
 .nav-root-60em .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-60em .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -4069,10 +4104,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-60em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 60em) {
   .nav-root-60em .nav-toggle {
@@ -4108,11 +4144,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-60em .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-60em .nav-element {
     padding: 0;
@@ -4122,7 +4158,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -4140,8 +4176,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-60em .nav-dropdown-arrow > polygon,
 .nav-root-60em .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -4179,7 +4216,7 @@
 .nav-root-60em .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-60em .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-60em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -4232,7 +4269,7 @@
   justify-content: space-between;
 }
 .nav-root-70em .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-70em .nav-div {
   height: 100%;
@@ -4251,8 +4288,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-70em .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -4274,7 +4311,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-70em .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -4283,7 +4320,7 @@
   display: none;
 }
 .nav-root-70em .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-70em .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -4293,10 +4330,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-70em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 70em) {
   .nav-root-70em .nav-toggle {
@@ -4332,11 +4370,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-70em .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-70em .nav-element {
     padding: 0;
@@ -4346,7 +4384,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -4364,8 +4402,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-70em .nav-dropdown-arrow > polygon,
 .nav-root-70em .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -4403,7 +4442,7 @@
 .nav-root-70em .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-70em .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-70em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -4456,7 +4495,7 @@
   justify-content: space-between;
 }
 .nav-root-80em .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-80em .nav-div {
   height: 100%;
@@ -4475,8 +4514,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-80em .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -4498,7 +4537,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-80em .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -4507,7 +4546,7 @@
   display: none;
 }
 .nav-root-80em .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-80em .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -4517,10 +4556,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-80em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 80em) {
   .nav-root-80em .nav-toggle {
@@ -4556,11 +4596,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-80em .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-80em .nav-element {
     padding: 0;
@@ -4570,7 +4610,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -4588,8 +4628,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-80em .nav-dropdown-arrow > polygon,
 .nav-root-80em .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -4627,7 +4668,7 @@
 .nav-root-80em .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-80em .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-80em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -4680,7 +4721,7 @@
   justify-content: space-between;
 }
 .nav-root-90em .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-90em .nav-div {
   height: 100%;
@@ -4699,8 +4740,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-90em .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -4722,7 +4763,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-90em .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -4731,7 +4772,7 @@
   display: none;
 }
 .nav-root-90em .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-90em .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -4741,10 +4782,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-90em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 90em) {
   .nav-root-90em .nav-toggle {
@@ -4780,11 +4822,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-90em .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-90em .nav-element {
     padding: 0;
@@ -4794,7 +4836,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -4812,8 +4854,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-90em .nav-dropdown-arrow > polygon,
 .nav-root-90em .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -4851,7 +4894,7 @@
 .nav-root-90em .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-90em .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-90em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -4904,7 +4947,7 @@
   justify-content: space-between;
 }
 .nav-root-100em .nav-element:hover > .nav-dropdown {
-  transform: rotate3d(0, 0, 0, 90deg);
+  rotate: none;
 }
 .nav-root-100em .nav-div {
   height: 100%;
@@ -4923,8 +4966,8 @@
   background-image: var(--background-image);
   z-index: 900;
   border-radius: 5px;
-  transform: rotate3d(1, 0, 0, 90deg);
-  transition: transform 0.2s;
+  rotate: x 90deg;
+  transition: rotate 0.2s;
 }
 .nav-root-100em .nav-dropdown .nav-dropdown {
   top: -5px;
@@ -4946,7 +4989,7 @@
   margin-left: calc(5px - var(--desktop-link-padding));
   margin-right: var(--desktop-link-padding);
   cursor: auto;
-  transition: fill, transform 0.1s;
+  transition: all 0.1s linear;
 }
 .nav-root-100em .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-color);
@@ -4955,7 +4998,7 @@
   display: none;
 }
 .nav-root-100em .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateY(3px);
+  translate: 0 3px;
 }
 .nav-root-100em .nav-element:hover > .nav-div > .nav-dropdown-arrow > polygon {
   fill: var(--arrow-desktop-hover-color);
@@ -4965,10 +5008,11 @@
   width: var(--arrow-right-size);
   height: auto;
   margin: 0px 5px 0 2px;
-  transform: rotate(270deg);
+  rotate: 270deg;
 }
 .nav-root-100em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
-  transform: translateX(3px) rotate(270deg);
+  translate: 3px;
+  rotate: 270deg;
 }
 @media (max-width: 100em) {
   .nav-root-100em .nav-toggle {
@@ -5004,11 +5048,11 @@
     border-radius: 10px;
     overflow-y: auto;
     background-image: var(--background-image);
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
   }
   .nav-root-100em .nav-list.expanded {
-    transform: none;
+    rotate: none;
   }
   .nav-root-100em .nav-element {
     padding: 0;
@@ -5018,7 +5062,7 @@
     padding: 0;
     margin-left: 10px;
     display: flex;
-    transform: none;
+    rotate: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height linear 0.3s;
@@ -5036,8 +5080,9 @@
     margin: 0;
     opacity: 0.9;
     cursor: pointer;
-    transform: none;
-    transition: transform 0.3s, stroke 0.1s;
+    translate: none;
+    rotate: none;
+    transition: rotate 0.3s linear, stroke 0.1s linear;
   }
   .nav-root-100em .nav-dropdown-arrow > polygon,
 .nav-root-100em .nav-dropdown .nav-dropdown-arrow > polygon,
@@ -5075,7 +5120,7 @@
 .nav-root-100em .nav-dropdown .nav-dropdown-arrow.expanded,
 .nav-root-100em .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded,
 .nav-root-100em .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow.expanded {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 }
 
@@ -5128,7 +5173,7 @@
 .speedometer-progress-bar > svg > .meter {
   stroke-width: var(--meter-width);
   stroke-linecap: round;
-  transition: transform ease-out var(--meter-transition-speed);
+  transition: rotate ease-out var(--meter-transition-speed);
 }
 .speedometer-progress-bar > p {
   margin-top: 0.15em;

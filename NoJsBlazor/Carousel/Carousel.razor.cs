@@ -168,8 +168,8 @@ public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposa
     public bool Running => interval.Enabled;
 
 
-    private readonly Timer interval = new();
-    private readonly Timer autoStart = new();
+    private readonly System.Timers.Timer interval = new();
+    private readonly System.Timers.Timer autoStart = new();
 
     #endregion
 

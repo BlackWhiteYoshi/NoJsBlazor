@@ -4,36 +4,71 @@
         <name>NoJsBlazor</name>
     </assembly>
     <members>
-        <member name="T:NoJsBlazor.CarouselAnimation">
-            <summary>
-            Type of animation, how the items are swapped.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.CarouselAnimation.FadeOut">
-            <summary>
-            Transition on opacity
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.CarouselAnimation.Slide">
-            <summary>
-            Transition on transform: x-axis
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.CarouselAnimation.SlideRotate">
-            <summary>
-            Transition on transform: x-axis and y-axis
-            </summary>
-        </member>
         <member name="T:NoJsBlazor.Carousel">
             <summary>
             <para>A Carousel like in Bootstrap. It holds <see cref="T:Microsoft.AspNetCore.Components.RenderFragment"/> as items. </para>
             <para>It can also display an overlay, control-arrows, item indicators and a play/stop button.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Carousel.Active">
+        <member name="F:NoJsBlazor.Carousel.Item.carouselItem">
+            <summary>
+            Renderable content of this item.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.Carousel.Item.zIndex">
+            <summary>
+            It is either 20 or 10.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.Carousel.Item.opacity">
+            <summary>
+            It is either 1 or 0.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.Carousel.Item.translateX">
+            <summary>
+            It is either Fadout=0, Slide=+-100, SlideRotate=+-50 or 0.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.Carousel.Item.rotateY">
+            <summary>
+            It is either +-90 or 0.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.Carousel.Item.slideClass">
+            <summary>
+            It is either "slide" or string.Empty.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.Carousel.Item.indicatorOpacity">
+            <summary>
+            It is eiher 1.0f or 0.5f.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.Carousel.Item.progressBar">
+            <summary>
+            It is either 100 or 0.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.Carousel.Item.progressBarTransition">
+            <summary>
+            It is either set to Interval time or 0.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Carousel.ItemCount">
+            <summary>
+            The Number of Items currently in this carousel.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Carousel.ActiveStart">
             <summary>
             <para>Index of the active item at the beginning.</para>
             <para>Default is 0.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Carousel.Active">
+            <summary>
+            The Index of the current Active Item.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.IntervalTime">
@@ -48,6 +83,11 @@
             <para>Default is FadeOut.</para>
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Carousel.CurrAnimation">
+            <summary>
+            Gives the current Animation.
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Carousel.AutoStartTime">
             <summary>
             <para>Starts interval after [AutoStartTime] ms, if interval not running and no action occurs.</para>
@@ -55,9 +95,19 @@
             <para>Default is 0.</para>
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Carousel.CurrAutoStartTime">
+            <summary>
+            Holds the current value of the time to autoStart.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Carousel.AutoStartRunning">
+            <summary>
+            Inidicates if the autoStart Timer is currently ticking.
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Carousel.BeginRunning">
             <summary>
-            <para>Interval Thread starts at beginning.</para>
+            <para>Carousel Interval starts at beginning.</para>
             <para>Default is true.</para>
             </summary>
         </member>
@@ -90,6 +140,18 @@
             Html that will be rendered in the overlay section.
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Carousel.OnActiveChanged">
+            <summary>
+            <para>Fires every time after <see cref="P:NoJsBlazor.Carousel.Active">active</see> item changed.</para>
+            <para>Parameter is index of the new active item.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Carousel.OnRunningChanged">
+            <summary>
+            <para>Fires every time after the <see cref="P:NoJsBlazor.Carousel.Running">Running</see> state is set.</para>
+            <para>Parameter indicates if the carousel is currently running.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Carousel.Attributes">
             <summary>
             Captures unmatched values
@@ -100,16 +162,9 @@
             Indicates if the interval of the carousel is currently running.
             </summary>
         </member>
-        <member name="E:NoJsBlazor.Carousel.OnActiveChanged">
+        <member name="M:NoJsBlazor.Carousel.Dispose">
             <summary>
-            <para>Fires every time after <see cref="F:NoJsBlazor.Carousel.active">active</see> item changed.</para>
-            <para>Parameter is index of the new active item.</para>
-            </summary>
-        </member>
-        <member name="E:NoJsBlazor.Carousel.OnRunningChanged">
-            <summary>
-            <para>Fires every time after the <see cref="P:NoJsBlazor.Carousel.Running">Running</see> state is set.</para>
-            <para>Parameter indicates if the carousel is currently running.</para>
+            Disposes Interval Timer and Autostart Timer.
             </summary>
         </member>
         <member name="M:NoJsBlazor.Carousel.ReInitialize">
@@ -167,7 +222,7 @@
         </member>
         <member name="M:NoJsBlazor.Carousel.SetAutoStartTime(System.Int32)">
             <summary>
-            <para>Sets autostart time of the carousel.</para>
+            <para>Sets autostart time in ms of the carousel.</para>
             <para>Value of 0 deactivates autostart.</para>
             <para>Restarts autoStart if currently running.</para>
             </summary>
@@ -183,9 +238,24 @@
             Stops the interval, sets Running = false and starts the Autostart timer if AutoStartTime greater 0.
             </summary>
         </member>
-        <member name="M:NoJsBlazor.Carousel.Dispose">
+        <member name="T:NoJsBlazor.CarouselAnimation">
             <summary>
-            Disposes Interval Timer and Autostart Timer.
+            Type of animation, how the items are swapped.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.CarouselAnimation.FadeOut">
+            <summary>
+            Transition on opacity
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.CarouselAnimation.Slide">
+            <summary>
+            Transition on translate x-axis
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.CarouselAnimation.SlideRotate">
+            <summary>
+            Transition on translate x-axis and rotate y-axis
             </summary>
         </member>
         <member name="T:NoJsBlazor.CarouselItem">
@@ -210,12 +280,6 @@
             </summary>
             <param name="child">content of this object</param>
         </member>
-        <member name="M:NoJsBlazor.CarouselItem.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
-            <summary>
-            How this component renders, what is normally written in razor-syntax
-            </summary>
-            <param name="builder"></param>
-        </member>
         <member name="T:NoJsBlazor.CollapseDiv">
             <summary>
             A container that content can be collapsed.
@@ -232,22 +296,10 @@
             Content that is hidden when collapsed.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.CollapseDiv.HeadHeight">
-            <summary>
-            <para>Height in px of the head of the Component which also functions as the collapse/expand button.</para>
-            <para>It is also the height of the Component when it is collapsed.</para>
-            <para>Default is 62.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.CollapseDiv.ContentHeight">
-            <summary>
-            <para>Height of the Component when it is expanded.</para>
-            <para>Default is 173.</para>
-            </summary>
-        </member>
         <member name="P:NoJsBlazor.CollapseDiv.StartCollapsed">
             <summary>
-            Initializing collapsed or expanded.
+            <para>Initializing collapsed or expanded.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.CollapseDiv.OnCollapseChanged">
@@ -261,6 +313,16 @@
             Captures unmatched values
             </summary>
         </member>
+        <member name="P:NoJsBlazor.CollapseDiv.Collapsed">
+            <summary>
+            The state of collapsed or expanded.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.CollapseDiv.SilentCollapsedSetter">
+            <summary>
+            Sets the state of <see cref="P:NoJsBlazor.CollapseDiv.Collapsed"/> without notifying <see cref="P:NoJsBlazor.CollapseDiv.OnCollapseChanged"/>.
+            </summary>
+        </member>
         <member name="T:NoJsBlazor.ContextMenu">
             <summary>
             <para>A menu that can be toggled and shown at mouse position.</para>
@@ -270,6 +332,12 @@
         <member name="P:NoJsBlazor.ContextMenu.ChildContent">
             <summary>
             Content of this ContextMenu.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.ContextMenu.OnToggle">
+            <summary>
+            <para>Fires every time when <see cref="P:NoJsBlazor.ContextMenu.Expanded">Expanded</see> get changed.</para>
+            <para>Value is equal <see cref="P:NoJsBlazor.ContextMenu.Expanded">Expanded</see>.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.ContextMenu.Attributes">
@@ -283,35 +351,28 @@
             </summary>
             <param name="value">expanded</param>
         </member>
-        <member name="E:NoJsBlazor.ContextMenu.OnToggle">
-            <summary>
-            <para>Fires every time after <see cref="P:NoJsBlazor.ContextMenu.Expanded">Expanded</see> got set.</para>
-            <para>Value is equal <see cref="P:NoJsBlazor.ContextMenu.Expanded">Expanded</see>.</para>
-            </summary>
-        </member>
         <member name="M:NoJsBlazor.ContextMenu.Open(System.Double,System.Double)">
             <summary>
-            <para>Display the context menu at the given location.</para>
+            Display the context menu at the given location.
             </summary>
-        </member>
-        <member name="M:NoJsBlazor.ContextMenu.Open(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">
-            <summary>
-            <para>Display the context menu based on mouse position.</para>
-            </summary>
-        </member>
-        <member name="M:NoJsBlazor.ContextMenu.Open(Microsoft.AspNetCore.Components.Web.TouchEventArgs)">
-            <summary>
-            <para>Display the context menu based on touch position.</para>
-            </summary>
-        </member>
-        <member name="M:NoJsBlazor.ContextMenu.Open(System.EventArgs)">
-            <summary>
-            Display the context menu based on press position.
-            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
         </member>
         <member name="M:NoJsBlazor.ContextMenu.Close">
             <summary>
             Collapses all expanded submenus and closes the context menu.
+            </summary>
+        </member>
+        <member name="M:NoJsBlazor.ContextMenu.SilentOpen(System.Double,System.Double)">
+            <summary>
+            Display the context menu at the given location without notifying <see cref="P:NoJsBlazor.ContextMenu.OnToggle"/>.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:NoJsBlazor.ContextMenu.SilentClose">
+            <summary>
+            Collapses all expanded submenus and closes the context menu without notifying <see cref="P:NoJsBlazor.ContextMenu.OnToggle"/>.
             </summary>
         </member>
         <member name="M:NoJsBlazor.ContextMenu.Reset">
@@ -341,11 +402,6 @@
             Another <see cref="T:NoJsBlazor.ContextMenu"/> inside of a <see cref="T:NoJsBlazor.ContextMenu"/> or <see cref="T:NoJsBlazor.ContextSubMenu"/>.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.ContextSubMenu.ContextMenuRoot">
-            <summary>
-            Will be automatically set by the root.
-            </summary>
-        </member>
         <member name="P:NoJsBlazor.ContextSubMenu.Head">
             <summary>
             Content that is collapsed visible.
@@ -356,16 +412,21 @@
             Content that is expanded visible.
             </summary>
         </member>
+        <member name="P:NoJsBlazor.ContextSubMenu.OnToggle">
+            <summary>
+            <para>Fires every time when <see cref="P:NoJsBlazor.ContextSubMenu.Expanded">Expanded</see> get changed.</para>
+            <para>Value is equal <see cref="P:NoJsBlazor.ContextSubMenu.Expanded">Expanded</see>.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.ContextSubMenu.Expanded">
             <summary>
             Value for expanding or collapsing this submenu.
             </summary>
             <param name="value">expanded</param>
         </member>
-        <member name="E:NoJsBlazor.ContextSubMenu.OnToggle">
+        <member name="P:NoJsBlazor.ContextSubMenu.SilentExpandedSetter">
             <summary>
-            <para>Fires every time after <see cref="P:NoJsBlazor.ContextSubMenu.Expanded">Expanded</see> got set.</para>
-            <para>Value is equal <see cref="P:NoJsBlazor.ContextSubMenu.Expanded">Expanded</see>.</para>
+            Sets the state of <see cref="P:NoJsBlazor.ContextSubMenu.Expanded"/> without notifying <see cref="P:NoJsBlazor.ContextSubMenu.OnToggle"/> of this submenu.
             </summary>
         </member>
         <member name="M:NoJsBlazor.ContextSubMenu.Toggle">
@@ -391,29 +452,48 @@
         </member>
         <member name="P:NoJsBlazor.Dialog.ShowTitle">
             <summary>
-            Indicates whether to skip the <see cref="P:NoJsBlazor.Dialog.Title">Title</see> section
+            <para>Indicates whether to skip the <see cref="P:NoJsBlazor.Dialog.Title">Title</see> section.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.Moveable">
             <summary>
-            The Window can be grabed and draged around the screen
+            <para>The Window can be grabed and draged around the screen.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.ModalScreen">
             <summary>
             <para>If the background should be blurred/unavailable.</para>
             <para>Technically the background will be overlayed with a div with high opacity.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.CloseOnModalBackground">
             <summary>
-            If on the <see cref="P:NoJsBlazor.Dialog.ModalScreen">ModalBackground</see> a click/touch occurs, whether the window should close or not close.
+            <para>If on the <see cref="P:NoJsBlazor.Dialog.ModalScreen">ModalBackground</see> a click/touch occurs, whether the window should close or not close.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Dialog.OnClose">
+        <member name="P:NoJsBlazor.Dialog.OnActiveChanged">
             <summary>
-            <para>Invokes every time when the Dialog get closed.</para>
-            <para>Technically invokes every time when <see cref="P:NoJsBlazor.Dialog.Active">Active</see> is set to false</para>
+            <para>Invokes every time when the Dialog opens or closes.</para>
+            <para>true: dialog got from close to open, false: dialog got from open to closed.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Dialog.OnTitlePointerDown">
+            <summary>
+            Fires if pointer starts on title div.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Dialog.OnTitlePointerMove">
+            <summary>
+            Fires if pointer moves on title div, but only if pointer down is active.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Dialog.OnTitlePointerUp">
+            <summary>
+            Fires if pointer releases on title div.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.Attributes">
@@ -437,9 +517,15 @@
             <para>false -> window is closed</para>
             </summary>
         </member>
-        <member name="F:NoJsBlazor.Dialog.headBarTC">
+        <member name="P:NoJsBlazor.Dialog.SilentActiveSetter">
             <summary>
-            Use this to fill the @onmove and @onup event of the object behind this window if you don't enable <see cref="P:NoJsBlazor.Dialog.ModalScreen">ModalScreen</see>
+            Sets the state of <see cref="P:NoJsBlazor.Dialog.Active"/> without notifying <see cref="P:NoJsBlazor.Dialog.OnActiveChanged"/>.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Dialog.TitleDiv">
+            <summary>
+            <para>The Container Element of the title head bar.</para>
+            <para>You can use this to register mouse capture.</para>
             </summary>
         </member>
         <member name="M:NoJsBlazor.Dialog.Open">
@@ -517,6 +603,16 @@
             Value of this Input field.
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Input.SilentValueSetter">
+            <summary>
+            Sets the state of <see cref="P:NoJsBlazor.Input.Value"/> without notifying <see cref="P:NoJsBlazor.Input.ValueChanged"/>.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Input.ValueChanged">
+            <summary>
+            Fires every time <see cref="P:NoJsBlazor.Input.Value"/> changes.
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Input.Title">
             <summary>
             <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
@@ -558,178 +654,32 @@
             Captures unmatched values. The values are applied to the outer div container and not to the input field
             </summary>
         </member>
-        <member name="T:NoJsBlazor.LoaderAnimation">
-            <summary>
-            Types of spinning
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderAnimation.Spin">
-            <summary>
-            normal spin
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderAnimation.Spin_skew">
-            <summary>
-            spin with distortion
-            </summary>
-        </member>
-        <member name="T:NoJsBlazor.LoaderTimingFunction">
-            <summary>
-            Speed/Acceleration selection
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderTimingFunction.Linear">
-            <summary>
-            constant speed
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderTimingFunction.Ease">
-            <summary>
-            slow start, then fast, ends slowly
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderTimingFunction.Ease_in">
-            <summary>
-            slow start, fast end
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderTimingFunction.Ease_out">
-            <summary>
-            fast start, slow end
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderTimingFunction.Ease_in_out">
-            <summary>
-            same as <see cref="F:NoJsBlazor.LoaderTimingFunction.Ease">Ease</see>, only even slower start and end
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderTimingFunction.Slow_middle">
-            <summary>
-            fast rotation, but in the middle part very slow
-            </summary>
-        </member>
-        <member name="T:NoJsBlazor.LoaderDirection">
-            <summary>
-            Rotation directions
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderDirection.Normal">
-            <summary>
-            clockwise
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderDirection.Reverse">
-            <summary>
-            counterclockwise
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderDirection.Alternate">
-            <summary>
-            begins with clockwise, then counterclockwise, ...
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.LoaderDirection.Alternate_reverse">
-            <summary>
-            begins with counterclockwise, then clockwise, ...
-            </summary>
-        </member>
-        <member name="T:NoJsBlazor.LoaderIcon">
-            <summary>
-            A little, animated icon that can be used to indicate loading.
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.Size">
-            <summary>
-            <para>Base size of the icon.</para>
-            <para>Default is 100.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.BallSize">
-            <summary>
-            <para>Ball size relativ to the <see cref="P:NoJsBlazor.LoaderIcon.Size">base size</see>.</para>
-            <para>This value can range from 0 to 1, default is 0.875.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.BallMargin">
-            <summary>
-            <para>Space between the balls relativ to the ball size.</para>
-            <para>If ball size is 1.0, this value has no effect.</para>
-            <para>This value can range from 0 to 1, default is 0.25.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.Animation">
-            <summary>
-            <para>Type of animation to play.</para>
-            <para>Default is LoaderAnimation.Spin.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.SpinDuration">
-            <summary>
-            <para>Speed of the rotation in ms.</para>
-            <para>Defailt is 2000.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.SpinTimingFunction">
-            <summary>
-            <para>Timing function of the rotation.</para>
-            <para>Defailt is LoaderTimingFunction.Linear.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.SpinDirection">
-            <summary>
-            <para>Animation direction of the rotation.</para>
-            <para>Defailt is LoaderDirection.Normal.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.ColorDuration">
-            <summary>
-            <para>Speed of color changing in ms.</para>
-            <para>Default is 1500.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.ColorTimingFunction">
-            <summary>
-            <para>Timing function of color changing.</para>
-            <para>Default is LoaderTimingFunction.Linear.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.BallMoveDuration">
-            <summary>
-            <para>Speed of moving the balls outwards in ms.</para>
-            <para>Value of 0 will remove this animation.</para>
-            <para>Default is 2000.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.BallMoveTimingFunction">
-            <summary>
-            <para>Timing funtion of moving the balls outwards.</para>
-            <para>Default is LoaderTimingFunction.Ease_in_out.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.LoaderIcon.Attributes">
-            <summary>
-            Captures unmatched values
-            </summary>
-        </member>
         <member name="T:NoJsBlazor.NavBar">
             <summary>
             A container that can display your brand, the content can be collapsed and contains <see cref="T:NoJsBlazor.NavBarMenu"/> or/and <see cref="T:NoJsBlazor.NavBarItem"/>/<see cref="T:NoJsBlazor.NavBarLink"/>.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.NavBar.DisableBrand">
-            <summary>
-            Should skip the <see cref="P:NoJsBlazor.NavBar.Brand">Brand</see> output.
-            </summary>
-        </member>
         <member name="P:NoJsBlazor.NavBar.Brand">
             <summary>
-            Content which represents your site.
+            <para>Content which represents your site.</para>
+            <para>If it is null, the corresponding parts are not rendered.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.NavBar.Items">
             <summary>
-            <para>List of the <see cref="T:NoJsBlazor.NavBar"/>.</para>
-            <para>This should be a list of <see cref="T:NoJsBlazor.NavBarMenu"/> of <see cref="T:NoJsBlazor.NavBarItem"/> objects.</para>
+            <para>This should be a list of <see cref="T:NoJsBlazor.NavBarMenu"/> of <see cref="T:NoJsBlazor.NavBarItem"/>/<see cref="T:NoJsBlazor.NavBarLink"/> objects.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.NavBar.Breakpoint">
+            <summary>
+            <para>Changes at the given width between phone and desktop view.</para>
+            <para>Default is <see cref="F:NoJsBlazor.NavBarBreakpoint.none"/>.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.NavBar.OnToggle">
+            <summary>
+            <para>Fires every time when <see cref="P:NoJsBlazor.NavBar.Expanded">Expanded</see> get changed.</para>
+            <para>Value is equal <see cref="P:NoJsBlazor.NavBar.Expanded">Expanded</see>.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.NavBar.Attributes">
@@ -742,10 +692,9 @@
             Value for Expanding or Collapsing the navbar
             </summary>
         </member>
-        <member name="E:NoJsBlazor.NavBar.OnToggle">
+        <member name="P:NoJsBlazor.NavBar.SilentExpandedSetter">
             <summary>
-            <para>Fires every time after <see cref="P:NoJsBlazor.NavBar.Expanded">Expanded</see> got set.</para>
-            <para>Value is equal <see cref="P:NoJsBlazor.NavBar.Expanded">Expanded</see>.</para>
+            Sets the state of <see cref="P:NoJsBlazor.NavBar.Expanded"/> without notifying <see cref="P:NoJsBlazor.NavBar.OnToggle"/>.
             </summary>
         </member>
         <member name="M:NoJsBlazor.NavBar.Reset">
@@ -753,15 +702,115 @@
             Collapses all expanded menus and submenus.
             </summary>
         </member>
+        <member name="T:NoJsBlazor.NavBarBreakpoint">
+            <summary>
+            Width values for changing between phone and desktop view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.none">
+            <summary>
+            Changes never, stays always at desktop view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px500">
+            <summary>
+            Below width of 500px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px600">
+            <summary>
+            Below width of 600px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px700">
+            <summary>
+            Below width of 700px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px800">
+            <summary>
+            Below width of 800px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px900">
+            <summary>
+            Below width of 900px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px1000">
+            <summary>
+            Below width of 1000px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px1100">
+            <summary>
+            Below width of 1100px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px1200">
+            <summary>
+            Below width of 1200px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px1300">
+            <summary>
+            Below width of 1300px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px1400">
+            <summary>
+            Below width of 1400px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.px1500">
+            <summary>
+            Below width of 1500px is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.em30">
+            <summary>
+            Below width of 30em is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.em40">
+            <summary>
+            Below width of 40em is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.em50">
+            <summary>
+            Below width of 50em is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.em60">
+            <summary>
+            Below width of 60em is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.em70">
+            <summary>
+            Below width of 70em is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.em80">
+            <summary>
+            Below width of 80em is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.em90">
+            <summary>
+            Below width of 90em is phone view.
+            </summary>
+        </member>
+        <member name="F:NoJsBlazor.NavBarBreakpoint.em100">
+            <summary>
+            Below width of 100em is phone view.
+            </summary>
+        </member>
         <member name="T:NoJsBlazor.NavBarMenu">
             <summary>
             <para>A single menu that can hold other <see cref="T:NoJsBlazor.NavBarMenu"/> or/and <see cref="T:NoJsBlazor.NavBarItem"/>/<see cref="T:NoJsBlazor.NavBarLink"/>.</para>
             <para>This should be placed inside of a <see cref="T:NoJsBlazor.NavBar"/> or <see cref="T:NoJsBlazor.NavBarMenu"/>.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.NavBarMenu.NavBarRoot">
-            <summary>
-            Will be automatically set by the root.
             </summary>
         </member>
         <member name="P:NoJsBlazor.NavBarMenu.Head">
@@ -774,16 +823,21 @@
             Content that is expanded visible.
             </summary>
         </member>
+        <member name="P:NoJsBlazor.NavBarMenu.OnToggle">
+            <summary>
+            <para>Fires every time when <see cref="P:NoJsBlazor.NavBarMenu.Expanded">Expanded</see> get changed.</para>
+            <para>Value is equal <see cref="P:NoJsBlazor.NavBarMenu.Expanded">Expanded</see>.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.NavBarMenu.Expanded">
             <summary>
             Value for expanding or collapsing this submenu.
             </summary>
             <param name="value">expanded</param>
         </member>
-        <member name="E:NoJsBlazor.NavBarMenu.OnToggle">
+        <member name="P:NoJsBlazor.NavBarMenu.SilentExpandedSetter">
             <summary>
-            <para>Fires every time after <see cref="P:NoJsBlazor.NavBarMenu.Expanded">Expanded</see> got set.</para>
-            <para>Value is equal <see cref="P:NoJsBlazor.NavBarMenu.Expanded">Expanded</see>.</para>
+            Sets the state of <see cref="P:NoJsBlazor.NavBarMenu.Expanded"/> without notifying <see cref="P:NoJsBlazor.NavBarMenu.OnToggle"/> of this submenu.
             </summary>
         </member>
         <member name="M:NoJsBlazor.NavBarMenu.Toggle">
@@ -826,6 +880,18 @@
             Value of the Slider
             </summary>
         </member>
+        <member name="P:NoJsBlazor.DecimalSlider.ValueChanged">
+            <summary>
+            <para>Invokes every time Value get changed with:</para>
+            <para>LeftButton, RightButton, Slider or EditField.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.DecimalSlider.OnChange">
+            <summary>
+            <para>Invokes every time Value get changed with:</para>
+            <para>LeftButton, RightButton, Slider (only on release) or EditField.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.DecimalSlider.Title">
             <summary>
             An optional label.
@@ -834,44 +900,44 @@
         <member name="P:NoJsBlazor.DecimalSlider.Min">
             <summary>
             <para>Slider lower bounds.</para>
-            <para>Default is 0</para>
+            <para>Default is 0.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Max">
             <summary>
             <para>Slider upper bounds.</para>
-            <para>Default is 10</para>
+            <para>Default is 10.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Step">
             <summary>
             <para>Slider precision</para>
-            <para>Default is 0.1</para>
+            <para>Default is 0.1.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Editable">
             <summary>
             <para>Indicates if the user is able to edit the number directly.</para>
-            <para>Technically the number is displayed in a input field instead of a label,</para>
-            <para>Dafault is false</para>
+            <para>Technically the number is displayed in a input field instead of a label.</para>
+            <para>Dafault is false.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.DecimalSlider.LeftButtonText">
+        <member name="P:NoJsBlazor.DecimalSlider.LeftButtonContent">
             <summary>
             <para>Content inside the left Button.</para>
-            <para>Default is "🡸"</para>
+            <para>Default is a svg showing "🡸".</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.DecimalSlider.RightButtonText">
+        <member name="P:NoJsBlazor.DecimalSlider.RightButtonContent">
             <summary>
             <para>Content inside the right Button.</para>
-            <para>Default is "🡺"</para>
+            <para>Default is a svg showing "🡺".</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.Display">
             <summary>
             <para>The way the value should be printed.</para>
-            <para>Default is value.ToString()</para>
+            <para>Default is value.ToString().</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.DecimalSlider.ParseEdit">
@@ -897,6 +963,18 @@
             Value of the Slider
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Slider.ValueChanged">
+            <summary>
+            <para>Invokes every time Value get changed with:</para>
+            <para>LeftButton, RightButton, Slider or EditField.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Slider.OnChange">
+            <summary>
+            <para>Invokes every time Value get changed with:</para>
+            <para>LeftButton, RightButton, Slider (only on release) or EditField.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Slider.Title">
             <summary>
             An optional label.
@@ -905,44 +983,44 @@
         <member name="P:NoJsBlazor.Slider.Min">
             <summary>
             <para>Slider lower bounds.</para>
-            <para>Default is 0</para>
+            <para>Default is 0.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.Max">
             <summary>
             <para>Slider upper bounds.</para>
-            <para>Default is 10</para>
+            <para>Default is 10.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.Step">
             <summary>
             <para>Slider precision</para>
-            <para>Default is 1</para>
+            <para>Default is 1.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.Editable">
             <summary>
             <para>Indicates if the user is able to edit the number directly.</para>
-            <para>Technically the number is displayed in a input field instead of a label,</para>
-            <para>Dafault is false</para>
+            <para>Technically the number is displayed in a input field instead of a label.</para>
+            <para>Dafault is false.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.LeftButtonText">
+        <member name="P:NoJsBlazor.Slider.LeftButtonContent">
             <summary>
             <para>Content inside the left Button.</para>
-            <para>Default is "🡸"</para>
+            <para>Default is a svg showing "🡸".</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.RightButtonText">
+        <member name="P:NoJsBlazor.Slider.RightButtonContent">
             <summary>
             <para>Content inside the right Button.</para>
-            <para>Default is "🡺"</para>
+            <para>Default is a svg showing "🡺".</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.Display">
             <summary>
             <para>The way the value should be printed.</para>
-            <para>Default is value.ToString()</para>
+            <para>Default is value.ToString().</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider.ParseEdit">
@@ -972,50 +1050,20 @@
             y-coordinate
             </summary>
         </member>
-        <member name="M:NoJsBlazor.CoordinateTracker.SetCoordinate(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">
+        <member name="M:NoJsBlazor.CoordinateTracker.SetCoordinate(Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
             <summary>
             <para>Sets the coordinates x/y with ClientX/ClientY and returns those.</para>
-            <para>Normally called in onmousedown event.</para>
+            <para>Normally called in onpointerdown event.</para>
             </summary>
             <param name="e"></param>
             <returns></returns>
         </member>
-        <member name="M:NoJsBlazor.CoordinateTracker.SetCoordinate(Microsoft.AspNetCore.Components.Web.TouchEventArgs)">
-            <summary>
-            <para>Sets the coordinates x/y with ClientX/ClientY and returns those.</para>
-            <para>Normally called in ontouchstart event.</para>
-            </summary>
-            <param name="e"></param>
-            <returns></returns>
-        </member>
-        <member name="M:NoJsBlazor.CoordinateTracker.SetCoordinate(System.EventArgs)">
-            <summary>
-            Sets the coordinates x/y with ClientX/ClientY and returns those.
-            </summary>
-            <param name="e">Has to be a <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>, otherwise an Exception is thrown.</param>
-            <returns></returns>
-        </member>
-        <member name="M:NoJsBlazor.CoordinateTracker.MoveCoordinate(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">
+        <member name="M:NoJsBlazor.CoordinateTracker.MoveCoordinate(Microsoft.AspNetCore.Components.Web.PointerEventArgs)">
             <summary>
             <para>Sets the coordinates x/y with ClientX/ClientY and returns the difference to it's previous.</para>
-            <para>Normally called in onmousemove event.</para>
+            <para>Normally called in onpointermove event.</para>
             </summary>
             <param name="e"></param>
-            <returns></returns>
-        </member>
-        <member name="M:NoJsBlazor.CoordinateTracker.MoveCoordinate(Microsoft.AspNetCore.Components.Web.TouchEventArgs)">
-            <summary>
-            <para>Sets the coordinates x/y with ClientX/ClientY and returns the difference to it's previous.</para>
-            <para>Normally called in ontouchmove event.</para>
-            </summary>
-            <param name="e"></param>
-            <returns></returns>
-        </member>
-        <member name="M:NoJsBlazor.CoordinateTracker.MoveCoordinate(System.EventArgs)">
-            <summary>
-            <para>Sets the coordinates x/y with ClientX/ClientY and returns the difference to it's previous.</para>
-            </summary>
-            <param name="e">Has to be a <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>, otherwise an Exception is thrown.</param>
             <returns></returns>
         </member>
         <member name="T:NoJsBlazor.ListableComponentBase`1">
@@ -1028,35 +1076,6 @@
             <summary>
             <para>Registering the component at the parent <see cref="T:NoJsBlazor.ListableComponentBase`1">ListableComponentBase</see>.</para>
             <para>Therefore the reference of the parent has to be given with a CascadingParameter.</para>
-            </summary>
-        </member>
-        <member name="T:NoJsBlazor.ListableHoldingComponentBase`1">
-            <summary>
-            <para>It's actually just a combination of <see cref="T:NoJsBlazor.ListableComponentBase`1"/> and <see cref="T:NoJsBlazor.ListholdingComponentBase`1"/>.</para>
-            <para>But since multiple inheritence doesn't work, an ugly workaround is used.</para>
-            </summary>
-            <typeparam name="T">Base class</typeparam>
-        </member>
-        <member name="M:NoJsBlazor.ListableHoldingComponentBase`1.OnInitialized">
-            <summary>
-            <para>Registering the component at the parent <see cref="T:NoJsBlazor.ListableComponentBase`1"/>.</para>
-            <para>Therefore the reference of the parent has to be given with a CascadingParameter.</para>
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.ListableHoldingComponentBase`1.childList">
-            <summary>
-            List of all registered <see cref="T:NoJsBlazor.ListableComponentBase`1"/> childs.
-            </summary>
-        </member>
-        <member name="M:NoJsBlazor.ListableHoldingComponentBase`1.Register(`0)">
-            <summary>
-            API for <see cref="T:NoJsBlazor.ListableComponentBase`1"/> objects to add themselves to the list.
-            </summary>
-            <param name="child"></param>
-        </member>
-        <member name="P:NoJsBlazor.ListableHoldingComponentBase`1.ChildCount">
-            <summary>
-            Gives the current number of registered childs.
             </summary>
         </member>
         <member name="T:NoJsBlazor.ListholdingComponentBase`1">
@@ -1082,88 +1101,10 @@
             Gives the current number of registered childs.
             </summary>
         </member>
-        <member name="T:NoJsBlazor.TouchClick`1">
+        <member name="P:NoJsBlazor.CollapseDivArrow.Attributes">
             <summary>
-            <para>Objects of that class can handle mouse and touch input properly, that on mouse/touch down the corresponding given methods invokes.</para>
-            <para>It manages, that the simulated click on phnone devices will not trigger the given method a second time and also only the left click will trigger an invoke.</para>
+            Captures unmatched values
             </summary>
-            <typeparam name="T">T should be a data-model that can hold all necessary parameters.</typeparam>
-        </member>
-        <member name="M:NoJsBlazor.TouchClick`1.#ctor(System.Action{System.EventArgs},System.Action{System.EventArgs},System.Action{System.EventArgs})">
-            <summary>
-            Creates an Object that handles mouse and touch input properly to invoke the corresponding given methods.
-            </summary>
-            <param name="OnDown">
-            <para>Will be executed once every time when someone clickes or touches the item.</para>
-            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
-            </param>
-            <param name="OnMove">
-            <para>Wxecutes only if OnDown happend before.</para>
-            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
-            </param>
-            <param name="OnUp">
-            <para>Will be executed once every time when someone releases the item but only if OnDown happend.</para>
-            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
-            </param>
-        </member>
-        <member name="P:NoJsBlazor.TouchClick`1.OnMouseDown">
-            <summary>
-            usage: @onmousedown="[MyTouchClickObject].OnMouseDown"
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.TouchClick`1.OnTouchStart">
-            <summary>
-            usage: @ontouchstart="[MyTouchClickObject].OnTouchStart"
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.TouchClick`1.OnMouseMove">
-            <summary>
-            usage: @onmousemove="[MyTouchClickObject].OnMouseMove"
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.TouchClick`1.OnTouchMove">
-            <summary>
-            usage: @ontouchmove="[MyTouchClickObject].OnTouchMove"
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.TouchClick`1.OnMouseUp">
-            <summary>
-            usage: @onmouseup="[MyTouchClickObject].OnMouseUp"
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.TouchClick`1.OnTouchEnd">
-            <summary>
-            usage: @ontouchend="[MyTouchClickObject].OnTouchEnd"
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.TouchClick`1.Parameter">
-            <summary>
-            <para>T should be a model that can hold all necessary parameters.</para>
-            <para>Set the parameters before invoking the Action, so the parameters can be used in the given method.</para>
-            </summary>
-        </member>
-        <member name="T:NoJsBlazor.TouchClick">
-            <summary>
-            <para>Objects of that class can handle mouse and touch input properly, that on mouse/touch down the corresponding given methods invokes.</para>
-            <para>It manages, that the simulated click on phnone devices will not trigger the given method a second time and also only the left click will trigger an invoke.</para>
-            </summary>
-        </member>
-        <member name="M:NoJsBlazor.TouchClick.#ctor(System.Action{System.EventArgs},System.Action{System.EventArgs},System.Action{System.EventArgs})">
-            <summary>
-            Creates an Object that handles mouse and touch input properly to invoke the corresponding given methods.
-            </summary>
-            <param name="OnDown">
-            <para>Will be executed once every time when someone clickes or touches the item.</para>
-            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
-            </param>
-            <param name="OnMove">
-            <para>Wxecutes only if OnDown happend before.</para>
-            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
-            </param>
-            <param name="OnUp">
-            <para>Will be executed once every time when someone releases the item but only if OnDown happend.</para>
-            <para><see cref="T:System.EventArgs"/> is either an instance of  <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>.</para>
-            </param>
         </member>
         <member name="P:NoJsBlazor.NavBarItem.Head">
             <summary>
@@ -1175,7 +1116,7 @@
             Html that will be displayed.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.NavBarLink.NavBarRoot">
+        <member name="P:NoJsBlazor.NavBarLink.Parent">
             <summary>
             Will be automatically set by the root.
             </summary>

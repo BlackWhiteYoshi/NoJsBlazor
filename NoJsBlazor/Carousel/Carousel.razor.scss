@@ -39,7 +39,7 @@
             }
 
             &.slide {
-                transition: transform ease-out var(--swap-duration);
+                transition: translate ease-out var(--swap-duration), rotate ease-out var(--swap-duration);
             }
 
             &.active {

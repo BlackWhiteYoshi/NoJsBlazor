@@ -13,7 +13,8 @@
                 <div class="carousel-element @ItemContainer[i].slideClass" style="
                         z-index: @ItemContainer[i].zIndex;
                         opacity: @ItemContainer[i].opacity;
-                        transform: translateX(@(ItemContainer[i].translateX)%) rotateY(@(ItemContainer[i].rotateY)deg);">
+                        translate: @(ItemContainer[i].translateX)%;
+                        rotate: y @(ItemContainer[i].rotateY)deg;">
                     @ItemContainer[i].carouselItem.ChildContent
                 </div>
             }

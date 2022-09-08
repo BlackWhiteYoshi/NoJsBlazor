@@ -21,8 +21,8 @@
     z-index: 999;
     border-radius: 5px;
     list-style: none;
-    transform: rotate3d(1, 0, 0, 90deg);
-    transition: transform 0.2s;
+    rotate: x 90deg;
+    transition: rotate 0.2s;
 
     .context-menu {
         top: -$menu-padding;
@@ -30,7 +30,7 @@
     }
 
     &.expanded {
-        transform: none;
+        rotate: none;
     }
 
     .context-element {
@@ -46,7 +46,7 @@
         }
 
         &:hover > .context-menu, &.expanded > .context-menu {
-            transform: rotate3d(0, 0, 0, 90deg);
+            rotate: none;
         }
 
         &.context-item {
@@ -74,8 +74,8 @@
         height: auto;
         margin: 0px 5px 0 2px;
         cursor: auto;
-        transform: rotate(270deg);
-        transition: fill, transform 0.1s;
+        rotate: 270deg;
+        transition: rotate 0.1s linear, fill 0.1s linear;
 
         & > polygon {
             fill: var(--arrow-color);
@@ -87,7 +87,8 @@
     }
 
     .context-element:hover > .context-div > .context-arrow {
-        transform: translateX(3px) rotate(270deg);
+        translate: 3px;
+        rotate: 270deg;
 
         & > polygon {
             fill: var(--arrow-hover-color);

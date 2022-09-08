@@ -10,9 +10,9 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Library for Blazor apps. It contains some UI-Components. This Library doesn't use any Javascript code, everything is implemented in Razor, (S)CSS and C#.</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>2.4.0</Version>
-    <AssemblyVersion>2.4.0.0</AssemblyVersion>
-    <FileVersion>2.4.0.0</FileVersion>
+    <Version>2.4.1</Version>
+    <AssemblyVersion>2.4.1.0</AssemblyVersion>
+    <FileVersion>2.4.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,8 +23,6 @@
     <Using Include="Microsoft.AspNetCore.Components.Routing" />
     <Using Include="Microsoft.AspNetCore.Components.Web" />
     <Using Include="Microsoft.JSInterop" />
-
-    <Using Remove="System.Threading" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +35,7 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <DocumentationFile>C:\Users\BlackWhiteYoshi\Documents\Visual Studio 2019\Projects\_Libraries\NoJsBlazor\NoJsBlazor\NoJsBlazor.xml</DocumentationFile>
+    <DocumentationFile>$(ProjectDir)NoJsBlazor.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

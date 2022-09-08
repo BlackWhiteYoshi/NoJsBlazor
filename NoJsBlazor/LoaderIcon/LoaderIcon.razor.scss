@@ -36,14 +36,26 @@
 
             
     @keyframes spin-type-1 {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+            rotate: 0deg;
+        }
+        to {
+            rotate: 360deg;
+        }
     }
 
     @keyframes spin-type-2 {
-        0% { transform: rotate(0deg) skew(-30deg, -30deg); }
-        50% { transform: rotate(180deg) skew(30deg, 30deg); }
-        100% { transform: rotate(360deg) skew(-30deg, -30deg); }
+        0% {
+            rotate: 0deg;
+            transform: skew(-30deg, -30deg);
+        }
+        50% {
+            transform: skew(30deg, 30deg);
+        }
+        100% {
+            rotate: 360deg;
+            transform: skew(-30deg, -30deg);
+        }
     }
             
     @keyframes move-type-1 {
@@ -140,21 +152,18 @@
     // ball animations
 
     @keyframes ball-action-square {
-        0% {
-            border-radius: 50%;
-        }
         40% {
             border-radius: 50%;
         }
         60% {
             border-radius: 0%;
-            transform: scale(1, 1);
+            scale: 1;
         }
         70% {
-            transform: scale(0, 1);
+            scale: 0 1;
         }
         80% {
-            transform: scale(1, 1);
+            scale: 1;
         }
         100% {
             border-radius: 50%;
@@ -175,55 +184,60 @@
             
     @keyframes ball-action-line {
         65% {
-            transform: translate(0);
+            translate: 0;
         }
         70% {
-            transform: translateY(90%);
+            translate: 0 90%;
         }
         75% {
-            transform: translateY(30%);
+            translate: 0 30%;
         }
         80% {
-            transform: translateY(120%);
+            translate: 0 120%;
         }
         85% {
-            transform: translateY(60%);
+            translate: 0 60%;
         }
         90% {
             width: var(--size);
             height: var(--size);
-            transform: translateY(150%);
+            translate: 0 150%;
         }
         95% {
             width: calc(var(--size) * 0.01);
             height: calc(var(--size) * 2);
-            transform: translate(calc(var(--size) / 2), var(--size));
+            translate: calc(var(--size) / 2) var(--size);
         }
         100% {
             width: var(--size);
             height: var(--size);
-            transform: translate(0);
+            translate: 0;
         }
     }
             
     @keyframes ball-action-big {
         70% {
             z-index: -1;
-            transform: translate(0) scale(1);
+            translate: 0;
+            scale: 1;
         }
         85% {
             z-index: -1;
-            transform: translate(-100%, -100%) scale(3);
+            translate: -100% -100%;
+            scale: 3;
         }
         90% {
             z-index: -1;
-            transform: translate(-100%, -100%) scale(0);
+            translate: -100% -100%;
+            scale: 0;
         }
         95% {
-            transform: translate(0) scale(0);
+            translate: 0;
+            scale: 0;
         }
         100% {
-            transform: translate(0) scale(1);
+            translate: 0;
+            scale: 1;
         }
     }
 }
