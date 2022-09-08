@@ -2,7 +2,7 @@
 
 namespace ManualTesting.Client.Services;
 
-public interface IJSModuleRuntime : IJSRuntime {
+public interface IJSModuleRuntime : IJSInProcessRuntime {
     protected IJSRuntime JsRuntime { get; }
 
 
@@ -179,6 +179,17 @@ public interface IJSModuleRuntime : IJSRuntime {
     #region non-module methods
 
     /// <summary>
+    /// Invokes the specified JavaScript function synchronously.
+    /// </summary>
+    /// <typeparam name="TResult">The JSON-serializable return type.</typeparam>
+    /// <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
+    /// <param name="args">JSON-serializable arguments.</param>
+    /// <returns>An instance of <typeparamref name="TResult"/> obtained by JSON-deserializing the return value.</returns>
+    TResult IJSInProcessRuntime.Invoke<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.PublicProperties)] TResult>(string identifier, params object?[]? args)
+        => ((IJSInProcessRuntime)JsRuntime).Invoke<TResult>(identifier, args);
+
+
+    /// <summary>
     /// This method performs synchronous, if the underlying implementation supports synchrounous interoperability.
     /// </summary>
     /// <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>window.someScope.someFunction</c>.</param>
@@ -221,6 +232,7 @@ public interface IJSModuleRuntime : IJSRuntime {
         else
             return JsRuntime.InvokeAsync<TValue>(identifier, cancellationToken, args);
     }
+
 
     /// <summary>
     /// Invokes the specified JavaScript function asynchronously.

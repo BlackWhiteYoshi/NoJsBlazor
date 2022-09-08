@@ -27,6 +27,7 @@ public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
 
     public event Action<MouseEventArgs>? Click;
 
+
     protected override async Task OnInitializedAsync() {
         _ = base.OnInitializedAsync();
 
