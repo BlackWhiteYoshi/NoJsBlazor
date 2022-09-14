@@ -63,20 +63,31 @@ public static class CBox {
     }
 
     /// <summary>
-    /// Takes a raw cookieString and returns a key,value array.
+    /// Takes a raw cookieString and returns a key,value dictionary.
     /// </summary>
     /// <param name="cookieString">string with ';' seperated cookies</param>
     /// <returns></returns>
-    public static Dictionary<string, string> SplitCookies(string cookieString) {
-        string[] cookies = cookieString.Split(';');
+    public static Dictionary<string, string> SplitCookies(ReadOnlySpan<char> cookieString) {
+        Dictionary<string, string> result = new();
 
-        Dictionary<string, string> cookieDic = new(cookies.Length);
-        foreach (string cookie in cookies) {
-            string[] pairs = cookie.Split('=');
-            if (pairs.Length == 2)
-                cookieDic.Add(pairs[0].Trim(), pairs[1].Trim());
+        while (true) {
+            int keyIndex = cookieString.IndexOf("=");
+            if (keyIndex == -1)
+                break;
+            string key = new(cookieString[..keyIndex].Trim());
+            cookieString = cookieString[(keyIndex + 1)..];
+
+            int valueIndex = cookieString.IndexOf(";");
+            if (valueIndex == -1) {
+                string lastValue = new(cookieString.Trim());
+                result.Add(key, lastValue);
+                break;
+            }
+            string value = new(cookieString[..valueIndex].Trim());
+            cookieString = cookieString[(valueIndex + 1)..];
+            result.Add(key, value);
         }
 
-        return cookieDic;
+        return result;
     }
 }
