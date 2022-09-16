@@ -4,7 +4,7 @@
 /// <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
 /// <para>The value of this object is from type <see cref="decimal"/>.</para>
 /// </summary>
-public partial class DecimalSlider : ComponentBase {
+public sealed partial class DecimalSlider : ComponentBase {
     /// <summary>
     /// Value of the Slider
     /// </summary>

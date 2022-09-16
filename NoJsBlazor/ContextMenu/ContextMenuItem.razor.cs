@@ -4,7 +4,7 @@
 /// <para>Wrapper for the content that will be a context item.</para>
 /// <para>This should be placed inside of a <see cref="ContextMenu"/>/<see cref="ContextSubMenu"/> instance.</para>
 /// </summary>
-public partial class ContextMenuItem : ComponentBase {
+public sealed partial class ContextMenuItem : ComponentBase {
     /// <summary>
     /// Html that will be displayed.
     /// </summary>

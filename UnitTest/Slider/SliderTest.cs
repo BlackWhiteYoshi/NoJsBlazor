@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public class SliderTest : TestContext {
+public sealed class SliderTest : TestContext {
     #region parameter
 
     [Fact]

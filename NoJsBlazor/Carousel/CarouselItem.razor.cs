@@ -4,7 +4,7 @@
 /// <para>Wrapper for the content that will be a carousel item.</para>
 /// <para>This should be placed inside Renderfragment <b>Items</b> of a <see cref="Carousel"/> instance.</para>
 /// </summary>
-public partial class CarouselItem : ListableComponentBase<CarouselItem> {
+public sealed partial class CarouselItem : ListableComponentBase<CarouselItem> {
     /// <summary>
     /// Content of this component.
     /// </summary>

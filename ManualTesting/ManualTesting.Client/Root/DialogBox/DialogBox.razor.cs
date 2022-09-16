@@ -5,7 +5,7 @@ namespace ManualTesting.Client;
 /// <summary>
 /// A Container located at the top layer of &lt;body&gt;, so dialog-RenderFragments can be rendered here.
 /// </summary>
-public partial class DialogBox : ServiceComponentBase<IDialogBox>, IDialogBox {
+public sealed partial class DialogBox : ServiceComponentBase<IDialogBox>, IDialogBox {
     private readonly List<RenderFragment> dialogList = new();
 
     /// <summary>

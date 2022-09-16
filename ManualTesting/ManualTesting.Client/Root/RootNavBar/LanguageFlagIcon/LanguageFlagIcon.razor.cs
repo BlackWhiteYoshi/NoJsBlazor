@@ -3,7 +3,7 @@ using NoJsBlazor;
 
 namespace ManualTesting.Client;
 
-public partial class LanguageFlagIcon : ComponentBase, IDisposable {
+public sealed partial class LanguageFlagIcon : ComponentBase, IDisposable {
     [Inject, AllowNull]
     private IJSModuleRuntime JsModuleRuntime { get; init; }
 

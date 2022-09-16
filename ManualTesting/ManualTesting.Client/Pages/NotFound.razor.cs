@@ -2,7 +2,7 @@
 
 namespace ManualTesting.Client;
 
-public partial class NotFound : PageComponentBase {
+public sealed partial class NotFound : PageComponentBase {
     [Inject, AllowNull]
     private NavigationManager NavigationManager { get; init; }
 

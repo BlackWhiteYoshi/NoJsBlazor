@@ -4,7 +4,7 @@
 /// <para>A service provider with dynamic lifetime entries.</para>
 /// <para>Components can be registered and unregistered any time, normally when that component is instantiated/disposed.</para>
 /// </summary>
-public class ComponentMediator : IComponentMediator {
+public sealed class ComponentMediator : IComponentMediator {
     private readonly Dictionary<Type, object> componentList = new();
 
 

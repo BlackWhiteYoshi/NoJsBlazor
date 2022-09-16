@@ -3,7 +3,7 @@
 /// <summary>
 /// Another <see cref="ContextMenu"/> inside of a <see cref="ContextMenu"/> or <see cref="ContextSubMenu"/>.
 /// </summary>
-public partial class ContextSubMenu : ListableComponentBase<ContextSubMenu> {
+public sealed partial class ContextSubMenu : ListableComponentBase<ContextSubMenu> {
     /// <summary>
     /// Content that is collapsed visible.
     /// </summary>

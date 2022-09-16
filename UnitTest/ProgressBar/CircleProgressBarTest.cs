@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public class CircleProgressBarTest : TestContext {
+public sealed class CircleProgressBarTest : TestContext {
     #region parameter
 
     [Fact]

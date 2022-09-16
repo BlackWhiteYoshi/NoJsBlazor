@@ -4,7 +4,7 @@
 /// <para>A normal input field with a embedded label.</para>
 /// <para>Don't use it inside EditForm, use <see cref="EditFormInput">EditFormInput</see> instead.</para>
 /// </summary>
-public partial class Input : ComponentBase {
+public sealed partial class Input : ComponentBase {
     private string? _value;
     /// <summary>
     /// Value of this Input field.

@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public class InputTest : TestContext {
+public sealed class InputTest : TestContext {
     #region parameter
 
     [Fact]

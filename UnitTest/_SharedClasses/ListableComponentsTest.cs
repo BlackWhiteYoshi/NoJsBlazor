@@ -1,6 +1,6 @@
 ﻿namespace UnitTest;
 
-public class ListableComponentsTest : TestContext {
+public sealed class ListableComponentsTest : TestContext {
     private class ListholdingComponentDummy : ListholdingComponentBase<ListableComponentDummy> {
         public List<ListableComponentDummy> ChildList => childList;
     }

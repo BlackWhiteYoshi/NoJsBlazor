@@ -3,7 +3,7 @@
 /// <summary>
 /// A little message window that it is first hidden and can be displayed on demand.
 /// </summary>
-public partial class Dialog : ComponentBase {
+public sealed partial class Dialog : ComponentBase {
     /// <summary>
     /// Html that will be displayed inside the head bar.
     /// </summary>

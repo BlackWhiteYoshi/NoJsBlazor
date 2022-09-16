@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public partial class EditFormInputTest : TestContext {
+public sealed partial class EditFormInputTest : TestContext {
     #region parameter
 
     [Fact]

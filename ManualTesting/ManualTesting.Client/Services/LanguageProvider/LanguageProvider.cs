@@ -1,6 +1,6 @@
 ﻿namespace ManualTesting.Client.Services;
 
-public class LanguageProvider : ILanguageProvider {
+public sealed class LanguageProvider : ILanguageProvider {
     private Language _language = Language.English;
     /// <summary>
     /// <para>The Value of this class.</para>

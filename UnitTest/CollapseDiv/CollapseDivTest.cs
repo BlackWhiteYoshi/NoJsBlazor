@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public class CollapseDivTest : TestContext {
+public sealed class CollapseDivTest : TestContext {
     #region parameter
 
     [Fact]

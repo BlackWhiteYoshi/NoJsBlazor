@@ -4,7 +4,7 @@
 /// <para>A normal input field with a embedded label.</para>
 /// <para>It can only be used inside EditForm.</para>
 /// </summary>
-public partial class EditFormInput : InputBase<string> {
+public sealed partial class EditFormInput : InputBase<string> {
     /// <summary>
     /// <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
     /// <para>returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete)</para>

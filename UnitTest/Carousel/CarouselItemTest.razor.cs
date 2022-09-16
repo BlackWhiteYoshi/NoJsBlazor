@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public partial class CarouselItemTest : TestContext {
+public sealed partial class CarouselItemTest : TestContext {
     [Fact]
     public void ChildContent_Is_Rendered_In_carouselItemDiv() {
         MarkupString TEST_HTML = new("<p>Test Text</p>");

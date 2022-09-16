@@ -3,7 +3,7 @@
 /// <summary>
 /// A container that content can be collapsed.
 /// </summary>
-public partial class CollapseDiv : ComponentBase {
+public sealed partial class CollapseDiv : ComponentBase {
     /// <summary>
     /// <para>Content that is also visible collapsed.</para>
     /// <para>If clicked on it, it will expand/collapse.</para>

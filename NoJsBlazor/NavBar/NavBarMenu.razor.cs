@@ -4,7 +4,7 @@
 /// <para>A single menu that can hold other <see cref="NavBarMenu"/> or/and <see cref="NavBarItem"/>/<see cref="NavBarLink"/>.</para>
 /// <para>This should be placed inside of a <see cref="NavBar"/> or <see cref="NavBarMenu"/>.</para>
 /// </summary>
-public partial class NavBarMenu : ListableComponentBase<NavBarMenu> {
+public sealed partial class NavBarMenu : ListableComponentBase<NavBarMenu> {
     /// <summary>
     /// Content that is collapsed visible.
     /// </summary>

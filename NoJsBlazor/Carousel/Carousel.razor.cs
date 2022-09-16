@@ -6,7 +6,7 @@ namespace NoJsBlazor;
 /// <para>A Carousel like in Bootstrap. It holds <see cref="RenderFragment"/> as items. </para>
 /// <para>It can also display an overlay, control-arrows, item indicators and a play/stop button.</para>
 /// </summary>
-public partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposable {
+public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposable {
     private struct Item {
         /// <summary>
         /// Renderable content of this item.

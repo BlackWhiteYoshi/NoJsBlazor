@@ -2,7 +2,7 @@
 
 namespace ManualTesting.Client;
 
-public partial class Home : PageComponentBase, IDisposable {
+public sealed partial class Home : PageComponentBase, IDisposable {
     [Inject, AllowNull]
     private IDialogBox DialogBox { get; init; }
 

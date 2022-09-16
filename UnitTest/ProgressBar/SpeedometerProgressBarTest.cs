@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public class SpeedometerProgressBarTest : TestContext {
+public sealed class SpeedometerProgressBarTest : TestContext {
     #region parameter
 
     [Fact]

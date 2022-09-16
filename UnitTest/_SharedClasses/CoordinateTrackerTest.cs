@@ -1,6 +1,6 @@
 ﻿namespace UnitTest;
 
-public class CoordinateTrackerTest {
+public sealed class CoordinateTrackerTest {
     [Fact]
     public void SetCoordinate_MouseEventArgs_Sets_XY_With_ClientXY() {
         const double X = 10;

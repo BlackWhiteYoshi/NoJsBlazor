@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public class LoaderIconTest : TestContext {
+public sealed class LoaderIconTest : TestContext {
     #region parameter
 
     [Fact]

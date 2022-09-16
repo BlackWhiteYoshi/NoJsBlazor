@@ -3,7 +3,7 @@ using NoJsBlazor;
 
 namespace ManualTesting.Client;
 
-public partial class RootNavBar : ComponentBase, IDisposable {
+public sealed partial class RootNavBar : ComponentBase, IDisposable {
     [Inject, AllowNull]
     private ILanguageProvider Lang { get; init; }
 

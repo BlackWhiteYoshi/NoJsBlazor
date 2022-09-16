@@ -1,6 +1,6 @@
 ﻿namespace ManualTesting.Client.Services;
 
-public class JSModuleRuntime : IJSModuleRuntime, IDisposable, IAsyncDisposable {
+public sealed class JSModuleRuntime : IJSModuleRuntime, IDisposable, IAsyncDisposable {
     #region construction
 
     private readonly IJSRuntime _jsRuntime;

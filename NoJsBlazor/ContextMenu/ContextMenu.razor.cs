@@ -4,7 +4,7 @@
 /// <para>A menu that can be toggled and shown at mouse position.</para>
 /// <para>Triggering the menu is not included.</para>
 /// </summary>
-public partial class ContextMenu : ListholdingComponentBase<ContextSubMenu> {
+public sealed partial class ContextMenu : ListholdingComponentBase<ContextSubMenu> {
     /// <summary>
     /// Content of this ContextMenu.
     /// </summary>

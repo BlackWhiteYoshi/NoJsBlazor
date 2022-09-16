@@ -2,7 +2,7 @@
 
 namespace UnitTest;
 
-public partial class ContextSubMenuTest : TestContext {
+public sealed partial class ContextSubMenuTest : TestContext {
     #region parameter
 
     [Fact]

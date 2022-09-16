@@ -2,7 +2,7 @@ using AngleSharp.Dom;
 
 namespace UnitTest;
 
-public partial class CarouselTest : TestContext {
+public sealed partial class CarouselTest : TestContext {
     #region parameter
 
     [Fact]

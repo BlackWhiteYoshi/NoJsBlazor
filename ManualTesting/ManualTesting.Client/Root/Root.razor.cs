@@ -2,7 +2,7 @@
 
 namespace ManualTesting.Client;
 
-public partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
+public sealed partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
     private const string ROOT_JS = "/Root/Root.razor.js";
 
 

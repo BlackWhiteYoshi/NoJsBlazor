@@ -3,7 +3,7 @@
 /// <summary>
 /// A container that can display your brand, the content can be collapsed and contains <see cref="NavBarMenu"/> or/and <see cref="NavBarItem"/>/<see cref="NavBarLink"/>.
 /// </summary>
-public partial class NavBar : ListholdingComponentBase<NavBarMenu> {
+public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     /// <summary>
     /// <para>Content which represents your site.</para>
     /// <para>If it is null, the corresponding parts are not rendered.</para>
