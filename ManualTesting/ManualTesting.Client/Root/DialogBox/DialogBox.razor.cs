@@ -1,11 +1,9 @@
-﻿using ManualTesting.Client.Services;
-
-namespace ManualTesting.Client;
+﻿namespace ManualTesting.Client;
 
 /// <summary>
 /// A Container located at the top layer of &lt;body&gt;, so dialog-RenderFragments can be rendered here.
 /// </summary>
-public sealed partial class DialogBox : ServiceComponentBase<IDialogBox>, IDialogBox {
+public sealed partial class DialogBox : LanguageServiceComponentBase<IDialogBox>, IDialogBox {
     private readonly List<RenderFragment> dialogList = new();
 
     /// <summary>
@@ -30,24 +28,4 @@ public sealed partial class DialogBox : ServiceComponentBase<IDialogBox>, IDialo
     /// Triggers a <see cref="ComponentBase.StateHasChanged">StateHasChanged</see>.
     /// </summary>
     public void Rerender() => InvokeAsync(StateHasChanged);
-
-
-    #region Language Listener
-
-    [Inject, AllowNull]
-    private ILanguageProvider Lang { get; init; }
-
-    protected override void OnInitialized() {
-        base.OnInitialized();
-        Lang.OnLanguageChanged += Rerender;
-    }
-
-    public new void Dispose() {
-        base.Dispose();
-        Lang.OnLanguageChanged -= Rerender;
-    }
-
-    private void Rerender(Language language) => InvokeAsync(StateHasChanged);
-
-    #endregion
 }
