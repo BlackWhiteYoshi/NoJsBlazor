@@ -1,25 +1,15 @@
-﻿using ManualTesting.Client.Services;
-
-namespace ManualTesting.Client;
+﻿namespace ManualTesting.Client;
 
 /// <summary>
-/// A normal component that register itself on initializing at the Layout, so the Layout can call Rerender()
+/// A normal component that register itself on initializing at the Root, so Root know it current page.
 /// </summary>
-public abstract class PageComponentBase : ComponentBase, IDisposable {
-    [Inject, AllowNull]
-    protected ILanguageProvider Lang { get; init; }
-
+public abstract class PageComponentBase : LanguageComponentBase {
     [Inject, AllowNull]
     protected IRoot Root { get; init; }
 
 
     protected override void OnInitialized() {
         base.OnInitialized();
-        Lang.OnLanguageChanged += Rerender;
         Root.PageComponent = this;
     }
-
-    public void Dispose() => Lang.OnLanguageChanged -= Rerender;
-
-    private void Rerender(Language language) => InvokeAsync(StateHasChanged);
 }

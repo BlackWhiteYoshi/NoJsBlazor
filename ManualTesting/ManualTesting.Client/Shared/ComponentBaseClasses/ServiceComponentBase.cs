@@ -16,5 +16,8 @@ public abstract class ServiceComponentBase<T> : ComponentBase, IDisposable {
         Mediator.Register<T>(this);
     }
 
-    public void Dispose() => Mediator.Unregister<T>();
+    public void Dispose() {
+        Mediator.Unregister<T>();
+        GC.SuppressFinalize(this);
+    }
 }

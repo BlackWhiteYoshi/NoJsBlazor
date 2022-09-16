@@ -1,6 +1,5 @@
-﻿@using ManualTesting.Client.Services
-
-@namespace ManualTesting.Client
+﻿@namespace ManualTesting.Client
+@inherits LanguageComponentBase
 
 <header class="header-navbar" @onclick:stopPropagation>
     <NavBar @ref="navBar" Breakpoint="NavBarBreakpoint.em50" OnToggle="PhoneToggle">

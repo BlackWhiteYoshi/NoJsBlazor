@@ -3,12 +3,9 @@ using NoJsBlazor;
 
 namespace ManualTesting.Client;
 
-public sealed partial class LanguageFlagIcon : ComponentBase, IDisposable {
+public sealed partial class LanguageFlagIcon : LanguageComponentBase, IDisposable {
     [Inject, AllowNull]
     private IJSModuleRuntime JsModuleRuntime { get; init; }
-
-    [Inject, AllowNull]
-    private ILanguageProvider Lang { get; init; }
 
     [Inject, AllowNull]
     private IRoot Root { get; init; }
@@ -24,15 +21,12 @@ public sealed partial class LanguageFlagIcon : ComponentBase, IDisposable {
     protected override void OnInitialized() {
         base.OnInitialized();
         DialogBox.Add(RenderLanguageDialog);
-        Lang.OnLanguageChanged += Rerender;
     }
 
-    public void Dispose() {
+    public new void Dispose() {
+        base.Dispose();
         DialogBox.Remove(RenderLanguageDialog);
-        Lang.OnLanguageChanged -= Rerender;
     }
-    
-    private void Rerender(Language language) => InvokeAsync(StateHasChanged);
 
 
     private void ToggleLanguageDialog(MouseEventArgs e) {
