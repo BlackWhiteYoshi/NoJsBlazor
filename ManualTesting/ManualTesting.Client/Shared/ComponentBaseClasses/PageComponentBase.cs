@@ -1,9 +1,10 @@
 ﻿namespace ManualTesting.Client;
 
 /// <summary>
-/// A normal component that register itself on initializing at the Root, so Root know it current page.
+/// <para>A normal component that rerenders when language is changed.</para>
+/// <para>A normal component that register itself on initializing at the Root, so Root know it current page.</para>
 /// </summary>
-public abstract class PageComponentBase : LanguageComponentBase {
+public abstract class PageComponentBase : LanguageComponentBase, IDisposable {
     [Inject, AllowNull]
     protected IRoot Root { get; init; }
 
@@ -11,5 +12,11 @@ public abstract class PageComponentBase : LanguageComponentBase {
     protected override void OnInitialized() {
         base.OnInitialized();
         Root.PageComponent = this;
+    }
+
+    public new void Dispose() {
+        base.Dispose();
+        if (Root.PageComponent == this)
+            Root.PageComponent = null;
     }
 }
