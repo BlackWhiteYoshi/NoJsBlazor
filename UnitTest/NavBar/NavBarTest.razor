@@ -3,10 +3,38 @@
 
 @code {
     private void FourNavBarMenus(RenderTreeBuilder __builder) {
-        <NavBarMenu />
-        <NavBarMenu />
-        <NavBarMenu />
-        <NavBarMenu />
+        <NavBarMenu>
+            <Head>
+                Head
+            </Head>
+            <Items>
+                <NavBarItem>Item</NavBarItem>
+            </Items>
+        </NavBarMenu>
+        <NavBarMenu>
+            <Head>
+                Head
+            </Head>
+            <Items>
+                <NavBarItem>Item</NavBarItem>
+            </Items>
+        </NavBarMenu>
+        <NavBarMenu>
+            <Head>
+                Head
+            </Head>
+            <Items>
+                <NavBarItem>Item</NavBarItem>
+            </Items>
+        </NavBarMenu>
+        <NavBarMenu>
+            <Head>
+                Head
+            </Head>
+            <Items>
+                <NavBarItem>Item</NavBarItem>
+            </Items>
+        </NavBarMenu>
     }
 
     private (IRenderedFragment fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarTree() {
@@ -18,8 +46,11 @@
             @<NavBar @ref="navBar">
                 <Items>
                     <NavBarMenu @ref="navBarMenu">
+                        <Head>
+                            Head
+                        </Head>
                         <Items>
-                            <NavBarItem @ref="navBarItem" />
+                            <NavBarItem @ref="navBarItem">Item</NavBarItem>
                         </Items>
                     </NavBarMenu>
                 </Items>

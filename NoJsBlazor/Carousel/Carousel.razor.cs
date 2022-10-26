@@ -60,7 +60,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// <para>Default is 0.</para>
     /// </summary>
     [Parameter]
-    public int ActiveStart { get; init; } = 0;
+    public int ActiveStart { get; set; } = 0;
     /// <summary>
     /// The Index of the current Active Item.
     /// </summary>
@@ -71,14 +71,14 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// <para>Default is 6000.</para>
     /// </summary>
     [Parameter]
-    public int IntervalTime { get; init; } = 6000;
+    public int IntervalTime { get; set; } = 6000;
 
     /// <summary>
     /// <para>Type of swapping animation.</para>
     /// <para>Default is FadeOut.</para>
     /// </summary>
     [Parameter]
-    public CarouselAnimation Animation { get; init; } = CarouselAnimation.FadeOut;
+    public CarouselAnimation Animation { get; set; } = CarouselAnimation.FadeOut;
     /// <summary>
     /// Gives the current Animation.
     /// </summary>
@@ -90,7 +90,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// <para>Default is 0.</para>
     /// </summary>
     [Parameter]
-    public int AutoStartTime { get; init; } = 0;
+    public int AutoStartTime { get; set; } = 0;
     /// <summary>
     /// Holds the current value of the time to autoStart.
     /// </summary>
@@ -105,7 +105,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
-    public bool BeginRunning { get; init; } = true;
+    public bool BeginRunning { get; set; } = true;
 
     /// <summary>
     /// <para>Next/Previous Arrows available</para>
@@ -132,8 +132,8 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// <para>Content of the <see cref="Carousel"/>.</para>
     /// <para>This should be a list of <see cref="CarouselItem"/> objects.</para>
     /// </summary>
-    [Parameter]
-    public RenderFragment? Items { get; set; }
+    [Parameter, EditorRequired]
+    public RenderFragment Items { get; set; } = null!;
 
     /// <summary>
     /// Html that will be rendered in the overlay section.
@@ -159,7 +159,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
+    public IDictionary<string, object>? Attributes { get; set; }
 
 
     /// <summary>

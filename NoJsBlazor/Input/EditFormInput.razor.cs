@@ -58,7 +58,7 @@ public sealed partial class EditFormInput : InputBase<string> {
     /// These values are applied to the input field.
     /// </summary>
     [Parameter]
-    public Dictionary<string, object>? InputAttributes { get; set; }
+    public IDictionary<string, object>? InputAttributes { get; set; }
 
 
     protected override string? FormatValueAsString(string? value) => value;

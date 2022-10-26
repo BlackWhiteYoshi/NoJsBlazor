@@ -33,7 +33,14 @@
 
         IRenderedFragment fragment = Render(
             @<ContextMenu @ref="contextMenu">
-                <ContextSubMenu @ref="contextSubMenu" OnToggle="eventCallback" />
+                <ContextSubMenu @ref="contextSubMenu" OnToggle="eventCallback">
+                    <Head>
+                        Head
+                    </Head>
+                    <Items>
+                        <ContextMenuItem>Item</ContextMenuItem>
+                    </Items>
+                </ContextSubMenu>
             </ContextMenu>
             );
 

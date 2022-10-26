@@ -1,25 +1,26 @@
 ﻿namespace ManualTesting.Client;
 
 /// <summary>
-/// A Container located at the top layer of &lt;body&gt;, so dialog-RenderFragments can be rendered here.
+/// Provides a way to render fragments into another location outside of the DOM hierarchy of the parent component.
 /// </summary>
-public sealed partial class DialogBox : LanguageServiceComponentBase<IDialogBox>, IDialogBox {
-    private readonly List<RenderFragment> dialogList = new();
+public abstract partial class Portal<T> : LanguageServiceComponentBase<T>, IPortal where T : IPortal {
+    private readonly HashSet<RenderFragment> renderFragmentList = new();
 
     /// <summary>
-    /// Adds the given RenderFragment to the list.
+    /// <para>Registers the given RenderFragment.</para>
+    /// <para>If already registered, nothing happens.</para>
     /// </summary>
     public void Add(RenderFragment renderFragment) {
-        dialogList.Add(renderFragment);
+        renderFragmentList.Add(renderFragment);
         InvokeAsync(StateHasChanged);
     }
 
     /// <summary>
-    /// <para>Removes the given RenderFragment from the list.</para>
+    /// <para>Unregisters the given RenderFragment.</para>
     /// <para>If not found, nothing happens.</para>
     /// </summary>
     public void Remove(RenderFragment renderFragment) {
-        dialogList.Remove(renderFragment);
+        renderFragmentList.Remove(renderFragment);
         InvokeAsync(StateHasChanged);
     }
 

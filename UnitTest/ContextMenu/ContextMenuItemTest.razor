@@ -10,6 +10,9 @@
         IRenderedFragment fragment = Render(
             @<ContextMenu @ref="contextMenu">
                 <ContextSubMenu @ref="contextSubMenu">
+                    <Head>
+                        Head
+                    </Head>
                     <Items>
                         <ContextMenuItem @ref="contextMenuItem">
                             @childContent
@@ -30,8 +33,11 @@
         IRenderedFragment fragment = Render(
             @<ContextMenu @ref="contextMenu">
                 <ContextSubMenu @ref="contextSubMenu">
+                    <Head>
+                        Head
+                    </Head>
                     <Items>
-                        <ContextMenuItem @ref="contextMenuItem" OnPressed="eventCallback" />
+                        <ContextMenuItem @ref="contextMenuItem" OnPressed="eventCallback">Item</ContextMenuItem>
                     </Items>
                 </ContextSubMenu>
             </ContextMenu>

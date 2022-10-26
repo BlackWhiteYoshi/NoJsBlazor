@@ -13,7 +13,7 @@ public static class CoreServicesExtension {
         // component services
         services.AddScoped<IComponentMediator, ComponentMediator>();
         services.AddScoped((IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<IComponentMediator>().Get<IRoot>());
-        services.AddScoped((IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<IComponentMediator>().Get<IDialogBox>());
+        services.AddScoped((IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<IComponentMediator>().Get<ITopLevelPortal>());
         
         return services;
     }

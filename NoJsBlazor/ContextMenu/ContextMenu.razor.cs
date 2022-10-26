@@ -8,8 +8,8 @@ public sealed partial class ContextMenu : ListholdingComponentBase<ContextSubMen
     /// <summary>
     /// Content of this ContextMenu.
     /// </summary>
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
 
     /// <summary>
     /// <para>Fires every time when <see cref="Expanded">Expanded</see> get changed.</para>
@@ -22,7 +22,7 @@ public sealed partial class ContextMenu : ListholdingComponentBase<ContextSubMen
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
+    public IDictionary<string, object>? Attributes { get; set; }
 
 
     private bool _expanded = false;

@@ -3,19 +3,19 @@
 namespace ManualTesting.Client;
 
 public sealed partial class Home : PageComponentBase, IDisposable {
-    [Inject, AllowNull]
-    private IDialogBox DialogBox { get; init; }
+    [Inject]
+    private ITopLevelPortal TopLevelPortal { get; init; } = null!;
 
 
     protected override void OnInitialized() {
         base.OnInitialized();
-        DialogBox.Add(RenderDialog);
+        TopLevelPortal.Add(RenderDialog);
     }
 
     public new void Dispose() {
         base.Dispose();
         Root.Click -= CloseContextMenu;
-        DialogBox.Remove(RenderDialog);
+        TopLevelPortal.Remove(RenderDialog);
     }
 
 

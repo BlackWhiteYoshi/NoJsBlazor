@@ -13,12 +13,12 @@ else {
     /// <summary>
     /// Will be automatically set by the parent.
     /// </summary>
-    [CascadingParameter(Name = "Head"), System.Diagnostics.CodeAnalysis.AllowNull]
-    public bool Head { get; init; }
+    [CascadingParameter(Name = "Head")]
+    public bool Head { get; set; }
 
     /// <summary>
     /// Html that will be displayed.
     /// </summary>
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
 }

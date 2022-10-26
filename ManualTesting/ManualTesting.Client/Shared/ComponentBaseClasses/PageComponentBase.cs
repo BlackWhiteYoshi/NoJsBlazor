@@ -5,8 +5,8 @@
 /// <para>A normal component that register itself on initializing at the Root, so Root know it current page.</para>
 /// </summary>
 public abstract class PageComponentBase : LanguageComponentBase, IDisposable {
-    [Inject, AllowNull]
-    protected IRoot Root { get; init; }
+    [Inject]
+    protected IRoot Root { get; init; } = null!;
 
 
     protected override void OnInitialized() {

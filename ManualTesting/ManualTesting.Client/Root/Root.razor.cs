@@ -6,23 +6,23 @@ public sealed partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposab
     private const string ROOT_JS = "/Root/Root.razor.js";
 
 
-    [Inject, AllowNull]
-    private IJSModuleRuntime JsModuleRuntime { get; init; }
+    [Inject]
+    private IJSModuleRuntime JsModuleRuntime { get; init; } = null!;
 
-    [Inject, AllowNull]
-    private IPreRenderFlag PreRenderFlag { get; init; }
+    [Inject]
+    private IPreRenderFlag PreRenderFlag { get; init; } = null!;
 
-    [Inject, AllowNull]
-    private ILanguageProvider Lang { get; init; }
+    [Inject]
+    private ILanguageProvider Lang { get; init; } = null!;
 
 
     /// <summary>
     /// Initial value for ILanguageProvider.
     /// </summary>
     [Parameter]
-    public Language? StartLanguage { private get; init; }
+    public Language? StartLanguage { get; set; }
 
-    [AllowNull]
+    [System.Diagnostics.CodeAnalysis.AllowNull]
     public PageComponentBase PageComponent { get; set; }
 
     public event Action<MouseEventArgs>? Click;

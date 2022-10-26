@@ -14,12 +14,12 @@ else {
     /// <summary>
     /// Will be automatically set by the root.
     /// </summary>
-    [CascadingParameter(Name = "Parent"), System.Diagnostics.CodeAnalysis.AllowNull]
-    public ListholdingComponentBase<NavBarMenu> Parent { get; set; }
+    [CascadingParameter(Name = "Parent")]
+    public ListholdingComponentBase<NavBarMenu> Parent { get; set; } = null!;
 
     /// <summary>
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
+    public IDictionary<string, object>? Attributes { get; set; }
 }

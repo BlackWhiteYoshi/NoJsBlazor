@@ -1,16 +1,17 @@
 ﻿namespace ManualTesting.Client;
 
 /// <summary>
-/// A Container located at the top layer of &lt;body&gt;, so dialog-RenderFragments can be rendered here.
+/// Provides a way to render fragments into another location outside of the DOM hierarchy of the parent component.
 /// </summary>
-public interface IDialogBox {
+public interface IPortal {
     /// <summary>
-    /// Adds the given RenderFragment to the list.
+    /// <para>Registers the given RenderFragment.</para>
+    /// <para>If already registered, nothing happens.</para>
     /// </summary>
     public void Add(RenderFragment renderFragment);
 
     /// <summary>
-    /// <para>Removes the given RenderFragment from the list.</para>
+    /// <para>Unregisters the given RenderFragment.</para>
     /// <para>If not found, nothing happens.</para>
     /// </summary>
     public void Remove(RenderFragment renderFragment);

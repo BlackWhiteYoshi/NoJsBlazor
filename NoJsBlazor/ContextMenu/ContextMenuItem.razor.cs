@@ -8,8 +8,8 @@ public sealed partial class ContextMenuItem : ComponentBase {
     /// <summary>
     /// Html that will be displayed.
     /// </summary>
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
 
     /// <summary>
     /// <para>Invokes every time when this list item get clicked or touched.</para>

@@ -15,7 +15,7 @@
                             @headHtml
                         </Head>
                         <Items>
-                            <NavBarItem @ref="navBarItem" />
+                            <NavBarItem @ref="navBarItem">Item</NavBarItem>
                         </Items>
                     </NavBarMenu>
                 </Items>
@@ -34,8 +34,11 @@
             @<NavBar @ref="navBar">
                 <Items>
                     <NavBarMenu @ref="navBarMenu" OnToggle="eventCallback">
+                        <Head>
+                            Head
+                        </Head>
                         <Items>
-                            <NavBarItem @ref="navBarItem" />
+                            <NavBarItem @ref="navBarItem">Item</NavBarItem>
                         </Items>
                     </NavBarMenu>
                 </Items>

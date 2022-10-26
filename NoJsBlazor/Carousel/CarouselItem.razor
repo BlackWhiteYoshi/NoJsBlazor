@@ -1,6 +1,6 @@
 ﻿@namespace NoJsBlazor
 @inherits ListableComponentBase<CarouselItem>
 
-<div class="@cssClass">
+<div class="@(active ? "carousel-element active" : "carousel-element")">
     @ChildContent
 </div>

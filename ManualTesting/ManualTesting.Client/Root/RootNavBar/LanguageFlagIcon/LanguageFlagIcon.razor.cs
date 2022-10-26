@@ -4,28 +4,28 @@ using NoJsBlazor;
 namespace ManualTesting.Client;
 
 public sealed partial class LanguageFlagIcon : LanguageComponentBase, IDisposable {
-    [Inject, AllowNull]
-    private IJSModuleRuntime JsModuleRuntime { get; init; }
+    [Inject]
+    private IJSModuleRuntime JsModuleRuntime { get; init; } = null!;
 
-    [Inject, AllowNull]
-    private IRoot Root { get; init; }
+    [Inject]
+    private IRoot Root { get; init; } = null!;
 
-    [Inject, AllowNull]
-    private IDialogBox DialogBox { get; init; }
+    [Inject]
+    private ITopLevelPortal TopLevelPortal { get; init; } = null!;
 
 
     [AllowNull]
     private Dialog dialog;
-    
-    
+
+
     protected override void OnInitialized() {
         base.OnInitialized();
-        DialogBox.Add(RenderLanguageDialog);
+        TopLevelPortal.Add(RenderLanguageDialog);
     }
 
     public new void Dispose() {
         base.Dispose();
-        DialogBox.Remove(RenderLanguageDialog);
+        TopLevelPortal.Remove(RenderLanguageDialog);
     }
 
 

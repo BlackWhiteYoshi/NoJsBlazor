@@ -8,26 +8,15 @@ public sealed partial class CarouselItem : ListableComponentBase<CarouselItem> {
     /// <summary>
     /// Content of this component.
     /// </summary>
-    [Parameter, AllowNull]
-    public RenderFragment ChildContent { get; set; }
-
-    /// <summary>
-    /// Creates a <see cref="CarouselItem"/> with no content.
-    /// </summary>
-    public CarouselItem() : base() { }
-
-    /// <summary>
-    /// Creates a <see cref="CarouselItem"/> with the given content, which can be inserted in an existing carousel.
-    /// </summary>
-    /// <param name="child">content of this object</param>
-    public CarouselItem(RenderFragment child) : base() => ChildContent = child;
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; } = null!;
 
 
-    private string cssClass = "carousel-element";
+    private bool active = false;
 
     protected override void OnInitialized() {
         if (((Carousel)Parent).ActiveStart == Parent.ChildCount)
-            cssClass = "carousel-element active";
+            active = true;
         base.OnInitialized();
     }
 }

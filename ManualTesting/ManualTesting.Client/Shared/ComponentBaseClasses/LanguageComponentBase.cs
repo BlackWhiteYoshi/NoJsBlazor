@@ -6,8 +6,8 @@ namespace ManualTesting.Client;
 /// A normal component that rerenders when language is changed.
 /// </summary>
 public abstract class LanguageComponentBase : ComponentBase, IDisposable {
-    [Inject, AllowNull]
-    protected ILanguageProvider Lang { get; init; }
+    [Inject]
+    protected ILanguageProvider Lang { get; init; } = null!;
 
 
     protected override void OnInitialized() {

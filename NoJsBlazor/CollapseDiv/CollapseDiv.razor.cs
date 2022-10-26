@@ -22,7 +22,7 @@ public sealed partial class CollapseDiv : ComponentBase {
     /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
-    public bool StartCollapsed { get; init; } = true;
+    public bool StartCollapsed { get; set; } = true;
 
     /// <summary>
     /// <para>Fires every time when collapse state is changed.</para>
@@ -35,7 +35,7 @@ public sealed partial class CollapseDiv : ComponentBase {
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
+    public IDictionary<string, object>? Attributes { get; set; }
 
     private bool _collapsed;
     /// <summary>

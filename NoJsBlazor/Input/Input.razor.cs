@@ -87,13 +87,13 @@ public sealed partial class Input : ComponentBase {
     /// These values are applied to the input field.
     /// </summary>
     [Parameter]
-    public Dictionary<string, object>? InputAttributes { get; set; }
+    public IDictionary<string, object>? InputAttributes { get; set; }
 
     /// <summary>
     /// Captures unmatched values. The values are applied to the outer div container and not to the input field
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
+    public IDictionary<string, object>? Attributes { get; set; }
 
 
     private bool hasValue;

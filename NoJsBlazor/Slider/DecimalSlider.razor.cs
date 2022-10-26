@@ -65,21 +65,21 @@ public sealed partial class DecimalSlider : ComponentBase {
     /// <para>Default is a svg showing "🡸".</para>
     /// </summary>
     [Parameter]
-    public RenderFragment LeftButtonContent { get; set; }
+    public RenderFragment LeftButtonContent { get; set; } = DefaultLeftButton;
 
     /// <summary>
     /// <para>Content inside the right Button.</para>
     /// <para>Default is a svg showing "🡺".</para>
     /// </summary>
     [Parameter]
-    public RenderFragment RightButtonContent { get; set; }
+    public RenderFragment RightButtonContent { get; set; } = DefaultRightButton;
 
     /// <summary>
     /// <para>The way the value should be printed.</para>
     /// <para>Default is value.ToString().</para>
     /// </summary>
     [Parameter]
-    public Func<decimal, string> Display { get; set; } = (decimal value) => value.ToString();
+    public Func<decimal, string> Display { get; set; } = DefaultDisplay;
 
     /// <summary>
     /// <para>Parsing function for the edit field.</para>
@@ -93,13 +93,10 @@ public sealed partial class DecimalSlider : ComponentBase {
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
+    public IDictionary<string, object>? Attributes { get; set; }
 
 
     public DecimalSlider() {
-        LeftButtonContent = DefaultLeftButton;
-        RightButtonContent = DefaultRightButton;
-        Display = DefaultDisplay;
         ParseEdit = DefaultParseEdit;
     }
 

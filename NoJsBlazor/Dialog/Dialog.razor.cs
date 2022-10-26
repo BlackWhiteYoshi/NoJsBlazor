@@ -74,7 +74,7 @@ public sealed partial class Dialog : ComponentBase {
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
+    public IDictionary<string, object>? Attributes { get; set; }
 
     /// <summary>
     /// Current offset of x-coordinate, 0 means middle of the screen.

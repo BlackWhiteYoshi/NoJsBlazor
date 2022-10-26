@@ -7,14 +7,14 @@ public sealed partial class ContextSubMenu : ListableComponentBase<ContextSubMen
     /// <summary>
     /// Content that is collapsed visible.
     /// </summary>
-    [Parameter]
-    public RenderFragment? Head { get; set; }
+    [Parameter, EditorRequired]
+    public RenderFragment Head { get; set; } = null!;
 
     /// <summary>
     /// Content that is expanded visible.
     /// </summary>
-    [Parameter]
-    public RenderFragment? Items { get; set; }
+    [Parameter, EditorRequired]
+    public RenderFragment Items { get; set; } = null!;
 
     /// <summary>
     /// <para>Fires every time when <see cref="Expanded">Expanded</see> get changed.</para>

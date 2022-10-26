@@ -1,0 +1,7 @@
+﻿@namespace ManualTesting.Client
+@typeparam T
+@inherits LanguageServiceComponentBase<T>
+
+@foreach (RenderFragment dialog in renderFragmentList) {
+    @dialog
+}

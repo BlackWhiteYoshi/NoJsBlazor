@@ -3,8 +3,9 @@
 namespace ManualTesting.Client;
 
 public sealed partial class RootNavBar : LanguageComponentBase {
-    [Inject, AllowNull]
-    private IRoot Root { get; init; }
+    [Inject]
+    private IRoot Root { get; init; } = null!;
+
 
     [AllowNull]
     private NavBar navBar;

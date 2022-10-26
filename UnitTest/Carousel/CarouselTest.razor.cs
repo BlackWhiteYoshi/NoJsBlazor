@@ -287,7 +287,7 @@ public sealed partial class CarouselTest : TestContext {
         });
         Carousel carousel = carouselContainer.Instance;
 
-        carousel.AddItem(new CarouselItem(CarouselItemRed));
+        carousel.AddItem(new CarouselItem() { ChildContent = CarouselItemRed });
 
         Assert.Equal(5, carousel.ItemCount);
     }

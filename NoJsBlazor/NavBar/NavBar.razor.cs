@@ -14,8 +14,8 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     /// <summary>
     /// <para>This should be a list of <see cref="NavBarMenu"/> of <see cref="NavBarItem"/>/<see cref="NavBarLink"/> objects.</para>
     /// </summary>
-    [Parameter]
-    public RenderFragment? Items { get; set; }
+    [Parameter, EditorRequired]
+    public RenderFragment Items { get; set; } = null!;
 
     /// <summary>
     /// <para>Changes at the given width between phone and desktop view.</para>
@@ -35,7 +35,7 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     /// Captures unmatched values
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? Attributes { get; set; }
+    public IDictionary<string, object>? Attributes { get; set; }
 
 
     private bool _expanded = false;
