@@ -22,7 +22,7 @@ public sealed partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposab
     [Parameter]
     public Language? StartLanguage { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.AllowNull]
+    [AllowNull]
     public PageComponentBase PageComponent { get; set; }
 
     public event Action<MouseEventArgs>? Click;
