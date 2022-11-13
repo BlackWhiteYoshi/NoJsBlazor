@@ -8,7 +8,7 @@ namespace ManualTesting.Client;
 /// <typeparam name="T">The type on which this instance is registering.</typeparam>
 public abstract class ServiceComponentBase<T> : ComponentBase, IDisposable {
     [Inject]
-    protected IComponentMediator Mediator { get; init; } = null!;
+    public required IComponentMediator Mediator { get; init; }
 
 
     protected override void OnInitialized() {

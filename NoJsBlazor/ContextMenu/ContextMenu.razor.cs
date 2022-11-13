@@ -9,7 +9,7 @@ public sealed partial class ContextMenu : ListholdingComponentBase<ContextSubMen
     /// Content of this ContextMenu.
     /// </summary>
     [Parameter, EditorRequired]
-    public RenderFragment ChildContent { get; set; } = null!;
+    public required RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// <para>Fires every time when <see cref="Expanded">Expanded</see> get changed.</para>

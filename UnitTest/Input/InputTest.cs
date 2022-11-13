@@ -100,26 +100,6 @@ public sealed class InputTest : TestContext {
     #endregion
 
 
-    #region public methods
-
-    [Fact]
-    public void SilentValueSetter_Sets_Without_Notifying() {
-        const string TEST_TEXT = "test text";
-        int fired = 0;
-
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
-            builder.Add((Input input) => input.ValueChanged, (string? value) => fired++);
-        });
-        Input input = inputContainer.Instance;
-
-        input.SilentValueSetter = TEST_TEXT;
-        Assert.Equal(TEST_TEXT, input.Value);
-        Assert.Equal(0, fired);
-    }
-
-    #endregion
-
-
     #region events
 
     [Fact]

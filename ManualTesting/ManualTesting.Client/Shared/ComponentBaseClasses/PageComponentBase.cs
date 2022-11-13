@@ -6,7 +6,7 @@
 /// </summary>
 public abstract class PageComponentBase : LanguageComponentBase, IDisposable {
     [Inject]
-    protected IRoot Root { get; init; } = null!;
+    public required IRoot Root { get; init; }
 
 
     protected override void OnInitialized() {

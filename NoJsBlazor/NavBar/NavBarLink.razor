@@ -15,7 +15,7 @@ else {
     /// Will be automatically set by the root.
     /// </summary>
     [CascadingParameter(Name = "Parent")]
-    public ListholdingComponentBase<NavBarMenu> Parent { get; set; } = null!;
+    public required ListholdingComponentBase<NavBarMenu> Parent { get; set; }
 
     /// <summary>
     /// Captures unmatched values

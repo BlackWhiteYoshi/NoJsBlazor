@@ -6,7 +6,7 @@
 /// <typeparam name="T">Component base class of the <see cref="ListableComponentBase{T}"/></typeparam>
 public abstract class ListableComponentBase<T> : ComponentBase where T : ListableComponentBase<T> {
     [CascadingParameter(Name = "Parent")]
-    public ListholdingComponentBase<T> Parent { get; set; } = null!;
+    public required ListholdingComponentBase<T> Parent { get; set; }
 
     /// <summary>
     /// <para>Registering the component at the parent <see cref="ListableComponentBase{T}">ListableComponentBase</see>.</para>

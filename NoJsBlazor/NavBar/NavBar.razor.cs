@@ -15,7 +15,7 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     /// <para>This should be a list of <see cref="NavBarMenu"/> of <see cref="NavBarItem"/>/<see cref="NavBarLink"/> objects.</para>
     /// </summary>
     [Parameter, EditorRequired]
-    public RenderFragment Items { get; set; } = null!;
+    public required RenderFragment Items { get; set; }
 
     /// <summary>
     /// <para>Changes at the given width between phone and desktop view.</para>

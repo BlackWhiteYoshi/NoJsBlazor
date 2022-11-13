@@ -6,6 +6,13 @@
 /// </summary>
 public sealed partial class EditFormInput : InputBase<string> {
     /// <summary>
+    /// Fires every time item looses focus and value has changed.
+    /// </summary>
+    [Parameter]
+    public EventCallback<string?> OnChange { get; set; }
+
+
+    /// <summary>
     /// <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
     /// <para>returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete)</para>
     /// </summary>
@@ -72,8 +79,10 @@ public sealed partial class EditFormInput : InputBase<string> {
 
     private bool HasValue => !string.IsNullOrEmpty(Value);
 
-    private void OnInput(ChangeEventArgs e) {
+    private void OnFieldInput(ChangeEventArgs e) {
         Value = (string?)e.Value;
         ValueChanged.InvokeAsync(Value);
     }
+
+    private void OnFieldChange(ChangeEventArgs e) => OnChange.InvokeAsync((string?)e.Value);
 }

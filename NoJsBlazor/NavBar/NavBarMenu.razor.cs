@@ -9,13 +9,13 @@ public sealed partial class NavBarMenu : ListableComponentBase<NavBarMenu> {
     /// Content that is collapsed visible.
     /// </summary>
     [Parameter, EditorRequired]
-    public RenderFragment Head { get; set; } = null!;
+    public required RenderFragment Head { get; set; }
 
     /// <summary>
     /// Content that is expanded visible.
     /// </summary>
     [Parameter, EditorRequired]
-    public RenderFragment Items { get; set; } = null!;
+    public required RenderFragment Items { get; set; }
 
     /// <summary>
     /// <para>Fires every time when <see cref="Expanded">Expanded</see> get changed.</para>

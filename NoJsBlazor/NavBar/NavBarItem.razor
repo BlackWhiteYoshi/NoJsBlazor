@@ -20,5 +20,5 @@ else {
     /// Html that will be displayed.
     /// </summary>
     [Parameter, EditorRequired]
-    public RenderFragment ChildContent { get; set; } = null!;
+    public required RenderFragment ChildContent { get; set; }
 }

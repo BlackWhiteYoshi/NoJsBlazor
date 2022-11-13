@@ -9,8 +9,8 @@ public sealed class SliderTest : TestContext {
     public void Value_Is_Rendered_Inside_Label() {
         const int VALUE = 5;
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Value, VALUE);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Value, VALUE);
         });
 
         IElement label = sliderContainer.Find(".slider-buttons label");
@@ -21,8 +21,8 @@ public sealed class SliderTest : TestContext {
     public void Title_Is_Rendered_Inside_First_Label() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Title, TEST_TEXT);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Title, TEST_TEXT);
         });
 
         IElement label = sliderContainer.FindAll("label")[0];
@@ -31,8 +31,8 @@ public sealed class SliderTest : TestContext {
 
     [Fact]
     public void Title_Is_Not_Rendered_When_Empty() {
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Title, string.Empty);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Title, string.Empty);
         });
 
         Assert.Single(sliderContainer.FindAll("label"));
@@ -42,8 +42,8 @@ public sealed class SliderTest : TestContext {
     public void Min_Sets_MinAttribute() {
         const int MIN = 3;
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Min, MIN);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Min, MIN);
         });
 
         IElement slider = sliderContainer.Find("input");
@@ -55,8 +55,8 @@ public sealed class SliderTest : TestContext {
     public void Max_Sets_MaxAttribute() {
         const int MAX = 3;
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Max, MAX);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Max, MAX);
         });
 
         IElement slider = sliderContainer.Find("input");
@@ -68,8 +68,8 @@ public sealed class SliderTest : TestContext {
     public void Step_Sets_StepAttribute() {
         const int STEP = 3;
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Step, STEP);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Step, STEP);
         });
 
         IElement slider = sliderContainer.Find("input");
@@ -81,8 +81,8 @@ public sealed class SliderTest : TestContext {
     [InlineData(true)]
     [InlineData(false)]
     public void Editable_Renderes_InputField(bool editable) {
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Editable, editable);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Editable, editable);
         });
 
         IRefreshableElementCollection<IElement> inputFields = sliderContainer.FindAll("input");
@@ -95,8 +95,8 @@ public sealed class SliderTest : TestContext {
         const string TEST_TEXT = "Test Text";
         RenderFragment renderFragment = (RenderTreeBuilder builder) => builder.AddContent(0, TEST_TEXT);
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.LeftButtonContent, renderFragment);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.LeftButtonContent, renderFragment);
         });
 
         IElement button = sliderContainer.Find("button");
@@ -108,8 +108,8 @@ public sealed class SliderTest : TestContext {
         const string TEST_TEXT = "Test Text";
         RenderFragment renderFragment = (RenderTreeBuilder builder) => builder.AddContent(0, TEST_TEXT);
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.RightButtonContent, renderFragment);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.RightButtonContent, renderFragment);
         });
 
         IElement button = sliderContainer.FindAll("button")[1];
@@ -120,8 +120,8 @@ public sealed class SliderTest : TestContext {
     public void Display_Changes_Label_Output() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Display, (int value) => TEST_TEXT);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Display, (int value) => TEST_TEXT);
         });
 
         IElement label = sliderContainer.Find(".slider-buttons label");
@@ -132,11 +132,11 @@ public sealed class SliderTest : TestContext {
     public void ParseEdit_Reads_In_EditBox() {
         const int VALUE = 6;
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Editable, true);
-            builder.Add((Slider slider) => slider.ParseEdit, (string? input) => VALUE);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Editable, true);
+            builder.Add((Slider<int> slider) => slider.ParseEdit, (string? input) => VALUE);
         });
-        Slider slider = sliderContainer.Instance;
+        Slider<int> slider = sliderContainer.Instance;
 
         IElement input = sliderContainer.Find("input");
         input.Change("doesn't matter because ParseEdit outputs always the same");
@@ -152,11 +152,11 @@ public sealed class SliderTest : TestContext {
     public void ValueChanged_Is_Fired_When_Value_Is_Modified_By_User() {
         int fired = 0;
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Value, 1);
-            builder.Add((Slider slider) => slider.Min, 0);
-            builder.Add((Slider slider) => slider.Max, 2);
-            builder.Add((Slider slider) => slider.ValueChanged, (int value) => fired++);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Value, 1);
+            builder.Add((Slider<int> slider) => slider.Min, 0);
+            builder.Add((Slider<int> slider) => slider.Max, 2);
+            builder.Add((Slider<int> slider) => slider.ValueChanged, (int value) => fired++);
         });
 
         IElement button = sliderContainer.Find("button");
@@ -168,11 +168,11 @@ public sealed class SliderTest : TestContext {
     public void OnChange_Is_Fired_When_Value_Is_Modified_By_User() {
         int fired = 0;
 
-        IRenderedComponent<Slider> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider> builder) => {
-            builder.Add((Slider slider) => slider.Value, 1);
-            builder.Add((Slider slider) => slider.Min, 0);
-            builder.Add((Slider slider) => slider.Max, 2);
-            builder.Add((Slider slider) => slider.OnChange, (int value) => fired++);
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Value, 1);
+            builder.Add((Slider<int> slider) => slider.Min, 0);
+            builder.Add((Slider<int> slider) => slider.Max, 2);
+            builder.Add((Slider<int> slider) => slider.OnChange, (int value) => fired++);
         });
 
         IElement button = sliderContainer.Find("button");

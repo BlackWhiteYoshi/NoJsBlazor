@@ -5,13 +5,13 @@ namespace ManualTesting.Client;
 
 public sealed partial class LanguageFlagIcon : LanguageComponentBase, IDisposable {
     [Inject]
-    private IJSModuleRuntime JsModuleRuntime { get; init; } = null!;
+    public required IJSModuleRuntime JsModuleRuntime { get; init; }
 
     [Inject]
-    private IRoot Root { get; init; } = null!;
+    public required IRoot Root { get; init; }
 
     [Inject]
-    private ITopLevelPortal TopLevelPortal { get; init; } = null!;
+    public required ITopLevelPortal TopLevelPortal { get; init; }
 
 
     [AllowNull]

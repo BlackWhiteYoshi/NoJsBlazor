@@ -9,7 +9,7 @@ public sealed partial class CarouselItem : ListableComponentBase<CarouselItem> {
     /// Content of this component.
     /// </summary>
     [Parameter, EditorRequired]
-    public RenderFragment ChildContent { get; set; } = null!;
+    public required RenderFragment ChildContent { get; set; }
 
 
     private bool active = false;

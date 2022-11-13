@@ -1,18 +1,19 @@
 ﻿@namespace NoJsBlazor
+@typeparam Type
 
 <div class="slider" @attributes="@Attributes">
     @if (Title != string.Empty) {
         <label>@Title</label>
     }
     <div class="slider-buttons">
-        <button disabled="@(Value <= Min)" @onclick="LeftButton">@LeftButtonContent</button>
+        <button disabled="@(Value <= Min)" @onclick="OnLeftButton">@LeftButtonContent</button>
         @if (!Editable) {
             <label>@Display(Value)</label>
         }
         else {
             <input value="@Display(Value)" @onchange="OnChangeEditField" />
         }
-        <button disabled="@(Value >= Max)" @onclick="RightButton">@RightButtonContent</button>
+        <button disabled="@(Value >= Max)" @onclick="OnRightButton">@RightButtonContent</button>
     </div>
     <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnInputSlider" @onchange="OnChangeSlider" />
 </div>

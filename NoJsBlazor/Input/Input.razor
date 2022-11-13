@@ -4,7 +4,8 @@
     <input
             id="@Id"
             value="@Value"
-            @oninput="OnInput"
+            @oninput="OnFieldInput"
+            @onchange="OnFieldChange"
             type="@Type"
             name="@Name"
             autocomplete="@(Autocomplete ? "on" : "off")"

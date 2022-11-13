@@ -22,21 +22,17 @@ public sealed partial class Input : ComponentBase {
     }
 
     /// <summary>
-    /// Sets the state of <see cref="Value"/> without notifying <see cref="ValueChanged"/>.
-    /// </summary>
-    public string? SilentValueSetter {
-        set {
-            _value = value;
-            hasValue = !string.IsNullOrEmpty(Value);
-        }
-    }
-
-
-    /// <summary>
     /// Fires every time <see cref="Value"/> changes.
     /// </summary>
     [Parameter]
     public EventCallback<string?> ValueChanged { get; set; }
+
+    /// <summary>
+    /// Fires every time item looses focus and value has changed.
+    /// </summary>
+    [Parameter]
+    public EventCallback<string?> OnChange { get; set; }
+
 
     /// <summary>
     /// <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
@@ -98,5 +94,8 @@ public sealed partial class Input : ComponentBase {
 
     private bool hasValue;
 
-    private void OnInput(ChangeEventArgs e) => Value = (string?)e.Value;
+
+    private void OnFieldInput(ChangeEventArgs e) => Value = (string?)e.Value;
+
+    private void OnFieldChange(ChangeEventArgs e) => OnChange.InvokeAsync((string?)e.Value);
 }

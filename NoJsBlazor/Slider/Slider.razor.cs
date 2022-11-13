@@ -1,29 +1,32 @@
-﻿namespace NoJsBlazor;
+﻿using System.Globalization;
+using System.Numerics;
+
+namespace NoJsBlazor;
 
 /// <summary>
 /// <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
 /// <para>The value of this object is from type <see cref="int"/>.</para>
 /// </summary>
-public sealed partial class Slider : ComponentBase {
+public sealed partial class Slider<Type> : ComponentBase where Type : struct, INumber<Type> {
     /// <summary>
     /// Value of the Slider
     /// </summary>
     [Parameter]
-    public int Value { get; set; }
+    public Type Value { get; set; }
 
     /// <summary>
     /// <para>Invokes every time Value get changed with:</para>
     /// <para>LeftButton, RightButton, Slider or EditField.</para>
     /// </summary>
     [Parameter]
-    public EventCallback<int> ValueChanged { get; set; }
+    public EventCallback<Type> ValueChanged { get; set; }
 
     /// <summary>
     /// <para>Invokes every time Value get changed with:</para>
     /// <para>LeftButton, RightButton, Slider (only on release) or EditField.</para>
     /// </summary>
     [Parameter]
-    public EventCallback<int> OnChange { get; set; }
+    public EventCallback<Type> OnChange { get; set; }
 
     /// <summary>
     /// An optional label.
@@ -36,21 +39,21 @@ public sealed partial class Slider : ComponentBase {
     /// <para>Default is 0.</para>
     /// </summary>
     [Parameter]
-    public int Min { get; set; } = 0;
+    public Type Min { get; set; } = Type.Zero;
 
     /// <summary>
     /// <para>Slider upper bounds.</para>
     /// <para>Default is 10.</para>
     /// </summary>
     [Parameter]
-    public int Max { get; set; } = 10;
+    public Type Max { get; set; } = Type.One + Type.One + Type.One + Type.One + Type.One + Type.One + Type.One + Type.One + Type.One + Type.One; // 10
 
     /// <summary>
     /// <para>Slider precision</para>
     /// <para>Default is 1.</para>
     /// </summary>
     [Parameter]
-    public int Step { get; set; } = 1;
+    public Type Step { get; set; } = Type.One;
 
     /// <summary>
     /// <para>Indicates if the user is able to edit the number directly.</para>
@@ -79,7 +82,7 @@ public sealed partial class Slider : ComponentBase {
     /// <para>Default is value.ToString().</para>
     /// </summary>
     [Parameter]
-    public Func<int, string> Display { get; set; } = DefaultDisplay;
+    public Func<Type, string> Display { get; set; } = DefaultDisplay;
 
     /// <summary>
     /// <para>Parsing function for the edit field.</para>
@@ -87,7 +90,7 @@ public sealed partial class Slider : ComponentBase {
     /// <para>Default succeed if the value is int-parseable and in Min/Max bounds.</para>
     /// </summary>
     [Parameter]
-    public Func<string?, int?> ParseEdit { get; set; }
+    public Func<string?, Type?> ParseEdit { get; set; }
 
     /// <summary>
     /// Captures unmatched values
@@ -103,7 +106,7 @@ public sealed partial class Slider : ComponentBase {
 
     #region private Methods
 
-    private void LeftButton(MouseEventArgs e) {
+    private void OnLeftButton(MouseEventArgs e) {
         if (Value > Min) {
             Value -= Step;
             ValueChanged.InvokeAsync(Value);
@@ -111,7 +114,7 @@ public sealed partial class Slider : ComponentBase {
         }
     }
 
-    private void RightButton(MouseEventArgs e) {
+    private void OnRightButton(MouseEventArgs e) {
         if (Value < Max) {
             Value += Step;
             ValueChanged.InvokeAsync(Value);
@@ -121,7 +124,7 @@ public sealed partial class Slider : ComponentBase {
 
 
     private void OnInputSlider(ChangeEventArgs e) {
-        Value = int.Parse((string)e.Value!);
+        Value = Type.Parse((string)e.Value!, CultureInfo.CurrentCulture);
         ValueChanged.InvokeAsync(Value);
     }
 
@@ -129,9 +132,9 @@ public sealed partial class Slider : ComponentBase {
 
 
     private void OnChangeEditField(ChangeEventArgs input) {
-        int? buffer = ParseEdit((string?)input.Value);
+        Type? buffer = ParseEdit((string?)input.Value);
         if (buffer != null) {
-            Value = (int)buffer;
+            Value = (Type)buffer;
             ValueChanged.InvokeAsync(Value);
             OnChange.InvokeAsync(Value);
         }
@@ -139,10 +142,10 @@ public sealed partial class Slider : ComponentBase {
 
 
 
-    private static string DefaultDisplay(int value) => value.ToString();
+    private static string DefaultDisplay(Type value) => value.ToString() ?? string.Empty;
 
-    private int? DefaultParseEdit(string? input) {
-        if (int.TryParse(input, out int result))
+    private Type? DefaultParseEdit(string? input) {
+        if (Type.TryParse(input, CultureInfo.CurrentCulture, out Type result))
             if (result < Min)
                 return Min;
             else if (Max < result)

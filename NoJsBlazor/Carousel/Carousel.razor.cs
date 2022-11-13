@@ -133,7 +133,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// <para>This should be a list of <see cref="CarouselItem"/> objects.</para>
     /// </summary>
     [Parameter, EditorRequired]
-    public RenderFragment Items { get; set; } = null!;
+    public required RenderFragment Items { get; set; }
 
     /// <summary>
     /// Html that will be rendered in the overlay section.

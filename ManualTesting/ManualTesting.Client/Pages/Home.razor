@@ -82,7 +82,7 @@
     <section>
         <h2 class="headline">Input</h2>
 
-        <Input Title="Eingabe"/>
+        <Input Title="Eingabe" />
     </section>
 
     <section>
@@ -116,15 +116,15 @@
         <h2 class="headline">Slider</h2>
 
         <div class="center">
-            <Slider Title="Test1" Display="@((int value) => $"{value}%")" />
+            <Slider Type="int" Title="Test1" Display="@((int value) => $"{value}%")" />
         </div>
 
         <div class="center">
-            <Slider Editable="true" style="width: 200px;" />
+            <Slider Type="int" Editable="true" style="width: 200px;" />
         </div>
 
         <div class="center">
-            <DecimalSlider />
+            <Slider Type="decimal" />
         </div>
     </section>
 </div>

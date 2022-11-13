@@ -7,13 +7,13 @@ public sealed partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposab
 
 
     [Inject]
-    private IJSModuleRuntime JsModuleRuntime { get; init; } = null!;
+    public required IJSModuleRuntime JsModuleRuntime { get; init; }
 
     [Inject]
-    private IPreRenderFlag PreRenderFlag { get; init; } = null!;
+    public required IPreRenderFlag PreRenderFlag { get; init; }
 
     [Inject]
-    private ILanguageProvider Lang { get; init; } = null!;
+    public required ILanguageProvider Lang { get; init; }
 
 
     /// <summary>
