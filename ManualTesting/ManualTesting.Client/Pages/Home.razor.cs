@@ -4,7 +4,7 @@ namespace ManualTesting.Client;
 
 public sealed partial class Home : PageComponentBase, IDisposable {
     [Inject]
-    public required ITopLevelPortal TopLevelPortal { get; init; }
+    public required ITopLevelPortal TopLevelPortal { private get; init; }
 
 
     protected override void OnInitialized() {

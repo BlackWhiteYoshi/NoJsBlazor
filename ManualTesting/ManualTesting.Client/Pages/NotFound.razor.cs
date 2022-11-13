@@ -4,10 +4,10 @@ namespace ManualTesting.Client;
 
 public sealed partial class NotFound : PageComponentBase {
     [Inject]
-    public required NavigationManager NavigationManager { get; init; }
+    public required NavigationManager NavigationManager { private get; init; }
 
     [Inject]
-    public required IPreRenderFlag  PreRenderFlag { get; init; }
+    public required IPreRenderFlag  PreRenderFlag { private get; init; }
 
 
     private const int BAD_REQUEST_LIST_MAX_DISTANCE = 8;

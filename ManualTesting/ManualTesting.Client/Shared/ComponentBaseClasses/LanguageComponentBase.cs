@@ -7,7 +7,7 @@ namespace ManualTesting.Client;
 /// </summary>
 public abstract class LanguageComponentBase : ComponentBase, IDisposable {
     [Inject]
-    public required ILanguageProvider Lang { get; init; }
+    public required ILanguageProvider Lang { protected get; init; }
 
 
     protected override void OnInitialized() {
