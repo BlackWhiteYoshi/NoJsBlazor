@@ -169,7 +169,7 @@
     }
 
 
-    @media (max-width: $breakpoint) {
+    @media (width <= $breakpoint) {
         .nav-toggle {
             display: unset;
             width: auto;

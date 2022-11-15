@@ -15,7 +15,7 @@ $xxl: 1400px;
 @mixin grid-2-condition($column-left, $column-right, $width) {
     @include grid-2($column-left, $column-right);
 
-    @media (max-width: $width) {
+    @media (width <= $width) {
         grid-template-columns: 100%;
     }
 }
@@ -42,7 +42,7 @@ $xxl: 1400px;
 @mixin grid-span-2-condition($width) {
     @include grid-span-2();
 
-    @media (max-width: $width) {
+    @media (width <= $width) {
         grid-column: 1;
     }
 }

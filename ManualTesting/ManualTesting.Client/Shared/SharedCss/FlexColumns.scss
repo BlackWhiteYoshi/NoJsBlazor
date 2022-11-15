@@ -16,7 +16,7 @@ $xxl: 1400px;
     & > * {
         width: 100%;
         
-        @media (min-width: $breakpoint) {
+        @media (width >= $breakpoint) {
             width: calc(50% - 10px);
         }
     }
