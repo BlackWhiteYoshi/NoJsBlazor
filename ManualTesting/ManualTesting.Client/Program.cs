@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 namespace ManualTesting.Client;
 
 public sealed class Program {
-    public static void Main(string[] args) {
+    public static Task Main(string[] args) {
         WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
         ConfigureServices(builder.Services);
-        builder.Build().RunAsync();
+        return builder.Build().RunAsync();
     }
 
     private static void ConfigureServices(IServiceCollection services) {
