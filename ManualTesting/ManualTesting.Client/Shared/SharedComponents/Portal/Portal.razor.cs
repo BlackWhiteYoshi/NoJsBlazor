@@ -3,7 +3,7 @@
 /// <summary>
 /// Provides a way to render fragments into another location outside of the DOM hierarchy of the parent component.
 /// </summary>
-public abstract partial class Portal<T> : LanguageServiceComponentBase<T>, IPortal where T : IPortal {
+public abstract partial class Portal : LanguageServiceComponentBase, IPortal {
     private readonly HashSet<RenderFragment> renderFragmentList = new();
 
     /// <summary>

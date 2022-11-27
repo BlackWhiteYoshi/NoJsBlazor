@@ -1,15 +1,15 @@
 ﻿@namespace ManualTesting.Client
-@inherits ServiceComponentBase<IRoot>
+@inherits Services.ServiceComponentBase
 
 <div id="root" @onclick="(MouseEventArgs e) => Click?.Invoke(e)">
-    @if (PreRenderFlag.Flag) {
+    @if (preRenderFlag.Flag) {
         <div id="app-load-progress">
             <div class="load-circle"></div>
             <LoaderIcon />
         </div>
     }
 
-    <DialogBox />
+    <ITopLevelPortal />
 
 
     <RootNavBar />

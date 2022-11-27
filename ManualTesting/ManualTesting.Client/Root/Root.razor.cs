@@ -2,18 +2,8 @@
 
 namespace ManualTesting.Client;
 
-public sealed partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposable {
+public sealed partial class Root : ServiceComponentBase, IRoot, IDisposable {
     private const string ROOT_JS = "/Root/Root.razor.js";
-
-
-    [Inject]
-    public required IJSModuleRuntime JsModuleRuntime { private get; init; }
-
-    [Inject]
-    public required IPreRenderFlag PreRenderFlag { private get; init; }
-
-    [Inject]
-    public required ILanguageProvider Lang { private get; init; }
 
 
     /// <summary>
@@ -28,26 +18,36 @@ public sealed partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposab
     public event Action<MouseEventArgs>? Click;
 
 
+    private readonly IJSModuleRuntime jsModuleRuntime;
+    private readonly IPreRenderFlag preRenderFlag;
+    private readonly ILanguageProvider lang;
+
+    public Root(IJSModuleRuntime jsModuleRuntime, IPreRenderFlag preRenderFlag, ILanguageProvider lang) {
+        this.jsModuleRuntime = jsModuleRuntime;
+        this.preRenderFlag = preRenderFlag;
+        this.lang = lang;
+    }
+
     protected override async Task OnInitializedAsync() {
         _ = base.OnInitializedAsync();
 
-        if (!PreRenderFlag.Flag) {
-            _ = JsModuleRuntime.PreLoadModule(CBox.SHARED_JS).Preserve();
-            _ = JsModuleRuntime.PreLoadModule(ROOT_JS).Preserve();
+        if (!preRenderFlag.Flag) {
+            _ = jsModuleRuntime.PreLoadModule(CBox.SHARED_JS).Preserve();
+            _ = jsModuleRuntime.PreLoadModule(ROOT_JS).Preserve();
         }
 
-        Lang.OnLanguageChanged += OnLanguageChanged;
-        Lang.Language = await InitLanguage();
+        lang.OnLanguageChanged += OnLanguageChanged;
+        lang.Language = await InitLanguage();
 
 
         async ValueTask<Language> InitLanguage() {
             if (StartLanguage != null)
                 return StartLanguage.Value;
 
-            if (PreRenderFlag.Flag)
+            if (preRenderFlag.Flag)
                 return await Default();
 
-            Dictionary<string, string> cookies = CBox.SplitCookies(await JsModuleRuntime.InvokeTrySync<string>(CBox.SHARED_JS, "getCookies"));
+            Dictionary<string, string> cookies = CBox.SplitCookies(await jsModuleRuntime.InvokeTrySync<string>(CBox.SHARED_JS, "getCookies"));
             if (!cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? languageString))
                 return await Default();
 
@@ -57,17 +57,17 @@ public sealed partial class Root : ServiceComponentBase<IRoot>, IRoot, IDisposab
             return language;
 
 
-            async ValueTask<Language> Default() => ILanguageProvider.GetLanguage(await JsModuleRuntime.InvokeTrySync<string>(ROOT_JS, "getBrowserLanguage"));
+            async ValueTask<Language> Default() => ILanguageProvider.GetLanguage(await jsModuleRuntime.InvokeTrySync<string>(ROOT_JS, "getBrowserLanguage"));
         }
     }
 
-    public new void Dispose() {
+    public override void Dispose() {
         base.Dispose();
-        Lang.OnLanguageChanged -= OnLanguageChanged;
+        lang.OnLanguageChanged -= OnLanguageChanged;
     }
 
 
     private void OnLanguageChanged(Language language) {
-        _ = JsModuleRuntime.InvokeVoidTrySync(ROOT_JS, "setHtmlLanguage", ILanguageProvider.GetAbbreviation(language)).Preserve();
+        _ = jsModuleRuntime.InvokeVoidTrySync(ROOT_JS, "setHtmlLanguage", ILanguageProvider.GetAbbreviation(language)).Preserve();
     }
 }

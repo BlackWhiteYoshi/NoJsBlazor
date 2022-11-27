@@ -3,7 +3,7 @@
 /// <summary>
 /// Provides a way to render fragments into another location outside of the DOM hierarchy of the parent component.
 /// </summary>
-public interface IPortal {
+public interface IPortal : IComponent {
     /// <summary>
     /// <para>Registers the given RenderFragment.</para>
     /// <para>If already registered, nothing happens.</para>

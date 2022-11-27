@@ -1,6 +1,6 @@
 ﻿namespace ManualTesting.Client;
 
-public interface IRoot {
+public interface IRoot : IComponent {
     [AllowNull]
     public PageComponentBase PageComponent { get; set; }
 

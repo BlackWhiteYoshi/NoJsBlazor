@@ -9,11 +9,11 @@ public static class CoreServicesExtension {
     public static IServiceCollection AddCoreServices(this IServiceCollection services) {
         services.AddScoped<IJSModuleRuntime, JSModuleRuntime>();
         services.AddScoped<ILanguageProvider, LanguageProvider>();
+        services.AddScoped<IComponentActivator, ComponentActivator>();
 
         // component services
-        services.AddScoped<IComponentMediator, ComponentMediator>();
-        services.AddScoped((IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<IComponentMediator>().Get<IRoot>());
-        services.AddScoped((IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<IComponentMediator>().Get<ITopLevelPortal>());
+        services.AddScoped<IRoot, Root>();
+        services.AddScoped<ITopLevelPortal, TopLevelPortal>();
         
         return services;
     }

@@ -3,4 +3,4 @@
 /// <summary>
 /// A Portal located at the top layer of &lt;body&gt;, so e.g. dialog-RenderFragments can be rendered here.
 /// </summary>
-public interface ITopLevelPortal : IPortal { }
+public class ITopLevelPortal : Portal { }

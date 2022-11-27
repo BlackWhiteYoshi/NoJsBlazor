@@ -1,4 +1,4 @@
-﻿using ManualTesting.Client.Services;
+﻿using System.Reflection;
 
 namespace ManualTesting.Client;
 
@@ -7,18 +7,21 @@ namespace ManualTesting.Client;
 /// <para>A component that register itself on initializing at the <see cref="Mediator" /> and unregister on disposing.</para>
 /// </summary>
 /// <typeparam name="T">The type on which this instance is registering.</typeparam>
-public abstract class LanguageServiceComponentBase<T> : LanguageComponentBase, IDisposable {
-    [Inject]
-    public required IComponentMediator Mediator { protected get; init; }
-
-
-    protected override void OnInitialized() {
-        base.OnInitialized();
-        Mediator.Register<T>(this);
+public abstract class LanguageServiceComponentBase : LanguageComponentBase, IComponent, IDisposable {
+    private static readonly FieldInfo _renderHandleField = typeof(ComponentBase).GetField("_renderHandle", BindingFlags.NonPublic | BindingFlags.Instance) ?? throw new Exception($"""field "_renderHandle" in {nameof(ComponentBase)} got renamed""");
+    private RenderHandle RenderHandle {
+        get => (RenderHandle)_renderHandleField.GetValue(this)!;
+        set => _renderHandleField.SetValue(this, value);
     }
 
-    public new void Dispose() {
+    protected bool HasRenderHandle => RenderHandle.IsInitialized;
+
+
+    void IComponent.Attach(RenderHandle renderHandle) => RenderHandle = renderHandle;
+
+    public new virtual void Dispose() {
         base.Dispose();
-        Mediator.Unregister<T>();
+        RenderHandle = default;
+        GC.SuppressFinalize(this);
     }
 }
