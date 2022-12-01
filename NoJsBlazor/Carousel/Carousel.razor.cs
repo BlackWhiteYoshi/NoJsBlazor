@@ -127,14 +127,14 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     public IDictionary<string, object>? Attributes { get; set; }
 
 
-    private int _active;
+    private int active;
     /// <summary>
     /// The Index of the current Active Item.
     /// </summary>
     public int Active {
-        get => _active;
+        get => active;
         set {
-            if (_active == value)
+            if (active == value)
                 return;
 
             SwapActive(Active, value, value - Active);
@@ -165,7 +165,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
         autoStart.AutoReset = false;
     }
     
-    protected override void OnInitialized() => _active = ActiveStart;
+    protected override void OnInitialized() => active = ActiveStart;
 
     private bool firstRender = true;
     protected override void OnAfterRender(bool firstRender) {
@@ -223,10 +223,10 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     public void SwapCarouselItems(int index1, int index2) {
         (childList[index1], childList[index2]) = (childList[index2], childList[index1]);
 
-        if (_active == index1)
-            _active = index2;
-        else if (_active == index2)
-            _active = index1;
+        if (active == index1)
+            active = index2;
+        else if (active == index2)
+            active = index1;
     }
 
 
@@ -235,26 +235,35 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     internal override void Add(CarouselItem carouselItem) {
         if (firstRender)
             carouselItem.Active = ChildCount == ActiveStart;
+        else
+            if (ChildCount == 0) {
+                active = 0;
+                carouselItem.Active = true;
+            }
 
         base.Add(carouselItem);
     }
 
     internal override void Remove(CarouselItem carouselItem) {
-        if (childList.Count == 1)
-            throw new InvalidOperationException("Empty Carousel is not supported. You must have at least 1 CarouselItem in the Carousel.");
+        if (childList.Count == 1) {
+            active = -1;
+            childList.RemoveAt(0);
+            StateHasChanged();
+            return;
+        }
 
         int index;
         for (index = 0; index < childList.Count; index++)
             if (childList[index] == carouselItem)
                 break;
 
-        if (_active > index)
-            _active--;
+        if (active > index)
+            active--;
         else if (Active == index) {
-            if (_active == 0)
+            if (active == 0)
                 childList[Active + 1].Active = true;
             else {
-                _active--;
+                active--;
                 childList[Active].Active = true;
             }
         }
@@ -331,7 +340,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
                 throw new ArgumentOutOfRangeException(nameof(CarouselAnimation), "Enum is out of range");
         }
 
-        _active = next;
+        this.active = next;
         InvokeAsync(StateHasChanged);
         OnActiveChanged.InvokeAsync(Active);
     }

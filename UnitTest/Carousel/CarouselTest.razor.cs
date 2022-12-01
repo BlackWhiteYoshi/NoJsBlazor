@@ -99,7 +99,7 @@ public sealed partial class CarouselTest : TestContext {
     }
 
     [Fact]
-    public void Items_RemoveLastChild_ThrowsInvalidOperationException() {
+    public void Items_RemoveLastChild_SetsActiveToMinus1() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, CarouselItemRed);
         });
@@ -107,10 +107,9 @@ public sealed partial class CarouselTest : TestContext {
 
         RenderFragment noItems = (RenderTreeBuilder builder) => { };
         carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", noItems));
-        try {
-            carouselContainer.WaitForAssertion(() => Assert.Throws<InvalidOperationException>(() => { }));
-        }
-        catch (InvalidOperationException) { }
+
+        Assert.Equal(0, carousel.ChildCount);
+        Assert.Equal(-1, carousel.Active);
     }
 
     [Fact]
