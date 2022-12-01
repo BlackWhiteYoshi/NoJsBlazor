@@ -12,25 +12,65 @@
             const int HEIGHT = 450;
         }
         <div class="center" style="width: 80%; max-width: 900px">
-            <Carousel ActiveStart="1" Animation="CarouselAnimation.Slide" BeginRunning="false" IntervalTime="4000">
+            <Carousel @ref="carousel" ActiveStart="1" Animation="carouselAnimation" BeginRunning="false" IntervalTime="intervalTime" AutoStartTime="autoStartTime" ControlArrowsEnable="controlArrowsEnable" IndicatorsEnable="indicatorsEnable" PlayButtonEnable="playButtonEnable">
                 <Items>
-                    <CarouselItem>
-                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, red, blue);"></div>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, blue, yellow);"></div>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, yellow, green);"></div>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <div style="height: @(HEIGHT)px; background: linear-gradient(90deg, green, red);"></div>
-                    </CarouselItem>
+                    @foreach (string color in colorList) {
+                        <CarouselItem>
+                            <div style="height: @(HEIGHT)px; background: @color;"></div>
+                        </CarouselItem>
+                    }
                 </Items>
                 <Overlay>
                     <p>Ich bin ein Overlay!</p>
                 </Overlay>
             </Carousel>
+        </div>
+        <div class="center" style="margin: 50px auto;">
+            <div style="margin-bottom: 10px">
+                <label>items</label>
+                @foreach (int i in Enumerable.Range(0, colorList.Count)) {
+                    <div>
+                        <input @bind="colorList[i]" style="width: 250px" />
+                    </div>
+                }
+                <div class="center">
+                    <button @onclick="_ => colorList.Add(string.Empty)" style="padding: 3px 5px; background-color: #88F;">+</button>
+                    <button @onclick="_ => colorList.RemoveAt(colorList.Count - 1)" style="padding: 3px 5px;  background-color: #F88;">-</button>
+                </div>
+                <div>
+                    <input @bind="swap1" style="width: 40px" />
+                    <input @bind="swap2" style="width: 40px" />
+                    <button @onclick="_ => carousel!.SwapCarouselItems(swap1, swap2)">Swap items</button>
+                </div>
+            </div>
+            <div>
+                <select @bind="carouselAnimation" style="padding: 3px 10px;">
+                    <option value="@CarouselAnimation.FadeOut">FadeOut</option>
+                    <option value="@CarouselAnimation.Slide">Slide</option>
+                    <option value="@CarouselAnimation.SlideRotate">SlideRotate</option>
+                </select>
+                <label>Animation</label>
+            </div>
+            <div>
+                <input type="checkbox" @bind="controlArrowsEnable" />
+                <label>controlArrowsEnable</label>
+            </div>
+            <div>
+                <input type="checkbox" @bind="indicatorsEnable" />
+                <label>indicatorsEnable</label>
+            </div>
+            <div>
+                <input type="checkbox" @bind="playButtonEnable" />
+                <label>playButtonEnable</label>
+            </div>
+            <div>
+                <input @bind="intervalTime" style="width: 50px; padding: 3px 5px;" />
+                <label>intervalTime</label>
+            </div>
+            <div>
+                <input @bind="autoStartTime" style="width: 50px; padding: 3px 5px;" />
+                <label>autoStartTime</label>
+            </div>
         </div>
     </section>
 
@@ -132,7 +172,7 @@
 
 @code {
     public void RenderDialog(RenderTreeBuilder __builder) {
-        <Dialog @ref="dialog" ModalScreen="false">
+        <Dialog @ref="dialog" ModalScreen="false" OnTitlePointerDown="OnTitleDown" OnTitlePointerUp="OnTitleUp">
             <Title>
                 <p style="margin: 0;">My Test Dialog</p>
             </Title>

@@ -3,27 +3,9 @@
 
 <div class="carousel" @attributes="@Attributes">
     <div class="carousel-content">
-        @*
-            TODO
-            remove if branch and ItemContainer
-            using @key optimising
-        *@
-        @if (ItemContainer.Length > 0) {
-            @for (int i = 0; i < ItemContainer.Length; i++) {
-                <div class="carousel-element @ItemContainer[i].slideClass" style="
-                        z-index: @ItemContainer[i].zIndex;
-                        opacity: @ItemContainer[i].opacity;
-                        translate: @(ItemContainer[i].translateX)%;
-                        rotate: y @(ItemContainer[i].rotateY)deg;">
-                    @ItemContainer[i].carouselItem.ChildContent
-                </div>
-            }
-        }
-        else {
-            <CascadingValue Name="Parent" Value="(ListholdingComponentBase<CarouselItem>)this" IsFixed="true">
-                @Items
-            </CascadingValue>
-        }
+        <CascadingValue Name="Parent" Value="(ListholdingComponentBase<CarouselItem>)this" IsFixed="true">
+            @Items
+        </CascadingValue>
     </div>
     @if (Overlay != null) {
         <div class="carousel-overlay">
@@ -43,10 +25,19 @@
     }
     @if (IndicatorsEnable) {
         <ol class="carousel-indicator-list">
-            @foreach (int i in Enumerable.Range(0, ItemContainer.Length)) {
+            @foreach (int i in Enumerable.Range(0, childList.Count)) {
                 <li role="button" @onclick="_ => IndicatorButton(i)">
-                    <div style="opacity: @ItemContainer[i].indicatorOpacity">
-                        <div style="width:@(ItemContainer[i].progressBar)%; transition: width @(ItemContainer[i].progressBarTransition)ms linear;"></div>
+                    @{
+                        (string active, string progressActive, int progressTime) = (Active == i) switch {
+                            true => interval.Enabled switch {
+                                true => ("active", "active", (int)IntervalTime),
+                                false => ("active", string.Empty, 0)
+                            },
+                            false => (string.Empty, string.Empty, 0),
+                        };
+                    }
+                    <div class="@active">
+                        <div class="@progressActive" style="transition: width @(progressTime)ms linear;"></div>
                     </div>
                 </li>
             }

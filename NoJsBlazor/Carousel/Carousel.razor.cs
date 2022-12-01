@@ -7,71 +7,12 @@ namespace NoJsBlazor;
 /// <para>It can also display an overlay, control-arrows, item indicators and a play/stop button.</para>
 /// </summary>
 public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposable {
-    private struct Item {
-        /// <summary>
-        /// Renderable content of this item.
-        /// </summary>
-        public CarouselItem carouselItem;
-        /// <summary>
-        /// It is either 20 or 10.
-        /// </summary>
-        public int zIndex;
-        /// <summary>
-        /// It is either 1 or 0.
-        /// </summary>
-        public int opacity;
-        /// <summary>
-        /// It is either Fadout=0, Slide=+-100, SlideRotate=+-50 or 0.
-        /// </summary>
-        public float translateX;
-        /// <summary>
-        /// It is either +-90 or 0.
-        /// </summary>
-        public int rotateY;
-        /// <summary>
-        /// It is either "slide" or string.Empty.
-        /// </summary>
-        public string slideClass;
-        /// <summary>
-        /// It is eiher 1.0f or 0.5f.
-        /// </summary>
-        public float indicatorOpacity;
-        /// <summary>
-        /// It is either 100 or 0.
-        /// </summary>
-        public int progressBar;
-        /// <summary>
-        /// It is either set to Interval time or 0.
-        /// </summary>
-        public int progressBarTransition;
-    }
-
-    private Item[] ItemContainer = Array.Empty<Item>();
-    /// <summary>
-    /// The Number of Items currently in this carousel.
-    /// </summary>
-    public int ItemCount => ItemContainer.Length;
-
-
-    #region Parameters & Fields
-
     /// <summary>
     /// <para>Index of the active item at the beginning.</para>
     /// <para>Default is 0.</para>
     /// </summary>
     [Parameter]
     public int ActiveStart { get; set; } = 0;
-    /// <summary>
-    /// The Index of the current Active Item.
-    /// </summary>
-    public int Active { get; private set; }
-
-    /// <summary>
-    /// <para>Waiting time before beginning swap animation in ms.</para>
-    /// <para>Default is 6000.</para>
-    /// </summary>
-    [Parameter]
-    public int IntervalTime { get; set; } = 6000;
 
     /// <summary>
     /// <para>Type of swapping animation.</para>
@@ -79,10 +20,21 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// </summary>
     [Parameter]
     public CarouselAnimation Animation { get; set; } = CarouselAnimation.FadeOut;
+
     /// <summary>
-    /// Gives the current Animation.
+    /// <para>Waiting time before beginning swap animation in ms.</para>
+    /// <para>Default is 6000.</para>
     /// </summary>
-    public CarouselAnimation CurrAnimation { get; private set; }
+    [Parameter]
+    public double IntervalTime {
+        get => interval.Interval;
+        set {
+            if (value == interval.Interval)
+                return;
+
+            interval.Interval = value;
+        }
+    }
 
     /// <summary>
     /// <para>Starts interval after [AutoStartTime] ms, if interval not running and no action occurs.</para>
@@ -90,15 +42,28 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     /// <para>Default is 0.</para>
     /// </summary>
     [Parameter]
-    public int AutoStartTime { get; set; } = 0;
-    /// <summary>
-    /// Holds the current value of the time to autoStart.
-    /// </summary>
-    public int CurrAutoStartTime { get; private set; }
-    /// <summary>
-    /// Inidicates if the autoStart Timer is currently ticking.
-    /// </summary>
-    public bool AutoStartRunning => autoStart.Enabled;
+    public double AutoStartTime {
+        get {
+            if (_isAutoStartTimeNull)
+                return 0.0;
+            else
+                return autoStart.Interval;
+        }
+        set {
+            if (value == 0.0)
+                _isAutoStartTimeNull = true;
+            else {
+                _isAutoStartTimeNull = false;
+                if (value == autoStart.Interval)
+                    return;
+
+                autoStart.Interval = value;
+                autoStart.Stop();
+                autoStart.Start();
+            }
+        }
+    }
+    private bool _isAutoStartTimeNull = true;
 
     /// <summary>
     /// <para>Carousel Interval starts at beginning.</para>
@@ -162,33 +127,56 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     public IDictionary<string, object>? Attributes { get; set; }
 
 
+    private int _active;
+    /// <summary>
+    /// The Index of the current Active Item.
+    /// </summary>
+    public int Active {
+        get => _active;
+        set {
+            if (_active == value)
+                return;
+
+            SwapActive(Active, value, value - Active);
+        }
+    }
+
     /// <summary>
     /// Indicates if the interval of the carousel is currently running.
     /// </summary>
     public bool Running => interval.Enabled;
 
+    /// <summary>
+    /// Inidicates if the autoStart Timer is currently ticking.
+    /// </summary>
+    public bool AutoStartRunning => autoStart.Enabled;
+
 
     private readonly System.Timers.Timer interval = new();
     private readonly System.Timers.Timer autoStart = new();
 
-    #endregion
 
+    public Carousel() {
+        interval.Interval = 6000.0;
+        interval.Elapsed += Interval;
+        interval.AutoReset = true;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        autoStart.Elapsed += AutoStart;
+        autoStart.AutoReset = false;
+    }
+    
+    protected override void OnInitialized() => _active = ActiveStart;
+
+    private bool firstRender = true;
+    protected override void OnAfterRender(bool firstRender) {
         if (firstRender) {
-            Initialize();
-            StateHasChanged();
-
-            if (BeginRunning) {
-                // first render has no indicators because ChildCount = 0 
-                // a second render is needed to render indicators with progress 0
-                // then start timer, which sets progress to full (with transition)
-                await Task.Yield();
+            if (BeginRunning)
                 StartInterval();
-            }
-            else if (CurrAutoStartTime > 0)
+            else if (AutoStartTime > 0.0)
                 autoStart.Start();
         }
+
+        this.firstRender = false;
     }
 
     /// <summary>
@@ -198,6 +186,84 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
         interval?.Dispose();
         autoStart?.Dispose();
     }
+
+
+    /// <summary>
+    /// <para>Finds the indexes of the 2 given CarouselItems and then executes <see cref="SwapCarouselItems(int, int)"/>.</para>
+    /// <para>If one of the items is not present in the CarouselItem list, an <see cref="ArgumentException"/> is thrown.</para>
+    /// </summary>
+    /// <param name="carouselItem1"></param>
+    /// <param name="carouselItem2"></param>
+    /// <exception cref="ArgumentException"></exception>
+    public void SwapCarouselItems(CarouselItem carouselItem1, CarouselItem carouselItem2) {
+        int index1;
+        for (index1 = 0; index1 < childList.Count; index1++)
+            if (childList[index1] == carouselItem1)
+                break;
+        if (index1 == childList.Count)
+            throw new ArgumentException("first parameter is not an item of this carousel");
+
+        int index2;
+        for (index2 = 0; index2 < childList.Count; index2++)
+            if (childList[index2] == carouselItem2)
+                break;
+        if (index2 == childList.Count)
+            throw new ArgumentException("second parameter is not an item of this carousel");
+
+        SwapCarouselItems(index1, index2);
+    }
+
+    /// <summary>
+    /// <para>Swaps the 2 items in the CarouselItem list at the given indexes.</para>
+    /// <para>The active item is preserved.<br />
+    /// e.g. 0 is active, swap(0, 1)  -&gt; 1 will be active, so the active item won't change.</para>
+    /// </summary>
+    /// <param name="index1"></param>
+    /// <param name="index2"></param>
+    public void SwapCarouselItems(int index1, int index2) {
+        (childList[index1], childList[index2]) = (childList[index2], childList[index1]);
+
+        if (_active == index1)
+            _active = index2;
+        else if (_active == index2)
+            _active = index1;
+    }
+
+
+    #region ListholdingComponentBase functions
+
+    internal override void Add(CarouselItem carouselItem) {
+        if (firstRender)
+            carouselItem.Active = ChildCount == ActiveStart;
+
+        base.Add(carouselItem);
+    }
+
+    internal override void Remove(CarouselItem carouselItem) {
+        if (childList.Count == 1)
+            throw new InvalidOperationException("Empty Carousel is not supported. You must have at least 1 CarouselItem in the Carousel.");
+
+        int index;
+        for (index = 0; index < childList.Count; index++)
+            if (childList[index] == carouselItem)
+                break;
+
+        if (_active > index)
+            _active--;
+        else if (Active == index) {
+            if (_active == 0)
+                childList[Active + 1].Active = true;
+            else {
+                _active--;
+                childList[Active].Active = true;
+            }
+        }
+
+        childList.RemoveAt(index);
+        StateHasChanged();
+    }
+
+    #endregion
 
 
     #region input Funtions
@@ -214,7 +280,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
 
     private void IndicatorButton(int indicatorIndex) {
         StopInterval();
-        SwapItems(Active, indicatorIndex, indicatorIndex - Active);
+        Active = indicatorIndex;
     }
 
     private void PlayButton(MouseEventArgs e) {
@@ -227,459 +293,88 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     #endregion
 
 
-    #region private Functions
-
-    private void Initialize() {
-        ItemContainer = new Item[childList.Count];
-        Active = ActiveStart;
-        CurrAnimation = Animation;
-        interval.Interval = IntervalTime;
-        interval.Elapsed += Interval;
-        interval.AutoReset = true;
-
-        CurrAutoStartTime = AutoStartTime;
-        if (CurrAutoStartTime > 0)
-            autoStart.Interval = CurrAutoStartTime;
-        autoStart.Elapsed += AutoStart;
-        autoStart.AutoReset = false;
-
-
-        for (int i = 0; i < ItemContainer.Length; i++) {
-            ItemContainer[i].carouselItem = childList[i];
-            ItemContainer[i].zIndex = 10;
-            ItemContainer[i].indicatorOpacity = 0.5f;
-            ItemContainer[i].progressBar = 0;
-            ItemContainer[i].progressBarTransition = 0;
-            ItemContainer[i].slideClass = string.Empty;
-        }
-        // set first one active
-        ItemContainer[Active].zIndex = 20;
-        ItemContainer[Active].indicatorOpacity = 1.0f;
-
-        switch (CurrAnimation) {
-            case CarouselAnimation.FadeOut:
-                for (int i = 0; i < ItemContainer.Length; i++) {
-                    ItemContainer[i].opacity = 0;
-                    ItemContainer[i].translateX = 0;
-                    ItemContainer[i].rotateY = 0;
-                }
-                // set first one active
-                ItemContainer[Active].opacity = 1;
-                break;
-
-            case CarouselAnimation.Slide:
-                for (int i = 0; i < ItemContainer.Length; i++) {
-                    ItemContainer[i].opacity = 1;
-                    ItemContainer[i].translateX = 90;
-                    ItemContainer[i].rotateY = 0;
-                }
-                // set first one active
-                ItemContainer[Active].translateX = 0;
-                break;
-
-            case CarouselAnimation.SlideRotate:
-                for (int i = 0; i < ItemContainer.Length; i++) {
-                    ItemContainer[i].opacity = 1;
-                    ItemContainer[i].translateX = 50;
-                    ItemContainer[i].rotateY = 90;
-                }
-                // set first one active
-                ItemContainer[Active].translateX = 0;
-                ItemContainer[Active].rotateY = 0;
-                break;
-        }
-    }
-
     private void Prev() {
         int next = Active - 1;
         if (next < 0)
-            next = ItemContainer.Length - 1;
+            next = ChildCount - 1;
 
-        SwapItems(Active, next, -1);
+        SwapActive(Active, next, -1);
     }
 
     private void Next() {
-        int next = (Active + 1) % ItemContainer.Length;
+        int next = Active + 1;
+        if (next == ChildCount)
+            next = 0;
 
-        SwapItems(Active, next, 1);
+        SwapActive(Active, next, 1);
     }
 
-    private async void SwapItems(int active, int next, int direction) {
-        ItemContainer[active].progressBarTransition = 0;
-        ItemContainer[active].progressBar = 0;
-
+    private void SwapActive(int active, int next, int direction) {
         if (active == next)
             return;
 
-        ItemContainer[active].zIndex = 10;
-        ItemContainer[next].zIndex = 20;
-        ItemContainer[active].indicatorOpacity = 0.5f;
-        ItemContainer[next].indicatorOpacity = 1.0f;
-
-        switch (CurrAnimation) {
+        switch (Animation) {
             case CarouselAnimation.FadeOut:
-                ItemContainer[active].opacity = 0;
-                ItemContainer[next].opacity = 1;
+                childList[active].Active = false;
+                childList[next].Active = true;
                 break;
 
             case CarouselAnimation.Slide:
             case CarouselAnimation.SlideRotate:
-                int translateX;
-                int rotateY;
-                if (CurrAnimation == CarouselAnimation.Slide) {
-                    translateX = 100;
-                    rotateY = 0;
-                }
-                else {
-                    translateX = 50;
-                    rotateY = 90;
-                }
                 int sgnDirection = Math.Sign(direction);
-
-                for (int i = 0; i != direction; i += sgnDirection) {
-                    ItemContainer[next - i].slideClass = string.Empty;
-                    ItemContainer[next - i].translateX = translateX * (direction - i);
-                    ItemContainer[next - i].rotateY = rotateY * (direction - i);
-                }
-
-                await InvokeAsync(StateHasChanged);
-                // TODO waiting of rendering instead of waiting 30ms
-                await Task.Delay(30);
-
-                ItemContainer[next].slideClass = "slide";
-                ItemContainer[next].translateX = 0;
-                ItemContainer[next].rotateY = 0;
-
-                for (int i = 0; i != direction; i += sgnDirection) {
-                    ItemContainer[active + i].slideClass = "slide";
-                    ItemContainer[active + i].translateX = -translateX * (direction - i);
-                    ItemContainer[active + i].rotateY = -rotateY * (direction - i);
-                }
-
+                for (int i = 0; i != direction; i += sgnDirection)
+                    childList[next - i].Rotate(direction - i, direction);
+                childList[active].Rotate(0, direction);
                 break;
 
             default:
-                throw new Exception("pigs have learned to fly");
+                throw new ArgumentOutOfRangeException(nameof(CarouselAnimation), "Enum is out of range");
         }
 
-        _ = InvokeAsync(StateHasChanged);
-        Active = next;
-        _ = OnActiveChanged.InvokeAsync(Active);
-    }
-
-    private void StopInterval() {
-        interval.Stop();
-        ItemContainer[Active].progressBarTransition = 0;
-        ItemContainer[Active].progressBar = 0;
-        if (CurrAutoStartTime > 0) {
-            autoStart.Stop();
-            autoStart.Start();
-        }
-        _ = OnRunningChanged.InvokeAsync(false);
+        _active = next;
+        InvokeAsync(StateHasChanged);
+        OnActiveChanged.InvokeAsync(Active);
     }
 
 
     #region Interval / AutoStart
 
-    private void StartInterval() {
-        ItemContainer[Active].progressBarTransition = IntervalTime;
-        ItemContainer[Active].progressBar = 100;
-        interval.Start();
-        InvokeAsync(StateHasChanged);
-        _ = OnRunningChanged.InvokeAsync(true);
-    }
-
-    private void Interval(object? source, ElapsedEventArgs e) {
-        int next = (Active + 1) % ItemContainer.Length;
-        ItemContainer[next].progressBarTransition = IntervalTime;
-        ItemContainer[next].progressBar = 100;
-        Next();
-        InvokeAsync(StateHasChanged);
-    }
-
-    private void AutoStart(object? source, ElapsedEventArgs e) {
-        if (!interval.Enabled)
-            StartInterval();
-    }
-
-    #endregion
-
-    #endregion
-
-
-    #region public Functions
-
     /// <summary>
-    /// <para>If one of theses parameters are changed manually, this method should be called:</para>
-    /// <para>CarouselItem, Active, Animation, Running, IntervalTime, AutoStartTime</para>
+    /// Starts the interval-timer that automatically change to next item.
     /// </summary>
-    public void ReInitialize() {
-        Initialize();
-        if (!Running && BeginRunning)
-            StartInterval();
-
-        InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// <para>Adds an item to the carousel.</para>
-    /// <para>Default (index = -1) is at the end of the carousel.</para>
-    /// </summary>
-    /// <param name="item">RenderFragment to Render</param>
-    /// <param name="index">0 = first item, Length or -1 = last item</param>
-    public void AddItem(CarouselItem item, int index = -1) {
-        if (index < -1)
-            throw new IndexOutOfRangeException("index must be equal or greater -1");
-
-        if (index > ItemContainer.Length)
-            throw new IndexOutOfRangeException($"index must be less or equal Length");
-
-        if (index == -1)
-            index = ItemContainer.Length;
-
-        // create array with one more space and copy array in the new array with one space at position
-        Item[] items = new Item[ItemContainer.Length + 1];
-        int i = 0;
-        for (; i < index; i++)
-            items[i] = ItemContainer[i];
-        for (; i < ItemContainer.Length; i++)
-            items[i + 1] = ItemContainer[i];
-
-        // fill space position with default values
-        items[index].carouselItem = item;
-        items[index].indicatorOpacity = 0.5f;
-        items[index].progressBar = 0;
-        items[index].progressBarTransition = 0;
-        items[index].slideClass = string.Empty;
-        switch (CurrAnimation) {
-            case CarouselAnimation.FadeOut:
-                items[index].opacity = 0;
-                items[index].translateX = 0;
-                items[index].rotateY = 0;
-                break;
-
-            case CarouselAnimation.Slide:
-                items[index].opacity = 1;
-                items[index].translateX = 100;
-                items[index].rotateY = 0;
-                break;
-
-            case CarouselAnimation.SlideRotate:
-                items[index].opacity = 1;
-                items[index].translateX = 50;
-                items[index].rotateY = 90;
-                break;
-        }
-
-        // adjust active
-        if (index <= Active) {
-            Active++;
-
-            // Progressbar Transition goes from start, so refesh Interval
-            if (interval.Enabled) {
-                interval.Stop();
-                StartInterval();
-            }
-        }
-
-        ItemContainer = items;
-
-        InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// Removes the item with the given index from the carousel.
-    /// </summary>
-    /// <param name="index">0 = first item, Length - 1 = last item</param>
-    public void RemoveItem(int index) {
-        if (ItemContainer.Length <= 1)
+    public void StartInterval() {
+        if (interval.Enabled)
             return;
 
-        if (index < 0)
-            throw new IndexOutOfRangeException("index must be equal or greater 0");
-
-        if (index >= ItemContainer.Length)
-            throw new IndexOutOfRangeException($"index must be smaller than Length");
-
-        // create array with one less space and copy array in the new array with removed item at index
-        Item[] items = new Item[ItemContainer.Length - 1];
-        int i = 0;
-        for (; i < index; i++)
-            items[i] = ItemContainer[i];
-        for (; i < items.Length; i++)
-            items[i] = ItemContainer[i + 1];
-
-        // adjust active
-        if (index < Active) {
-            Active--;
-            // Progressbar Transition goes from start, so refesh Interval
-            if (interval.Enabled) {
-                interval.Stop();
-                StartInterval();
-            }
-        }
-        else if (index == Active) {
-            if (Active < ItemContainer.Length) {
-                int newActive = Active;
-                if (Active == items.Length) {
-                    newActive--;
-                    if (interval.Enabled) {
-                        interval.Stop();
-                        StartInterval();
-                    }
-                }
-
-                items[newActive].indicatorOpacity = ItemContainer[Active].indicatorOpacity;
-                items[newActive].opacity = ItemContainer[Active].opacity;
-                items[newActive].progressBar = ItemContainer[Active].progressBar;
-                items[newActive].progressBarTransition = ItemContainer[Active].progressBarTransition;
-                items[newActive].translateX = ItemContainer[Active].translateX;
-                items[newActive].rotateY = ItemContainer[Active].rotateY;
-
-                Active = newActive;
-            }
-        }
-
-        ItemContainer = items;
-
-        InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// Removes the first appearance of the given item from the carousel.
-    /// </summary>
-    /// <param name="carouselItem"></param>
-    public bool RemoveItem(CarouselItem carouselItem) {
-        for (int i = 0; i < ItemContainer.Length; i++)
-            if (ItemContainer[i].carouselItem == carouselItem) {
-                RemoveItem(i);
-                return true;
-            }
-
-        return false;
-    }
-
-    /// <summary>
-    /// Swaps 2 items in the carousel.
-    /// </summary>
-    /// <param name="index1">0 = first item, Length - 1 = last item</param>
-    /// <param name="index2">0 = first item, Length - 1 = last item</param>
-    public void SwapItem(int index1, int index2) {
-        (ItemContainer[index1].carouselItem, ItemContainer[index2].carouselItem) = (ItemContainer[index2].carouselItem, ItemContainer[index1].carouselItem);
-        InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// Set the item with the given index to active.
-    /// </summary>
-    /// <param name="index">0 = first item, Length - 1 = last item</param>
-    /// <param name="intervalStop">stopping interval with this change</param>
-    public void SetActiveItem(int index, bool intervalStop = true) {
-        if (Active != index) {
-            SwapItems(Active, index, index - Active);
-            if (intervalStop)
-                StopInterval();
-            else if (interval.Enabled) {
-                interval.Stop();
-                StartInterval();
-            }
-        }
-        else if (intervalStop)
-            StopInterval();
-
-        InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// Sets the swapping animation of the carousel.
-    /// </summary>
-    /// <param name="animation"></param>
-    public void SetAnimation(CarouselAnimation animation) {
-        CurrAnimation = animation;
-
-        switch (animation) {
-            case CarouselAnimation.FadeOut:
-                for (int i = 0; i < ItemContainer.Length; i++) {
-                    ItemContainer[i].opacity = 0;
-                    ItemContainer[i].translateX = 0;
-                    ItemContainer[i].rotateY = 0;
-                    ItemContainer[i].slideClass = string.Empty;
-                }
-                // set first one active
-                ItemContainer[Active].opacity = 1;
-                break;
-
-            case CarouselAnimation.Slide:
-                for (int i = 0; i < ItemContainer.Length; i++) {
-                    ItemContainer[i].opacity = 1;
-                    ItemContainer[i].translateX = 100;
-                    ItemContainer[i].rotateY = 0;
-                    ItemContainer[i].slideClass = string.Empty;
-                }
-                // set first one active
-                ItemContainer[Active].translateX = 0;
-                break;
-
-            case CarouselAnimation.SlideRotate:
-                for (int i = 0; i < ItemContainer.Length; i++) {
-                    ItemContainer[i].opacity = 1;
-                    ItemContainer[i].translateX = 50;
-                    ItemContainer[i].rotateY = 90;
-                    ItemContainer[i].slideClass = string.Empty;
-                }
-                // set first one active
-                ItemContainer[Active].translateX = 0;
-                ItemContainer[Active].rotateY = 0;
-                break;
-        }
-        InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// <para>Sets interval time of the carousel.</para>
-    /// <para>Stops interval if currently running.</para>
-    /// </summary>
-    /// <param name="intervalTime"></param>
-    public void SetIntervalTime(int intervalTime) {
-        StopInterval();
-        interval.Interval = intervalTime;
-        InvokeAsync(StateHasChanged);
-    }
-
-    /// <summary>
-    /// <para>Sets autostart time in ms of the carousel.</para>
-    /// <para>Value of 0 deactivates autostart.</para>
-    /// <para>Restarts autoStart if currently running.</para>
-    /// </summary>
-    /// <param name="autoStartTime"></param>
-    public void SetAutoStartTime(int autoStartTime) {
-        CurrAutoStartTime = autoStartTime;
         autoStart.Stop();
+        interval.Start();
 
-        if (CurrAutoStartTime > 0) {
-            autoStart.Interval = autoStartTime;
+        InvokeAsync(StateHasChanged);
+        OnRunningChanged.InvokeAsync(true);
+    }
+
+    /// <summary>
+    /// Stops the interval-timer, so the current item will not automatically change.
+    /// </summary>
+    public void StopInterval() {
+        if (!interval.Enabled)
+            return;
+
+        interval.Stop();
+        if (AutoStartTime > 0.0) {
+            autoStart.Stop();
             autoStart.Start();
         }
 
         InvokeAsync(StateHasChanged);
+        OnRunningChanged.InvokeAsync(false);
     }
 
-    /// <summary>
-    /// Starts the interval and sets Running = true.
-    /// </summary>
-    public void Start() {
-        if (!interval.Enabled) {
+    private void Interval(object? source, ElapsedEventArgs e) => Next();
+
+    private void AutoStart(object? source, ElapsedEventArgs e) {
+        if (!interval.Enabled)
             StartInterval();
-            InvokeAsync(StateHasChanged);
-        }
-    }
-
-    /// <summary>
-    /// Stops the interval, sets Running = false and starts the Autostart timer if AutoStartTime greater 0.
-    /// </summary>
-    public void Stop() {
-        StopInterval();
-        InvokeAsync(StateHasChanged);
     }
 
     #endregion

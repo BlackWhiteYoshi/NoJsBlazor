@@ -4,6 +4,9 @@ namespace ManualTesting.Client;
 
 public sealed partial class Home : PageComponentBase, IDisposable {
     [Inject]
+    public required IJSRuntime JsRuntime { private get; init; }
+
+    [Inject]
     public required ITopLevelPortal TopLevelPortal { private get; init; }
 
 
@@ -17,6 +20,30 @@ public sealed partial class Home : PageComponentBase, IDisposable {
         Root.Click -= CloseContextMenu;
         TopLevelPortal.Remove(RenderDialog);
     }
+
+    #region Carousel
+
+    [AllowNull]
+    private Carousel carousel;
+
+    private readonly List<string> colorList = new() {
+        "linear-gradient(90deg, red, blue)",
+        "linear-gradient(90deg, blue, yellow)",
+        "linear-gradient(90deg, yellow, green)",
+        "linear-gradient(90deg, green, red)"
+    };
+
+    private int swap1;
+    private int swap2;
+
+    private CarouselAnimation carouselAnimation = CarouselAnimation.FadeOut;
+    private bool controlArrowsEnable = true;
+    private bool indicatorsEnable = true;
+    private bool playButtonEnable = true;
+    private double intervalTime = 4000.0;
+    private double autoStartTime = 0.0;
+
+    #endregion
 
 
     #region ContextMenu
@@ -46,6 +73,10 @@ public sealed partial class Home : PageComponentBase, IDisposable {
     private void OpenDialog(MouseEventArgs e) => dialog.Open();
 
     private void CloseDialog(MouseEventArgs e) => dialog.Close();
+
+    private void OnTitleDown(PointerEventArgs e) => ((IJSInProcessRuntime)JsRuntime).InvokeVoid("setPointerCapture", dialog.TitleDiv, e.PointerId);
+
+    private void OnTitleUp(PointerEventArgs e) => ((IJSInProcessRuntime)JsRuntime).InvokeVoid("releasePointerCapture", dialog.TitleDiv, e.PointerId);
 
     #endregion
 

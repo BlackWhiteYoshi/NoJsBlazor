@@ -36,9 +36,6 @@
 .carousel > .carousel-content > .carousel-element.slide {
   transition: translate ease-out var(--swap-duration), rotate ease-out var(--swap-duration);
 }
-.carousel > .carousel-content > .carousel-element.active {
-  z-index: 20;
-}
 .carousel > .carousel-overlay {
   position: absolute;
   inset: var(--overlay-position);
@@ -91,13 +88,23 @@
   background-color: var(--indicator-color);
   border-radius: 5px;
   overflow: hidden;
-  transition: opacity 0.3s;
+  opacity: 0.5;
+  transition: opacity 0.1s;
 }
 .carousel > .carousel-indicator-list > li > div > div {
+  width: 0;
   height: 100%;
   background-color: var(--indicator-progress-color);
 }
+.carousel > .carousel-indicator-list > li > .active {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.carousel > .carousel-indicator-list > li > .active > .active {
+  width: 100%;
+}
 .carousel > .carousel-indicator-list > li:hover > div {
+  transition: opacity 0.3s;
   opacity: 1 !important;
 }
 .carousel > .carousel-play-button {

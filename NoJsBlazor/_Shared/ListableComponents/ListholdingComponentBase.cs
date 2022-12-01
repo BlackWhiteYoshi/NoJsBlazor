@@ -15,8 +15,17 @@ public abstract class ListholdingComponentBase<T> : ComponentBase where T : List
     /// API for <see cref="ListableComponentBase{T}"/> objects to add themselves to the list.
     /// </summary>
     /// <param name="child"></param>
-    internal void Register(T child) {
+    internal virtual void Add(T child) {
         childList.Add(child);
+        StateHasChanged();
+    }
+
+    /// <summary>
+    /// API for <see cref="ListableComponentBase{T}"/> objects to remove themselves to the list.
+    /// </summary>
+    /// <param name="child"></param>
+    internal virtual void Remove(T child) {
+        childList.Remove(child);
         StateHasChanged();
     }
 

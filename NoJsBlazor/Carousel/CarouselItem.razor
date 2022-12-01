@@ -1,6 +1,42 @@
 ﻿@namespace NoJsBlazor
 @inherits ListableComponentBase<CarouselItem>
 
-<div class="@(active ? "carousel-element active" : "carousel-element")">
+@{
+    int zIndex;
+    int opacity;
+    int translateX;
+    int rotateY;
+    if (Active) {
+        zIndex = 20;
+        opacity = 1;
+        translateX = 0;
+        rotateY = 0;
+    }
+    else {
+        zIndex = 10;
+        switch (((Carousel)Parent).Animation) {
+            case CarouselAnimation.FadeOut:
+                opacity = 0;
+                translateX = 0;
+                rotateY = 0;
+                slideClass = string.Empty;
+                break;
+            case CarouselAnimation.Slide:
+                opacity = 1;
+                translateX = 100 * position;
+                rotateY = 0;
+                break;
+            case CarouselAnimation.SlideRotate:
+                opacity = 1;
+                translateX = 50 * position;
+                rotateY = 90 * position;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(CarouselAnimation), "Enum is out of range");
+        }
+    }
+}
+
+<div class="carousel-element @slideClass" style="z-index: @zIndex; opacity: @opacity; translate: @(translateX)%; rotate: y @(rotateY)deg;">
     @ChildContent
 </div>

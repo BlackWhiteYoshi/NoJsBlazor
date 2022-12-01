@@ -10,71 +10,10 @@
             <para>It can also display an overlay, control-arrows, item indicators and a play/stop button.</para>
             </summary>
         </member>
-        <member name="F:NoJsBlazor.Carousel.Item.carouselItem">
-            <summary>
-            Renderable content of this item.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.Carousel.Item.zIndex">
-            <summary>
-            It is either 20 or 10.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.Carousel.Item.opacity">
-            <summary>
-            It is either 1 or 0.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.Carousel.Item.translateX">
-            <summary>
-            It is either Fadout=0, Slide=+-100, SlideRotate=+-50 or 0.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.Carousel.Item.rotateY">
-            <summary>
-            It is either +-90 or 0.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.Carousel.Item.slideClass">
-            <summary>
-            It is either "slide" or string.Empty.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.Carousel.Item.indicatorOpacity">
-            <summary>
-            It is eiher 1.0f or 0.5f.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.Carousel.Item.progressBar">
-            <summary>
-            It is either 100 or 0.
-            </summary>
-        </member>
-        <member name="F:NoJsBlazor.Carousel.Item.progressBarTransition">
-            <summary>
-            It is either set to Interval time or 0.
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.Carousel.ItemCount">
-            <summary>
-            The Number of Items currently in this carousel.
-            </summary>
-        </member>
         <member name="P:NoJsBlazor.Carousel.ActiveStart">
             <summary>
             <para>Index of the active item at the beginning.</para>
             <para>Default is 0.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.Carousel.Active">
-            <summary>
-            The Index of the current Active Item.
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.Carousel.IntervalTime">
-            <summary>
-            <para>Waiting time before beginning swap animation in ms.</para>
-            <para>Default is 6000.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.Animation">
@@ -83,9 +22,10 @@
             <para>Default is FadeOut.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Carousel.CurrAnimation">
+        <member name="P:NoJsBlazor.Carousel.IntervalTime">
             <summary>
-            Gives the current Animation.
+            <para>Waiting time before beginning swap animation in ms.</para>
+            <para>Default is 6000.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.AutoStartTime">
@@ -93,16 +33,6 @@
             <para>Starts interval after [AutoStartTime] ms, if interval not running and no action occurs.</para>
             <para>Value of 0 deactivates autostart.</para>
             <para>Default is 0.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.Carousel.CurrAutoStartTime">
-            <summary>
-            Holds the current value of the time to autoStart.
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.Carousel.AutoStartRunning">
-            <summary>
-            Inidicates if the autoStart Timer is currently ticking.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Carousel.BeginRunning">
@@ -157,9 +87,19 @@
             Captures unmatched values
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Carousel.Active">
+            <summary>
+            The Index of the current Active Item.
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Carousel.Running">
             <summary>
             Indicates if the interval of the carousel is currently running.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Carousel.AutoStartRunning">
+            <summary>
+            Inidicates if the autoStart Timer is currently ticking.
             </summary>
         </member>
         <member name="M:NoJsBlazor.Carousel.Dispose">
@@ -167,75 +107,32 @@
             Disposes Interval Timer and Autostart Timer.
             </summary>
         </member>
-        <member name="M:NoJsBlazor.Carousel.ReInitialize">
+        <member name="M:NoJsBlazor.Carousel.SwapCarouselItems(NoJsBlazor.CarouselItem,NoJsBlazor.CarouselItem)">
             <summary>
-            <para>If one of theses parameters are changed manually, this method should be called:</para>
-            <para>CarouselItem, Active, Animation, Running, IntervalTime, AutoStartTime</para>
+            <para>Finds the indexes of the 2 given CarouselItems and then executes <see cref="M:NoJsBlazor.Carousel.SwapCarouselItems(System.Int32,System.Int32)"/>.</para>
+            <para>If one of the items is not present in the CarouselItem list, an <see cref="T:System.ArgumentException"/> is thrown.</para>
+            </summary>
+            <param name="carouselItem1"></param>
+            <param name="carouselItem2"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:NoJsBlazor.Carousel.SwapCarouselItems(System.Int32,System.Int32)">
+            <summary>
+            <para>Swaps the 2 items in the CarouselItem list at the given indexes.</para>
+            <para>The active item is preserved.<br />
+            e.g. 0 is active, swap(0, 1)  -&gt; 1 will be active, so the active item won't change.</para>
+            </summary>
+            <param name="index1"></param>
+            <param name="index2"></param>
+        </member>
+        <member name="M:NoJsBlazor.Carousel.StartInterval">
+            <summary>
+            Starts the interval-timer that automatically change to next item.
             </summary>
         </member>
-        <member name="M:NoJsBlazor.Carousel.AddItem(NoJsBlazor.CarouselItem,System.Int32)">
+        <member name="M:NoJsBlazor.Carousel.StopInterval">
             <summary>
-            <para>Adds an item to the carousel.</para>
-            <para>Default (index = -1) is at the end of the carousel.</para>
-            </summary>
-            <param name="item">RenderFragment to Render</param>
-            <param name="index">0 = first item, Length or -1 = last item</param>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.RemoveItem(System.Int32)">
-            <summary>
-            Removes the item with the given index from the carousel.
-            </summary>
-            <param name="index">0 = first item, Length - 1 = last item</param>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.RemoveItem(NoJsBlazor.CarouselItem)">
-            <summary>
-            Removes the first appearance of the given item from the carousel.
-            </summary>
-            <param name="carouselItem"></param>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.SwapItem(System.Int32,System.Int32)">
-            <summary>
-            Swaps 2 items in the carousel.
-            </summary>
-            <param name="index1">0 = first item, Length - 1 = last item</param>
-            <param name="index2">0 = first item, Length - 1 = last item</param>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.SetActiveItem(System.Int32,System.Boolean)">
-            <summary>
-            Set the item with the given index to active.
-            </summary>
-            <param name="index">0 = first item, Length - 1 = last item</param>
-            <param name="intervalStop">stopping interval with this change</param>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.SetAnimation(NoJsBlazor.CarouselAnimation)">
-            <summary>
-            Sets the swapping animation of the carousel.
-            </summary>
-            <param name="animation"></param>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.SetIntervalTime(System.Int32)">
-            <summary>
-            <para>Sets interval time of the carousel.</para>
-            <para>Stops interval if currently running.</para>
-            </summary>
-            <param name="intervalTime"></param>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.SetAutoStartTime(System.Int32)">
-            <summary>
-            <para>Sets autostart time in ms of the carousel.</para>
-            <para>Value of 0 deactivates autostart.</para>
-            <para>Restarts autoStart if currently running.</para>
-            </summary>
-            <param name="autoStartTime"></param>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.Start">
-            <summary>
-            Starts the interval and sets Running = true.
-            </summary>
-        </member>
-        <member name="M:NoJsBlazor.Carousel.Stop">
-            <summary>
-            Stops the interval, sets Running = false and starts the Autostart timer if AutoStartTime greater 0.
+            Stops the interval-timer, so the current item will not automatically change.
             </summary>
         </member>
         <member name="T:NoJsBlazor.CarouselAnimation">
@@ -268,17 +165,6 @@
             <summary>
             Content of this component.
             </summary>
-        </member>
-        <member name="M:NoJsBlazor.CarouselItem.#ctor">
-            <summary>
-            Creates a <see cref="T:NoJsBlazor.CarouselItem"/> with no content.
-            </summary>
-        </member>
-        <member name="M:NoJsBlazor.CarouselItem.#ctor(Microsoft.AspNetCore.Components.RenderFragment)">
-            <summary>
-            Creates a <see cref="T:NoJsBlazor.CarouselItem"/> with the given content, which can be inserted in an existing carousel.
-            </summary>
-            <param name="child">content of this object</param>
         </member>
         <member name="T:NoJsBlazor.CollapseDiv">
             <summary>
@@ -552,6 +438,11 @@
             <para>It can only be used inside EditForm.</para>
             </summary>
         </member>
+        <member name="P:NoJsBlazor.EditFormInput.OnChange">
+            <summary>
+            Fires every time item looses focus and value has changed.
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.EditFormInput.Title">
             <summary>
             <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
@@ -603,14 +494,14 @@
             Value of this Input field.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Input.SilentValueSetter">
-            <summary>
-            Sets the state of <see cref="P:NoJsBlazor.Input.Value"/> without notifying <see cref="P:NoJsBlazor.Input.ValueChanged"/>.
-            </summary>
-        </member>
         <member name="P:NoJsBlazor.Input.ValueChanged">
             <summary>
             Fires every time <see cref="P:NoJsBlazor.Input.Value"/> changes.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.Input.OnChange">
+            <summary>
+            Fires every time item looses focus and value has changed.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Title">
@@ -866,171 +757,88 @@
         </member>
         <member name="P:NoJsBlazor.ProgressBar.Content">
             <summary>
-            Accessing <see cref="P:NoJsBlazor.ProgressBar.Progress"/> and <see cref="P:NoJsBlazor.ProgressBar.Text"/> together.
+            Accessing <see cref="P:NoJsBlazor.ProgressBar.Progress"/> and <see cref="P:NoJsBlazor.ProgressBar.Text"/> together. Also rerenders the component.
             </summary>
         </member>
-        <member name="T:NoJsBlazor.DecimalSlider">
-            <summary>
-            <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
-            <para>The value of this object is from type <see cref="T:System.Decimal"/>.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.Value">
-            <summary>
-            Value of the Slider
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.ValueChanged">
-            <summary>
-            <para>Invokes every time Value get changed with:</para>
-            <para>LeftButton, RightButton, Slider or EditField.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.OnChange">
-            <summary>
-            <para>Invokes every time Value get changed with:</para>
-            <para>LeftButton, RightButton, Slider (only on release) or EditField.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.Title">
-            <summary>
-            An optional label.
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.Min">
-            <summary>
-            <para>Slider lower bounds.</para>
-            <para>Default is 0.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.Max">
-            <summary>
-            <para>Slider upper bounds.</para>
-            <para>Default is 10.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.Step">
-            <summary>
-            <para>Slider precision</para>
-            <para>Default is 0.1.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.Editable">
-            <summary>
-            <para>Indicates if the user is able to edit the number directly.</para>
-            <para>Technically the number is displayed in a input field instead of a label.</para>
-            <para>Dafault is false.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.LeftButtonContent">
-            <summary>
-            <para>Content inside the left Button.</para>
-            <para>Default is a svg showing "🡸".</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.RightButtonContent">
-            <summary>
-            <para>Content inside the right Button.</para>
-            <para>Default is a svg showing "🡺".</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.Display">
-            <summary>
-            <para>The way the value should be printed.</para>
-            <para>Default is value.ToString().</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.ParseEdit">
-            <summary>
-            <para>Parsing function for the edit field.</para>
-            <para>It gets the content of the edit field as string and returns the appropriated decimal number. It Returns null if the value is not valid.</para>
-            <para>Default succeed if the value is decimal-parseable and in Min/Max bounds.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.DecimalSlider.Attributes">
-            <summary>
-            Captures unmatched values
-            </summary>
-        </member>
-        <member name="T:NoJsBlazor.Slider">
+        <member name="T:NoJsBlazor.Slider`1">
             <summary>
             <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
             <para>The value of this object is from type <see cref="T:System.Int32"/>.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.Value">
+        <member name="P:NoJsBlazor.Slider`1.Value">
             <summary>
             Value of the Slider
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.ValueChanged">
+        <member name="P:NoJsBlazor.Slider`1.ValueChanged">
             <summary>
             <para>Invokes every time Value get changed with:</para>
             <para>LeftButton, RightButton, Slider or EditField.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.OnChange">
+        <member name="P:NoJsBlazor.Slider`1.OnChange">
             <summary>
             <para>Invokes every time Value get changed with:</para>
             <para>LeftButton, RightButton, Slider (only on release) or EditField.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.Title">
+        <member name="P:NoJsBlazor.Slider`1.Title">
             <summary>
             An optional label.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.Min">
+        <member name="P:NoJsBlazor.Slider`1.Min">
             <summary>
             <para>Slider lower bounds.</para>
             <para>Default is 0.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.Max">
+        <member name="P:NoJsBlazor.Slider`1.Max">
             <summary>
             <para>Slider upper bounds.</para>
             <para>Default is 10.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.Step">
+        <member name="P:NoJsBlazor.Slider`1.Step">
             <summary>
             <para>Slider precision</para>
             <para>Default is 1.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.Editable">
+        <member name="P:NoJsBlazor.Slider`1.Editable">
             <summary>
             <para>Indicates if the user is able to edit the number directly.</para>
             <para>Technically the number is displayed in a input field instead of a label.</para>
             <para>Dafault is false.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.LeftButtonContent">
+        <member name="P:NoJsBlazor.Slider`1.LeftButtonContent">
             <summary>
             <para>Content inside the left Button.</para>
             <para>Default is a svg showing "🡸".</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.RightButtonContent">
+        <member name="P:NoJsBlazor.Slider`1.RightButtonContent">
             <summary>
             <para>Content inside the right Button.</para>
             <para>Default is a svg showing "🡺".</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.Display">
+        <member name="P:NoJsBlazor.Slider`1.Display">
             <summary>
             <para>The way the value should be printed.</para>
             <para>Default is value.ToString().</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.ParseEdit">
+        <member name="P:NoJsBlazor.Slider`1.ParseEdit">
             <summary>
             <para>Parsing function for the edit field.</para>
             <para>It gets the content of the edit field as string and returns the appropriated integer. It Returns null if the value is not valid.</para>
             <para>Default succeed if the value is int-parseable and in Min/Max bounds.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Slider.Attributes">
+        <member name="P:NoJsBlazor.Slider`1.Attributes">
             <summary>
             Captures unmatched values
             </summary>
@@ -1090,9 +898,15 @@
             List of all registered <see cref="T:NoJsBlazor.ListableComponentBase`1">ListableComponentBase</see> childs.
             </summary>
         </member>
-        <member name="M:NoJsBlazor.ListholdingComponentBase`1.Register(`0)">
+        <member name="M:NoJsBlazor.ListholdingComponentBase`1.Add(`0)">
             <summary>
             API for <see cref="T:NoJsBlazor.ListableComponentBase`1"/> objects to add themselves to the list.
+            </summary>
+            <param name="child"></param>
+        </member>
+        <member name="M:NoJsBlazor.ListholdingComponentBase`1.Remove(`0)">
+            <summary>
+            API for <see cref="T:NoJsBlazor.ListableComponentBase`1"/> objects to remove themselves to the list.
             </summary>
             <param name="child"></param>
         </member>

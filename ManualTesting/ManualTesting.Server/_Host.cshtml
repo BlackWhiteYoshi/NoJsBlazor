@@ -21,11 +21,20 @@
 
         <link rel="stylesheet" href="~/style.min.css" />
         <link rel="stylesheet" href="~/site.css" />
+        <script>
+            function setPointerCapture(targetElement, pointerId) {
+                targetElement.setPointerCapture(pointerId);
+            }
+            
+            function releasePointerCapture(targetElement, pointerId) {
+                targetElement.releasePointerCapture(pointerId);
+            }
+        </script>
     </head>
 
     <body>
         <component type="typeof(IRoot)" render-mode="WebAssemblyPrerendered" param-StartLanguage="language" />
-
+        
         <script src="~/_framework/blazor.webassembly.js"></script>
     </body>
 </html>
