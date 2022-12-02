@@ -7,7 +7,7 @@ public sealed partial class NotFound : PageComponentBase {
     public required NavigationManager NavigationManager { private get; init; }
 
     [Inject]
-    public required IPreRenderFlag  PreRenderFlag { private get; init; }
+    public required PreRendering IsPreRendering { private get; init; }
 
 
     private const int BAD_REQUEST_LIST_MAX_DISTANCE = 8;

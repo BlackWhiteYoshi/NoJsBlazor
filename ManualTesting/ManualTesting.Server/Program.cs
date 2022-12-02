@@ -18,7 +18,7 @@ public sealed class Program {
     private static void ConfigureServices(IServiceCollection services) {
         services.AddRazorPages((RazorPagesOptions options) => options.RootDirectory = "/");
         
-        services.AddSingleton<IPreRenderFlag, Services.PreRenderFlag>();
+        services.AddSingleton<PreRendering>(() => true);
         services.AddCoreServices();
     }
 

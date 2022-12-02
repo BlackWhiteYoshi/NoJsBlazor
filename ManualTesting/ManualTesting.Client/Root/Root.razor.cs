@@ -20,20 +20,20 @@ public sealed partial class Root : ServiceComponentBase, IRoot, IDisposable {
 
     private readonly NavigationManager navigationManager;
     private readonly IJSModuleRuntime jsModuleRuntime;
-    private readonly IPreRenderFlag preRenderFlag;
+    private readonly PreRendering isPreRendering;
     private readonly ILanguageProvider lang;
 
-    public Root(NavigationManager navigationManager, IJSModuleRuntime jsModuleRuntime, IPreRenderFlag preRenderFlag, ILanguageProvider lang) {
+    public Root(NavigationManager navigationManager, IJSModuleRuntime jsModuleRuntime, PreRendering isPreRendering, ILanguageProvider lang) {
         this.navigationManager = navigationManager;
         this.jsModuleRuntime = jsModuleRuntime;
-        this.preRenderFlag = preRenderFlag;
+        this.isPreRendering = isPreRendering;
         this.lang = lang;
     }
 
     protected override async Task OnInitializedAsync() {
         _ = base.OnInitializedAsync();
 
-        if (!preRenderFlag.Flag) {
+        if (!isPreRendering()) {
             _ = jsModuleRuntime.PreLoadModule(CBox.SHARED_JS).Preserve();
             _ = jsModuleRuntime.PreLoadModule(ROOT_JS).Preserve();
         }
@@ -46,7 +46,7 @@ public sealed partial class Root : ServiceComponentBase, IRoot, IDisposable {
             if (StartLanguage != null)
                 return StartLanguage.Value;
 
-            if (preRenderFlag.Flag)
+            if (isPreRendering())
                 return await Default();
 
             Dictionary<string, string> cookies = CBox.SplitCookies(await jsModuleRuntime.InvokeTrySync<string>(CBox.SHARED_JS, "getCookies"));

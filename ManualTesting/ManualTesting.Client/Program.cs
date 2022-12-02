@@ -11,7 +11,7 @@ public sealed class Program {
     }
 
     private static void ConfigureServices(IServiceCollection services) {
-        services.AddSingleton<IPreRenderFlag, PreRenderFlag>();
+        services.AddSingleton<PreRendering>(() => false);
         services.AddCoreServices();
     }
 }
