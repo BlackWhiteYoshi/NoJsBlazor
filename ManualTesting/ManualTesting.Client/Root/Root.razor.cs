@@ -18,13 +18,11 @@ public sealed partial class Root : ServiceComponentBase, IRoot, IDisposable {
     public event Action<MouseEventArgs>? Click;
 
 
-    private readonly NavigationManager navigationManager;
     private readonly IJSModuleRuntime jsModuleRuntime;
     private readonly PreRendering isPreRendering;
     private readonly ILanguageProvider lang;
 
-    public Root(NavigationManager navigationManager, IJSModuleRuntime jsModuleRuntime, PreRendering isPreRendering, ILanguageProvider lang) {
-        this.navigationManager = navigationManager;
+    public Root(IJSModuleRuntime jsModuleRuntime, PreRendering isPreRendering, ILanguageProvider lang) {
         this.jsModuleRuntime = jsModuleRuntime;
         this.isPreRendering = isPreRendering;
         this.lang = lang;
