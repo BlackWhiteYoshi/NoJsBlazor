@@ -16,7 +16,6 @@ public sealed partial class Input : ComponentBase {
             if (value != _value) {
                 _value = value;
                 hasValue = !string.IsNullOrEmpty(Value);
-                ValueChanged.InvokeAsync(Value);
             }
         }
     }
@@ -95,7 +94,10 @@ public sealed partial class Input : ComponentBase {
     private bool hasValue;
 
 
-    private void OnFieldInput(ChangeEventArgs e) => Value = (string?)e.Value;
+    private void OnFieldInput(ChangeEventArgs e) {
+        Value = (string?)e.Value;
+        ValueChanged.InvokeAsync(Value);
+    }
 
     private void OnFieldChange(ChangeEventArgs e) => OnChange.InvokeAsync((string?)e.Value);
 }
