@@ -2,23 +2,25 @@
 
 namespace ManualTesting.Client;
 
-public sealed partial class Home : PageComponentBase, IDisposable {
+public sealed partial class Home : ComponentBase, IDisposable {
+    [Inject]
+    public required IRoot Root { private get; init; }
+
     [Inject]
     public required IJSRuntime JsRuntime { private get; init; }
 
     [Inject]
-    public required ITopLevelPortal TopLevelPortal { private get; init; }
+    public required Portal Portal { private get; init; }
 
 
     protected override void OnInitialized() {
         base.OnInitialized();
-        TopLevelPortal.Add(RenderDialog);
+        Portal.Add(RenderDialog);
     }
 
-    public new void Dispose() {
-        base.Dispose();
+    public void Dispose() {
         Root.Click -= CloseContextMenu;
-        TopLevelPortal.Remove(RenderDialog);
+        Portal.Remove(RenderDialog);
     }
 
     #region Carousel

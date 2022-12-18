@@ -1,5 +1,4 @@
 ﻿@namespace ManualTesting.Client
-@inherits LanguageComponentBase
 
 <header class="header-navbar" @onclick:stopPropagation>
     <NavBar @ref="navBar" Breakpoint="NavBarBreakpoint.em50" OnToggle="PhoneToggle">
@@ -15,23 +14,22 @@
             <NavBarLink href="/">Test</NavBarLink>
             <NavBarMenu>
                 <Head>
-                    <NavBarLink href="/">@Lang.Print("Example", "Beispiel")</NavBarLink>
+                    <NavBarLink href="/1">Example</NavBarLink>
                 </Head>
                 <Items>
-                    <NavBarLink href="/">@Lang.Print("Example 3", "Beispiel 3")</NavBarLink>
+                    <NavBarLink href="/2">Example 2</NavBarLink>
                     <NavBarMenu>
                         <Head>
-                            <NavBarLink href="/">@Lang.Print("Example 2", "Beispiel 2")</NavBarLink>
+                            <NavBarLink href="/3">Example 3</NavBarLink>
                         </Head>
                         <Items>
-                            <NavBarLink href="/">@Lang.Print("Example 3", "Beispiel 3")</NavBarLink>
+                            <NavBarLink href="/4">Example 4</NavBarLink>
                         </Items>
                     </NavBarMenu>
                 </Items>
             </NavBarMenu>
-            <NavBarLink href="/">@Lang.Print("Example 2", "Beispiel 2")</NavBarLink>
-            <NavBarLink href="/">@Lang.Print("Example 3", "Beispiel 3")</NavBarLink>
+            <NavBarLink href="/2">Example 2</NavBarLink>
+            <NavBarLink href="/3">Example 3</NavBarLink>
         </Items>
     </NavBar>
-    <LanguageFlagIcon />
 </header>

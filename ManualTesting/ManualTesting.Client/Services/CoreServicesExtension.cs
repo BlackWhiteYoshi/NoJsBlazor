@@ -7,13 +7,12 @@ public static class CoreServicesExtension {
     /// <param name="services"></param>
     /// <returns></returns>
     public static IServiceCollection AddCoreServices(this IServiceCollection services) {
-        services.AddScoped<IJSModuleRuntime, JSModuleRuntime>();
-        services.AddScoped<ILanguageProvider, LanguageProvider>();
+        services.AddScoped((IServiceProvider serviceProvider) => (IJSInProcessRuntime)serviceProvider.GetRequiredService<IJSRuntime>());
         services.AddScoped<IComponentActivator, ComponentActivator>();
 
         // component services
         services.AddScoped<IRoot, Root>();
-        services.AddScoped<ITopLevelPortal, TopLevelPortal>();
+        services.AddScoped<Portal>();
         
         return services;
     }

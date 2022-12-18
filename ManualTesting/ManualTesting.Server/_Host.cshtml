@@ -2,16 +2,9 @@
 @namespace ManualTesting.Server
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using ManualTesting.Client
-@using ManualTesting.Client.Services
-
-@{
-    if (!HttpContext.Request.Cookies.TryGetValue(CBox.COOKIE_KEY_LANGUAGE, out string? languageString) || !ILanguageProvider.TryParse(languageString, out Language language))
-        // no or invalid cookie
-        language = ILanguageProvider.GetLanguage(Request.Headers["Accept-Language"].ToString());
-}
 
 <!DOCTYPE html>
-<html lang="@ILanguageProvider.GetAbbreviation(language)">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,7 +26,7 @@
     </head>
 
     <body>
-        <component type="typeof(IRoot)" render-mode="WebAssemblyPrerendered" param-StartLanguage="language" />
+        <component type="typeof(IRoot)" render-mode="WebAssemblyPrerendered" />
         
         <script src="~/_framework/blazor.webassembly.js"></script>
     </body>

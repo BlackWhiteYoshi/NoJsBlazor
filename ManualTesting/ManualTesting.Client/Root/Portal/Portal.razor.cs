@@ -1,9 +1,11 @@
-﻿namespace ManualTesting.Client;
+﻿using ManualTesting.Client.Services;
+
+namespace ManualTesting.Client;
 
 /// <summary>
 /// Provides a way to render fragments into another location outside of the DOM hierarchy of the parent component.
 /// </summary>
-public abstract partial class Portal : LanguageServiceComponentBase, IPortal {
+public sealed partial class Portal : ServiceComponentBase, IPortal {
     private readonly HashSet<RenderFragment> renderFragmentList = new();
 
     /// <summary>

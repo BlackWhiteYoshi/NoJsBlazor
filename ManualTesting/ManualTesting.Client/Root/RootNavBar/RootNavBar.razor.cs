@@ -2,7 +2,7 @@
 
 namespace ManualTesting.Client;
 
-public sealed partial class RootNavBar : LanguageComponentBase {
+public sealed partial class RootNavBar : ComponentBase {
     [Inject]
     public required IRoot Root { private get; init; }
 

@@ -1,7 +1,69 @@
-﻿#home {
-    & > section {
-        & > p {
-            color: green;
-        }
+﻿.headline-background {
+    display: table;
+    margin: 1.5em auto 2em auto;
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: calc(1.3rem + 0.8vw);
+    line-height: 1.3;
+    padding: 20px;
+    border-radius: 50%;
+    color: #4F81BD;
+    background-color: #EAF8EA;
+}
+
+.headline {
+    font-size: calc(1.3rem + 0.6vw);
+    line-height: 1.3;
+    text-align: center;
+    margin: 1.4em auto 1.2em auto;
+}
+
+.center {
+    display: table;
+    margin-inline: auto;
+}
+
+
+
+// bootstrap equivalents
+
+.container {
+    width:100%;
+    $padding: 5%;
+    padding-left: $padding;
+    padding-right: $padding;
+}
+
+
+button:not(:disabled) { cursor: pointer; }
+
+@mixin button-template($background-color, $hover-background-color, $disabled-color) {
+    $border-width: 2px;
+
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    border: $border-width outset #EEE;
+    border-radius: 0.25rem;
+    color: #FFF;
+    background-color: $background-color;
+    transition: color linear 0.2s, background-color linear 0.2s, border linear 0.2s;
+
+    &:hover {
+        background-color: $hover-background-color;
+        border: $border-width inset #EEE;
+    }
+
+    &:disabled {
+        background-color: $disabled-color;
+        box-shadow: none;
+        border: none;
+        margin: $border-width;
     }
 }
+
+.btn-main { @include button-template(#17F, #16E, #8AF); }  
+.btn-second { @include button-template(#1AF, #3CF, #ADF); }
+.btn-info { @include button-template(#23F, #00F, #99F); }
+.btn-deny { @include button-template(#060, #040, #7B7); }
+.btn-cancel { @include button-template(#444, #222, #888); }
+.btn-danger { @include button-template(#d34, #e12, #E77); }
