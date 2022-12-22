@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace ManualTesting.Client;
 
-public sealed class Program {
+public static class Program {
     public static Task Main(string[] args) {
         WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
         ConfigureServices(builder.Services);

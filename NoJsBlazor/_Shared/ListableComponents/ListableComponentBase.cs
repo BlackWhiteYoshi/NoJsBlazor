@@ -8,6 +8,7 @@ public abstract class ListableComponentBase<T> : ComponentBase, IDisposable wher
     [CascadingParameter(Name = "Parent")]
     public required ListholdingComponentBase<T> Parent { get; set; }
 
+
     /// <summary>
     /// <para>Registering the component at the parent <see cref="ListableComponentBase{T}">ListableComponentBase</see>.</para>
     /// <para>Therefore the reference of the parent has to be given with a CascadingParameter.</para>

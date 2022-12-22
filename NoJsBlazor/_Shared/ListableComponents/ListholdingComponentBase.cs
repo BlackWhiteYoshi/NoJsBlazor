@@ -11,6 +11,7 @@ public abstract class ListholdingComponentBase<T> : ComponentBase where T : List
     /// </summary>
     protected readonly List<T> childList = new();
 
+
     /// <summary>
     /// API for <see cref="ListableComponentBase{T}"/> objects to add themselves to the list.
     /// </summary>
@@ -28,6 +29,7 @@ public abstract class ListholdingComponentBase<T> : ComponentBase where T : List
         childList.Remove(child);
         StateHasChanged();
     }
+
 
     /// <summary>
     /// Gives the current number of registered childs.

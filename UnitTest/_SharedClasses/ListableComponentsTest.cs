@@ -6,6 +6,7 @@ public sealed class ListableComponentsTest : TestContext {
     }
     private class ListableComponentDummy : ListableComponentBase<ListableComponentDummy> { }
 
+
     [Theory]
     [InlineData(0)]
     [InlineData(1)]
