@@ -14,7 +14,8 @@ public sealed partial class Portal : ServiceComponentBase, IPortal {
     /// </summary>
     public void Add(RenderFragment renderFragment) {
         renderFragmentList.Add(renderFragment);
-        InvokeAsync(StateHasChanged);
+        if (HasRenderHandle)
+            InvokeAsync(StateHasChanged);
     }
 
     /// <summary>
@@ -23,12 +24,16 @@ public sealed partial class Portal : ServiceComponentBase, IPortal {
     /// </summary>
     public void Remove(RenderFragment renderFragment) {
         renderFragmentList.Remove(renderFragment);
-        InvokeAsync(StateHasChanged);
+        if (HasRenderHandle)
+            InvokeAsync(StateHasChanged);
     }
 
 
     /// <summary>
     /// Triggers a <see cref="ComponentBase.StateHasChanged">StateHasChanged</see>.
     /// </summary>
-    public void Rerender() => InvokeAsync(StateHasChanged);
+    public void Rerender() {
+        if (HasRenderHandle)
+            InvokeAsync(StateHasChanged);
+    }
 }

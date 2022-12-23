@@ -21,4 +21,11 @@ public interface IPortal : IComponent {
     /// Triggers a <see cref="ComponentBase.StateHasChanged">StateHasChanged</see>.
     /// </summary>
     public void Rerender();
+
+
+
+    public static void Render(RenderTreeBuilder builder) {
+        builder.OpenComponent<IPortal>(0);
+        builder.CloseComponent();
+    }
 }
