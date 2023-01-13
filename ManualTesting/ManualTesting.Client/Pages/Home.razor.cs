@@ -9,18 +9,9 @@ public sealed partial class Home : ComponentBase, IDisposable {
     [Inject]
     public required IJSRuntime JsRuntime { private get; init; }
 
-    [Inject]
-    public required IPortal Portal { private get; init; }
-
-
-    protected override void OnInitialized() {
-        base.OnInitialized();
-        Portal.Add(RenderDialog);
-    }
 
     public void Dispose() {
         Root.Click -= CloseContextMenu;
-        Portal.Remove(RenderDialog);
     }
 
     #region Carousel

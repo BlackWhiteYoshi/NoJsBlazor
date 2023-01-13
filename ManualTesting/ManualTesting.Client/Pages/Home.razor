@@ -116,6 +116,19 @@
     <section>
         <h2 class="headline">Dialog</h2>
         <button class="btn-main center" @onclick="OpenDialog" @onclick:stopPropagation>open dialog</button>
+        <Dialog @ref="dialog" ModalScreen="false" OnTitlePointerDown="OnTitleDown" OnTitlePointerUp="OnTitleUp">
+            <Title>
+                <p style="margin: 0;">My Test Dialog</p>
+            </Title>
+            <Content>
+                <p style="margin: 0;">
+                    Ich bin irgendein Text.<br />
+                    Ich habe keinen Sinn.<br />
+                    Mich zu lesen bringt gar nichts.
+                </p>
+                <button class="btn-main center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
+            </Content>
+        </Dialog>
     </section>
 
     <section>
@@ -167,21 +180,3 @@
         </div>
     </section>
 </div>
-
-
-@code {
-    public void RenderDialog(RenderTreeBuilder __builder) {
-        <Dialog @ref="dialog" ModalScreen="false" OnTitlePointerDown="OnTitleDown" OnTitlePointerUp="OnTitleUp">
-            <Title>
-                <p style="margin: 0;">My Test Dialog</p>
-            </Title>
-            <Content>
-                <p style="margin: 0;">
-                    Ich bin irgendein Text.<br />
-                    Ich habe keinen Sinn.<br />
-                    Mich zu lesen bringt gar nichts.</p>
-                <button class="btn-main center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
-            </Content>
-        </Dialog>
-    }
-}

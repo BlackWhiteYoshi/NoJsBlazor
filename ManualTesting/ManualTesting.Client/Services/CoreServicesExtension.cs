@@ -12,7 +12,6 @@ public static class CoreServicesExtension {
 
         // component services
         services.AddScoped<IRoot, Root>();
-        services.AddScoped<IPortal, Portal>();
         
         return services;
     }
