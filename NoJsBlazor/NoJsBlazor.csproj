@@ -5,14 +5,27 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <Title>NoJsBlazor</Title>
+    <Description>Library for Blazor applications. It contains some UI components. This Library does not use any Javascript code, everything is implemented in Razor, (S)CSS and C#.</Description>
     <Authors>BlackWhiteYoshi</Authors>
-    <Copyright>MIT</Copyright>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>Library for Blazor apps. It contains some UI-Components. This Library doesn't use any Javascript code, everything is implemented in Razor, (S)CSS and C#.</Description>
+    <PackageTags>C#;Blazor;HTML;CSS;UI;Component;Components;Library</PackageTags>
+
+    <PackageReadmeFile>Package.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/BlackWhiteYoshi/NoJsBlazor</PackageProjectUrl>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/BlackWhiteYoshi/NoJsBlazor.git</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <PackageIconUrl>https://raw.githubusercontent.com/BlackWhiteYoshi/NoJsBlazor/master/ICON.png/</PackageIconUrl>
+    <PackageIcon>ICON.png</PackageIcon>
+
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>3.0.2</Version>
-    <AssemblyVersion>3.0.2.0</AssemblyVersion>
-    <FileVersion>3.0.2.0</FileVersion>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+    <Version>3.1.0</Version>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -33,10 +46,12 @@
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
     <None Include="compilerconfig.json" />
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\PACKAGE.md" Pack="true" PackagePath="\" />
+    <None Include="..\ICON.png" Pack="true" PackagePath="\" />
+    <None Include="..\LICENSE" Pack="true=" PackagePath="\" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">

@@ -228,18 +228,20 @@
   cursor: default;
   white-space: nowrap;
 }
-.context-menu .context-element:hover > .context-div, .context-menu .context-element.expanded > .context-menu {
+.context-menu .context-element:hover > .context-div, .context-menu .context-element.expanded > .context-div {
   background-color: var(--hover-dropright-background-color);
   box-shadow: 0 0 15px var(--hover-dropright-shadow-color);
 }
 .context-menu .context-element:hover > .context-menu, .context-menu .context-element.expanded > .context-menu {
   rotate: none;
 }
-.context-menu .context-element.context-item {
-  cursor: pointer;
+.context-menu .context-element:hover > .context-div > .context-arrow {
+  translate: 3px;
+  rotate: 270deg;
 }
-.context-menu .context-element.context-item:hover {
-  background-color: var(--hover-item-background-color);
+.context-menu .context-element:hover > .context-div > .context-arrow > polygon {
+  fill: var(--arrow-hover-color);
+  stroke: var(--arrow-hover-stroke);
 }
 .context-menu .context-div {
   height: 100%;
@@ -249,6 +251,12 @@
   align-items: center;
   gap: 10px;
   cursor: default;
+}
+.context-menu .context-element.context-item {
+  cursor: pointer;
+}
+.context-menu .context-element.context-item:hover {
+  background-color: var(--hover-item-background-color);
 }
 .context-menu .context-arrow {
   width: var(--arrow-size);
@@ -263,14 +271,6 @@
 }
 .context-menu .context-arrow > circle, .context-menu .context-arrow > line {
   display: none;
-}
-.context-menu .context-element:hover > .context-div > .context-arrow {
-  translate: 3px;
-  rotate: 270deg;
-}
-.context-menu .context-element:hover > .context-div > .context-arrow > polygon {
-  fill: var(--arrow-hover-color);
-  stroke: var(--arrow-hover-stroke);
 }
 
 .dialog-modal-background {
@@ -5132,6 +5132,9 @@
 }
 
 .standard-progress-bar {
+  --width: 300px;
+  --height: 20px;
+  --bar-color: #08F;
   --border-color: #444;
   --border-radius: 20px;
   --bar-margin: 0.125em;
@@ -5142,9 +5145,16 @@
   border-radius: var(--border-radius);
 }
 .standard-progress-bar > div > div {
+  width: var(--width);
+  height: var(--height);
   margin: var(--bar-margin);
   border-radius: var(--border-radius);
-  transition: border-left ease-in-out var(--bar-transition-speed);
+  overflow: hidden;
+}
+.standard-progress-bar > div > div > div {
+  height: 100%;
+  background-color: var(--bar-color);
+  transition: width ease-in-out var(--bar-transition-speed);
 }
 .standard-progress-bar > p {
   margin-top: 0.15em;
@@ -5152,11 +5162,24 @@
 }
 
 .circle-progress-bar {
+  --diameter: 200px;
+  --circle-margin: 4;
+  --circle-color: #04A;
   --border-color: #444;
+}
+.circle-progress-bar > svg {
+  width: var(--diameter);
+  height: var(--diameter);
 }
 .circle-progress-bar > svg > circle {
   fill: none;
   stroke: var(--border-color);
+}
+.circle-progress-bar > svg > g {
+  scale: calc(100 - var(--circle-margin));
+}
+.circle-progress-bar > svg > g > :is(path, circle) {
+  fill: var(--circle-color);
 }
 .circle-progress-bar > p {
   margin-top: 0.15em;
@@ -5164,23 +5187,60 @@
 }
 
 .speedometer-progress-bar {
+  --diameter: 200px;
   --border-color: #444;
   --middle-circle-color: #0006;
+  --small-tick-width: 1;
+  --small-tick-color: #333;
+  --big-tick-width: 4;
+  --big-tick-color: #222;
+  --meter-length: 87.5;
   --meter-width: 5;
+  --meter-color: #D22;
   --meter-transition-speed: 500ms;
 }
-.speedometer-progress-bar > svg > .inner-circle {
-  fill: var(--middle-circle-color);
-  stroke: none;
+.speedometer-progress-bar > svg {
+  width: var(--diameter);
+  height: var(--diameter);
 }
 .speedometer-progress-bar > svg > .outer-circle {
   stroke: var(--border-color);
   fill: none;
 }
+.speedometer-progress-bar > svg > .small-tick {
+  stroke-width: var(--small-tick-width);
+  stroke: var(--small-tick-color);
+}
+.speedometer-progress-bar > svg > .big-tick {
+  stroke-width: var(--big-tick-width);
+  stroke: var(--big-tick-color);
+}
+.speedometer-progress-bar > svg > .meter-circle {
+  r: calc(0.17px * var(--meter-length));
+  stroke: none;
+  fill: var(--middle-circle-color);
+}
 .speedometer-progress-bar > svg > .meter {
-  stroke-width: var(--meter-width);
-  stroke-linecap: round;
   transition: rotate ease-out var(--meter-transition-speed);
+}
+.speedometer-progress-bar > svg > .meter > line {
+  stroke: var(--meter-color);
+  stroke-width: var(--meter-width);
+  scale: 1 var(--meter-length);
+}
+.speedometer-progress-bar > svg > .meter > :is(.line-cap-begin, .line-cap-end) {
+  r: calc(0.5px * var(--meter-width));
+  stroke: none;
+  fill: var(--meter-color);
+}
+.speedometer-progress-bar > svg > .meter > .line-cap-begin {
+  translate: 0 calc(-0.2px * var(--meter-length));
+}
+.speedometer-progress-bar > svg > .meter > .line-cap-end {
+  translate: 0 calc(1px * var(--meter-length));
+}
+.speedometer-progress-bar > svg > text {
+  font-size: 13.8px;
 }
 .speedometer-progress-bar > p {
   margin-top: 0.15em;
