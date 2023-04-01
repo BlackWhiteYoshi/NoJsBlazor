@@ -14,20 +14,12 @@
 
         <link rel="stylesheet" href="~/_content/NoJsBlazor/style.min.css" />
         <link rel="stylesheet" href="~/site.css" />
-        <script>
-            function setPointerCapture(targetElement, pointerId) {
-                targetElement.setPointerCapture(pointerId);
-            }
-            
-            function releasePointerCapture(targetElement, pointerId) {
-                targetElement.releasePointerCapture(pointerId);
-            }
-        </script>
     </head>
 
     <body>
         <component type="typeof(IRoot)" render-mode="WebAssemblyPrerendered" />
         
         <script src="~/_framework/blazor.webassembly.js"></script>
+        <script src="~/site.js"></script>
     </body>
 </html>
