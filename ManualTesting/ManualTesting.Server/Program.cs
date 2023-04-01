@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace ManualTesting.Server;
 
 public static class Program {
+    public interface IAssemblyMarker { }
+
+
     public static void Main(string[] args) {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

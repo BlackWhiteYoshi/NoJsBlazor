@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoJsBlazor", "NoJsBlazor\No
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{8207BB74-AC5F-4DC7-BBB9-5A2B17B70463}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualTesting.Server", "ManualTesting\ManualTesting.Server\ManualTesting.Server.csproj", "{B0187953-3761-4AE2-A653-4C64A11237E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManualTesting.Server", "ManualTesting\ManualTesting.Server\ManualTesting.Server.csproj", "{B0187953-3761-4AE2-A653-4C64A11237E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualTesting.PostGenerator", "ManualTesting\ManualTesting.PostGenerator\ManualTesting.PostGenerator.csproj", "{E078D690-33C6-4D6E-AFB1-690FA0DE6DCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{B0187953-3761-4AE2-A653-4C64A11237E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0187953-3761-4AE2-A653-4C64A11237E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0187953-3761-4AE2-A653-4C64A11237E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E078D690-33C6-4D6E-AFB1-690FA0DE6DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E078D690-33C6-4D6E-AFB1-690FA0DE6DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E078D690-33C6-4D6E-AFB1-690FA0DE6DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E078D690-33C6-4D6E-AFB1-690FA0DE6DCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{60676A74-B9B0-4921-820B-FABD3A3ACEA5} = {2814BE64-B8C4-4810-85E4-4A14DE30BC19}
 		{B0187953-3761-4AE2-A653-4C64A11237E2} = {2814BE64-B8C4-4810-85E4-4A14DE30BC19}
+		{E078D690-33C6-4D6E-AFB1-690FA0DE6DCD} = {2814BE64-B8C4-4810-85E4-4A14DE30BC19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E21D4A4-A412-4143-8ADA-573E5BED3293}

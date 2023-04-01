@@ -1,0 +1,25 @@
+{
+  "working directory": "../../../../ManualTesting.Client/bin/Release/net7.0/browser-wasm/publish/wwwroot",
+  "site url": "https://nojsblazor.firerocket.de",
+  "generate html pages": {
+    "enabled": true,
+    "page folder": "__html_page"
+  },
+  "create robots.txt": true,
+  "create sitemap.xml": true,
+  "remove files": {
+    "enabled": true,
+    "folder list": [],
+    "file list": [ "_framework/ManualTesting.Client.pdb.gz", "_content/NoJsBlazor/style.css" ]
+  },
+  "minify css/js": {
+    "enabled": true,
+    "exclude list startsWith": [ "_content", "_framework" ],
+    "exclude list endsWith": []
+  },
+  "zip files": {
+    "enabled": true,
+    "exclude list startsWith": [],
+    "exclude list endsWith": [ ".gz", ".br", ".jpg", ".png", ".woff2" ]
+  }
+}
