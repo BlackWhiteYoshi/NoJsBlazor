@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <NoWarn>BL0007</NoWarn> <!-- [Paramter] NonAutoProperty -->
+    <NoWarn>$(NoWarn);BL0007</NoWarn> <!-- [Paramter] NonAutoProperty -->
     <WarningsAsErrors>RZ2012</WarningsAsErrors> <!-- [EditorRequired] -->
   </PropertyGroup>
 
