@@ -2,52 +2,22 @@
 @inherits ProgressBar
 
 <div class="circle-progress-bar" @attributes="@Attributes">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" style="width: @(Diameter)px; height: @(Diameter)px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
         <circle cx="0" cy="0" r="99" />
-        @{
-            int innerRadius = 100 - Margin;
-            if (Progress < 1.0) {
+        <g>
+            @if (Progress < 1.0) {
                 double alpha = 2 * Math.PI * Progress;
 
-                double coordinateX = innerRadius * Math.Sin(alpha);
-                double coordinateY = innerRadius * -Math.Cos(alpha);
+                double coordinateX = Math.Sin(alpha);
+                double coordinateY = -Math.Cos(alpha);
                 int overHalfBit = alpha > Math.PI ? 1 : 0;
                 
-                <path d="M 0 @(-innerRadius) A @innerRadius @innerRadius 0 @overHalfBit 1 @coordinateX @coordinateY L 0 0 L 0 @(-innerRadius)" fill="@Color" />
+                <path d="M 0 -1 A 1 1 0 @overHalfBit 1 @coordinateX @coordinateY L 0 0 L 0 -1" />
             }
             else {
-                <circle cx="0" cy="0" r="@innerRadius" style="fill: @Color; stroke: none;" />
+                <circle cx="0" cy="0" r="1" />
             }
-        }
+        </g>
     </svg>
     <p class="center">@Text</p>
 </div>
-
-@code {
-    /// <summary>
-    /// <para>The size (width and height) of this element in px.</para>
-    /// <para>Default is 200.</para>
-    /// </summary>
-    [Parameter]
-    public int Diameter { get; set; } = 200;
-
-    /// <summary>
-    /// <para>Space between Border and the inner Circle in px.</para>
-    /// <para>Default is 4.</para>
-    /// </summary>
-    [Parameter]
-    public int Margin { get; set; } = 4;
-
-    /// <summary>
-    /// <para>Color of the inner Circle.</para>
-    /// <para>Default is #04A (dark blue).</para>
-    /// </summary>
-    [Parameter]
-    public string Color { get; set; } = "#04A";
-
-    /// <summary>
-    /// Captures unmatched values
-    /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IDictionary<string, object>? Attributes { get; set; }
-}

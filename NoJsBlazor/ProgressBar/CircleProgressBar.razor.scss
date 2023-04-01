@@ -1,10 +1,23 @@
 ﻿.circle-progress-bar {
+    --diameter: 200px;
+    --circle-margin: 4;
+    --circle-color: #04A;
     --border-color: #444;
 
     & > svg {
+        width: var(--diameter);
+        height: var(--diameter);
+
         & > circle {
             fill: none;
             stroke: var(--border-color);
+        }
+
+        & > g {
+            scale: calc(100 - var(--circle-margin));
+            & > :is(path, circle) {
+                fill: var(--circle-color);
+            }
         }
     }
 

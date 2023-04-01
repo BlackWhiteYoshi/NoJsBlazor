@@ -1,24 +1,70 @@
 ﻿.speedometer-progress-bar {
+    --diameter: 200px;
+
     --border-color: #444;
     --middle-circle-color: #0006;
+
+    --small-tick-width: 1;
+    --small-tick-color: #333;
+    --big-tick-width: 4;
+    --big-tick-color: #222;
+
+    --meter-length: 87.5;
     --meter-width: 5;
+    --meter-color: #D22;
     --meter-transition-speed: 500ms;
 
     & > svg {
-        & > .inner-circle {
-            fill: var(--middle-circle-color);
-            stroke: none;
-        }
+        width: var(--diameter);
+        height: var(--diameter);
 
         & > .outer-circle {
             stroke: var(--border-color);
             fill: none;  
         }
 
+        & > .small-tick {
+            stroke-width: var(--small-tick-width);
+            stroke: var(--small-tick-color);
+        }
+
+        & > .big-tick {
+            stroke-width: var(--big-tick-width);
+            stroke: var(--big-tick-color);
+        }
+
+        & > .meter-circle {
+            r: calc(0.17px * var(--meter-length));
+            stroke: none;
+            fill: var(--middle-circle-color);
+        }
+
         & > .meter {
-            stroke-width: var(--meter-width);
-            stroke-linecap: round;
             transition: rotate ease-out var(--meter-transition-speed);
+
+            & > line {
+                stroke: var(--meter-color);
+                stroke-width: var(--meter-width);
+                scale: 1 var(--meter-length);
+            }
+
+            & > :is(.line-cap-begin, .line-cap-end) {
+                r: calc(0.5px * var(--meter-width));
+                stroke: none;
+                fill: var(--meter-color);
+            }
+
+            & > .line-cap-begin {
+                translate: 0 calc(-0.2px * var(--meter-length));
+            }
+
+            & > .line-cap-end {
+                translate: 0 calc(1px * var(--meter-length));
+            }
+        }
+
+        & > text {
+            font-size: 13.8px;
         }
     }
 

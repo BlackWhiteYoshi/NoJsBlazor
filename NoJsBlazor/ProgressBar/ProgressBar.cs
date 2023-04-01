@@ -5,7 +5,7 @@
 /// </summary>
 public abstract class ProgressBar : ComponentBase {
     /// <summary>
-    /// <para>The relative amoint of the progress Bar</para>
+    /// <para>The relative amount of the progress Bar.</para>
     /// <para>0 means empty, 1 means full.</para>
     /// <para>Default is 0.0</para>
     /// </summary>
@@ -29,4 +29,11 @@ public abstract class ProgressBar : ComponentBase {
             InvokeAsync(StateHasChanged);
         }
     }
+
+
+    /// <summary>
+    /// Captures unmatched values
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? Attributes { get; set; }
 }

@@ -2,63 +2,32 @@
 @inherits ProgressBar
 
 <div class="speedometer-progress-bar" @attributes="@Attributes">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" style="width: @(Diameter)px; height: @(Diameter)px;">
-        <text x="-5" y="70" style="font-size: 13.8px;">%</text>
-        <circle class="inner-circle" cx="0" cy="0" r="@(15f / 0.875f * Length)" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
+        <text x="-5" y="70">%</text>
         <circle class="outer-circle" cx="0" cy="0" r="99" />
-
+        
         @for (int i = 0; i <= 100; i++) {
             double radians = (3.0 / 2.0 * Math.PI) * i / 100.0 + (5.0 / 4.0 * Math.PI);
             (double x, double y) vec = (Math.Sin(radians), -Math.Cos(radians));
 
             if (i % 10 == 0) {
-                <line x1="@(vec.x * 99)" y1="@(vec.y * 99)" x2="@(vec.x * 85)" y2="@(vec.y * 85)" stroke-width="4" stroke="#222" />
+                <line class="big-tick" x1="@(vec.x * 99)" y1="@(vec.y * 99)" x2="@(vec.x * 85)" y2="@(vec.y * 85)" />
 
                 string number = i.ToString();
                 int numberLength = number.Length * 4;
                 <text><text x="@(vec.x * 70 - numberLength)" y="@(vec.y * 70 + 4)">@number</text></text>
             }
             else {
-                <line x1="@(vec.x * 99)" y1="@(vec.y * 99)" x2="@(vec.x * 90)" y2="@(vec.y * 90)" stroke-width="2" stroke="#333" />
+                <line class="small-tick" x1="@(vec.x * 99)" y1="@(vec.y * 99)" x2="@(vec.x * 90)" y2="@(vec.y * 90)" />
             }
         }
 
-        <line class="meter"
-              x1="0"
-              y1="@(-20 * Length)"
-              x2="0"
-              y2="@(100 * Length)"
-              stroke="@Color"
-              style="rotate: @((float)(3.0 / 2.0 * Math.PI) * Progress + (float)(1.0 / 4.0 * Math.PI))rad" />
+        <circle class="meter-circle" cx="0" cy="0" />
+        <g class="meter" style="rotate: @((float)(3.0 / 2.0 * Math.PI) * Progress + (float)(1.0 / 4.0 * Math.PI))rad">
+            <line x1="0" y1="-0.2" x2="0" y2="1" />
+            <circle class="line-cap-begin" cx="0" cy="0" />
+            <circle class="line-cap-end" cx="0" cy="0" />
+        </g>
     </svg>
     <p class="center">@Text</p>
 </div>
-
-@code {
-    /// <summary>
-    /// <para>The size (width and height) of this element in px.</para>
-    /// <para>Default is 200.</para>
-    /// </summary>
-    [Parameter]
-    public int Diameter { get; set; } = 200;
-
-    /// <summary>
-    /// <para>Relative Length of the meter, 1.0f is length of radius.</para>
-    /// <para>Default is 0.875f.</para>
-    /// </summary>
-    [Parameter]
-    public float Length { get; set; } = 0.875f;
-
-    /// <summary>
-    /// <para>Color of the inner Circle.</para>
-    /// <para>Default is #D22 (dark red).</para>
-    /// </summary>
-    [Parameter]
-    public string Color { get; set; } = "#D22";
-
-    /// <summary>
-    /// Captures unmatched values
-    /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IDictionary<string, object>? Attributes { get; set; }
-}

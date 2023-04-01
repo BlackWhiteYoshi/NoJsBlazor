@@ -1,5 +1,10 @@
 ﻿.standard-progress-bar {
+    --width: 300px;
+    --height: 20px;
+
+    --bar-color: #08F;
     --border-color: #444;
+
     --border-radius: 20px;
     --bar-margin: 0.125em;
     --bar-transition-speed: 300ms;
@@ -9,11 +14,20 @@
         border: solid 1px var(--border-color);
         border-radius: var(--border-radius);
 
-        // bar itself
+        // bar track
         & > div {
+            width: var(--width);
+            height: var(--height);
             margin: var(--bar-margin);
             border-radius: var(--border-radius);
-            transition: border-left ease-in-out var(--bar-transition-speed);
+            overflow: hidden;
+
+            // bar itself
+            & > div {
+                height: 100%;
+                background-color: var(--bar-color);
+                transition: width ease-in-out var(--bar-transition-speed);
+            }
         }
     }
 
