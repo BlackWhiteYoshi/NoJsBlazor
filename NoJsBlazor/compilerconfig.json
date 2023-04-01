@@ -2,9 +2,5 @@
   {
     "outputFile": "wwwroot/style.css",
     "inputFile": "Main.scss"
-  },
-  {
-    "outputFile": "../ManualTesting/ManualTesting.Client/wwwroot/style.css",
-    "inputFile": "Main.scss"
   }
 ]
