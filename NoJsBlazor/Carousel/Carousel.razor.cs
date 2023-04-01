@@ -3,7 +3,7 @@
 namespace NoJsBlazor;
 
 /// <summary>
-/// <para>A Carousel like in Bootstrap. It holds <see cref="RenderFragment"/> as items. </para>
+/// <para>A Carousel like in Bootstrap. It holds <see cref="CarouselItem"/> as items. </para>
 /// <para>It can also display an overlay, control-arrows, item indicators and a play/stop button.</para>
 /// </summary>
 public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, IDisposable {
@@ -66,7 +66,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
     private bool _isAutoStartTimeNull = true;
 
     /// <summary>
-    /// <para>Carousel Interval starts at beginning.</para>
+    /// <para>Carousel Interval starts running or paused.</para>
     /// <para>Default is true.</para>
     /// </summary>
     [Parameter]

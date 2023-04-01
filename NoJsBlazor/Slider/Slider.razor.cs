@@ -4,26 +4,28 @@ using System.Numerics;
 namespace NoJsBlazor;
 
 /// <summary>
-/// <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
-/// <para>The value of this object is from type <see cref="int"/>.</para>
+/// An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.
 /// </summary>
 public sealed partial class Slider<Type> : ComponentBase where Type : struct, INumber<Type> {
     /// <summary>
-    /// Value of the Slider
+    /// <para>Value of the Slider.</para>
+    /// <para>Should be used as two-way-binding.</para>
     /// </summary>
     [Parameter]
     public Type Value { get; set; }
 
     /// <summary>
-    /// <para>Invokes every time Value get changed with:</para>
-    /// <para>LeftButton, RightButton, Slider or EditField.</para>
+    /// <para>Invokes every time Value get changed with:<br />
+    /// LeftButton, RightButton, Slider or EditField.</para>
+    /// <para>This or <see cref="OnChange"/> can be used for two-way-binding.</para>
     /// </summary>
     [Parameter]
     public EventCallback<Type> ValueChanged { get; set; }
 
     /// <summary>
-    /// <para>Invokes every time Value get changed with:</para>
-    /// <para>LeftButton, RightButton, Slider (only on release) or EditField.</para>
+    /// <para>Invokes every time Value get changed with:<br />
+    /// LeftButton, RightButton, Slider (only on release) or EditField.</para>
+    /// <para>This or <see cref="ValueChanged"/> can be used for two-way-binding.</para>
     /// </summary>
     [Parameter]
     public EventCallback<Type> OnChange { get; set; }
@@ -86,8 +88,8 @@ public sealed partial class Slider<Type> : ComponentBase where Type : struct, IN
 
     /// <summary>
     /// <para>Parsing function for the edit field.</para>
-    /// <para>It gets the content of the edit field as string and returns the appropriated integer. It Returns null if the value is not valid.</para>
-    /// <para>Default succeed if the value is int-parseable and in Min/Max bounds.</para>
+    /// <para>It should get the content of the edit field as string and return the appropriated number. It should return null if the value is not valid.</para>
+    /// <para>Default try parses number and when succeed, clamps to Min,Max-bounds.</para>
     /// </summary>
     [Parameter]
     public Func<string?, Type?> ParseEdit { get; set; }

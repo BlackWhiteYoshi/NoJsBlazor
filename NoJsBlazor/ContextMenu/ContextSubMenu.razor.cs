@@ -25,7 +25,7 @@ public sealed partial class ContextSubMenu : ListableComponentBase<ContextSubMen
 
     private bool _expanded = false;
     /// <summary>
-    /// Value for expanding or collapsing this submenu.
+    /// The state of collapsed or expanded for this submenu.
     /// </summary>
     /// <param name="value">expanded</param>
     public bool Expanded {

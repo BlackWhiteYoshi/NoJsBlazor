@@ -1,7 +1,9 @@
 ﻿namespace NoJsBlazor;
 
 /// <summary>
-/// A container that can display your brand, the content can be collapsed and contains <see cref="NavBarMenu"/> or/and <see cref="NavBarItem"/>/<see cref="NavBarLink"/>.
+/// A container that contains a nested list of items/links.<br />
+/// It automatically collapses to phone view at a configurable threshold.<br />
+/// Optional it can also show a brand.
 /// </summary>
 public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     /// <summary>
@@ -40,7 +42,7 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
 
     private bool _expanded = false;
     /// <summary>
-    /// Value for Expanding or Collapsing the navbar
+    /// Value for Expanding or Collapsing the navbar.
     /// </summary>
     public bool Expanded {
         get => _expanded;
@@ -98,7 +100,7 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
 
 
     /// <summary>
-    /// Collapses all expanded menus and submenus.
+    /// Collapses this menu and all expanded submenus.
     /// </summary>
     public void Reset() {
         foreach (NavBarMenu navBar in childList)

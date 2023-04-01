@@ -24,7 +24,7 @@ public sealed partial class Dialog : ComponentBase {
     public bool ShowTitle { get; set; } = true;
 
     /// <summary>
-    /// <para>The Window can be grabed and draged around the screen.</para>
+    /// <para>The window can be grabed and draged around the screen.</para>
     /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
@@ -32,14 +32,13 @@ public sealed partial class Dialog : ComponentBase {
 
     /// <summary>
     /// <para>If the background should be blurred/unavailable.</para>
-    /// <para>Technically the background will be overlayed with a div with high opacity.</para>
     /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
     public bool ModalScreen { get; set; } = true;
 
     /// <summary>
-    /// <para>If on the <see cref="ModalScreen">ModalBackground</see> a click/touch occurs, whether the window should close or not close.</para>
+    /// <para>If on the <see cref="ModalScreen">ModalBackground</see> a click occurs, whether the window should close or not close.</para>
     /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
@@ -88,8 +87,8 @@ public sealed partial class Dialog : ComponentBase {
 
     private bool _active;
     /// <summary>
-    /// <para>true -> window is shown;</para>
-    /// <para>false -> window is closed</para>
+    /// true -> window is shown<br />
+    /// false -> window is closed
     /// </summary>
     public bool Active {
         get => _active;
