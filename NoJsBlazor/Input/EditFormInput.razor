@@ -1,9 +1,8 @@
 ﻿@namespace NoJsBlazor
 @inherits InputBase<string>
 
-<div class="input-field-container" @attributes="@AdditionalAttributes">
+<div class="input-field-container @CssClass" @attributes="@AdditionalAttributes">
     <input
-            class="@CssClass"
             id="@Id"
             value="@Value"
             @oninput="OnFieldInput"
