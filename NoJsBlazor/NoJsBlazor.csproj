@@ -4,7 +4,6 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
     <Title>NoJsBlazor</Title>
     <Description>Library for Blazor applications. It contains some UI components. This Library does not use any Javascript code, everything is implemented in Razor, (S)CSS and C#.</Description>
@@ -28,6 +27,11 @@
     <DebugType>embedded</DebugType>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DocumentationFile>$(ProjectDir)NoJsBlazor.xml</DocumentationFile>
+  </PropertyGroup>
+
   <PropertyGroup>
     <NoWarn>BL0007</NoWarn>
     <WarningsAsErrors>RZ2012</WarningsAsErrors>
@@ -49,14 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\PACKAGE.md" Pack="true" PackagePath="\" />
-    <None Include="..\ICON.png" Pack="true" PackagePath="\" />
-    <None Include="..\LICENSE" Pack="true=" PackagePath="\" />
+    <None Include="..\PACKAGE.md" Pack="True" PackagePath="/" />
+    <None Include="..\ICON.png" Pack="True" PackagePath="/" />
+    <None Include="..\LICENSE" Pack="True" PackagePath="/" />
   </ItemGroup>
-
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <DocumentationFile>$(ProjectDir)NoJsBlazor.xml</DocumentationFile>
-  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />

@@ -7,7 +7,7 @@
 public sealed partial class EditFormInput : InputBase<string> {
     /// <summary>
     /// <para>Fires every time item looses focus and value has changed.</para>
-    /// <para>This or <see cref="ValueChanged"/> can be used for two-way-binding.</para>
+    /// <para>This or ValueChanged can be used for two-way-binding.</para>
     /// </summary>
     [Parameter]
     public EventCallback<string?> OnChange { get; set; }

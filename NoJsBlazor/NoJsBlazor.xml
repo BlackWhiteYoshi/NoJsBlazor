@@ -6,7 +6,7 @@
     <members>
         <member name="T:NoJsBlazor.Carousel">
             <summary>
-            <para>A Carousel like in Bootstrap. It holds <see cref="T:Microsoft.AspNetCore.Components.RenderFragment"/> as items. </para>
+            <para>A Carousel like in Bootstrap. It holds <see cref="T:NoJsBlazor.CarouselItem"/> as items. </para>
             <para>It can also display an overlay, control-arrows, item indicators and a play/stop button.</para>
             </summary>
         </member>
@@ -37,7 +37,7 @@
         </member>
         <member name="P:NoJsBlazor.Carousel.BeginRunning">
             <summary>
-            <para>Carousel Interval starts at beginning.</para>
+            <para>Carousel Interval starts running or paused.</para>
             <para>Default is true.</para>
             </summary>
         </member>
@@ -233,9 +233,8 @@
         </member>
         <member name="P:NoJsBlazor.ContextMenu.Expanded">
             <summary>
-            Value for expanding or collapsing this submenu.
+            The state of collapsed or visible.
             </summary>
-            <param name="value">expanded</param>
         </member>
         <member name="M:NoJsBlazor.ContextMenu.Open(System.Double,System.Double)">
             <summary>
@@ -269,7 +268,7 @@
         <member name="T:NoJsBlazor.ContextMenuItem">
             <summary>
             <para>Wrapper for the content that will be a context item.</para>
-            <para>This should be placed inside of a <see cref="T:NoJsBlazor.ContextMenu"/>/<see cref="T:NoJsBlazor.ContextSubMenu"/> instance.</para>
+            <para>This should be placed inside of a <see cref="T:NoJsBlazor.ContextMenu"/> or <see cref="T:NoJsBlazor.ContextSubMenu"/> instance.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.ContextMenuItem.ChildContent">
@@ -279,8 +278,7 @@
         </member>
         <member name="P:NoJsBlazor.ContextMenuItem.OnPressed">
             <summary>
-            <para>Invokes every time when this list item get clicked or touched.</para>
-            <para><see cref="T:System.EventArgs"/> is either <see cref="T:Microsoft.AspNetCore.Components.Web.MouseEventArgs"/> or <see cref="T:Microsoft.AspNetCore.Components.Web.TouchEventArgs"/>, depends if it was invoked by clicking or touching.</para>
+            Invokes every time when this list item get clicked or touched.
             </summary>
         </member>
         <member name="T:NoJsBlazor.ContextSubMenu">
@@ -306,7 +304,7 @@
         </member>
         <member name="P:NoJsBlazor.ContextSubMenu.Expanded">
             <summary>
-            Value for expanding or collapsing this submenu.
+            The state of collapsed or expanded for this submenu.
             </summary>
             <param name="value">expanded</param>
         </member>
@@ -344,20 +342,19 @@
         </member>
         <member name="P:NoJsBlazor.Dialog.Moveable">
             <summary>
-            <para>The Window can be grabed and draged around the screen.</para>
+            <para>The window can be grabed and draged around the screen.</para>
             <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.ModalScreen">
             <summary>
             <para>If the background should be blurred/unavailable.</para>
-            <para>Technically the background will be overlayed with a div with high opacity.</para>
             <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.CloseOnModalBackground">
             <summary>
-            <para>If on the <see cref="P:NoJsBlazor.Dialog.ModalScreen">ModalBackground</see> a click/touch occurs, whether the window should close or not close.</para>
+            <para>If on the <see cref="P:NoJsBlazor.Dialog.ModalScreen">ModalBackground</see> a click occurs, whether the window should close or not close.</para>
             <para>Default is true.</para>
             </summary>
         </member>
@@ -399,8 +396,8 @@
         </member>
         <member name="P:NoJsBlazor.Dialog.Active">
             <summary>
-            <para>true -> window is shown;</para>
-            <para>false -> window is closed</para>
+            true -> window is shown<br />
+            false -> window is closed
             </summary>
         </member>
         <member name="P:NoJsBlazor.Dialog.SilentActiveSetter">
@@ -434,19 +431,20 @@
         </member>
         <member name="T:NoJsBlazor.EditFormInput">
             <summary>
-            <para>A normal input field with a embedded label.</para>
+            <para>Input field with a embedded label.</para>
             <para>It can only be used inside EditForm.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.OnChange">
             <summary>
-            Fires every time item looses focus and value has changed.
+            <para>Fires every time item looses focus and value has changed.</para>
+            <para>This or ValueChanged can be used for two-way-binding.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Title">
             <summary>
-            <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
-            <para>returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete)</para>
+            <para>Sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true).</para>
+            <para>Returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete).</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Label">
@@ -465,17 +463,18 @@
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Id">
             <summary>
-            sets the "id"-attribute in input field and the "for"-attribute in the label.
+            Sets the "id"-attribute in input field and the "for"-attribute in the label.
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Name">
             <summary>
-            sets the "name"-attribute in the input field.
+            Sets the "name"-attribute in the input field.
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Autocomplete">
             <summary>
-            sets the "autocomplete"-attribute in the input field.
+            <para>Sets the "autocomplete"-attribute in the input field.</para>
+            <para>default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.InputAttributes">
@@ -485,29 +484,32 @@
         </member>
         <member name="T:NoJsBlazor.Input">
             <summary>
-            <para>A normal input field with a embedded label.</para>
+            <para>Input field with a embedded label.</para>
             <para>Don't use it inside EditForm, use <see cref="T:NoJsBlazor.EditFormInput">EditFormInput</see> instead.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Value">
             <summary>
-            Value of this Input field.
+            <para>Value of this Input field.</para>
+            <para>Should be used as two-way-binding.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.ValueChanged">
             <summary>
-            Fires every time <see cref="P:NoJsBlazor.Input.Value"/> changes.
+            <para>Fires every time <see cref="P:NoJsBlazor.Input.Value"/> changes.</para>
+            <para>This or <see cref="P:NoJsBlazor.Input.OnChange"/> can be used for two-way-binding.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.OnChange">
             <summary>
-            Fires every time item looses focus and value has changed.
+            <para>Fires every time item looses focus and value has changed.</para>
+            <para>This or <see cref="P:NoJsBlazor.Input.ValueChanged"/> can be used for two-way-binding.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Title">
             <summary>
-            <para>sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true)</para>
-            <para>returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete)</para>
+            <para>Sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true).</para>
+            <para>Returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete).</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Label">
@@ -522,17 +524,18 @@
         </member>
         <member name="P:NoJsBlazor.Input.Id">
             <summary>
-            sets the "id"-attribute in input field and the "for"-attribute in the label.
+            Sets the "id"-attribute in input field and the "for"-attribute in the label.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Name">
             <summary>
-            sets the "name"-attribute in the input field.
+            Sets the "name"-attribute in the input field.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Autocomplete">
             <summary>
-            sets the "autocomplete"-attribute in the input field.
+            <para>Sets the "autocomplete"-attribute in the input field.</para>
+            <para>default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.InputAttributes">
@@ -547,7 +550,9 @@
         </member>
         <member name="T:NoJsBlazor.NavBar">
             <summary>
-            A container that can display your brand, the content can be collapsed and contains <see cref="T:NoJsBlazor.NavBarMenu"/> or/and <see cref="T:NoJsBlazor.NavBarItem"/>/<see cref="T:NoJsBlazor.NavBarLink"/>.
+            A container that contains a nested list of items/links.<br />
+            It automatically collapses to phone view at a configurable threshold.<br />
+            Optional it can also show a brand.
             </summary>
         </member>
         <member name="P:NoJsBlazor.NavBar.Brand">
@@ -580,7 +585,7 @@
         </member>
         <member name="P:NoJsBlazor.NavBar.Expanded">
             <summary>
-            Value for Expanding or Collapsing the navbar
+            Value for Expanding or Collapsing the navbar.
             </summary>
         </member>
         <member name="P:NoJsBlazor.NavBar.SilentExpandedSetter">
@@ -590,7 +595,7 @@
         </member>
         <member name="M:NoJsBlazor.NavBar.Reset">
             <summary>
-            Collapses all expanded menus and submenus.
+            Collapses this menu and all expanded submenus.
             </summary>
         </member>
         <member name="T:NoJsBlazor.NavBarBreakpoint">
@@ -700,7 +705,7 @@
         </member>
         <member name="T:NoJsBlazor.NavBarMenu">
             <summary>
-            <para>A single menu that can hold other <see cref="T:NoJsBlazor.NavBarMenu"/> or/and <see cref="T:NoJsBlazor.NavBarItem"/>/<see cref="T:NoJsBlazor.NavBarLink"/>.</para>
+            <para>A single menu that can hold other <see cref="T:NoJsBlazor.NavBarMenu"/> and <see cref="T:NoJsBlazor.NavBarItem"/>/<see cref="T:NoJsBlazor.NavBarLink"/>.</para>
             <para>This should be placed inside of a <see cref="T:NoJsBlazor.NavBar"/> or <see cref="T:NoJsBlazor.NavBarMenu"/>.</para>
             </summary>
         </member>
@@ -744,7 +749,7 @@
         </member>
         <member name="P:NoJsBlazor.ProgressBar.Progress">
             <summary>
-            <para>The relative amoint of the progress Bar</para>
+            <para>The relative amount of the progress Bar.</para>
             <para>0 means empty, 1 means full.</para>
             <para>Default is 0.0</para>
             </summary>
@@ -760,27 +765,34 @@
             Accessing <see cref="P:NoJsBlazor.ProgressBar.Progress"/> and <see cref="P:NoJsBlazor.ProgressBar.Text"/> together. Also rerenders the component.
             </summary>
         </member>
+        <member name="P:NoJsBlazor.ProgressBar.Attributes">
+            <summary>
+            Captures unmatched values
+            </summary>
+        </member>
         <member name="T:NoJsBlazor.Slider`1">
             <summary>
-            <para>An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.</para>
-            <para>The value of this object is from type <see cref="T:System.Int32"/>.</para>
+            An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider`1.Value">
             <summary>
-            Value of the Slider
+            <para>Value of the Slider.</para>
+            <para>Should be used as two-way-binding.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider`1.ValueChanged">
             <summary>
-            <para>Invokes every time Value get changed with:</para>
-            <para>LeftButton, RightButton, Slider or EditField.</para>
+            <para>Invokes every time Value get changed with:<br />
+            LeftButton, RightButton, Slider or EditField.</para>
+            <para>This or <see cref="P:NoJsBlazor.Slider`1.OnChange"/> can be used for two-way-binding.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider`1.OnChange">
             <summary>
-            <para>Invokes every time Value get changed with:</para>
-            <para>LeftButton, RightButton, Slider (only on release) or EditField.</para>
+            <para>Invokes every time Value get changed with:<br />
+            LeftButton, RightButton, Slider (only on release) or EditField.</para>
+            <para>This or <see cref="P:NoJsBlazor.Slider`1.ValueChanged"/> can be used for two-way-binding.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider`1.Title">
@@ -834,8 +846,8 @@
         <member name="P:NoJsBlazor.Slider`1.ParseEdit">
             <summary>
             <para>Parsing function for the edit field.</para>
-            <para>It gets the content of the edit field as string and returns the appropriated integer. It Returns null if the value is not valid.</para>
-            <para>Default succeed if the value is int-parseable and in Min/Max bounds.</para>
+            <para>It should get the content of the edit field as string and return the appropriated number. It should return null if the value is not valid.</para>
+            <para>Default try parses number and when succeed, clamps to Min,Max-bounds.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider`1.Attributes">
@@ -936,75 +948,6 @@
             </summary>
         </member>
         <member name="P:NoJsBlazor.NavBarLink.Attributes">
-            <summary>
-            Captures unmatched values
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.CircleProgressBar.Diameter">
-            <summary>
-            <para>The size (width and height) of this element in px.</para>
-            <para>Default is 200.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.CircleProgressBar.Margin">
-            <summary>
-            <para>Space between Border and the inner Circle in px.</para>
-            <para>Default is 4.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.CircleProgressBar.Color">
-            <summary>
-            <para>Color of the inner Circle.</para>
-            <para>Default is #04A (dark blue).</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.CircleProgressBar.Attributes">
-            <summary>
-            Captures unmatched values
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.SpeedometerProgressBar.Diameter">
-            <summary>
-            <para>The size (width and height) of this element in px.</para>
-            <para>Default is 200.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.SpeedometerProgressBar.Length">
-            <summary>
-            <para>Relative Length of the meter, 1.0f is length of radius.</para>
-            <para>Default is 0.875f.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.SpeedometerProgressBar.Color">
-            <summary>
-            <para>Color of the inner Circle.</para>
-            <para>Default is #D22 (dark red).</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.SpeedometerProgressBar.Attributes">
-            <summary>
-            Captures unmatched values
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.StandardProgressBar.Width">
-            <summary>
-            <para>The Length of the Bar in px.</para>
-            <para>Default is 300.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.StandardProgressBar.Height">
-            <summary>
-            <para>The Thickness of the Bar in px.</para>
-            <para>Default is 20.</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.StandardProgressBar.Color">
-            <summary>
-            <para>Color of the inner Bar.</para>
-            <para>Default is #08F (light blue).</para>
-            </summary>
-        </member>
-        <member name="P:NoJsBlazor.StandardProgressBar.Attributes">
             <summary>
             Captures unmatched values
             </summary>
