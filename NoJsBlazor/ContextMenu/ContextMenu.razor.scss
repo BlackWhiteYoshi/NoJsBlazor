@@ -33,6 +33,7 @@
         rotate: none;
     }
 
+    // context-submenu
     .context-element {
         position: relative;
         margin: 0;
@@ -40,7 +41,7 @@
         cursor: default;
         white-space: nowrap;
 
-        &:hover > .context-div, &.expanded > .context-menu {
+        &:hover > .context-div, &.expanded > .context-div {
             background-color: var(--hover-dropright-background-color);
             box-shadow: 0 0 15px var(--hover-dropright-shadow-color);
         }
@@ -49,15 +50,17 @@
             rotate: none;
         }
 
-        &.context-item {
-            cursor: pointer;
+        &:hover > .context-div > .context-arrow {
+            translate: 3px;
+            rotate: 270deg;
 
-            &:hover {
-                background-color: var(--hover-item-background-color);
+            & > polygon {
+                fill: var(--arrow-hover-color);
+                stroke: var(--arrow-hover-stroke);
             }
         }
     }
-
+    
     .context-div {
         height: 100%;
         display: flex;
@@ -66,6 +69,15 @@
         align-items: center;
         gap: 10px;
         cursor: default;
+    }
+
+    // context-item
+    .context-element.context-item {
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--hover-item-background-color);
+        }
     }
 
     // right arrow
@@ -83,16 +95,6 @@
 
         & > circle, & > line {
             display: none;
-        }
-    }
-
-    .context-element:hover > .context-div > .context-arrow {
-        translate: 3px;
-        rotate: 270deg;
-
-        & > polygon {
-            fill: var(--arrow-hover-color);
-            stroke: var(--arrow-hover-stroke);
         }
     }
 }
