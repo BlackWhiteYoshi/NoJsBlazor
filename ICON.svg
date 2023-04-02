@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 20 20">
+    <defs>
+        <clipPath id="3quarter">
+            <rect x="-10" y="-10" width="20" height="10" />
+            <rect x="-10" y="-10" width="10" height="20" />
+        </clipPath>
+        
+        <g id="forbidden" stroke-width="2" stroke="#E22" fill="none">
+            <circle cx="0" cy="0" r="9"  />
+        
+            <line x1="-6" y1="-6" x2="6" y2="6" />
+        </g>
+    </defs>
+    
+
+    <use href="#forbidden" />
+    
+    <g font-family="Arial" fill="#22E">
+        <text x="-8.2" y="6">J</text>
+        <text x="-1.5" y="6">S</text>
+    </g>
+    
+    <use href="#forbidden" clip-path="url(#3quarter)" />
+</svg>
