@@ -10,7 +10,7 @@
     <Authors>BlackWhiteYoshi</Authors>
     <PackageTags>C#;Blazor;HTML;CSS;UI;Component;Components;Library</PackageTags>
 
-    <PackageReadmeFile>Package.md</PackageReadmeFile>
+    <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/BlackWhiteYoshi/NoJsBlazor</PackageProjectUrl>
 
     <RepositoryType>git</RepositoryType>

@@ -7,7 +7,6 @@ For documentation or sourcecode see [github.com/BlackWhiteYoshi/NoJsBlazor](http
 For a demo go to [nojsblazor.firerocket.de](https://nojsblazor.firerocket.de).
 
 
-<br></br>
 ## List of components
 
 - Carousel
