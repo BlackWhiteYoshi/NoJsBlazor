@@ -11,10 +11,14 @@ public abstract class ListableComponentBase<T> : ComponentBase, IDisposable wher
 
     /// <summary>
     /// <para>Registering the component at the parent <see cref="ListableComponentBase{T}">ListableComponentBase</see>.</para>
-    /// <para>Therefore the reference of the parent has to be given with a CascadingParameter.</para>
+    /// <para>Assumes the reference <see cref="Parent" /> is set.</para>
     /// </summary>
     protected override void OnInitialized() => Parent.Add((T)this);
 
+    /// <summary>
+    /// <para>Removing the component from the parent <see cref="ListableComponentBase{T}">ListableComponentBase</see>.</para>
+    /// <para>Assumes the reference <see cref="Parent" /> is set.</para>
+    /// </summary>
     public void Dispose() {
         Parent.Remove((T)this);
         GC.SuppressFinalize(this);
