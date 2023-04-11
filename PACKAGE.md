@@ -1,4 +1,5 @@
 ﻿# NoJsBlazor
+
 Library for Blazor applications. It contains some UI components.  
 This Library does not use any Javascript code, everything is implemented in Razor, (S)CSS and C#.
 
