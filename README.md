@@ -318,7 +318,7 @@ A little message window that it is first hidden and can be displayed on demand.
         OnActiveChanged="(bool opened) => { }"
         OnTitlePointerDown="(PointerEventArgs e) => { }"
         OnTitlePointerMove="(PointerEventArgs e) => { }"
-        OnTitlePointerUp="(PointerEventArgs e) => { }"
+        OnTitlePointerUp="(PointerEventArgs e) => { }">
     <Title>
         RenderFragment
     </Title>
