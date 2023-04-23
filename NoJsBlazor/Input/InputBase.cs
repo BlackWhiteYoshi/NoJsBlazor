@@ -41,7 +41,12 @@ public abstract class InputBase {
     public string? Label { get; set; }
 
     /// <summary>
-    /// Sets the type attribute.
+    /// <para>Sets the type attribute.</para>
+    /// <para>e.g.<br></br>
+    /// normal text(abcd)<br></br>
+    /// password(****)<br></br>
+    /// numberField(0123)<br></br>
+    /// …</para>
     /// </summary>
     [Parameter]
     public string? Type { get; set; }

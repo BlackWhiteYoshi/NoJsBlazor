@@ -454,11 +454,12 @@
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Type">
             <summary>
-            e.g.<br></br>
-            normal text (abcd)<br></br>
-            password (****)<br></br>
-            numberField (0123)<br></br>
-            …
+            <para>Sets the type attribute.</para>
+            <para>e.g.<br></br>
+            normal text(abcd)<br></br>
+            password(****)<br></br>
+            numberField(0123)<br></br>
+            …</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.Id">
@@ -500,10 +501,15 @@
             <para>This or <see cref="P:NoJsBlazor.Input.OnChange"/> can be used for two-way-binding.</para>
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Input.Attributes">
+            <summary>
+            Captures unmatched values. The values are applied to the outer div container and not to the input field
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Input.OnChange">
             <summary>
             <para>Fires every time item looses focus and value has changed.</para>
-            <para>This or <see cref="P:NoJsBlazor.Input.ValueChanged"/> can be used for two-way-binding.</para>
+            <para>This or ValueChanged can be used for two-way-binding.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Title">
@@ -519,7 +525,12 @@
         </member>
         <member name="P:NoJsBlazor.Input.Type">
             <summary>
-            Sets the type attribute.
+            <para>Sets the type attribute.</para>
+            <para>e.g.<br></br>
+            normal text(abcd)<br></br>
+            password(****)<br></br>
+            numberField(0123)<br></br>
+            …</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.Id">
@@ -543,9 +554,52 @@
             These values are applied to the input field.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.Input.Attributes">
+        <member name="P:NoJsBlazor.InputBase.OnChange">
             <summary>
-            Captures unmatched values. The values are applied to the outer div container and not to the input field
+            <para>Fires every time item looses focus and value has changed.</para>
+            <para>This or ValueChanged can be used for two-way-binding.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.InputBase.Title">
+            <summary>
+            <para>Sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true).</para>
+            <para>Returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete).</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.InputBase.Label">
+            <summary>
+            Displayed text of this Input field.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.InputBase.Type">
+            <summary>
+            <para>Sets the type attribute.</para>
+            <para>e.g.<br></br>
+            normal text(abcd)<br></br>
+            password(****)<br></br>
+            numberField(0123)<br></br>
+            …</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.InputBase.Id">
+            <summary>
+            Sets the "id"-attribute in input field and the "for"-attribute in the label.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.InputBase.Name">
+            <summary>
+            Sets the "name"-attribute in the input field.
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.InputBase.Autocomplete">
+            <summary>
+            <para>Sets the "autocomplete"-attribute in the input field.</para>
+            <para>default is true.</para>
+            </summary>
+        </member>
+        <member name="P:NoJsBlazor.InputBase.InputAttributes">
+            <summary>
+            These values are applied to the input field.
             </summary>
         </member>
         <member name="T:NoJsBlazor.NavBar">
@@ -895,7 +949,13 @@
         <member name="M:NoJsBlazor.ListableComponentBase`1.OnInitialized">
             <summary>
             <para>Registering the component at the parent <see cref="T:NoJsBlazor.ListableComponentBase`1">ListableComponentBase</see>.</para>
-            <para>Therefore the reference of the parent has to be given with a CascadingParameter.</para>
+            <para>Assumes the reference <see cref="P:NoJsBlazor.ListableComponentBase`1.Parent" /> is set.</para>
+            </summary>
+        </member>
+        <member name="M:NoJsBlazor.ListableComponentBase`1.Dispose">
+            <summary>
+            <para>Removing the component from the parent <see cref="T:NoJsBlazor.ListableComponentBase`1">ListableComponentBase</see>.</para>
+            <para>Assumes the reference <see cref="P:NoJsBlazor.ListableComponentBase`1.Parent" /> is set.</para>
             </summary>
         </member>
         <member name="T:NoJsBlazor.ListholdingComponentBase`1">
@@ -950,6 +1010,207 @@
         <member name="P:NoJsBlazor.NavBarLink.Attributes">
             <summary>
             Captures unmatched values
+            </summary>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineBaseAttribute">
+            <summary>
+            <para>Marks this class/struct as inlineable, so it can be listed in a <see cref="T:InlineCompositionAttributes.InlineAttribute`1"/> Attribute.</para>
+            </summary>
+        </member>
+        <member name="P:InlineCompositionAttributes.InlineBaseAttribute.IgnoreInheritenceAndImplements">
+            <summary>
+            If set the generator ignores the inherited class and implemented interfaces of this type.
+            </summary>
+        </member>
+        <member name="T:InlineCompositionAttributes.NoInlineAttribute">
+            <summary>
+            <para>Only usefule in a class/struct with a <see cref="T:InlineCompositionAttributes.InlineBaseAttribute"/>.</para>
+            <para>Skips/Ignores this member.</para>
+            </summary>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`1">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`2">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`3">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`4">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`5">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T5">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`6">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T5">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T6">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`7">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T5">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T6">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T7">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`8">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T5">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T6">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T7">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T8">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`9">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T5">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T6">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T7">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T8">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T9">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`10">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T5">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T6">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T7">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T8">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T9">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T10">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`11">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T5">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T6">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T7">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T8">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T9">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T10">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T11">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineAttribute`12">
+            <summary>
+            Generates a partial class/struct which includes all members listed in the typeParams.
+            </summary>
+            <typeparam name="T1">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T2">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T3">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T4">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T5">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T6">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T7">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T8">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T9">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T10">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T11">class/struct which members gets inlined.</typeparam>
+            <typeparam name="T12">class/struct which members gets inlined.</typeparam>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineMethodAttribute">
+            <summary>
+            The Method under this attribute will be inlined in the method given by <see cref="P:InlineCompositionAttributes.InlineMethodAttribute.MethodName"/>.
+            </summary>
+        </member>
+        <member name="P:InlineCompositionAttributes.InlineMethodAttribute.MethodName">
+            <summary>
+            The method name as string literal.
+            </summary>
+        </member>
+        <member name="P:InlineCompositionAttributes.InlineMethodAttribute.Modifiers">
+            <summary>
+            <para>Modifiers e.g. "public static extern", "protected abstract"</para>
+            <para>If null, the method modifiers will be taken.</para>
+            </summary>
+        </member>
+        <member name="P:InlineCompositionAttributes.InlineMethodAttribute.First">
+            <summary>
+            Indicates whether this method gets inlined before the other methods or after.
+            </summary>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineConstructorAttribute">
+            <summary>
+            The Method under this attribute will be inlined in the constructor.
+            </summary>
+        </member>
+        <member name="P:InlineCompositionAttributes.InlineConstructorAttribute.Modifiers">
+            <summary>
+            <para>Modifiers e.g. "public", "protected", "private"</para>
+            <para>If null, the method modifiers will be taken.</para>
+            </summary>
+        </member>
+        <member name="P:InlineCompositionAttributes.InlineConstructorAttribute.First">
+            <summary>
+            Indicates whether this method gets inlined before the other constructors or after.
+            </summary>
+        </member>
+        <member name="T:InlineCompositionAttributes.InlineFinalizerAttribute">
+            <summary>
+            The Method under this attribute will be inlined in the finalizer.
+            </summary>
+        </member>
+        <member name="P:InlineCompositionAttributes.InlineFinalizerAttribute.First">
+            <summary>
+            Indicates whether this method gets inlined before the other finalizers or after.
             </summary>
         </member>
     </members>
