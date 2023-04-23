@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 20 20">
     <defs>
         <clipPath id="3quarter">
-            <rect x="-10" y="-10" width="20" height="9" />
+            <rect x="-10" y="-10" width="20" height="11" />
             <rect x="-10" y="-10" width="10" height="20" />
         </clipPath>
         
