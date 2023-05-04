@@ -9,15 +9,8 @@
             @Head
         </CascadingValue>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" class="nav-dropdown-arrow @(Expanded ? "expanded" : string.Empty)" role="button" @onclick="Toggle">
-            <defs>
-                <linearGradient id="border-color" gradientTransform="rotate(45)">
-                    <stop offset="0.4" stop-color="#EEEEEE" />
-                    <stop offset="0.6" stop-color="#9F9F9F" />
-                </linearGradient>
-            </defs>
             <polygon fill="%23000B" points="0,0 5,10 10,0 5,3" />
             <circle cx="5" cy="5" r="3.8" />
-            <circle cx="5" cy="5" r="4.3" style="stroke: url('#border-color'); stroke-width: 0.2px;"></circle>
             <line x1="3.3" y1="4.3" x2="5" y2="6" />
             <line x1="6.7" y1="4.3" x2="5" y2="6" />
         </svg>
