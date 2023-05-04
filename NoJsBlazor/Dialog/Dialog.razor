@@ -1,4 +1,6 @@
-﻿@namespace NoJsBlazor
+﻿@using Microsoft.AspNetCore.Components.Web
+
+@namespace NoJsBlazor
 
 @if (Active) {
     <div class="dialog-modal-background" style="@(!ModalScreen ? "background: #0000; pointer-events: none;" : string.Empty)"
