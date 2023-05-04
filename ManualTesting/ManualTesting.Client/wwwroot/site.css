@@ -14,6 +14,12 @@ body {
   background: #EEE;
 }
 
+a:hover {
+  color: #fff !important;
+  text-shadow: 0 0 5px #000;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
 #root {
   position: relative;
   min-height: 100vh;
