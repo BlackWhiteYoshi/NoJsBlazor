@@ -1,8 +1,7 @@
 ﻿.collapse-div {
     --color: #DDE;
-    --transition-max-height: 300px;
+    --height-transition-time: 300ms;
     
-
     padding: 10px 20px;
     border-radius: 10px;
     background-color: var(--color);
@@ -19,20 +18,24 @@
     }
 
 
-    & > .content {
-        overflow: hidden;
-        transition: max-height 0.3s linear;
+    & > .content-grid {
+        display: grid;
+        transition: all var(--height-transition-time) ease-out;
+
+        & > .content-inner {
+            overflow: hidden;
+        }
     }
 
-    &.collapseable > .content {
-        max-height: var(--transition-max-height);
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-
-    &.collapsed > .content {
-        max-height: 0;
+    &.collapsed > .content-grid {
+        grid-template-rows: 0.0000000001fr; // minifier removes 'fr' when 0 and therefore breaks transition
         padding-top: 0;
         padding-bottom: 0;
+    }
+
+    &.collapseable > .content-grid {
+        grid-template-rows: 1fr;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 }

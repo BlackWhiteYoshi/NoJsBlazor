@@ -140,7 +140,7 @@
 
 .collapse-div {
   --color: #DDE;
-  --transition-max-height: 300px;
+  --height-transition-time: 300ms;
   padding: 10px 20px;
   border-radius: 10px;
   background-color: var(--color);
@@ -155,19 +155,22 @@
   align-items: center;
   gap: 5px;
 }
-.collapse-div > .content {
+.collapse-div > .content-grid {
+  display: grid;
+  transition: all var(--height-transition-time) ease-out;
+}
+.collapse-div > .content-grid > .content-inner {
   overflow: hidden;
-  transition: max-height 0.3s linear;
 }
-.collapse-div.collapseable > .content {
-  max-height: var(--transition-max-height);
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.collapse-div.collapsed > .content {
-  max-height: 0;
+.collapse-div.collapsed > .content-grid {
+  grid-template-rows: 0.0000000001fr;
   padding-top: 0;
   padding-bottom: 0;
+}
+.collapse-div.collapseable > .content-grid {
+  grid-template-rows: 1fr;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .collapse-div {

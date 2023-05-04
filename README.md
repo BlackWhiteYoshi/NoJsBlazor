@@ -162,10 +162,10 @@ A container that content can be collapsed.
 
 ### CSS Variables
 
-| **Name**                | **Default Value** |
-| ----------------------- | ----------------- |
-| --color                 | #DDE              |
-| --transition-max-height | 300px             |
+| **Name**                 | **Default Value** |
+| ------------------------ | ----------------- |
+| --color                  | #DDE              |
+| --height-transition-time | 300ms             |
 
 **Note**: The outer div changes it's css-class depending on expanding state: *collapsed* or *collapseable*.  
 
