@@ -9,20 +9,22 @@
  *          ...
  *          nav-dropdown-arrow
  *        nav-dropdown
- *          nav-element
- *            nav-div
- *              ...
- *              nav-dropdown-arrow
- *            nav-dropdown
- *                nav-element
- *                  ...
+ *          nav-dropdown-list
+ *            nav-element
+ *              nav-div
+ *                ...
+ *                nav-dropdown-arrow
+ *              nav-dropdown
+ *                nav-dropdown-list
+ *                  nav-element
+ *                    ...
  **/
 
 
 @mixin nav-content($breakpoint) {
     --phone-menu-max-width: 330px;
     --phone-menu-max-height: calc(100vh - 100px);
-    --phone-nav-dropdown-transition-max-height: 500px;
+    --phone-nav-dropdown-transition-time: 300ms;
 
     --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
     --font-color: #000;
@@ -75,7 +77,6 @@
 
     .nav-element {
         position: relative;
-        height: 100%;
         padding: 0 $desktop-dropdown-padding;
         display: flex;
         flex-direction: column;
@@ -97,20 +98,23 @@
     .nav-dropdown {
         position: absolute;
         top: 100%;
-        margin: 0;
-        padding: $desktop-dropdown-padding 0;
-        display: flex;
-        flex-direction: column;
-        background-image: var(--background-image);
-        z-index: 900;
-        border-radius: 5px;
         rotate: x 90deg;
+        z-index: 900;
         transition: rotate 0.2s;
 
         .nav-dropdown {
             top: -$desktop-dropdown-padding;
             left: 100%;
         }
+    }
+
+    .nav-dropdown-list {
+        margin: 0;
+        padding: $desktop-dropdown-padding 0;
+        display: flex;
+        flex-direction: column;
+        background-image: var(--background-image);
+        border-radius: 5px;
     }
 
     .nav-a {
@@ -154,7 +158,7 @@
     }
 
     // desktop view little right arrow at submenus
-    .nav-dropdown {
+    .nav-dropdown-list {
         .nav-dropdown-arrow {
             width: var(--arrow-right-size);
             height: auto;
@@ -221,26 +225,33 @@
 
         .nav-dropdown {
             position: static;
+            rotate: none;
+            display: grid;
+            grid-template-rows: 0.0000000001fr;
+            transition: grid-template-rows var(--phone-nav-dropdown-transition-time) ease-out;
+
+            &.expanded {
+                grid-template-rows: 1fr;
+
+                .nav-dropdown-list {
+                    padding: 3px 0;
+                }
+            }
+        }
+        
+        .nav-dropdown-list {
             padding: 0;
             margin-left: 10px;
             display: flex;
-            rotate: none;
             overflow: hidden;
-            max-height: 0;
-            transition: max-height linear 0.3s;
-
-            &.expanded {
-                padding: 3px 0;
-                max-height: var(--phone-nav-dropdown-transition-max-height);
-            }
         }
     
 
         // round circle dropdown icon
         .nav-dropdown-arrow,
-        .nav-dropdown .nav-dropdown-arrow,
+        .nav-dropdown-list .nav-dropdown-arrow,
         .nav-element:hover > .nav-div > .nav-dropdown-arrow,
-        .nav-dropdown .nav-element:hover > .nav-div > .nav-dropdown-arrow {
+        .nav-dropdown-list .nav-element:hover > .nav-div > .nav-dropdown-arrow {
             width: var(--arrow-phone-size);
             height: auto;
             margin: 0;
