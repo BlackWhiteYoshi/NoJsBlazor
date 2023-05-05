@@ -189,13 +189,25 @@
                 stroke-linecap: round;
             }
 
-            &:hover:not(.expanded) {
+            & > .cross {
+                display: none;
+            }
+
+            &:hover {
                 box-shadow: var(--phone-hover-shadow);
                 transition: box-shadow 0.3s;
             }
             
             &.expanded {
                 border: 2px inset #EEE;
+
+                & > .bar {
+                    display: none;
+                }
+
+                & > .cross {
+                    display: unset;
+                }
             }
         }
 
