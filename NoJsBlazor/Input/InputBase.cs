@@ -3,7 +3,7 @@
 namespace NoJsBlazor;
 
 [InlineBase]
-public abstract class InputBase {
+internal abstract class InputBase {
     [NoInline]
     public string? Value { get; set; }
 
