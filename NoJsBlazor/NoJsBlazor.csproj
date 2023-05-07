@@ -23,7 +23,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <Version>3.2.1</Version>
+    <Version>3.2.2</Version>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
 
@@ -38,13 +38,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Using Include="System.Diagnostics.CodeAnalysis" />
     <Using Include="Microsoft.AspNetCore.Components" />
     <Using Include="Microsoft.AspNetCore.Components.Rendering" />
     <Using Include="Microsoft.AspNetCore.Components.Forms" />
     <Using Include="Microsoft.AspNetCore.Components.Routing" />
     <Using Include="Microsoft.AspNetCore.Components.Web" />
-    <Using Include="Microsoft.JSInterop" />
   </ItemGroup>
 
   <ItemGroup>
