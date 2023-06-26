@@ -277,7 +277,7 @@
 }
 
 .dialog-modal-background {
-  --modal-screen-background-color: rgba(255, 255, 255, 0.8);
+  --modal-screen-background-color: #FFFC;
   --window-border-radius: 20px;
   --title-background-color: #FFF;
   --content-background-color: #EEE;
@@ -5495,6 +5495,7 @@
   --diameter: 200px;
   --border-color: #444;
   --middle-circle-color: #0006;
+  --text-color: #222;
   --small-tick-width: 1;
   --small-tick-color: #333;
   --big-tick-width: 4;
@@ -5546,6 +5547,7 @@
 }
 .speedometer-progress-bar > svg > text {
   font-size: 13.8px;
+  fill: var(--text-color);
 }
 .speedometer-progress-bar > p {
   margin-top: 0.15em;
