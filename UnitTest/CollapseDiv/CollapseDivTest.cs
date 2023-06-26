@@ -26,7 +26,7 @@ public sealed class CollapseDivTest : TestContext {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.Content, TEST_HTML);
         });
 
-        IElement contentDiv = collapseDivContainer.Find(".content");
+        IElement contentDiv = collapseDivContainer.Find(".content-inner");
 
         Assert.Equal(TEST_HTML, contentDiv.InnerHtml);
     }
