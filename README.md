@@ -716,6 +716,7 @@ An animation that shows speedometer where the hand is increasing with progress.
 | --middle-circle-color    | #0006             |
 | --small-tick-width       | 1                 |
 | --small-tick-color       | #333              |
+| --text-color             | #222              |
 | --big-tick-width         | 4                 |
 | --big-tick-color         | #222              |
 | --meter-length           | 87.5              |
