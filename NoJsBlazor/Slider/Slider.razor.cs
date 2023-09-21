@@ -58,6 +58,13 @@ public sealed partial class Slider<Type> : ComponentBase where Type : struct, IN
     public Type Step { get; set; } = Type.One;
 
     /// <summary>
+    /// <para>Enables or disables the controls (left-button, right-button, slider-thumb).</para>
+    /// <para>Default is true.</para>
+    /// </summary>
+    [Parameter]
+    public bool Enabled { get; set; } = true;
+
+    /// <summary>
     /// <para>Indicates if the user is able to edit the number directly.</para>
     /// <para>Technically the number is displayed in a input field instead of a label.</para>
     /// <para>Dafault is false.</para>

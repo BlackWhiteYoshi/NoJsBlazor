@@ -5568,6 +5568,7 @@
   --slider-thumb-color: #07F;
   --slider-thumb-width: 16px;
   --slider-thumb-height: 16px;
+  --slider-thumb-disabled-color: var(--button-disabled-color);
   display: inline-block;
   width: 100px;
   margin: 10px;
@@ -5637,7 +5638,7 @@
   opacity: 0.7;
   transition: opacity 0.3s;
 }
-.slider > input[type=range]:hover {
+.slider > input[type=range]:enabled:hover {
   opacity: 1;
 }
 .slider > input[type=range]:focus {
@@ -5671,4 +5672,12 @@
   border: none;
   background: var(--slider-thumb-color);
   cursor: pointer;
+}
+.slider > input[type=range]:disabled::-webkit-slider-thumb {
+  background: var(--slider-thumb-disabled-color);
+  cursor: default;
+}
+.slider > input[type=range]:disabled::-moz-range-thumb {
+  background: var(--slider-thumb-disabled-color);
+  cursor: default;
 }

@@ -12,6 +12,7 @@
     --slider-thumb-color: #07F;
     --slider-thumb-width: 16px;
     --slider-thumb-height: 16px;
+    --slider-thumb-disabled-color: var(--button-disabled-color);
 
 
     display: inline-block;
@@ -97,7 +98,7 @@
         opacity: 0.7;
         transition: opacity 0.3s;
 
-        &:hover {
+        &:enabled:hover {
             opacity: 1;
         }
 
@@ -140,6 +141,20 @@
 
         &::-moz-range-thumb {
             @include thumb;
+        }
+
+
+        @mixin disabled-thumb {
+            background: var(--slider-thumb-disabled-color);
+            cursor: default;
+        }
+
+        &:disabled::-webkit-slider-thumb {
+            @include disabled-thumb;
+        }
+
+        &:disabled::-moz-range-thumb {
+            @include disabled-thumb;
         }
     }
 }

@@ -773,6 +773,7 @@ An object that holds a ranged input together with a decrease and increase button
         Min="0"
         Max="10"
         Step="1"
+        Enabled="true"
         Editable="false"
         Display="(int value) => value.ToString() ?? string.Empty"
         ParseEdit="(string? input) => int.TryParse(input, CultureInfo.CurrentCulture, out int result) ? Math.Clamp(result, 0, 10) : null">
@@ -796,21 +797,22 @@ An object that holds a ranged input together with a decrease and increase button
 
 ### CSS Variables
 
-| **Name**                        | **Default Value** |
-| ------------------------------- | ----------------- |
-| --button-background-color       | #0D6EFD           |
-| --button-border-color           | #EEE              |
-| --button-stroke-color           | #FFF              |
-| --button-background-color-hover | #0B5ED7           |
-| --button-border-color-hover     | #0A58CA           |
-| --button-box-shadow-color-hover | #0A58CA           |
-| --button-disabled-color         | #8AF              |
-| --slider-track-color            | #5FF              |
-| --slider-track-height           | 6px               |
-| --slider-track-boder-radius     | 3px               |
-| --slider-thumb-color            | #07F              |
-| --slider-thumb-width            | 16px              |
-| --slider-thumb-height           | 16px              |
+| **Name**                        | **Default Value**            |
+| ------------------------------- | ---------------------------- |
+| --button-background-color       | #0D6EFD                      |
+| --button-border-color           | #EEE                         |
+| --button-stroke-color           | #FFF                         |
+| --button-background-color-hover | #0B5ED7                      |
+| --button-border-color-hover     | #0A58CA                      |
+| --button-box-shadow-color-hover | #0A58CA                      |
+| --button-disabled-color         | #8AF                         |
+| --slider-track-color            | #5FF                         |
+| --slider-track-height           | 6px                          |
+| --slider-track-boder-radius     | 3px                          |
+| --slider-thumb-color            | #07F                         |
+| --slider-thumb-width            | 16px                         |
+| --slider-thumb-height           | 16px                         |
+| --slider-thumb-disabled-color   | var(--button-disabled-color) |
 
 
 ### Type Parameters
@@ -831,6 +833,7 @@ An object that holds a ranged input together with a decrease and increase button
 | Min                | Type                        | Type.Zero                     | Slider lower bounds                                                                                                                                                                                              |
 | Max                | Type                        | Type.One + … + Type.One (×10) | Slider upper bounds                                                                                                                                                                                              |
 | Step               | Type                        | Type.One                      | Slider precision                                                                                                                                                                                                 |
+| Enabled            | bool                        | true                          | Enables or disables the controls (left-button, right-button, slider-thumb).
 | Editable           | bool                        | false                         | Indicates if the user is able to edit the number directly. Technically the number is displayed in a input field instead of a label.                                                                              |
 | LeftButtonContent  | RenderFragment              | DefaultLeftButton (🡸)        | Content inside the left Button.                                                                                                                                                                                  |
 | RightButtonContent | RenderFragment              | DefaultRightButton (🡺)       | Content inside the right Button.                                                                                                                                                                                 |

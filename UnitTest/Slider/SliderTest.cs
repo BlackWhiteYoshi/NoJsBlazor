@@ -80,6 +80,22 @@ public sealed class SliderTest : TestContext {
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
+    public void Enable_Stes_DisabledAttribute(bool enabled) {
+        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+            builder.Add((Slider<int> slider) => slider.Enabled, enabled);
+        });
+
+        IElement slider = sliderContainer.Find("input");
+        IAttr? disabled = slider.Attributes["disabled"];
+        if (enabled)
+            Assert.Null(disabled);
+        else
+            Assert.NotNull(disabled);
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
     public void Editable_Renderes_InputField(bool editable) {
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Editable, editable);

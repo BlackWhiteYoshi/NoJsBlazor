@@ -8,16 +8,16 @@
         <label>@Title</label>
     }
     <div class="slider-buttons">
-        <button disabled="@(Value <= Min)" @onclick="OnLeftButton">@LeftButtonContent</button>
+        <button disabled="@(Value <= Min || !Enabled)" @onclick="OnLeftButton">@LeftButtonContent</button>
         @if (!Editable) {
             <label>@Display(Value)</label>
         }
         else {
             <input value="@Display(Value)" @onchange="OnChangeEditField" />
         }
-        <button disabled="@(Value >= Max)" @onclick="OnRightButton">@RightButtonContent</button>
+        <button disabled="@(Value >= Max || !Enabled)" @onclick="OnRightButton">@RightButtonContent</button>
     </div>
-    <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnInputSlider" @onchange="OnChangeSlider" />
+    <input type="range" disabled="@(!Enabled)" min="@Min" max="@Max" step="@Step" value="@Value" @oninput="OnInputSlider" @onchange="OnChangeSlider" />
 </div>
 
 @code {
