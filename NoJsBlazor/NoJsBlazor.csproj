@@ -23,7 +23,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <Version>3.2.3</Version>
+    <Version>3.2.4</Version>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
 

@@ -872,6 +872,12 @@
             <para>Default is 1.</para>
             </summary>
         </member>
+        <member name="P:NoJsBlazor.Slider`1.Enabled">
+            <summary>
+            <para>Enables or disables the controls (left-button, right-button, slider-thumb).</para>
+            <para>Default is true.</para>
+            </summary>
+        </member>
         <member name="P:NoJsBlazor.Slider`1.Editable">
             <summary>
             <para>Indicates if the user is able to edit the number directly.</para>
