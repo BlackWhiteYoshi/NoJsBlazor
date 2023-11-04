@@ -24,12 +24,12 @@
 
         <link rel="stylesheet" href="~/_content/NoJsBlazor/style.min.css" />
         <link rel="stylesheet" href="~/site.css" />
+        
+        <script src="~/site.js" defer></script>
+        <script src="~/_framework/blazor.webassembly.js" defer></script>
     </head>
 
     <body>
         <component type="typeof(IRoot)" render-mode="WebAssemblyPrerendered" />
-        
-        <script src="~/_framework/blazor.webassembly.js"></script>
-        <script src="~/site.js"></script>
     </body>
 </html>
