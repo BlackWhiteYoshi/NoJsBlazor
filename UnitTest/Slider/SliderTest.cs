@@ -109,10 +109,9 @@ public sealed class SliderTest : TestContext {
     [Fact]
     public void LeftButtonContent_Is_Rendered_Inside_LeftButton() {
         const string TEST_TEXT = "Test Text";
-        RenderFragment renderFragment = (RenderTreeBuilder builder) => builder.AddContent(0, TEST_TEXT);
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
-            builder.Add((Slider<int> slider) => slider.LeftButtonContent, renderFragment);
+            builder.Add((Slider<int> slider) => slider.LeftButtonContent, (RenderTreeBuilder builder) => builder.AddContent(0, TEST_TEXT));
         });
 
         IElement button = sliderContainer.Find("button");
@@ -122,10 +121,9 @@ public sealed class SliderTest : TestContext {
     [Fact]
     public void RightButtonContent_Is_Rendered_Inside_RightButton() {
         const string TEST_TEXT = "Test Text";
-        RenderFragment renderFragment = (RenderTreeBuilder builder) => builder.AddContent(0, TEST_TEXT);
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
-            builder.Add((Slider<int> slider) => slider.RightButtonContent, renderFragment);
+            builder.Add((Slider<int> slider) => slider.RightButtonContent, (RenderTreeBuilder builder) => builder.AddContent(0, TEST_TEXT));
         });
 
         IElement button = sliderContainer.FindAll("button")[1];

@@ -6,12 +6,16 @@ namespace ManualTesting.Client;
 public static class Program {
     public static Task Main(string[] args) {
         WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
-        ConfigureServices(builder.Services);
-        return builder.Build().RunAsync();
-    }
+        bool isDevelopmentEnvironment = builder.HostEnvironment.IsDevelopment();
 
-    private static void ConfigureServices(IServiceCollection services) {
-        services.AddSingleton<PreRendering>(() => false);
-        services.AddCoreServices();
+        // configure Services
+        {
+            IServiceCollection services = builder.Services;
+
+            services.AddSingleton<PreRendering>(() => false);
+            services.AddCoreServices();
+        }
+
+        return builder.Build().RunAsync();
     }
 }

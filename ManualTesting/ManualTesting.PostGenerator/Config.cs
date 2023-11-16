@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Nodes;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Nodes;
 
 namespace ManualTesting.PostGenerator;
 
@@ -29,61 +30,59 @@ file static class JsonNodeExtension {
 }
 
 public sealed class Config {
-    public string WorkingDirectory { get; init; } = string.Empty;
-    public string WorkingDirectoryWithTrailingSlash { get; init; } = string.Empty;
-    public string PageFolderPath { get; init; } = string.Empty;
-    public string PageFolderPathWithTrailingSlash { get; init; } = string.Empty;
+    public required string WorkingDirectory { get; init; }
+    public required string WorkingDirectoryWithTrailingSlash { get; init; }
+    public required string PageFolderPath { get; init; }
+    public required string PageFolderPathWithTrailingSlash { get; init; }
 
-    public string SiteUrl { get; init; } = string.Empty;
+    public required string SiteUrl { get; init; }
 
-    public bool GenerateHtmlPages { get; init; } = false;
+    public required bool GenerateHtmlPages { get; init; }
 
-    public bool CreateRobotsTxt { get; init; } = false;
+    public required bool CreateRobotsTxt { get; init; }
 
-    public bool CreateSitemapXml { get; init; } = false;
+    public required bool CreateSitemapXml { get; init; }
 
-    public bool RemoveFiles { get; init; } = false;
-    public (string[] folders, string[] files) RemoveFileList { get; init; } = (Array.Empty<string>(), Array.Empty<string>());
+    public required bool RemoveFiles { get; init; }
+    public required (string[] folders, string[] files) RemoveFileList { get; init; }
 
-    public bool MinifyCssJs { get; init; } = false;
-    public (string[] startsWith, string[] endsWith) MinifyExcludeList { get; init; } = (Array.Empty<string>(), Array.Empty<string>());
+    public required bool MinifyCssJs { get; init; }
+    public required (string[] startsWith, string[] endsWith) MinifyExcludeList { get; init; }
 
-    public bool ZipFiles { get; init; } = false;
-    public (string[] startsWith, string[] endsWith) ZipExcludeList { get; init; } = (Array.Empty<string>(), Array.Empty<string>());
+    public required bool ZipFiles { get; init; }
+    public required (string[] startsWith, string[] endsWith) ZipExcludeList { get; init; }
 
 
-    public static Config FromJson(string json) {
+    public Config() { }
+
+    [SetsRequiredMembers]
+    public Config(string json) {
         JsonNode root = JsonNode.Parse(json) ?? throw new Exception($"json is not in a valid format:\n{json}");
         
-        string workingDirectory = root.GetString("working directory");
-        if (!Directory.Exists(workingDirectory))
-            throw new InvalidDataException($"working directory does not exist:\n{Path.Combine(Directory.GetCurrentDirectory(), workingDirectory)}");
+        WorkingDirectory = root.GetString("working directory");
+        if (!Directory.Exists(WorkingDirectory))
+            throw new InvalidDataException($"working directory does not exist:\n{Path.Combine(Directory.GetCurrentDirectory(), WorkingDirectory)}");
+        WorkingDirectoryWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}";
         
         string relativePageFolderPath = root.Get("generate html pages").GetString("page folder");
+        PageFolderPath = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}";
+        PageFolderPathWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}{Path.DirectorySeparatorChar}";
 
+        SiteUrl = root.GetString("site url");
 
-        return new Config() {
-            WorkingDirectory = workingDirectory,
-            WorkingDirectoryWithTrailingSlash = $"{workingDirectory}{Path.DirectorySeparatorChar}",
-            PageFolderPath = $"{workingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}",
-            PageFolderPathWithTrailingSlash = $"{workingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}{Path.DirectorySeparatorChar}",
+        GenerateHtmlPages = root.Get("generate html pages").GetBool("enabled");
 
-            SiteUrl = root.GetString("site url"),
+        CreateRobotsTxt = root.GetBool("create robots.txt");
 
-            GenerateHtmlPages = root.Get("generate html pages").GetBool("enabled"),
+        CreateSitemapXml = root.GetBool("create sitemap.xml");
 
-            CreateRobotsTxt = root.GetBool("create robots.txt"),
+        RemoveFiles = root.Get("remove files").GetBool("enabled");
+        RemoveFileList = (root.Get("remove files").Get("folder list").AsStringArray(), root.Get("remove files").Get("file list").AsStringArray());
 
-            CreateSitemapXml = root.GetBool("create sitemap.xml"),
+        MinifyCssJs = root.Get("minify css/js").GetBool("enabled");
+        MinifyExcludeList = (root.Get("minify css/js").Get("exclude list startsWith").AsStringArray(), root.Get("minify css/js").Get("exclude list endsWith").AsStringArray());
 
-            RemoveFiles = root.Get("remove files").GetBool("enabled"),
-            RemoveFileList = (root.Get("remove files").Get("folder list").AsStringArray(), root.Get("remove files").Get("file list").AsStringArray()),
-
-            MinifyCssJs = root.Get("minify css/js").GetBool("enabled"),
-            MinifyExcludeList = (root.Get("minify css/js").Get("exclude list startsWith").AsStringArray(), root.Get("minify css/js").Get("exclude list endsWith").AsStringArray()),
-
-            ZipFiles = root.Get("zip files").GetBool("enabled"),
-            ZipExcludeList = (root.Get("zip files").Get("exclude list startsWith").AsStringArray(), root.Get("zip files").Get("exclude list endsWith").AsStringArray())
-        };
+        ZipFiles = root.Get("zip files").GetBool("enabled");
+        ZipExcludeList = (root.Get("zip files").Get("exclude list startsWith").AsStringArray(), root.Get("zip files").Get("exclude list endsWith").AsStringArray());
     }
 }

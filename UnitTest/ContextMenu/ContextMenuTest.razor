@@ -3,9 +3,9 @@
 
 @code {
     private (IRenderedFragment, ContextMenu, ContextSubMenu, ContextMenuItem) RenderContextMenuTree() {
-        ContextMenu? contextMenu = null;
-        ContextSubMenu? contextSubMenu = null;
-        ContextMenuItem? contextMenuItem = null;
+        ContextMenu contextMenu = null!;
+        ContextSubMenu contextSubMenu = null!;
+        ContextMenuItem contextMenuItem = null!;
 
         IRenderedFragment fragment = Render(
             @<ContextMenu @ref="contextMenu">
@@ -22,7 +22,7 @@
             </ContextMenu>
             );
 
-        return (fragment, contextMenu!, contextSubMenu!, contextMenuItem!);
+        return (fragment, contextMenu, contextSubMenu, contextMenuItem);
     }
 
     private void FourContextSubMenuItems(RenderTreeBuilder __builder) {

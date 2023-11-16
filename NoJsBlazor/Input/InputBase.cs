@@ -77,10 +77,12 @@ internal abstract class InputBase {
     public IDictionary<string, object>? InputAttributes { get; set; }
 
 
+    // memeber is used for SourceGenerator InlineComposition
     private void OnFieldInput(ChangeEventArgs e) {
         Value = (string?)e.Value;
         ValueChanged.InvokeAsync(Value);
     }
 
+    // memeber is used for SourceGenerator InlineComposition
     private void OnFieldChange(ChangeEventArgs e) => OnChange.InvokeAsync((string?)e.Value);
 }

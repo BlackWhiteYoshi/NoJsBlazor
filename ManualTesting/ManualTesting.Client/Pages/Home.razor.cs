@@ -4,7 +4,7 @@ namespace ManualTesting.Client;
 
 public sealed partial class Home : ComponentBase, IDisposable {
     [Inject]
-    public required IRoot Root { private get; init; }
+    public required IApp Root { private get; init; }
 
     [Inject]
     public required IJSRuntime JsRuntime { private get; init; }

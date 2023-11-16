@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+﻿using System.Runtime.CompilerServices;
 
 namespace ManualTesting.Client.Services;
 
@@ -9,14 +9,16 @@ namespace ManualTesting.Client.Services;
 /// - provide Property <see cref="HasRenderHandle"/>
 /// </summary>
 public abstract class ServiceComponentBase : ComponentBase, IComponent, IDisposable {
-    private static readonly FieldInfo renderHandleField = typeof(ComponentBase).GetField("_renderHandle", BindingFlags.NonPublic | BindingFlags.Instance) ?? throw new Exception($"""field "_renderHandle" in {nameof(ComponentBase)} got renamed""");
+    [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_renderHandle")]
+    private extern static ref RenderHandle GetRenderHandle(ComponentBase @this);
+
     private RenderHandle RenderHandle {
-        get => (RenderHandle)renderHandleField.GetValue(this)!;
-        set => renderHandleField.SetValue(this, value);
+        get => GetRenderHandle(this);
+        set => GetRenderHandle(this) = value;
     }
 
-    protected bool HasRenderHandle => RenderHandle.IsInitialized;
 
+    protected bool HasRenderHandle => RenderHandle.IsInitialized;
 
     void IComponent.Attach(RenderHandle renderHandle) => RenderHandle = renderHandle;
 

@@ -38,9 +38,9 @@
     }
 
     private (IRenderedFragment fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarTree() {
-        NavBar? navBar = null;
-        NavBarMenu? navBarMenu = null;
-        NavBarItem? navBarItem = null;
+        NavBar navBar = null!;
+        NavBarMenu navBarMenu = null!;
+        NavBarItem navBarItem = null!;
 
         IRenderedFragment fragment = Render(
             @<NavBar @ref="navBar">
@@ -57,6 +57,6 @@
             </NavBar>
             );
 
-        return (fragment, navBar!, navBarMenu!, navBarItem!);
+        return (fragment, navBar, navBarMenu, navBarItem);
     }
 }

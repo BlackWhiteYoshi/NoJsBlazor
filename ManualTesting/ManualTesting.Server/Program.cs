@@ -1,38 +1,44 @@
 ﻿using ManualTesting.Client.Services;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ManualTesting.Server;
 
 public static class Program {
-    public interface IAssemblyMarker { }
+    public interface IAssemblyMarker;
 
 
-    public static void Main(string[] args) {
+    public static Task Main(string[] args) {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-        ConfigureServices(builder.Services);
-        WebApplication app = builder.Build();
-
-        ConfigurePipeline(app);
-        app.Run();
-    }
+        bool isDevelopmentEnvironment = builder.Environment.IsDevelopment();
 
 
-    private static void ConfigureServices(IServiceCollection services) {
-        services.AddRazorPages((RazorPagesOptions options) => options.RootDirectory = "/");
-        
-        services.AddSingleton<PreRendering>(() => true);
-        services.AddCoreServices();
-    }
+        // configure Services
+        {
+            IServiceCollection services = builder.Services;
 
-    private static void ConfigurePipeline(WebApplication app) {
-        if (app.Environment.IsDevelopment()) {
-            app.UseDeveloperExceptionPage();
-            app.UseWebAssemblyDebugging();
+            builder.Services.AddRazorComponents()
+                .AddInteractiveWebAssemblyComponents();
+
+            services.AddSingleton<PreRendering>(() => true);
+            services.AddCoreServices();
         }
 
-        app.UseBlazorFrameworkFiles();
-        app.UseStaticFiles();
-        app.MapFallbackToPage("/_Host");
+        WebApplication app = builder.Build();
+
+        // configure Pipeline
+        {
+            if (isDevelopmentEnvironment) {
+                app.UseDeveloperExceptionPage();
+                app.UseWebAssemblyDebugging();
+            }
+
+            app.UseStaticFiles();
+            app.UseAntiforgery();
+
+            app.MapRazorComponents<Root>().AddAdditionalAssemblies(typeof(Client.App).Assembly)
+                .AddInteractiveWebAssemblyRenderMode();
+        }
+
+
+        return app.RunAsync();
     }
 }

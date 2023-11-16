@@ -1,5 +1,5 @@
 ﻿namespace ManualTesting.Client;
 
-public interface IRoot : IComponent {
+public interface IApp : IComponent {
     public event Action<MouseEventArgs>? Click;
 }

@@ -3,9 +3,9 @@
 
 @code {
     private (IRenderedFragment fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarTree(MarkupString headHtml) {
-        NavBar? navBar = null;
-        NavBarMenu? navBarMenu = null;
-        NavBarItem? navBarItem = null;
+        NavBar navBar = null!;
+        NavBarMenu navBarMenu = null!;
+        NavBarItem navBarItem = null!;
 
         IRenderedFragment fragment = Render(
             @<NavBar @ref="navBar">
@@ -22,13 +22,13 @@
             </NavBar>
             );
 
-        return (fragment, navBar!, navBarMenu!, navBarItem!);
+        return (fragment, navBar, navBarMenu, navBarItem);
     }
 
     private (IRenderedFragment fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarWithCallback(Action<bool> eventCallback) {
-        NavBar? navBar = null;
-        NavBarMenu? navBarMenu = null;
-        NavBarItem? navBarItem = null;
+        NavBar navBar = null!;
+        NavBarMenu navBarMenu = null!;
+        NavBarItem navBarItem = null!;
 
         IRenderedFragment fragment = Render(
             @<NavBar @ref="navBar">
@@ -45,6 +45,6 @@
             </NavBar>
             );
 
-        return (fragment, navBar!, navBarMenu!, navBarItem!);
+        return (fragment, navBar, navBarMenu, navBarItem);
     }
 }

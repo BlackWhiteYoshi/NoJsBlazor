@@ -9,7 +9,7 @@
 
     private (IRenderedFragment, EditFormInput) RenderTitle(string title) {
         TestModel testModel = new TestModel();
-        EditFormInput? editFormInput = null;
+        EditFormInput editFormInput = null!;
 
         IRenderedFragment fragment = Render(
             @<EditForm Model="testModel">
@@ -17,12 +17,12 @@
             </EditForm>
             );
 
-        return (fragment, editFormInput!);
+        return (fragment, editFormInput);
     }
 
     private (IRenderedFragment, EditFormInput) RenderLabel(string label) {
         TestModel testModel = new TestModel();
-        EditFormInput? editFormInput = null;
+        EditFormInput editFormInput = null!;
 
         IRenderedFragment fragment = Render(
             @<EditForm Model="testModel">
@@ -30,12 +30,12 @@
             </EditForm>
             );
 
-        return (fragment, editFormInput!);
+        return (fragment, editFormInput);
     }
 
     private (IRenderedFragment, EditFormInput) RenderType(string type) {
         TestModel testModel = new TestModel();
-        EditFormInput? editFormInput = null;
+        EditFormInput editFormInput = null!;
 
         IRenderedFragment fragment = Render(
             @<EditForm Model="testModel">
@@ -43,12 +43,12 @@
             </EditForm>
             );
 
-        return (fragment, editFormInput!);
+        return (fragment, editFormInput);
     }
 
     private (IRenderedFragment, EditFormInput) RenderId(string id) {
         TestModel testModel = new TestModel();
-        EditFormInput? editFormInput = null;
+        EditFormInput editFormInput = null!;
 
         IRenderedFragment fragment = Render(
             @<EditForm Model="testModel">
@@ -56,12 +56,12 @@
             </EditForm>
             );
 
-        return (fragment, editFormInput!);
+        return (fragment, editFormInput);
     }
 
     private (IRenderedFragment, EditFormInput) RenderName(string name) {
         TestModel testModel = new TestModel();
-        EditFormInput? editFormInput = null;
+        EditFormInput editFormInput = null!;
 
         IRenderedFragment fragment = Render(
             @<EditForm Model="testModel">
@@ -69,12 +69,12 @@
             </EditForm>
             );
 
-        return (fragment, editFormInput!);
+        return (fragment, editFormInput);
     }
 
     private (IRenderedFragment, EditFormInput) RenderAutocomplete(bool enabled) {
         TestModel testModel = new TestModel();
-        EditFormInput? editFormInput = null;
+        EditFormInput editFormInput = null!;
 
         IRenderedFragment fragment = Render(
             @<EditForm Model="testModel">
@@ -82,13 +82,13 @@
             </EditForm>
             );
 
-        return (fragment, editFormInput!);
+        return (fragment, editFormInput);
     }
 
 
     private (IRenderedFragment, EditFormInput, TestModel) RenderStandard() {
         TestModel testModel = new TestModel();
-        EditFormInput? editFormInput = null;
+        EditFormInput editFormInput = null!;
 
         IRenderedFragment fragment = Render(
             @<EditForm Model="testModel">
@@ -96,6 +96,6 @@
             </EditForm>
             );
 
-        return (fragment, editFormInput!, testModel);
+        return (fragment, editFormInput, testModel);
     }
 }

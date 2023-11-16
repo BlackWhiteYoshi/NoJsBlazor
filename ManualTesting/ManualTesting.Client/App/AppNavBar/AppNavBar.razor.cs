@@ -2,9 +2,9 @@
 
 namespace ManualTesting.Client;
 
-public sealed partial class RootNavBar : ComponentBase {
+public sealed partial class AppNavBar : ComponentBase {
     [Inject]
-    public required IRoot Root { private get; init; }
+    public required IApp Root { private get; init; }
 
 
     [AllowNull]

@@ -11,7 +11,7 @@ public static class CoreServicesExtension {
         services.AddScoped<IComponentActivator, ComponentActivator>();
 
         // component services
-        services.AddScoped<IRoot, Root>();
+        services.AddScoped<IApp, App>();
         
         return services;
     }

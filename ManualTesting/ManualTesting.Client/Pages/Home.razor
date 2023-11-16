@@ -120,19 +120,22 @@
     <section>
         <h2 class="headline">Dialog</h2>
         <button class="btn-main center" @onclick="OpenDialog" @onclick:stopPropagation>open dialog</button>
-        <Dialog @ref="dialog" ModalScreen="false" OnTitlePointerDown="OnTitleDown" OnTitlePointerUp="OnTitleUp">
-            <Title>
-                <p style="margin: 0;">My Test Dialog</p>
-            </Title>
-            <Content>
-                <p style="margin: 0;">
-                    I am any text.<br />
-                    I have no sense.<br />
-                    Reading me doesn't do anything.
-                </p>
-                <button class="btn-main center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
-            </Content>
-        </Dialog>
+
+        <SectionContent SectionName="top-level">
+            <Dialog @ref="dialog" ModalScreen="false" OnTitlePointerDown="OnTitleDown" OnTitlePointerUp="OnTitleUp">
+                <Title>
+                    <p style="margin: 0;">My Test Dialog</p>
+                </Title>
+                <Content>
+                    <p style="margin: 0;">
+                        I am any text.<br />
+                        I have no sense.<br />
+                        Reading me doesn't do anything.
+                    </p>
+                    <button class="btn-main center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
+                </Content>
+            </Dialog>
+        </SectionContent>
     </section>
 
     <section>

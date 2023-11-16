@@ -8,13 +8,8 @@ using System.IO.Compression;
 namespace ManualTesting.PostGenerator;
 
 public static class Generator {
-    private struct Core {
-        private readonly Config config;
-        public List<string> ErrorList { get; private set; } = new();
-
-        public Core(Config config) {
-            this.config = config;
-        }
+    private struct Core(Config config) {
+        public List<string> ErrorList { get; private set; } = [];
 
 
         public async Task GenerateHtmlPages() {
@@ -75,17 +70,17 @@ public static class Generator {
         }
 
         public async Task MinifyCssJs() {
-            Config config = this.config;
+            Config configRef = config;
             string[] files = Directory.GetFiles(config.WorkingDirectory, "*", SearchOption.AllDirectories);
 
             IEnumerable<string> cssFileList = files.Where((string file) => {
-                string fileRelative = file[config.WorkingDirectoryWithTrailingSlash.Length..];
+                string fileRelative = file[configRef.WorkingDirectoryWithTrailingSlash.Length..];
 
-                foreach (string startsWith in config.MinifyExcludeList.startsWith)
+                foreach (string startsWith in configRef.MinifyExcludeList.startsWith)
                     if (fileRelative.StartsWith(startsWith))
                         return false;
 
-                foreach (string endsWith in config.MinifyExcludeList.endsWith)
+                foreach (string endsWith in configRef.MinifyExcludeList.endsWith)
                     if (fileRelative.EndsWith(endsWith))
                         return false;
 
@@ -110,13 +105,13 @@ public static class Generator {
 
 
             IEnumerable<string> jsFileList = files.Where((string file) => {
-                string fileRelative = file[config.WorkingDirectoryWithTrailingSlash.Length..];
+                string fileRelative = file[configRef.WorkingDirectoryWithTrailingSlash.Length..];
 
-                foreach (string startsWith in config.MinifyExcludeList.startsWith)
+                foreach (string startsWith in configRef.MinifyExcludeList.startsWith)
                     if (fileRelative.StartsWith(startsWith))
                         return false;
 
-                foreach (string endsWith in config.MinifyExcludeList.endsWith)
+                foreach (string endsWith in configRef.MinifyExcludeList.endsWith)
                     if (fileRelative.EndsWith(endsWith))
                         return false;
 
@@ -139,16 +134,16 @@ public static class Generator {
         }
 
         public async Task ZipFiles() {
-            Config config = this.config;
-            string[] files = Directory.GetFiles(config.WorkingDirectory, "*", SearchOption.AllDirectories);
+            Config configRef = config;
+            string[] files = Directory.GetFiles(configRef.WorkingDirectory, "*", SearchOption.AllDirectories);
             IEnumerable<string> fileList = files.Where((string file) => {
-                string fileRelative = file[config.WorkingDirectoryWithTrailingSlash.Length..];
+                string fileRelative = file[configRef.WorkingDirectoryWithTrailingSlash.Length..];
 
-                foreach (string startsWith in config.ZipExcludeList.startsWith)
+                foreach (string startsWith in configRef.ZipExcludeList.startsWith)
                     if (fileRelative.StartsWith(startsWith))
                         return false;
 
-                foreach (string endsWith in config.ZipExcludeList.endsWith)
+                foreach (string endsWith in configRef.ZipExcludeList.endsWith)
                     if (fileRelative.EndsWith(endsWith))
                         return false;
 
