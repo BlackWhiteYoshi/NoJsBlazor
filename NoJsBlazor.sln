@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoJsBlazor", "NoJsBlazor\No
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{8207BB74-AC5F-4DC7-BBB9-5A2B17B70463}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManualTesting.Server", "ManualTesting\ManualTesting.Server\ManualTesting.Server.csproj", "{B0187953-3761-4AE2-A653-4C64A11237E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManualTesting.ClientHost", "ManualTesting\ManualTesting.ClientHost\ManualTesting.ClientHost.csproj", "{B0187953-3761-4AE2-A653-4C64A11237E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualTesting.PostGenerator", "ManualTesting\ManualTesting.PostGenerator\ManualTesting.PostGenerator.csproj", "{E078D690-33C6-4D6E-AFB1-690FA0DE6DCD}"
 EndProject

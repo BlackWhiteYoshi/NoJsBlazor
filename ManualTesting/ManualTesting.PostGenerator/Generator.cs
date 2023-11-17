@@ -13,7 +13,7 @@ public static class Generator {
 
 
         public async Task GenerateHtmlPages() {
-            using WebApplicationFactory<Server.Program.IAssemblyMarker> factory = new();
+            using WebApplicationFactory<ClientHost.Program.IAssemblyMarker> factory = new();
             using HttpClient httpClient = factory.CreateClient();
             HtmlSettings htmlSettings = new() {
                 RemoveComments = false,

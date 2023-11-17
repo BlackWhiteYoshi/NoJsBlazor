@@ -1,6 +1,6 @@
 ﻿using ManualTesting.Client.Services;
 
-namespace ManualTesting.Server;
+namespace ManualTesting.ClientHost;
 
 public static class Program {
     public interface IAssemblyMarker;

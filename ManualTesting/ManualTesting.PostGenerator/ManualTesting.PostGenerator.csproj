@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ManualTesting.Server\ManualTesting.Server.csproj" />
+    <ProjectReference Include="..\ManualTesting.ClientHost\ManualTesting.ClientHost.csproj" />
   </ItemGroup>
 
 </Project>
