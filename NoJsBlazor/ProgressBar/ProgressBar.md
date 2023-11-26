@@ -9,7 +9,7 @@ An animation that shows a bar growing from left to right.
 ```
 
 
-### CSS Variables
+### CSS Variables (.standard-progress-bar)
 
 | **Name**               | **Default Value** |
 | ---------------------- | ----------------- |
@@ -24,10 +24,10 @@ An animation that shows a bar growing from left to right.
 
 ### Parameters
 
-| **Name** | **Type** | **Default Value** | **Dexcription**                                                       |
-| -------- | -------- | ----------------- | --------------------------------------------------------------------- |
-| Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. |
-| Text     | string   | string.Empty      | Displaying text of this component.                                    |
+| **Name** | **Type** | **Default Value** | **Dexcription**                                                                      |
+| -------- | -------- | ----------------- | ------------------------------------------------------------------------------------ |
+| Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. Default is 0.0 |
+| Text     | string   | string.Empty      | Displaying text of this component. Default is string.Empty                           |
 
 
 ### Properties
@@ -47,7 +47,7 @@ An animation that shows a circle filling clockwise starting at top.
 ```
 
 
-### CSS Variables
+### CSS Variables (.circle-progress-bar)
 
 | **Name**        | **Default Value** |
 | --------------- | ------------------|
@@ -59,10 +59,10 @@ An animation that shows a circle filling clockwise starting at top.
 
 ### Parameters
 
-| **Name** | **Type** | **Default Value** | **Dexcription**                                                       |
-| -------- | -------- | ----------------- | --------------------------------------------------------------------- |
-| Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. |
-| Text     | string   | string.Empty      | Displaying text of this component.                                    |
+| **Name** | **Type** | **Default Value** | **Dexcription**                                                                      |
+| -------- | -------- | ----------------- | ------------------------------------------------------------------------------------ |
+| Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. Default is 0.0 |
+| Text     | string   | string.Empty      | Displaying text of this component. Default is string.Empty.                          |
 
 
 ### Properties
@@ -82,7 +82,7 @@ An animation that shows speedometer where the hand is increasing with progress.
 ```
 
 
-### CSS Variables
+### CSS Variables (.speedometer-progress-bar)
 
 | **Name**                 | **Default Value** |
 | ------------------------ | ----------------- |
@@ -102,10 +102,10 @@ An animation that shows speedometer where the hand is increasing with progress.
 
 ### Parameters
 
-| **Name** | **Type** | **Default Value** | **Dexcription**                                                       |
-| -------- | -------- | ----------------- | --------------------------------------------------------------------- |
-| Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. |
-| Text     | string   | string.Empty      | Displaying text of this component.                                    |
+| **Name** | **Type** | **Default Value** | **Dexcription**                                                                      |
+| -------- | -------- | ----------------- | ------------------------------------------------------------------------------------ |
+| Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. Default is 0.0 |
+| Text     | string   | string.Empty      | Displaying text of this component. Default is string.Empty.                          |
 
 
 ### Properties

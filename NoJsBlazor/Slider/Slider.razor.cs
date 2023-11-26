@@ -31,7 +31,8 @@ public sealed partial class Slider<Type> : ComponentBase where Type : struct, IN
     public EventCallback<Type> OnChange { get; set; }
 
     /// <summary>
-    /// An optional label.
+    /// <para>An optional label.</para>
+    /// <para>Default is <see cref="string.Empty"/></para>
     /// </summary>
     [Parameter]
     public string Title { get; set; } = string.Empty;
@@ -51,7 +52,7 @@ public sealed partial class Slider<Type> : ComponentBase where Type : struct, IN
     public Type Max { get; set; } = Type.One + Type.One + Type.One + Type.One + Type.One + Type.One + Type.One + Type.One + Type.One + Type.One; // 10
 
     /// <summary>
-    /// <para>Slider precision</para>
+    /// <para>Slider precision.</para>
     /// <para>Default is 1.</para>
     /// </summary>
     [Parameter]

@@ -21,7 +21,7 @@ A container that contains a nested list of items/links. It automatically collaps
 ```
 
 
-## CSS Variables
+## CSS Variables (.nav-root)
 
 | **Name**                             | **Default Value**                                                                                    |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------------- |
@@ -51,7 +51,7 @@ A container that contains a nested list of items/links. It automatically collaps
 | ---------- | ------------------------- | --------------------- | ------------------------------------------------------------------------------------------------- |
 | Brand      | RenderFragment?           | null                  | Content/Icon which represents your site. If it is null, the corresponding parts are not rendered. |
 | Items      | RenderFragment            | *required*            | This should be a list of *NavBarMenu* of *NavBarItem*/*NavBarLink*.                               |
-| Breakpoint | NavBarBreakpoint          | NavBarBreakpoint.none | Changes at the given width between phone and desktop view.                                        |
+| Breakpoint | NavBarBreakpoint          | NavBarBreakpoint.none | Changes at the given width between phone and desktop view. Default is NavBarBreakpoint.none.      |
 | OnToggle   | EventCallback&lt;bool&gt; | default               | Fires every time when *Expanded* get changed. Value is equal *Expanded*.                          |
 
 

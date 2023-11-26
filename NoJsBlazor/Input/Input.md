@@ -17,7 +17,7 @@ Input field with a embedded label.
 ```
 
 
-## CSS Variables
+## CSS Variables (.input-field-container)
 
 | **Name**                | **Default Value** |
 | ----------------------- | ----------------- |
@@ -39,8 +39,8 @@ Input field with a embedded label.
 | OnChange        | EventCallback&lt;string?&gt;       | default           | Fires every time item looses focus and value has changed. This or *ValueChanged* can be used for two-way-binding.                                                                  |
 | Title           | string                             | n/a               | Sets properties Label, Id, Name and Autocomplete to the given string (Autocomplete to true). Returns a comma seperated string with this 4 properties (Label,Id,Name,Autocomplete). |
 | Label           | string?                            | null              | Displayed text of this Input field.                                                                                                                                                |
-| Type            | string?                            | null              | Sets the type attribute.                                                                                                                                                           |
+| Type            | string?                            | null              | Sets the type attribute. e.g. normal text(abcd), password(****), numberField(0123), …                                                                                              |
 | Id              | string?                            | null              | Sets the "id"-attribute in input field and the "for"-attribute in the label.                                                                                                       |
 | Name            | string?                            | null              | Sets the "name"-attribute in the input field.                                                                                                                                      |
-| Autocomplete    | bool                               | true              | Sets the "autocomplete"-attribute in the input field.                                                                                                                              |
+| Autocomplete    | bool                               | true              | Sets the "autocomplete"-attribute in the input field. Default is true.                                                                                                             |
 | InputAttributes | IDictionary&lt;string, object&gt;? | null              | These values are applied to the input field.                                                                                                                                       |

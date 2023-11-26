@@ -14,7 +14,7 @@ A container that content can be collapsed.
 ```
 
 
-## CSS Variables
+## CSS Variables (.collapse-div)
 
 | **Name**                 | **Default Value** |
 | ------------------------ | ----------------- |
@@ -45,7 +45,7 @@ A container that content can be collapsed.
 A component containing a svg arrow icon.
 Can be placed inside CollapseDiv.Head to get a nice expanded-indicator that rotates on expanding.
 
-### CSS Variables
+### CSS Variables (.collapse-arrow)
 
 | **Name**                 | **Default Value** |
 | ------------------------ | ----------------- |

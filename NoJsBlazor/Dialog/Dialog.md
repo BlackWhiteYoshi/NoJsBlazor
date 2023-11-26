@@ -22,7 +22,7 @@ A little message window that it is first hidden and can be displayed on demand.
 ```
 
 
-## CSS Variables
+## CSS Variables (.dialog-modal-background)
 
 | **Name**                        | **Default Value**        |
 | ------------------------------- | ------------------------ |
@@ -38,10 +38,10 @@ A little message window that it is first hidden and can be displayed on demand.
 | ---------------------- | ------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Title                  | RenderFragment?                       | null              | Html that will be displayed inside the head bar.                                                                                |
 | Content                | RenderFragment?                       | null              | Html that will be displayed inside the window.                                                                                  |
-| ShowTitle              | bool                                  | true              | Indicates whether to skip the *Title* section.                                                                                  |
-| Moveable               | bool                                  | true              | The window can be grabed and draged around the screen.                                                                          |
-| ModalScreen            | bool                                  | true              | If the background should be blurred/unavailable.                                                                                |
-| CloseOnModalBackground | bool                                  | true              | If on the *ModalBackground* a click occurs, whether the window should close or not close.                                       |
+| ShowTitle              | bool                                  | true              | Indicates whether to skip the *Title* section. Default is true.                                                                 |
+| Moveable               | bool                                  | true              | The window can be grabed and draged around the screen. Default is true.                                                         |
+| ModalScreen            | bool                                  | true              | If the background should be blurred/unavailable. Default is true.                                                               |
+| CloseOnModalBackground | bool                                  | true              | If on the *ModalBackground* a click occurs, whether the window should close or not close. Default is true.                      |
 | OnActiveChanged        | EventCallback&lt;bool&gt;             | default           | Invokes every time when the Dialog opens or closes. true: dialog got from close to open, false: dialog got from open to closed. |
 | OnTitlePointerDown     | EventCallback&lt;PointerEventArgs&gt; | default           | Fires if pointer starts on title div.                                                                                           |
 | OnTitlePointerMove     | EventCallback&lt;PointerEventArgs&gt; | default           | Fires if pointer moves on title div, but only if pointer down is active.                                                        |

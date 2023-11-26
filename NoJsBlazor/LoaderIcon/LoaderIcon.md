@@ -1,4 +1,4 @@
-# LoaderIcon
+# LoaderIcon (.loader-icon)
 
 A funny animation to pass the waiting time.
 

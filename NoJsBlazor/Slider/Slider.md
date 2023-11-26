@@ -32,7 +32,7 @@ An object that holds a ranged input together with a decrease and increase button
 ```
 
 
-## CSS Variables
+## CSS Variables (.slider)
 
 | **Name**                        | **Default Value**            |
 | ------------------------------- | ---------------------------- |
@@ -54,9 +54,9 @@ An object that holds a ranged input together with a decrease and increase button
 
 ## Type Parameters
 
-| **Name** | **TypeConstraints**         |  **Dexcription**                            |
-| -------- | --------------------------- | ------------------------------------------- |
-| Type     | struct, INumber&lt;Type&gt; | Type of the underlying value of the Slider. |
+| **Name** | **TypeConstraints**         |  **Dexcription**                                                     |
+| -------- | --------------------------- | -------------------------------------------------------------------- |
+| Type     | struct, INumber&lt;Type&gt; | Number-type of the underlying value of the Slider. e.g. int, decimal |
 
 
 ## Parameters
@@ -66,15 +66,15 @@ An object that holds a ranged input together with a decrease and increase button
 | Value              | Type                        | null                          | Value of the Slider. Should be used as two-way-binding.                                                                                                                                                          |
 | ValueChanged       | EventCallback&lt;Type&gt;   | default                       | Invokes every time Value get changed with: LeftButton, RightButton, Slider or EditField. This or *OnChange* can be used for two-way-binding.                                                                     |
 | OnChange           | EventCallback&lt;Type&gt;   | default                       | Invokes every time Value get changed with: LeftButton, RightButton, Slider (only on release) or EditField. This or *ValueChanged* can be used for two-way-binding.                                               |
-| Title              | string                      | string.Empty                  | An optional label.                                                                                                                                                                                               |
-| Min                | Type                        | Type.Zero                     | Slider lower bounds                                                                                                                                                                                              |
-| Max                | Type                        | Type.One + … + Type.One (×10) | Slider upper bounds                                                                                                                                                                                              |
-| Step               | Type                        | Type.One                      | Slider precision                                                                                                                                                                                                 |
-| Enabled            | bool                        | true                          | Enables or disables the controls (left-button, right-button, slider-thumb).
-| Editable           | bool                        | false                         | Indicates if the user is able to edit the number directly. Technically the number is displayed in a input field instead of a label.                                                                              |
-| LeftButtonContent  | RenderFragment              | DefaultLeftButton (🡸)        | Content inside the left Button.                                                                                                                                                                                  |
-| RightButtonContent | RenderFragment              | DefaultRightButton (🡺)       | Content inside the right Button.                                                                                                                                                                                 |
-| Display            | Funck&lt;Type, string&gt;   | DefaultDisplay                | The way the value should be printed.                                                                                                                                                                             |
+| Title              | string                      | string.Empty                  | An optional label. Default is string.Empty                                                                                                                                                                       |
+| Min                | Type                        | Type.Zero                     | Slider lower bounds. Default is 0.                                                                                                                                                                               |
+| Max                | Type                        | Type.One + … + Type.One (×10) | Slider upper bounds. Default is 10.                                                                                                                                                                              |
+| Step               | Type                        | Type.One                      | Slider precision. Default is 1.                                                                                                                                                                                  |
+| Enabled            | bool                        | true                          | Enables or disables the controls (left-button, right-button, slider-thumb). Default is true.                                                                                                                     |
+| Editable           | bool                        | false                         | Indicates if the user is able to edit the number directly. Technically the number is displayed in a input field instead of a label. Dafault is false.                                                            |
+| LeftButtonContent  | RenderFragment              | DefaultLeftButton (🡸)        | Content inside the left Button. Default is a svg showing "🡸".                                                                                                                                                   |
+| RightButtonContent | RenderFragment              | DefaultRightButton (🡺)       | Content inside the right Button. Default is a svg showing "🡺".                                                                                                                                                  |
+| Display            | Funck&lt;Type, string&gt;   | DefaultDisplay                | The way the value should be printed. Default is value.ToString().                                                                                                                                                |
 | ParseEdit          | Funck&lt;string?, Type?&gt; | DefaultParseEdit              | It should get the content of the edit field as string and return the appropriated number. It should return null if the value is not valid. Default try parses number and when succeed, clamps to Min,Max-bounds. |
 
 **Note**: 

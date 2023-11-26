@@ -26,7 +26,7 @@ A Carousel like in Bootstrap. It can also display an overlay, control-arrows, it
 ```
 
 
-## CSS Variables
+## CSS Variables (.carousel)
 
 | **Name**                   | **Default Value**              |
 | -------------------------- | ------------------------------ |
@@ -48,20 +48,20 @@ A Carousel like in Bootstrap. It can also display an overlay, control-arrows, it
 
 ## Parameters
 
-| **Name**            | **Type**                  | **Default Value**         | **Dexcription**                                                                                                           |
-| ------------------- | ------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Items               | RenderFragment            | *required*                | Content of the *Carousel*. This should be a list of *CarouselItem* objects.                                               |
-| Overlay             | RenderFragment?           | null                      | Html that will be rendered in the overlay section.                                                                        |
-| ActiveStart         | int                       | 0                         | Index of the active item at the beginning.                                                                                |
-| Animation           | CarouselAnimation         | CarouselAnimation.FadeOut | Type of swapping animation: (FadeOut, Slide, SlideRotate)                                                                 |
-| IntervalTime        | double                    | 6000.0                    | Waiting time before beginning swap animation in ms.                                                                       |
-| AutoStartTime       | double                    | 0.0                       | Starts interval after [AutoStartTime] ms, if interval not running and no action occurs. Value of 0 deactivates autostart. |
-| BeginRunning        | bool                      | true                      | Carousel Interval starts running or paused.                                                                               |
-| ControlArrowsEnable | bool                      | true                      | Next/Previous Arrows available                                                                                            |
-| IndicatorsEnable    | bool                      | true                      | Indicators available                                                                                                      |
-| PlayButtonEnable    | bool                      | true                      | PlayButton available                                                                                                      |
-| OnActiveChanged     | EventCallback&lt;int&gt;  | default                   | Fires every time after *active* item changed. Parameter is index of the new active item.                                  |
-| OnRunningChanged    | EventCallback&lt;bool&gt; | default                   | Fires every time after the *Running* state is set. Parameter indicates if the carousel is currently running.              |
+| **Name**            | **Type**                  | **Default Value**         | **Dexcription**                                                                                                                         |
+| ------------------- | ------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Items               | RenderFragment            | *required*                | Content of the *Carousel*. This should be a list of *CarouselItem* objects.                                                             |
+| Overlay             | RenderFragment?           | null                      | Html that will be rendered in the overlay section.                                                                                      |
+| ActiveStart         | int                       | 0                         | Index of the active item at the beginning. Default is 0.                                                                                |
+| Animation           | CarouselAnimation         | CarouselAnimation.FadeOut | Type of swapping animation: (FadeOut, Slide, SlideRotate). Default is FadeOut.                                                          |
+| IntervalTime        | double                    | 6000.0                    | Waiting time before beginning swap animation in ms. Default is 6000.                                                                    |
+| AutoStartTime       | double                    | 0.0                       | Starts interval after [AutoStartTime] ms, if interval not running and no action occurs. Value of 0 deactivates autostart. Default is 0. |
+| BeginRunning        | bool                      | true                      | Carousel Interval starts running or paused. Default is true.                                                                            |
+| ControlArrowsEnable | bool                      | true                      | Next/Previous Arrows available. Default is true.                                                                                        |
+| IndicatorsEnable    | bool                      | true                      | Indicators available. Default is true.                                                                                                  |
+| PlayButtonEnable    | bool                      | true                      | PlayButton available. Default is true.                                                                                                  |
+| OnActiveChanged     | EventCallback&lt;int&gt;  | default                   | Fires every time after *active* item changed. Parameter is index of the new active item.                                                |
+| OnRunningChanged    | EventCallback&lt;bool&gt; | default                   | Fires every time after the *Running* state is set. Parameter indicates if the carousel is currently running.                            |
 
 
 ## Properties

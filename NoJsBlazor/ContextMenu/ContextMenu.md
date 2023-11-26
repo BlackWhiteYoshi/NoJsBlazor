@@ -16,7 +16,7 @@ Triggering the menu is not included.
 ```
 
 
-## CSS Variables
+## CSS Variables (.context-menu)
 
 | **Name**                           | **Default Value**                                                                                    |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------- |

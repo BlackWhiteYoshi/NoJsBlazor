@@ -66,7 +66,7 @@ internal abstract class InputBase {
 
     /// <summary>
     /// <para>Sets the "autocomplete"-attribute in the input field.</para>
-    /// <para>default is true.</para>
+    /// <para>Default is true.</para>
     /// </summary>
     [Parameter]
     public bool Autocomplete { get; set; } = true;
