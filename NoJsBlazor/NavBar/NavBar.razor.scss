@@ -62,7 +62,7 @@
         height: 100%;
     }
 
-    .nav-toggle, .nav-toggle-checkbox, .nav-dropdown-checkbox {
+    .nav-toggle, .nav-checkbox, .nav-dropdown-checkbox {
         display: none;
     }
 
@@ -206,7 +206,7 @@
             }
         }
 
-        .nav-toggle-checkbox:checked + .nav-toggle-icon {
+        .nav-checkbox:checked + .nav-toggle-icon {
             border: 2px inset #EEE;
 
             & > .bar {
@@ -234,7 +234,7 @@
             transition: rotate 0.2s;
         }
 
-        .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+        .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
             rotate: none;
         }
 

@@ -24,6 +24,7 @@ public sealed partial class NavBarMenu : ListableComponentBase<NavBarMenu> {
     [Parameter]
     public EventCallback<bool> OnToggle { get; set; }
 
+
     private bool _expanded = false;
     /// <summary>
     /// Value for expanding or collapsing this submenu.

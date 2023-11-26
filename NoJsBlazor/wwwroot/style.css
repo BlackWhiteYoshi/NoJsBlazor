@@ -642,7 +642,7 @@
 .nav-root .nav-brand {
   height: 100%;
 }
-.nav-root .nav-toggle, .nav-root .nav-toggle-checkbox, .nav-root .nav-dropdown-checkbox {
+.nav-root .nav-toggle, .nav-root .nav-checkbox, .nav-root .nav-dropdown-checkbox {
   display: none;
 }
 .nav-root .nav-list {
@@ -757,13 +757,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav500px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav500px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav500px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav500px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav500px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav500px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav500px .nav-list {
@@ -781,7 +781,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav500px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav500px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav500px .nav-element {
@@ -885,13 +885,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav600px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav600px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav600px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav600px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav600px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav600px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav600px .nav-list {
@@ -909,7 +909,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav600px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav600px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav600px .nav-element {
@@ -1013,13 +1013,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav700px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav700px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav700px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav700px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav700px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav700px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav700px .nav-list {
@@ -1037,7 +1037,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav700px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav700px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav700px .nav-element {
@@ -1141,13 +1141,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav800px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav800px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav800px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav800px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav800px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav800px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav800px .nav-list {
@@ -1165,7 +1165,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav800px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav800px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav800px .nav-element {
@@ -1269,13 +1269,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav900px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav900px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav900px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav900px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav900px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav900px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav900px .nav-list {
@@ -1293,7 +1293,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav900px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav900px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav900px .nav-element {
@@ -1397,13 +1397,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav1000px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav1000px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav1000px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav1000px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav1000px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav1000px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav1000px .nav-list {
@@ -1421,7 +1421,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav1000px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav1000px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav1000px .nav-element {
@@ -1525,13 +1525,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav1100px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav1100px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav1100px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav1100px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav1100px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav1100px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav1100px .nav-list {
@@ -1549,7 +1549,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav1100px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav1100px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav1100px .nav-element {
@@ -1653,13 +1653,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav1200px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav1200px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav1200px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav1200px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav1200px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav1200px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav1200px .nav-list {
@@ -1677,7 +1677,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav1200px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav1200px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav1200px .nav-element {
@@ -1781,13 +1781,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav1300px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav1300px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav1300px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav1300px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav1300px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav1300px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav1300px .nav-list {
@@ -1805,7 +1805,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav1300px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav1300px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav1300px .nav-element {
@@ -1909,13 +1909,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav1400px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav1400px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav1400px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav1400px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav1400px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav1400px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav1400px .nav-list {
@@ -1933,7 +1933,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav1400px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav1400px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav1400px .nav-element {
@@ -2037,13 +2037,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav1500px .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav1500px .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav1500px .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav1500px .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav1500px .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav1500px .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav1500px .nav-list {
@@ -2061,7 +2061,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav1500px .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav1500px .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav1500px .nav-element {
@@ -2165,13 +2165,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav30em .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav30em .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav30em .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav30em .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav30em .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav30em .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav30em .nav-list {
@@ -2189,7 +2189,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav30em .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav30em .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav30em .nav-element {
@@ -2293,13 +2293,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav40em .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav40em .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav40em .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav40em .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav40em .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav40em .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav40em .nav-list {
@@ -2317,7 +2317,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav40em .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav40em .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav40em .nav-element {
@@ -2421,13 +2421,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav50em .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav50em .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav50em .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav50em .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav50em .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav50em .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav50em .nav-list {
@@ -2445,7 +2445,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav50em .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav50em .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav50em .nav-element {
@@ -2549,13 +2549,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav60em .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav60em .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav60em .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav60em .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav60em .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav60em .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav60em .nav-list {
@@ -2573,7 +2573,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav60em .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav60em .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav60em .nav-element {
@@ -2677,13 +2677,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav70em .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav70em .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav70em .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav70em .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav70em .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav70em .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav70em .nav-list {
@@ -2701,7 +2701,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav70em .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav70em .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav70em .nav-element {
@@ -2805,13 +2805,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav80em .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav80em .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav80em .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav80em .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav80em .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav80em .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav80em .nav-list {
@@ -2829,7 +2829,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav80em .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav80em .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav80em .nav-element {
@@ -2933,13 +2933,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav90em .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav90em .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav90em .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav90em .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav90em .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav90em .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav90em .nav-list {
@@ -2957,7 +2957,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav90em .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav90em .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav90em .nav-element {
@@ -3061,13 +3061,13 @@
     box-shadow: var(--phone-hover-shadow);
     transition: box-shadow 0.3s;
   }
-  .nav100em .nav-toggle-checkbox:checked + .nav-toggle-icon {
+  .nav100em .nav-checkbox:checked + .nav-toggle-icon {
     border: 2px inset #EEE;
   }
-  .nav100em .nav-toggle-checkbox:checked + .nav-toggle-icon > .bar {
+  .nav100em .nav-checkbox:checked + .nav-toggle-icon > .bar {
     display: none;
   }
-  .nav100em .nav-toggle-checkbox:checked + .nav-toggle-icon > .cross {
+  .nav100em .nav-checkbox:checked + .nav-toggle-icon > .cross {
     display: unset;
   }
   .nav100em .nav-list {
@@ -3085,7 +3085,7 @@
     rotate: x 90deg;
     transition: rotate 0.2s;
   }
-  .nav100em .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+  .nav100em .nav-toggle:has(.nav-checkbox:checked) ~ .nav-list {
     rotate: none;
   }
   .nav100em .nav-element {

@@ -5,7 +5,7 @@
 
 <nav class="@NavRootClass" @attributes="@Attributes">
     <label class="nav-toggle" role="button">
-        <input type=checkbox class="nav-toggle-checkbox" @bind="Expanded" />
+        <input type=checkbox class="nav-checkbox" @bind="Expanded" />
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" class="nav-toggle-icon" aria-label="Toggle navigation">
             <line class="bar" x1='4' y1='7' x2='26' y2='7'/>
             <line class="bar" x1='4' y1='15' x2='26' y2='15'/>
@@ -19,9 +19,9 @@
         <div class="nav-brand" @onclick="Reset">@Brand</div>
     }
 
-    <ul class="nav-list">
+    <menu class="nav-list">
         <CascadingValue Name="Parent" Value="(ListholdingComponentBase<NavBarMenu>)this" IsFixed="true">
             @Items
         </CascadingValue>
-    </ul>
+    </menu>
 </nav>

@@ -45,7 +45,7 @@ public sealed partial class NavBarTest : TestContext {
         IRenderedComponent<NavBar> navBarContainer = RenderComponent<NavBar>();
         NavBar navBar = navBarContainer.Instance;
 
-        IElement toggle = navBarContainer.Find(".nav-toggle-checkbox");
+        IElement toggle = navBarContainer.Find(".nav-checkbox");
 
         toggle.Change(true);
         Assert.True(navBar.Expanded);
