@@ -62,7 +62,7 @@
         height: 100%;
     }
 
-    .nav-toggle {
+    .nav-toggle, .nav-toggle-checkbox, .nav-dropdown-checkbox {
         display: none;
     }
 
@@ -130,13 +130,16 @@
     }
 
 
+    .nav-dropdown-toggle {
+        display: contents;
+    }
+    
     // desktop view little down arrow at top level mwnu
     .nav-dropdown-arrow {
         width: var(--arrow-down-size);
         height: auto;
         margin-left: calc(5px - var(--desktop-link-padding));
         margin-right: var(--desktop-link-padding);
-        cursor: auto;
         transition: all 0.1s linear;
 
         & > polygon {
@@ -148,7 +151,7 @@
         }
     }
 
-    .nav-element:hover > .nav-div > .nav-dropdown-arrow {
+    .nav-element:hover > .nav-div > .nav-dropdown-toggle > .nav-dropdown-arrow {
         translate: 0 3px;
 
         & > polygon {
@@ -166,7 +169,7 @@
             rotate: 270deg;
         }
 
-        .nav-element:hover > .nav-div > .nav-dropdown-arrow {
+        .nav-element:hover > .nav-div > .nav-dropdown-toggle > .nav-dropdown-arrow {
             translate: 3px;
             rotate: 270deg;
         }
@@ -175,11 +178,14 @@
 
     @media (width <= $breakpoint) {
         .nav-toggle {
+            display: contents;
+            cursor: pointer;
+        }
+
+        .nav-toggle-icon {
             display: unset;
             width: auto;
             height: var(--phone-button-size);
-            cursor: pointer;
-            background-color: transparent;
             border: 2px outset #EEE;
             transition: box-shadow 0.1s;
 
@@ -197,17 +203,17 @@
                 box-shadow: var(--phone-hover-shadow);
                 transition: box-shadow 0.3s;
             }
-            
-            &.expanded {
-                border: 2px inset #EEE;
+        }
 
-                & > .bar {
-                    display: none;
-                }
+        .nav-toggle-checkbox:checked + .nav-toggle-icon {
+            border: 2px inset #EEE;
 
-                & > .cross {
-                    display: unset;
-                }
+            & > .bar {
+                display: none;
+            }
+
+            & > .cross {
+                display: unset;
             }
         }
 
@@ -225,11 +231,12 @@
             background-image: var(--background-image);
             rotate: x 90deg;
             transition: rotate 0.2s;
-
-            &.expanded {
-                rotate: none;
-            }
         }
+
+        .nav-toggle:has(.nav-toggle-checkbox:checked) ~ .nav-list {
+            rotate: none;
+        }
+
 
         .nav-element {
             padding: 0;
@@ -241,14 +248,18 @@
             display: grid;
             grid-template-rows: 0.0000000001fr;
             transition: grid-template-rows var(--phone-nav-dropdown-transition-time) ease-out;
+        }
 
-            &.expanded {
-                grid-template-rows: 1fr;
+        .nav-div:has(.nav-dropdown-checkbox:checked) ~ .nav-dropdown {
+            grid-template-rows: 1fr;
 
-                .nav-dropdown-list {
-                    padding: 3px 0;
-                }
+            .nav-dropdown-list {
+                padding: 3px 0;
             }
+        }
+
+        .nav-dropdown-toggle {
+            cursor: pointer;
         }
         
         .nav-dropdown-list {
@@ -262,13 +273,12 @@
         // round circle dropdown icon
         .nav-dropdown-arrow,
         .nav-dropdown-list .nav-dropdown-arrow,
-        .nav-element:hover > .nav-div > .nav-dropdown-arrow,
-        .nav-dropdown-list .nav-element:hover > .nav-div > .nav-dropdown-arrow {
+        .nav-element:hover > .nav-div > .nav-dropdown-toggle > .nav-dropdown-arrow,
+        .nav-dropdown-list .nav-element:hover > .nav-div > .nav-dropdown-toggle > .nav-dropdown-arrow {
             width: var(--arrow-phone-size);
             height: auto;
             margin: 0;
             opacity: 0.9;
-            cursor: pointer;
             translate: none;
             rotate: none;
             transition: rotate 0.3s linear, stroke 0.1s linear;
@@ -294,10 +304,13 @@
                     transition: stroke 0.3s;
                 }
             }
+        }
 
-            &.expanded {
-                rotate: 180deg;
-            }
+        .nav-dropdown-checkbox:checked + :is(.nav-dropdown-arrow),
+        .nav-dropdown-checkbox:checked + :is(.nav-dropdown-list .nav-dropdown-arrow),
+        .nav-dropdown-checkbox:checked + :is(.nav-element:hover > .nav-div > .nav-dropdown-toggle > .nav-dropdown-arrow),
+        .nav-dropdown-checkbox:checked + :is(.nav-dropdown-list .nav-element:hover > .nav-div > .nav-dropdown-toggle > .nav-dropdown-arrow) {
+            rotate: 180deg;
         }
     }
 }

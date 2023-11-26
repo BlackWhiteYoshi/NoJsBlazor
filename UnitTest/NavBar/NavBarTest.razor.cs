@@ -1,4 +1,5 @@
 ﻿using AngleSharp.Dom;
+using Bunit;
 
 namespace UnitTest;
 
@@ -44,12 +45,12 @@ public sealed partial class NavBarTest : TestContext {
         IRenderedComponent<NavBar> navBarContainer = RenderComponent<NavBar>();
         NavBar navBar = navBarContainer.Instance;
 
-        IElement toggle = navBarContainer.Find(".nav-toggle");
+        IElement toggle = navBarContainer.Find(".nav-toggle-checkbox");
 
-        toggle.Click();
+        toggle.Change(true);
         Assert.True(navBar.Expanded);
 
-        toggle.Click();
+        toggle.Change(false);
         Assert.False(navBar.Expanded);
     }
 

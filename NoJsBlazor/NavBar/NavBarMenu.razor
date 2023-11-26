@@ -8,14 +8,17 @@
         <CascadingValue Name="Head" Value="true" IsFixed="true">
             @Head
         </CascadingValue>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" class="nav-dropdown-arrow @(Expanded ? "expanded" : string.Empty)" role="button" @onclick="Toggle">
-            <polygon fill="%23000B" points="0,0 5,10 10,0 5,3" />
-            <circle cx="5" cy="5" r="3.8" />
-            <line x1="3.3" y1="4.3" x2="5" y2="6" />
-            <line x1="6.7" y1="4.3" x2="5" y2="6" />
-        </svg>
+        <label class="nav-dropdown-toggle" role="button">
+            <input type=checkbox class="nav-dropdown-checkbox" @bind="Expanded" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" class="nav-dropdown-arrow">
+                <polygon fill="%23000B" points="0,0 5,10 10,0 5,3" />
+                <circle cx="5" cy="5" r="3.8" />
+                <line x1="3.3" y1="4.3" x2="5" y2="6" />
+                <line x1="6.7" y1="4.3" x2="5" y2="6" />
+            </svg>
+        </label>
     </div>
-    <div class="nav-dropdown @(Expanded ? "expanded" : string.Empty)">
+    <div class="nav-dropdown">
         <ul class="nav-dropdown-list">
             @Items
         </ul>

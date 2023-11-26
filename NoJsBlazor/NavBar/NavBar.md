@@ -65,9 +65,10 @@ A container that contains a nested list of items/links. It automatically collaps
 
 ## Methods
 
-| **Name** | **Parameters** | **ReturnType** | **Dexcription**                                |
-| -------- | -------------- | -------------- | ---------------------------------------------- |
-| Reset    | *empty*        | void           | Collapses this menu and all expanded submenus. |
+| **Name** | **Parameters** | **ReturnType** | **Dexcription**                                                     |
+| -------- | -------------- | -------------- | ------------------------------------------------------------------- |
+| Toggle   | *empty*        | void           | Expands/Collapses this menu. Shorthand for: *Expanded = !Expanded;* |
+| Reset    | *empty*        | void           | Collapses this menu and all expanded submenus.                      |
 
 
 <br></br>
@@ -93,9 +94,9 @@ This should be placed inside of a *NavBar* or *NavBarMenu*.
 
 ### Methods
 
-| **Name** | **Parameters** | **ReturnType** | **Dexcription**                                                       |
-| -------- | -------------- | -------------- | --------------------------------------------------------------------- |
-| Toggle | *empty* | void | Expands/Collapses this menu. Shorthand for: *Expanded = !Expanded;*                      |
+| **Name** | **Parameters** | **ReturnType** | **Dexcription**                                                     |
+| -------- | -------------- | -------------- | ------------------------------------------------------------------- |
+| Toggle   | *empty*        | void           | Expands/Collapses this menu. Shorthand for: *Expanded = !Expanded;* |
 
 
 <br></br>

@@ -65,6 +65,12 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
         }
     }
 
+    /// <summary>
+    /// <para>Expands/Collapses this menu.</para>
+    /// <para>Shorthand for: <see cref="Expanded">Expanded</see> = !<see cref="Expanded">Expanded</see>;</para>
+    /// </summary>
+    public void Toggle() => Expanded = !Expanded;
+
 
     private string NavRootClass => Breakpoint switch {
         NavBarBreakpoint.none => "nav-root",
@@ -91,14 +97,6 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     };
     
     
-    private void ToggleNavBar(MouseEventArgs e) {
-        if (Expanded)
-            Reset();
-        else
-            Expanded = true;
-    }
-
-
     /// <summary>
     /// Collapses this menu and all expanded submenus.
     /// </summary>

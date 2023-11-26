@@ -25,9 +25,11 @@ public sealed partial class NavBarMenuTest : TestContext {
         (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarTree(default);
         Assert.False(navBarMenu.Expanded);
 
-        IElement div = fragment.Find(".nav-dropdown-arrow");
-        div.Click();
+        IElement div = fragment.Find(".nav-dropdown-checkbox");
+        div.Change(true);
         Assert.True(navBarMenu.Expanded);
+        div.Change(false);
+        Assert.False(navBarMenu.Expanded);
     }
 
     #endregion

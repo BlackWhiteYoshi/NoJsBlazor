@@ -4,19 +4,22 @@
 @inherits ListholdingComponentBase<NavBarMenu>
 
 <nav class="@NavRootClass" @attributes="@Attributes">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" class="nav-toggle @(Expanded ? "expanded" : string.Empty)" aria-label="Toggle navigation" role="button" @onclick="ToggleNavBar">
-        <line class="bar" x1='4' y1='7' x2='26' y2='7'/>
-        <line class="bar" x1='4' y1='15' x2='26' y2='15'/>
-        <line class="bar" x1='4' y1='23' x2='26' y2='23'/>
-        <line class="cross" x1='4' y1='7' x2='26' y2='23' />
-        <line class="cross" x1='4' y1='23' x2='26' y2='7' />
-    </svg>
+    <label class="nav-toggle" role="button">
+        <input type=checkbox class="nav-toggle-checkbox" @bind="Expanded" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" class="nav-toggle-icon" aria-label="Toggle navigation">
+            <line class="bar" x1='4' y1='7' x2='26' y2='7'/>
+            <line class="bar" x1='4' y1='15' x2='26' y2='15'/>
+            <line class="bar" x1='4' y1='23' x2='26' y2='23'/>
+            <line class="cross" x1='4' y1='7' x2='26' y2='23' />
+            <line class="cross" x1='4' y1='23' x2='26' y2='7' />
+        </svg>
+    </label>
     
     @if (Brand != null) {
         <div class="nav-brand" @onclick="Reset">@Brand</div>
     }
 
-    <ul class="nav-list @(Expanded ? "expanded" : string.Empty)">
+    <ul class="nav-list">
         <CascadingValue Name="Parent" Value="(ListholdingComponentBase<NavBarMenu>)this" IsFixed="true">
             @Items
         </CascadingValue>
