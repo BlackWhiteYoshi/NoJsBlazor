@@ -4,14 +4,5 @@
 @inherits InputBase<string>
 
 <div class="input-field-container @CssClass" @attributes="@AdditionalAttributes">
-    <input
-            id="@Id"
-            value="@Value"
-            @oninput="OnFieldInput"
-            @onchange="OnFieldChange"
-            type="@Type"
-            name="@Name"
-            autocomplete="@(Autocomplete ? "on" : "off")"
-            @attributes="@InputAttributes" />
-    <label class="@(HasValue ? "filled-input-label" : string.Empty)" for="@Id">@Label</label>
+    @((RenderFragment)RenderInputAndLabel)
 </div>

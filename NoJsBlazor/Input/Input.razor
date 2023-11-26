@@ -3,14 +3,5 @@
 @namespace NoJsBlazor
 
 <div class="input-field-container" @attributes="@Attributes">
-    <input
-            id="@Id"
-            value="@Value"
-            @oninput="OnFieldInput"
-            @onchange="OnFieldChange"
-            type="@Type"
-            name="@Name"
-            autocomplete="@(Autocomplete ? "on" : "off")"
-            @attributes="@InputAttributes" />
-    <label class="@(hasValue ? "filled-input-label" : string.Empty)" for="@Id">@Label</label>
+    @((RenderFragment)RenderInputAndLabel)
 </div>

@@ -15,7 +15,4 @@ public sealed partial class EditFormInput : InputBase<string> {
         validationErrorMessage = string.Empty;
         return true;
     }
-
-
-    private bool HasValue => !string.IsNullOrEmpty(Value);
 }

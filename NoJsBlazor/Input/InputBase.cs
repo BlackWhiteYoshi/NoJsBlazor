@@ -11,6 +11,7 @@ internal abstract class InputBase {
     public EventCallback<string?> ValueChanged { get; set; }
 
 
+
     /// <summary>
     /// <para>Fires every time item looses focus and value has changed.</para>
     /// <para>This or ValueChanged can be used for two-way-binding.</para>
@@ -77,12 +78,50 @@ internal abstract class InputBase {
     public IDictionary<string, object>? InputAttributes { get; set; }
 
 
-    // memeber is used for SourceGenerator InlineComposition
     private void OnFieldInput(ChangeEventArgs e) {
         Value = (string?)e.Value;
         ValueChanged.InvokeAsync(Value);
     }
 
-    // memeber is used for SourceGenerator InlineComposition
     private void OnFieldChange(ChangeEventArgs e) => OnChange.InvokeAsync((string?)e.Value);
+
+
+    // memeber is used for SourceGenerator InlineComposition
+    private void RenderInputAndLabel(RenderTreeBuilder __builder) {
+        /*
+        <input
+            id="@Id"
+            value="@Value"
+            @oninput="OnFieldInput"
+            @onchange="OnFieldChange"
+            type="@Type"
+            name="@Name"
+            autocomplete="@(Autocomplete ? "on" : "off")"
+            placeholder=""
+            @attributes="@InputAttributes" />
+        <label for="@Id">@Label</label>  
+        */
+
+        __builder.OpenElement(0, "input");
+
+        __builder.AddAttribute(1, "id", Id);
+        __builder.AddAttribute(2, "value", Value);
+        __builder.AddAttribute(3, "oninput", EventCallback.Factory.Create<ChangeEventArgs>(this, OnFieldInput));
+        __builder.AddAttribute(4, "onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, OnFieldChange));
+        __builder.AddAttribute(5, "type", Type);
+        __builder.AddAttribute(6, "name", Name);
+        __builder.AddAttribute(7, "autocomplete", Autocomplete ? "on" : "off");
+        __builder.AddAttribute(8, "placeholder", "");
+        __builder.AddMultipleAttributes(9, InputAttributes);
+
+        __builder.CloseElement();
+
+
+        __builder.OpenElement(10, "label");
+
+        __builder.AddAttribute(11, "for", Id);
+        __builder.AddContent(12, Label);
+
+        __builder.CloseElement();
+    }
 }

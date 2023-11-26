@@ -27,6 +27,7 @@
     <Version>3.2.5</Version>
     <IsAotCompatible>true</IsAotCompatible>
     <DebugType>embedded</DebugType>
+    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">

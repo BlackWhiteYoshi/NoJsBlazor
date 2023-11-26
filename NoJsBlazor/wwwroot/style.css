@@ -360,7 +360,7 @@
   pointer-events: none;
   transition: all 0.3s;
 }
-.input-field-container > input:focus + label, .input-field-container .filled-input-label {
+.input-field-container > :is(input:focus, input:not(:placeholder-shown)) + label {
   top: 0;
   translate: var(--label-top-offset-left) -50%;
   font-size: 0.8em;

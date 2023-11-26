@@ -38,7 +38,7 @@
         transition: all 0.3s;
     }
 
-    & > input:focus + label, .filled-input-label {
+    & > :is(input:focus, input:not(:placeholder-shown)) + label {
         top: 0;
         translate: var(--label-top-offset-left) -50%;
         font-size: 0.8em;

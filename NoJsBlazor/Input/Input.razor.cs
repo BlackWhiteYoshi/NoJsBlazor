@@ -8,21 +8,12 @@ namespace NoJsBlazor;
 /// </summary>
 [Inline<InputBase>]
 public sealed partial class Input : ComponentBase {
-    private string? _value;
     /// <summary>
     /// <para>Value of this Input field.</para>
     /// <para>Should be used as two-way-binding.</para>
     /// </summary>
     [Parameter]
-    public string? Value {
-        get => _value;
-        set {
-            if (value != _value) {
-                _value = value;
-                hasValue = !string.IsNullOrEmpty(Value);
-            }
-        }
-    }
+    public string? Value { get; set; }
 
     /// <summary>
     /// <para>Fires every time <see cref="Value"/> changes.</para>
@@ -37,7 +28,4 @@ public sealed partial class Input : ComponentBase {
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object>? Attributes { get; set; }
-
-
-    private bool hasValue;
 }
