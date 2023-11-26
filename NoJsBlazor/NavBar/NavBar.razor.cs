@@ -70,32 +70,6 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     /// <para>Shorthand for: <see cref="Expanded">Expanded</see> = !<see cref="Expanded">Expanded</see>;</para>
     /// </summary>
     public void Toggle() => Expanded = !Expanded;
-
-
-    private string NavRootClass => Breakpoint switch {
-        NavBarBreakpoint.none => "nav-root",
-        NavBarBreakpoint.px500 => "nav-root-500px",
-        NavBarBreakpoint.px600 => "nav-root-600px",
-        NavBarBreakpoint.px700 => "nav-root-700px",
-        NavBarBreakpoint.px800 => "nav-root-800px",
-        NavBarBreakpoint.px900 => "nav-root-900px",
-        NavBarBreakpoint.px1000 => "nav-root-1000px",
-        NavBarBreakpoint.px1100 => "nav-root-1100px",
-        NavBarBreakpoint.px1200 => "nav-root-1200px",
-        NavBarBreakpoint.px1300 => "nav-root-1300px",
-        NavBarBreakpoint.px1400 => "nav-root-1400px",
-        NavBarBreakpoint.px1500 => "nav-root-1500px",
-        NavBarBreakpoint.em30 => "nav-root-30em",
-        NavBarBreakpoint.em40 => "nav-root-40em",
-        NavBarBreakpoint.em50 => "nav-root-50em",
-        NavBarBreakpoint.em60 => "nav-root-60em",
-        NavBarBreakpoint.em70 => "nav-root-70em",
-        NavBarBreakpoint.em80 => "nav-root-80em",
-        NavBarBreakpoint.em90 => "nav-root-90em",
-        NavBarBreakpoint.em100 => "nav-root-100em",
-        _ => "nav-root"
-    };
-    
     
     /// <summary>
     /// Collapses this menu and all expanded submenus.
@@ -106,4 +80,30 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
 
         Expanded = false;
     }
+
+
+    private string NavRootClass => Breakpoint switch {
+        NavBarBreakpoint.none => "nav-root",
+        NavBarBreakpoint.px500 => "nav-root nav500px",
+        NavBarBreakpoint.px600 => "nav-root nav600px",
+        NavBarBreakpoint.px700 => "nav-root nav700px",
+        NavBarBreakpoint.px800 => "nav-root nav800px",
+        NavBarBreakpoint.px900 => "nav-root nav900px",
+        NavBarBreakpoint.px1000 => "nav-root nav1000px",
+        NavBarBreakpoint.px1100 => "nav-root nav1100px",
+        NavBarBreakpoint.px1200 => "nav-root nav1200px",
+        NavBarBreakpoint.px1300 => "nav-root nav1300px",
+        NavBarBreakpoint.px1400 => "nav-root nav1400px",
+        NavBarBreakpoint.px1500 => "nav-root nav1500px",
+        NavBarBreakpoint.em30 => "nav-root nav30em",
+        NavBarBreakpoint.em40 => "nav-root nav40em",
+        NavBarBreakpoint.em50 => "nav-root nav50em",
+        NavBarBreakpoint.em60 => "nav-root nav60em",
+        NavBarBreakpoint.em70 => "nav-root nav70em",
+        NavBarBreakpoint.em80 => "nav-root nav80em",
+        NavBarBreakpoint.em90 => "nav-root nav90em",
+        NavBarBreakpoint.em100 => "nav-root nav100em",
+        _ => "nav-root"
+    };
+    
 }

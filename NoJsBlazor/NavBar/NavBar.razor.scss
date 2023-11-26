@@ -21,7 +21,7 @@
  **/
 
 
-@mixin nav-content($breakpoint) {
+.nav-root {
     --phone-menu-max-width: 330px;
     --phone-menu-max-height: calc(100vh - 100px);
     --phone-nav-dropdown-transition-time: 300ms;
@@ -174,8 +174,9 @@
             rotate: 270deg;
         }
     }
+}
 
-
+@mixin nav-breakpoint-content($breakpoint) {
     @media (width <= $breakpoint) {
         .nav-toggle {
             display: contents;
@@ -316,16 +317,14 @@
 }
 
 
-.nav-root { @include nav-content(0px); }
-
 $i: 500;
 @while $i <= 1500 {
-    .nav-root-#{$i}px { @include nav-content($i + px);}
+    .nav#{$i}px { @include nav-breakpoint-content($i + px);}
     $i: $i + 100;
 }
 
 $i: 30;
 @while $i <= 100 {
-    .nav-root-#{$i}em { @include nav-content($i + em);}
+    .nav#{$i}em { @include nav-breakpoint-content($i + em);}
     $i: $i + 10;
 }
