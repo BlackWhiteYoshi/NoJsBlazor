@@ -15,7 +15,7 @@ public sealed class CollapseDivTest : TestContext {
 
         IElement headDiv = collapseDivContainer.Find(".head");
 
-        Assert.Equal(TEST_HTML, headDiv.InnerHtml);
+        Assert.EndsWith(TEST_HTML, headDiv.InnerHtml);
     }
 
     [Fact]
@@ -36,11 +36,11 @@ public sealed class CollapseDivTest : TestContext {
     [InlineData(false)]
     public void StartCollapsed_Starts_Collapsed(bool collapsed) {
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
-            builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartCollapsed, collapsed);
+            builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartExpanded, collapsed);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
-        Assert.Equal(collapsed, collapseDiv.Collapsed);
+        Assert.Equal(collapsed, collapseDiv.Expanded);
     }
 
     #endregion
@@ -51,13 +51,15 @@ public sealed class CollapseDivTest : TestContext {
     [Fact]
     public void Head_Clicked_Trigger_Collapsing() {
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
-            builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartCollapsed, false);
+            builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartExpanded, false);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
-        Assert.False(collapseDiv.Collapsed);
-        collapseDivContainer.Find(".head").Click();
-        Assert.True(collapseDiv.Collapsed);
+        Assert.False(collapseDiv.Expanded);
+        collapseDivContainer.Find(".collapse-toggle").Change(true);
+        Assert.True(collapseDiv.Expanded);
+        collapseDivContainer.Find(".collapse-toggle").Change(false);
+        Assert.False(collapseDiv.Expanded);
     }
 
     #endregion
@@ -70,13 +72,13 @@ public sealed class CollapseDivTest : TestContext {
         int fired = 0;
 
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
-            builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartCollapsed, false);
-            builder.Add((CollapseDiv collapseDiv) => collapseDiv.OnCollapseChanged, (bool collapsed) => fired++);
+            builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartExpanded, false);
+            builder.Add((CollapseDiv collapseDiv) => collapseDiv.OnExpandedChanged, (bool collapsed) => fired++);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
-        collapseDiv.SilentCollapsedSetter = true;
-        Assert.True(collapseDiv.Collapsed);
+        collapseDiv.SilentExpandedSetter = true;
+        Assert.True(collapseDiv.Expanded);
         Assert.Equal(0, fired);
     }
 
@@ -90,11 +92,11 @@ public sealed class CollapseDivTest : TestContext {
         int fired = 0;
 
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
-            builder.Add((CollapseDiv collapseDiv) => collapseDiv.OnCollapseChanged, (bool collapsed) => fired++);
+            builder.Add((CollapseDiv collapseDiv) => collapseDiv.OnExpandedChanged, (bool collapsed) => fired++);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
-        collapseDiv.Collapsed = !collapseDiv.Collapsed;
+        collapseDiv.Expanded = !collapseDiv.Expanded;
 
         Assert.Equal(1, fired);
     }

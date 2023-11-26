@@ -21,24 +21,22 @@ A container that content can be collapsed.
 | --color                  | #DDE              |
 | --height-transition-time | 300ms             |
 
-**Note**: The outer div changes it's css-class depending on expanding state: *collapsed* or *collapseable*.  
-
 ## Parameters
 
 | **Name**          | **Type**                  | **Default Value** | **Dexcription**                                                                                               |
 | ----------------- | ------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------- |
 | Head              | RenderFragment?           | null              | Content that is also visible collapsed. If clicked on it, it will expand/collapse.                            |
 | Content           | RenderFragment?           | null              | Content that is hidden when collapsed.                                                                        |
-| StartCollapsed    | bool                      | true              | Initializing collapsed or expanded.                                                                           |
-| OnCollapseChanged | EventCallback&lt;bool&gt; | default           | Fires every time when collapse state is changed. Parameter indicates if the component is currently collapsed. |
+| StartExpanded     | bool                      | true              | Initializing collapsed or expanded. Default is false.                                                         |
+| OnExpandedChanged | EventCallback&lt;bool&gt; | default           | Fires every time when collapse state is changed. Parameter indicates if the component is currently collapsed. |
 
 
 ## Properties
 
-| **Name**              | **Type** | get/set | **Dexcription**                                                      |
-| --------------------- | -------- | ------- | -------------------------------------------------------------------- |
-| Collapsed             | bool     | get/set | The state of collapsed or expanded.                                  |
-| SilentCollapsedSetter | bool     | set     | Sets the state of *Collapsed* without notifying *OnCollapseChanged*. |
+| **Name**             | **Type** | get/set | **Dexcription**                                                      |
+| -------------------- | -------- | ------- | -------------------------------------------------------------------- |
+| Expanded             | bool     | get/set | The state of collapsed or expanded.                                  |
+| SilentExpandedSetter | bool     | set     | Sets the state of *Collapsed* without notifying *OnCollapseChanged*. |
 
 
 <br></br>

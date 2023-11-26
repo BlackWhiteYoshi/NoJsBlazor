@@ -2,10 +2,11 @@
 
 @namespace NoJsBlazor
 
-<div class="collapse-div @(Collapsed ? "collapsed" : "collapseable")" @attributes="@Attributes">
-    <button class="head" @onclick="HeadClick">
+<div class="collapse-div" @attributes="@Attributes">
+    <label class="head" role="button">
+        <input type=checkbox class="collapse-toggle" @bind="Expanded" />
         @Head
-    </button>
+    </label>
     <div class="content-grid">
         <div class="content-inner">
             @Content

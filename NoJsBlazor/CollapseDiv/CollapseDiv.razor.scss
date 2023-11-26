@@ -7,14 +7,16 @@
     background-color: var(--color);
 
     & > .head {
-        width: 100%;
-        border: none;
-        background-color: unset;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 5px;
+        cursor: pointer;
+
+        & > .collapse-toggle {
+            display: none;
+        }
     }
 
 
@@ -27,13 +29,13 @@
         }
     }
 
-    &.collapsed > .content-grid {
+    .head:has(.collapse-toggle:not(:checked)) + .content-grid {
         grid-template-rows: 0.0000000001fr; // minifier removes 'fr' when 0 and therefore breaks transition
         padding-top: 0;
         padding-bottom: 0;
     }
 
-    &.collapseable > .content-grid {
+    .head:has(.collapse-toggle:checked) + .content-grid {
         grid-template-rows: 1fr;
         padding-top: 5px;
         padding-bottom: 5px;

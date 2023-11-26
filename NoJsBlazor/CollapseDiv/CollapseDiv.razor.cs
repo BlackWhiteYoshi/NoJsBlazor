@@ -19,17 +19,17 @@ public sealed partial class CollapseDiv : ComponentBase {
 
     /// <summary>
     /// <para>Initializing collapsed or expanded.</para>
-    /// <para>Default is true.</para>
+    /// <para>Default is false.</para>
     /// </summary>
     [Parameter]
-    public bool StartCollapsed { get; set; } = true;
+    public bool StartExpanded { get; set; } = false;
 
     /// <summary>
     /// <para>Fires every time when collapse state is changed.</para>
     /// <para>Parameter indicates if the component is currently collapsed.</para>
     /// </summary>
     [Parameter]
-    public EventCallback<bool> OnCollapseChanged { get; set; }
+    public EventCallback<bool> OnExpandedChanged { get; set; }
 
     /// <summary>
     /// Captures unmatched values
@@ -37,33 +37,31 @@ public sealed partial class CollapseDiv : ComponentBase {
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object>? Attributes { get; set; }
 
-    private bool _collapsed;
+    private bool _expanded;
     /// <summary>
     /// The state of collapsed or expanded.
     /// </summary>
-    public bool Collapsed {
-        get => _collapsed;
+    public bool Expanded {
+        get => _expanded;
         set {
-            if (value != _collapsed) {
-                _collapsed = value;
-                OnCollapseChanged.InvokeAsync(value);
+            if (value != _expanded) {
+                _expanded = value;
+                OnExpandedChanged.InvokeAsync(value);
                 InvokeAsync(StateHasChanged);
             }
         }
     }
 
     /// <summary>
-    /// Sets the state of <see cref="Collapsed"/> without notifying <see cref="OnCollapseChanged"/>.
+    /// Sets the state of <see cref="Expanded"/> without notifying <see cref="OnExpandedChanged"/>.
     /// </summary>
-    public bool SilentCollapsedSetter {
+    public bool SilentExpandedSetter {
         set {
-            _collapsed = value;
+            _expanded = value;
             InvokeAsync(StateHasChanged);
         }
     }
 
 
-    protected override void OnInitialized() => _collapsed = StartCollapsed;
-
-    private void HeadClick(MouseEventArgs e) => Collapsed = !Collapsed;
+    protected override void OnInitialized() => _expanded = StartExpanded;
 }

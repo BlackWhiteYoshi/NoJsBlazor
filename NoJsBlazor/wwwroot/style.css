@@ -146,14 +146,15 @@
   background-color: var(--color);
 }
 .collapse-div > .head {
-  width: 100%;
-  border: none;
-  background-color: unset;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
+}
+.collapse-div > .head > .collapse-toggle {
+  display: none;
 }
 .collapse-div > .content-grid {
   display: grid;
@@ -162,38 +163,34 @@
 .collapse-div > .content-grid > .content-inner {
   overflow: hidden;
 }
-.collapse-div.collapsed > .content-grid {
+.collapse-div .head:has(.collapse-toggle:not(:checked)) + .content-grid {
   grid-template-rows: 0.0000000001fr;
   padding-top: 0;
   padding-bottom: 0;
 }
-.collapse-div.collapseable > .content-grid {
+.collapse-div .head:has(.collapse-toggle:checked) + .content-grid {
   grid-template-rows: 1fr;
   padding-top: 5px;
   padding-bottom: 5px;
 }
 
-.collapse-div {
+.collapse-arrow {
   --arrow-size: 16px;
   --arrow-stroke-color: #000B;
   --arrow-background-color: #FFFB;
-}
-.collapse-div .collapse-arrow {
   width: var(--arrow-size);
   height: var(--arrow-size);
   transition: rotate 0.3s;
 }
-.collapse-div .collapse-arrow > circle, .collapse-div .collapse-arrow > line {
+.collapse-arrow > circle, .collapse-arrow > line {
   stroke: var(--arrow-stroke-color);
   stroke-width: 0.6px;
   fill: var(--arrow-background-color);
   stroke-linecap: round;
 }
-.collapse-div.collapseable .collapse-arrow {
+
+.collapse-toggle:checked ~ .collapse-arrow {
   rotate: 180deg;
-}
-.collapse-div.collapsed .collapse-arrow {
-  rotate: none;
 }
 
 .context-menu {
