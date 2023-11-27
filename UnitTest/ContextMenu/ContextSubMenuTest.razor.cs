@@ -11,8 +11,8 @@ public sealed partial class ContextSubMenuTest : TestContext {
 
         (IRenderedFragment? fragment, _, _, _) = RenderContextMenuTree(TEST_HTML);
 
-        IElement div = fragment.Find(".context-div");
-        Assert.Contains(TEST_HTML.Value, div.InnerHtml);
+        IElement div = fragment.Find(".context-submenu-toggle");
+        Assert.StartsWith(TEST_HTML.Value, div.InnerHtml);
     }
 
     #endregion
@@ -25,9 +25,11 @@ public sealed partial class ContextSubMenuTest : TestContext {
         (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuTree(default);
         Assert.False(contextSubMenu.Expanded);
 
-        IElement div = fragment.Find(".context-div");
-        div.Click();
+        IElement checkbox = fragment.Find(".context-submenu-checkbox");
+        checkbox.Change(true);
         Assert.True(contextSubMenu.Expanded);
+        checkbox.Change(false);
+        Assert.False(contextSubMenu.Expanded);
     }
 
 

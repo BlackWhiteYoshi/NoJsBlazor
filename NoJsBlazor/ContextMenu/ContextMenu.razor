@@ -1,8 +1,13 @@
-﻿@namespace NoJsBlazor
+﻿@using Microsoft.AspNetCore.Components.Web
+
+@namespace NoJsBlazor
 @inherits ListholdingComponentBase<ContextSubMenu>
 
-<ul class="context-menu @(Expanded ? "expanded" : string.Empty)" @attributes="@Attributes" style="top: @(top)px; left: @(left)px; @AddStyles()">
-    <CascadingValue Name="Parent" Value="(ListholdingComponentBase<ContextSubMenu>)this" IsFixed="true">
-        @ChildContent
-    </CascadingValue>
-</ul>
+<div class="context-menu" @attributes="@Attributes" style="top: @(top)px; left: @(left)px; @AddStyles()">
+    <input type=checkbox class="context-menu-checkbox" @bind="Expanded" />
+    <menu class="context-menu-list">
+        <CascadingValue Name="Parent" Value="(ListholdingComponentBase<ContextSubMenu>)this" IsFixed="true">
+            @ChildContent
+        </CascadingValue>
+    </menu>
+</div>

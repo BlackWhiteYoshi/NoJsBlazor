@@ -85,8 +85,8 @@ public sealed partial class ContextMenu : ListholdingComponentBase<ContextSubMen
         _expanded = false;
         InvokeAsync(StateHasChanged);
     }
-    
-    
+
+
     /// <summary>
     /// Collapses all expanded submenus.
     /// </summary>

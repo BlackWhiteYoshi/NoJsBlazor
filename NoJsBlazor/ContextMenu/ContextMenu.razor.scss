@@ -8,93 +8,103 @@
     --hover-dropright-shadow-color: #FFF;
     --hover-item-background-color: #FFF8;
 
-    // cannot invert value to get -desktop-dropdown-padding in css variable
-    $menu-padding: 5px;
-
 
     position: absolute;
-    margin: 0;
-    padding: $menu-padding 0;
-    display: flex;
-    flex-direction: column;
-    background-image: var(--background-image);
     z-index: 999;
-    border-radius: 5px;
-    list-style: none;
-    rotate: x 90deg;
-    transition: rotate 0.2s;
 
-    .context-menu {
-        top: -$menu-padding;
-        left: 100%;
-    }
+    .context-menu-list {
+        // cannot invert value to get -desktop-dropdown-padding in css variable
+        $menu-padding: 5px;
 
-    &.expanded {
-        rotate: none;
-    }
 
-    // context-submenu
-    .context-element {
-        position: relative;
+        
         margin: 0;
-        padding: $menu-padding #{2 * $menu-padding};
-        cursor: default;
-        white-space: nowrap;
+        padding: $menu-padding 0;
+        display: flex;
+        flex-direction: column;
+        background-image: var(--background-image);
+        border-radius: 5px;
+        list-style: none;
+        rotate: x 90deg;
+        transition: rotate 0.2s;
 
-        &:hover > .context-div, &.expanded > .context-div {
-            background-color: var(--hover-dropright-background-color);
-            box-shadow: 0 0 15px var(--hover-dropright-shadow-color);
+        .context-menu-list {
+            position: absolute;
+            top: -$menu-padding;
+            left: 100%;
         }
 
-        &:hover > .context-menu, &.expanded > .context-menu {
-            rotate: none;
+        // context-submenu
+        .context-element {
+            position: relative;
+            margin: 0;
+            padding: $menu-padding #{2 * $menu-padding};
+            cursor: default;
+            white-space: nowrap;
+
+            &:hover > .context-submenu-toggle, &:has(> .context-submenu-toggle > .context-submenu-checkbox:checked) > .context-submenu-toggle {
+                background-color: var(--hover-dropright-background-color);
+                box-shadow: 0 0 15px var(--hover-dropright-shadow-color);
+            }
+
+            &:hover > .context-menu-list, &:has(> .context-submenu-toggle > .context-submenu-checkbox:checked) > .context-menu-list {
+                rotate: none;
+            }
+
+            &:hover > .context-submenu-toggle > .context-arrow {
+                translate: 3px;
+                rotate: 270deg;
+
+                & > polygon {
+                    fill: var(--arrow-hover-color);
+                    stroke: var(--arrow-hover-stroke);
+                }
+            }
+        }
+    
+        .context-submenu-toggle {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            cursor: default;
         }
 
-        &:hover > .context-div > .context-arrow {
-            translate: 3px;
+        // context-item
+        .context-element.context-item {
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--hover-item-background-color);
+            }
+        }
+
+        // right arrow
+        .context-arrow {
+            width: var(--arrow-size);
+            height: auto;
+            margin: 0px 5px 0 2px;
+            cursor: auto;
             rotate: 270deg;
+            transition: rotate 0.1s linear, fill 0.1s linear;
 
             & > polygon {
-                fill: var(--arrow-hover-color);
-                stroke: var(--arrow-hover-stroke);
+                fill: var(--arrow-color);
+            }
+
+            & > circle, & > line {
+                display: none;
             }
         }
     }
-    
-    .context-div {
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        cursor: default;
+
+    .context-menu-checkbox:checked + .context-menu-list {
+        rotate: none;
     }
 
-    // context-item
-    .context-element.context-item {
-        cursor: pointer;
-
-        &:hover {
-            background-color: var(--hover-item-background-color);
-        }
-    }
-
-    // right arrow
-    .context-arrow {
-        width: var(--arrow-size);
-        height: auto;
-        margin: 0px 5px 0 2px;
-        cursor: auto;
-        rotate: 270deg;
-        transition: rotate 0.1s linear, fill 0.1s linear;
-
-        & > polygon {
-            fill: var(--arrow-color);
-        }
-
-        & > circle, & > line {
-            display: none;
-        }
+    .context-menu-checkbox, .context-submenu-checkbox {
+        display: none;
     }
 }

@@ -23,6 +23,7 @@ public sealed partial class ContextSubMenu : ListableComponentBase<ContextSubMen
     [Parameter]
     public EventCallback<bool> OnToggle { get; set; }
 
+
     private bool _expanded = false;
     /// <summary>
     /// The state of collapsed or expanded for this submenu.
@@ -49,8 +50,6 @@ public sealed partial class ContextSubMenu : ListableComponentBase<ContextSubMen
         }
     }
 
-
-    private void DropRightClick(MouseEventArgs e) => Toggle();
 
     /// <summary>
     /// <para>Expands/Collapses this menu.</para>

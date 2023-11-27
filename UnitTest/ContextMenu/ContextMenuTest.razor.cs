@@ -12,7 +12,8 @@ public sealed partial class ContextMenuTest : TestContext {
         });
         ContextMenu contextMenu = contextMenuContainer.Instance;
 
-        Assert.Equal(4, contextMenu.ChildCount);
+        IElement menu = contextMenuContainer.Find(".context-menu-list");
+        Assert.Equal(4, menu.Children.Length);
     }
 
     [Fact]
@@ -23,7 +24,7 @@ public sealed partial class ContextMenuTest : TestContext {
             builder.Add((ContextMenu contextMenu) => contextMenu.ChildContent, TEST_HTML);
         });
 
-        IElement div = contextMenuContainer.Find(".context-menu");
+        IElement div = contextMenuContainer.Find(".context-menu-list");
         Assert.Equal(TEST_HTML, div.InnerHtml);
     }
 
