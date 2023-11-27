@@ -25,8 +25,27 @@ A Carousel like in Bootstrap. It can also display an overlay, control-arrows, it
 </Carousel>
 ```
 
+```css
+.carousel {
+    --swap-duration: 500ms;
+    --overlay-position: auto auto 20% 20%;
+    --arrow-left-position: 0 auto 0 5%;
+    --arrow-right-position: 0 5% 0 auto;
+    --arrow-size: 6%;
+    --arrow-color: #FFF;
+    --indicator-list-position: auto 0 1em 0;
+    --indicator-list-width: 60%;
+    --indicator-gap: 5px;
+    --indicator-color: #FFF;
+    --indicator-progress-color: #0AA;
+    --play-button-position: auto auto calc(1em + 25px) 15%;
+    --play-button-size: 6%;
+    --play-button-color: #FFF;
+}
+```
 
-## CSS Variables (.carousel)
+
+## CSS Variables: .carousel
 
 | **Name**                   | **Default Value**              |
 | -------------------------- | ------------------------------ |

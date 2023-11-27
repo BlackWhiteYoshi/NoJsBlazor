@@ -16,8 +16,20 @@ Input field with a embedded label.
         InputAttributes="null" />
 ```
 
+```css
+.input-field-container {
+    --input-width: 12.5em;
+    --padding-top-bottom: 0.6em;
+    --padding-left-right: 1.2em;
+    --label-top-offset-left: 0.5em;
+    --background-color: #FFF;
+    --border-color: #444;
+    --focus-color: #00F;
+}
+```
 
-## CSS Variables (.input-field-container)
+
+## CSS Variables: .input-field-container
 
 | **Name**                | **Default Value** |
 | ----------------------- | ----------------- |

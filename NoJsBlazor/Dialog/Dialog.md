@@ -21,8 +21,17 @@ A little message window that it is first hidden and can be displayed on demand.
 </Dialog>
 ```
 
+```css
+.dialog-modal-background {
+    --modal-screen-background-color: rgba(255, 255, 255, 0.8);
+    --window-border-radius: 20px;
+    --title-background-color: #FFF;
+    --content-background-color: #EEE;
+}
+```
 
-## CSS Variables (.dialog-modal-background)
+
+## CSS Variables: .dialog-modal-background
 
 | **Name**                        | **Default Value**        |
 | ------------------------------- | ------------------------ |

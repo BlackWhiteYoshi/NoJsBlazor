@@ -20,8 +20,31 @@ A container that contains a nested list of items/links. It automatically collaps
 </NavBar>
 ```
 
+```css
+.nav-root {
+    --phone-menu-max-width: 330px;
+    --phone-menu-max-height: calc(100vh - 100px);
+    --phone-nav-dropdown-transition-time: 300ms;
+    --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
+    --font-color: #000;
+    --desktop-link-padding: 13px;
+    --vertical-link-padding: 8px;
+    --phone-button-size: 65%;
+    --phone-button-color: #000B;
+    --phone-hover-shadow: 0 0 10px #88F;
+    --arrow-down-size: 12px;
+    --arrow-right-size: 10px;
+    --arrow-desktop-color: #000B;
+    --arrow-desktop-hover-color: #FFFB;
+    --arrow-desktop-hover-stroke: #000;
+    --arrow-phone-size: 35px;
+    --arrow-phone-color: #000B;
+    --arrow-phone-color-hover: #FFFB;
+}
+```
 
-## CSS Variables (.nav-root)
+
+## CSS Variables: .nav-root
 
 | **Name**                             | **Default Value**                                                                                    |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------------- |

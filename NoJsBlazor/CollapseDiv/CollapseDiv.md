@@ -3,7 +3,7 @@
 A container that content can be collapsed.
 
 ```razor
-<CollapseDiv StartCollapsed="true" OnCollapseChanged="(bool collapsed) => { }">
+<CollapseDiv StartExpanded="true" OnExpandedChanged="(bool collapsed) => { }">
     <Head>
         RenderFragment<CollapseDivArrow />
     </Head>
@@ -13,8 +13,21 @@ A container that content can be collapsed.
 </CollapseDiv>
 ```
 
+```css
+.collapse-div {
+    --color: #DDE;
+    --height-transition-time: 300ms;
+}
 
-## CSS Variables (.collapse-div)
+.collapse-arrow {
+    --arrow-size: 16px;
+    --arrow-stroke-color: #000B;
+    --arrow-background-color: #FFFB;
+}
+```
+
+
+## CSS Variables: .collapse-div
 
 | **Name**                 | **Default Value** |
 | ------------------------ | ----------------- |
@@ -45,7 +58,7 @@ A container that content can be collapsed.
 A component containing a svg arrow icon.
 Can be placed inside CollapseDiv.Head to get a nice expanded-indicator that rotates on expanding.
 
-### CSS Variables (.collapse-arrow)
+### CSS Variables: .collapse-arrow
 
 | **Name**                 | **Default Value** |
 | ------------------------ | ----------------- |

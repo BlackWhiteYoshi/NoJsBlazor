@@ -15,8 +15,21 @@ Triggering the menu is not included.
 </ContextMenu>
 ```
 
+```css
+.context-menu {
+    --background-image: linear-gradient(90deg, rgba(200, 200, 255, 0.8), rgba(230, 230, 255, 0.8), rgba(200, 200, 255, 0.8));
+    --arrow-size: 10px;
+    --arrow-color: #000B;
+    --arrow-hover-color: #FFFB;
+    --arrow-hover-stroke: #000;
+    --hover-dropright-background-color: #FFF6;
+    --hover-dropright-shadow-color: #FFF;
+    --hover-item-background-color: #FFF8;
+}
+```
 
-## CSS Variables (.context-menu)
+
+## CSS Variables: .context-menu
 
 | **Name**                           | **Default Value**                                                                                    |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------- |
