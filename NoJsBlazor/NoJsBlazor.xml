@@ -182,13 +182,13 @@
             Content that is hidden when collapsed.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.CollapseDiv.StartCollapsed">
+        <member name="P:NoJsBlazor.CollapseDiv.StartExpanded">
             <summary>
             <para>Initializing collapsed or expanded.</para>
-            <para>Default is true.</para>
+            <para>Default is false.</para>
             </summary>
         </member>
-        <member name="P:NoJsBlazor.CollapseDiv.OnCollapseChanged">
+        <member name="P:NoJsBlazor.CollapseDiv.OnExpandedChanged">
             <summary>
             <para>Fires every time when collapse state is changed.</para>
             <para>Parameter indicates if the component is currently collapsed.</para>
@@ -199,14 +199,14 @@
             Captures unmatched values
             </summary>
         </member>
-        <member name="P:NoJsBlazor.CollapseDiv.Collapsed">
+        <member name="P:NoJsBlazor.CollapseDiv.Expanded">
             <summary>
             The state of collapsed or expanded.
             </summary>
         </member>
-        <member name="P:NoJsBlazor.CollapseDiv.SilentCollapsedSetter">
+        <member name="P:NoJsBlazor.CollapseDiv.SilentExpandedSetter">
             <summary>
-            Sets the state of <see cref="P:NoJsBlazor.CollapseDiv.Collapsed"/> without notifying <see cref="P:NoJsBlazor.CollapseDiv.OnCollapseChanged"/>.
+            Sets the state of <see cref="P:NoJsBlazor.CollapseDiv.Expanded"/> without notifying <see cref="P:NoJsBlazor.CollapseDiv.OnExpandedChanged"/>.
             </summary>
         </member>
         <member name="T:NoJsBlazor.ContextMenu">
@@ -475,7 +475,7 @@
         <member name="P:NoJsBlazor.EditFormInput.Autocomplete">
             <summary>
             <para>Sets the "autocomplete"-attribute in the input field.</para>
-            <para>default is true.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.EditFormInput.InputAttributes">
@@ -546,7 +546,7 @@
         <member name="P:NoJsBlazor.Input.Autocomplete">
             <summary>
             <para>Sets the "autocomplete"-attribute in the input field.</para>
-            <para>default is true.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Input.InputAttributes">
@@ -594,7 +594,7 @@
         <member name="P:NoJsBlazor.InputBase.Autocomplete">
             <summary>
             <para>Sets the "autocomplete"-attribute in the input field.</para>
-            <para>default is true.</para>
+            <para>Default is true.</para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.InputBase.InputAttributes">
@@ -645,6 +645,12 @@
         <member name="P:NoJsBlazor.NavBar.SilentExpandedSetter">
             <summary>
             Sets the state of <see cref="P:NoJsBlazor.NavBar.Expanded"/> without notifying <see cref="P:NoJsBlazor.NavBar.OnToggle"/>.
+            </summary>
+        </member>
+        <member name="M:NoJsBlazor.NavBar.Toggle">
+            <summary>
+            <para>Expands/Collapses this menu.</para>
+            <para>Shorthand for: <see cref="P:NoJsBlazor.NavBar.Expanded">Expanded</see> = !<see cref="P:NoJsBlazor.NavBar.Expanded">Expanded</see>;</para>
             </summary>
         </member>
         <member name="M:NoJsBlazor.NavBar.Reset">
@@ -851,7 +857,8 @@
         </member>
         <member name="P:NoJsBlazor.Slider`1.Title">
             <summary>
-            An optional label.
+            <para>An optional label.</para>
+            <para>Default is <see cref="F:System.String.Empty"/></para>
             </summary>
         </member>
         <member name="P:NoJsBlazor.Slider`1.Min">
@@ -868,7 +875,7 @@
         </member>
         <member name="P:NoJsBlazor.Slider`1.Step">
             <summary>
-            <para>Slider precision</para>
+            <para>Slider precision.</para>
             <para>Default is 1.</para>
             </summary>
         </member>
