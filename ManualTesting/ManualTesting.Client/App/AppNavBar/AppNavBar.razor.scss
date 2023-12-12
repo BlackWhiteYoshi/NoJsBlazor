@@ -38,14 +38,14 @@
             width: auto;
             margin-left: 5px;
             border-radius: 50%;
-            fill: rgba(0, 0, 0, 0.3);
+            fill: #0005;
             transition: background-color 0.1s, fill 0.1s;
         }
 
         &:hover {
             img, svg {
                 background-color: #E8E8E8;
-                fill: rgba(0, 0, 0, 1);
+                fill: #000F;
                 transition: background-color 0.3s, fill 0.3s;
             }
         }

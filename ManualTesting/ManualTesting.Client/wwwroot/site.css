@@ -129,12 +129,12 @@ a:hover {
   width: auto;
   margin-left: 5px;
   border-radius: 50%;
-  fill: rgba(0, 0, 0, 0.3);
+  fill: rgba(0, 0, 0, 0.3333333333);
   transition: background-color 0.1s, fill 0.1s;
 }
 .nav-brand a:hover img, .nav-brand a:hover svg {
   background-color: #E8E8E8;
-  fill: rgb(0, 0, 0);
+  fill: black;
   transition: background-color 0.3s, fill 0.3s;
 }
 

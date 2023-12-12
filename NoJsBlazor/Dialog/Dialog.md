@@ -23,7 +23,7 @@ A little message window that it is first hidden and can be displayed on demand.
 
 ```css
 .dialog-modal-background {
-    --modal-screen-background-color: rgba(255, 255, 255, 0.8);
+    --modal-screen-background-color: #FFFC;
     --window-border-radius: 20px;
     --title-background-color: #FFF;
     --content-background-color: #EEE;
@@ -33,12 +33,12 @@ A little message window that it is first hidden and can be displayed on demand.
 
 ## CSS Variables: .dialog-modal-background
 
-| **Name**                        | **Default Value**        |
-| ------------------------------- | ------------------------ |
-| --modal-screen-background-color | rgba(255, 255, 255, 0.8) |
-| --window-border-radius          | 20px                     |
-| --title-background-color        | #FFF                     |
-| --content-background-color      | #EEE                     |
+| **Name**                        | **Default Value** |
+| ------------------------------- | ----------------- |
+| --modal-screen-background-color | #FFFC             |
+| --window-border-radius          | 20px              |
+| --title-background-color        | #FFF              |
+| --content-background-color      | #EEE              |
 
 
 ## Parameters
