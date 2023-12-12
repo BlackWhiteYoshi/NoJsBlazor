@@ -6,7 +6,9 @@
 <nav class="@NavRootClass" @attributes="@Attributes">
     <label class="nav-toggle" role="button">
         <input type=checkbox class="nav-checkbox" @bind="Expanded" />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" class="nav-toggle-icon" aria-label="Toggle navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" class="nav-toggle-icon" aria-label="Toggle navigation" role="img">
+            <desc>Toggle to open and close the navigation menu.</desc>
+
             <line class="bar" x1='4' y1='7' x2='26' y2='7'/>
             <line class="bar" x1='4' y1='15' x2='26' y2='15'/>
             <line class="bar" x1='4' y1='23' x2='26' y2='23'/>
@@ -16,7 +18,7 @@
     </label>
     
     @if (Brand != null) {
-        <div class="nav-brand" @onclick="Reset">@Brand</div>
+        <div class="nav-brand" role="banner" @onclick="Reset">@Brand</div>
     }
 
     <menu class="nav-list">

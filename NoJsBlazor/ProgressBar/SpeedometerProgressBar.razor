@@ -2,7 +2,9 @@
 @inherits ProgressBar
 
 <div class="speedometer-progress-bar" @attributes="@Attributes">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" role="img">
+        <desc>Shows the loading progress.</desc>
+
         <text x="-5" y="70">%</text>
         <circle class="outer-circle" cx="0" cy="0" r="99" />
         

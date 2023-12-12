@@ -2,7 +2,9 @@
 @inherits ProgressBar
 
 <div class="circle-progress-bar" @attributes="@Attributes">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" role="img">
+        <desc>Shows the loading progress.</desc>
+
         <circle cx="0" cy="0" r="99" />
         <g>
             @if (Progress < 1.0) {
