@@ -60,7 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.14" />
     <PackageReference Include="InlineComposition" Version="1.0.7" PrivateAssets="all" />
   </ItemGroup>
 
