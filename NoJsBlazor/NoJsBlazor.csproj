@@ -24,7 +24,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <Version>4.0.1</Version>
+    <Version>4.0.2</Version>
     <IsAotCompatible>true</IsAotCompatible>
     <DebugType>embedded</DebugType>
     <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
@@ -61,7 +61,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.14" />
-    <PackageReference Include="InlineComposition" Version="1.0.7" PrivateAssets="all" />
+    <PackageReference Include="InlineComposition" Version="1.0.8" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
