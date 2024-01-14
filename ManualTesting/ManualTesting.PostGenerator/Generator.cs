@@ -12,27 +12,39 @@ public static class Generator {
         public List<string> ErrorList { get; private set; } = [];
 
 
-        public async Task GenerateHtmlPages() {
-            using WebApplicationFactory<ClientHost.Program.IAssemblyMarker> factory = new();
-            using HttpClient httpClient = factory.CreateClient();
-            HtmlSettings htmlSettings = new() {
-                RemoveComments = false,
-                RemoveOptionalTags = false
-            };
+        public async Task GenerateFiles() {
+            using WebApplicationFactory<ClientHost.Program.IAssemblyMarker> webApplicationFactory = new();
+            using HttpClient httpClient = webApplicationFactory.CreateClient();
 
-            using HttpResponseMessage response = await httpClient.GetAsync("");
-            string htmlContent = await response.Content.ReadAsStringAsync();
+            if (config.GenerateHtmlPage) {
+                HtmlSettings htmlSettings = new() {
+                    RemoveComments = false,
+                    RemoveOptionalTags = false
+                };
 
-            UglifyResult minifyResult = Uglify.Html(htmlContent, htmlSettings);
-            if (minifyResult.HasErrors) {
-                ErrorList.Add($"HTML Minification error:");
-                foreach (UglifyError error in minifyResult.Errors)
-                    ErrorList.Add(error.Message);
+                using HttpResponseMessage response = await httpClient.GetAsync("");
+                string htmlContent = await response.Content.ReadAsStringAsync();
+
+                UglifyResult minifyResult = Uglify.Html(htmlContent, htmlSettings);
+                if (minifyResult.HasErrors) {
+                    ErrorList.Add($"HTML Minification error:");
+                    foreach (UglifyError error in minifyResult.Errors)
+                        ErrorList.Add(error.Message);
+                }
+
+                string fileName = $"{config.PageFolderPathWithTrailingSlash}index.html";
+                Directory.CreateDirectory(Path.GetDirectoryName(fileName)!);
+                await File.WriteAllTextAsync(fileName, minifyResult.Code);
             }
 
-            string fileName = $"{config.PageFolderPathWithTrailingSlash}index.html";
-            Directory.CreateDirectory(Path.GetDirectoryName(fileName)!);
-            await File.WriteAllTextAsync(fileName, minifyResult.Code);
+            foreach (string filePath in config.GenerateFiles) {
+                using HttpResponseMessage response = await httpClient.GetAsync(filePath);
+                string content = await response.Content.ReadAsStringAsync();
+
+                string absoluteFilePath = $"{config.WorkingDirectoryWithTrailingSlash}{filePath}";
+                Directory.CreateDirectory(Path.GetDirectoryName(absoluteFilePath)!);
+                await File.WriteAllTextAsync(absoluteFilePath, content);
+            }
         }
 
         public async Task CreateRobotsTxt() {
@@ -40,14 +52,14 @@ public static class Generator {
         }
 
         public async Task CreateSiteMap() {
-            const string siteMapContent = """
+            string siteMapContent = """
                 <?xml version="1.0" encoding="UTF-8"?>
                 <urlset
                       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
                   <url>
-                    <loc>https://nojsblazor.firerocket.de/</loc>
+                    <loc>{config.SiteUrl}/</loc>
                   </url>
                 </urlset>
 
@@ -178,10 +190,10 @@ public static class Generator {
         Core core = new(config);
 
 
-        if (config.GenerateHtmlPages) {
-            Console.WriteLine("Generating html pages...");
-            await core.GenerateHtmlPages();
-            Console.WriteLine("Done html pages.\n");
+        if (config.GenerateHtmlPage || config.GenerateFiles.Length > 0) {
+            Console.WriteLine("Generating files...");
+            await core.GenerateFiles();
+            Console.WriteLine("Done file generating.\n");
         }
         else
             Console.WriteLine("Skip html pages.\n");

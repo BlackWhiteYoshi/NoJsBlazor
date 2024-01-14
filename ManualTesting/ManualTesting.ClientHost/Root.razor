@@ -27,13 +27,13 @@
         <link rel="stylesheet" href="/site.css" />
         
         <script src="/site.js" defer></script>
-        <script src="/_framework/blazor.webassembly.js" defer></script>
+        <script src="/_framework/blazor.web.js" defer></script>
     </head>
 
     <body>
         @{
             __builder.OpenComponent<Client.IApp>(0);
-            __builder.AddComponentRenderMode(RenderMode.InteractiveWebAssembly);
+            __builder.AddComponentRenderMode(renderMode);
             __builder.CloseComponent();
         }
 

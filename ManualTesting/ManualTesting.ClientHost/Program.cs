@@ -1,24 +1,55 @@
 ﻿using ManualTesting.Client.Services;
+using Microsoft.AspNetCore.Components.Server;
 
 namespace ManualTesting.ClientHost;
 
 public static class Program {
     public interface IAssemblyMarker;
 
+    [Flags]
+    private enum RenderMode {
+        Server = 1,
+        Webassembly = 2,
+        Static = 4
+    }
+
 
     public static Task Main(string[] args) {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
         bool isDevelopmentEnvironment = builder.Environment.IsDevelopment();
+
+        RenderMode renderMode = builder.Configuration["RenderMode"] switch {
+            "auto" => RenderMode.Server | RenderMode.Webassembly,
+            "webassembly" => RenderMode.Webassembly,
+            "server" => RenderMode.Server,
+            "static" => RenderMode.Static,
+            _ => throw new ArgumentException($"invalid config of 'RenderMode': {builder.Configuration["RenderMode"]}")
+        };
+
+        bool preRender = bool.TryParse(builder.Configuration["Prerender"], out bool value) switch {
+            true /* value present */ => value,
+            false /* default value */ => true
+        };
+
+        // check for valid startup configuration
+        if (renderMode == RenderMode.Static && !preRender)
+            throw new ArgumentException($"invalid combination of 'RenderMode' and 'Prerender': static without prerendering basically means doing nothing");
 
 
         // configure Services
         {
             IServiceCollection services = builder.Services;
 
-            builder.Services.AddRazorComponents()
-                .AddInteractiveWebAssemblyComponents();
+            IRazorComponentsBuilder razorComponentsBuilder = services.AddRazorComponents();
+            if (renderMode.HasFlag(RenderMode.Server))
+                razorComponentsBuilder.AddInteractiveServerComponents().AddCircuitOptions((CircuitOptions options) => options.DetailedErrors = builder.Environment.IsDevelopment());
+            if (renderMode.HasFlag(RenderMode.Webassembly))
+                razorComponentsBuilder.AddInteractiveWebAssemblyComponents();
 
-            services.AddSingleton<PreRendering>(() => true);
+            services.AddScoped<Services.PreRenderFlag>();
+            services.AddScoped<PreRendering>((IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<Services.PreRenderFlag>().GetFlag);
+            
             services.AddCoreServices();
         }
 
@@ -34,8 +65,11 @@ public static class Program {
             app.UseStaticFiles();
             app.UseAntiforgery();
 
-            app.MapRazorComponents<Root>().AddAdditionalAssemblies(typeof(Client.App).Assembly)
-                .AddInteractiveWebAssemblyRenderMode();
+            RazorComponentsEndpointConventionBuilder razorComponentsEndpointBuilder = app.MapRazorComponents<Root>().AddAdditionalAssemblies(typeof(Client.App).Assembly);
+            if (renderMode.HasFlag(RenderMode.Server))
+                razorComponentsEndpointBuilder.AddInteractiveServerRenderMode();
+            if (renderMode.HasFlag(RenderMode.Webassembly))
+                razorComponentsEndpointBuilder.AddInteractiveWebAssemblyRenderMode();
         }
 
 

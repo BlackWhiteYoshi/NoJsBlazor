@@ -37,7 +37,8 @@ public sealed class Config {
 
     public required string SiteUrl { get; init; }
 
-    public required bool GenerateHtmlPages { get; init; }
+    public required bool GenerateHtmlPage { get; init; }
+    public required string[] GenerateFiles { get; init; }
 
     public required bool CreateRobotsTxt { get; init; }
 
@@ -64,13 +65,14 @@ public sealed class Config {
             throw new InvalidDataException($"working directory does not exist:\n{Path.Combine(Directory.GetCurrentDirectory(), WorkingDirectory)}");
         WorkingDirectoryWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}";
         
-        string relativePageFolderPath = root.Get("generate html pages").GetString("page folder");
+        string relativePageFolderPath = root.Get("generate files").Get("html page").GetString("page folder");
         PageFolderPath = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}";
         PageFolderPathWithTrailingSlash = $"{WorkingDirectory}{Path.DirectorySeparatorChar}{relativePageFolderPath}{Path.DirectorySeparatorChar}";
 
         SiteUrl = root.GetString("site url");
 
-        GenerateHtmlPages = root.Get("generate html pages").GetBool("enabled");
+        GenerateHtmlPage = root.Get("generate files").Get("html page").GetBool("enabled");
+        GenerateFiles = root.Get("generate files").Get("other files").AsStringArray();
 
         CreateRobotsTxt = root.GetBool("create robots.txt");
 
