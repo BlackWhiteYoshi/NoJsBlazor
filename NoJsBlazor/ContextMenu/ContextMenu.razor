@@ -4,7 +4,7 @@
 @inherits ListholdingComponentBase<ContextSubMenu>
 
 <div class="context-menu" @attributes="@Attributes" style="top: @(top)px; left: @(left)px; @AddStyles()">
-    <input type=checkbox class="context-menu-checkbox" @bind="Expanded" />
+    <input type=checkbox class="context-menu-checkbox" @bind="Expanded">
     <menu class="context-menu-list">
         <CascadingValue Name="Parent" Value="(ListholdingComponentBase<ContextSubMenu>)this" IsFixed="true">
             @ChildContent

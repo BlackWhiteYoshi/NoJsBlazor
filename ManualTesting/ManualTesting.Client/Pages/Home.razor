@@ -4,7 +4,7 @@
 <div id="home">
     <h1 class="headline-background">NoJsBlazor</h1>
     
-    <p class="center" style="font-size: 1.2rem; margin-bottom: 5em;">This is the test website for NoJsBlazor.<br />
+    <p class="center" style="font-size: 1.2rem; margin-bottom: 5em;">This is the test website for NoJsBlazor.<br>
         For sourcecode and documentation visit <a href="https://github.com/BlackWhiteYoshi/NoJsBlazor">github.com/BlackWhiteYoshi/NoJsBlazor</a>.
     </p>
 
@@ -33,7 +33,7 @@
                 <label>items</label>
                 @foreach (int i in Enumerable.Range(0, colorList.Count)) {
                     <div>
-                        <input @bind="colorList[i]" style="width: 250px" />
+                        <input @bind="colorList[i]" style="width: 250px">
                     </div>
                 }
                 <div class="center">
@@ -41,8 +41,8 @@
                     <button @onclick="_ => colorList.RemoveAt(colorList.Count - 1)" style="padding: 3px 5px;  background-color: #F88;">-</button>
                 </div>
                 <div>
-                    <input @bind="swap1" style="width: 40px" />
-                    <input @bind="swap2" style="width: 40px" />
+                    <input @bind="swap1" style="width: 40px">
+                    <input @bind="swap2" style="width: 40px">
                     <button @onclick="_ => carousel!.SwapCarouselItems(swap1, swap2)">Swap items</button>
                 </div>
             </div>
@@ -55,23 +55,23 @@
                 <label>Animation</label>
             </div>
             <div>
-                <input type="checkbox" @bind="controlArrowsEnable" />
+                <input type="checkbox" @bind="controlArrowsEnable">
                 <label>controlArrowsEnable</label>
             </div>
             <div>
-                <input type="checkbox" @bind="indicatorsEnable" />
+                <input type="checkbox" @bind="indicatorsEnable">
                 <label>indicatorsEnable</label>
             </div>
             <div>
-                <input type="checkbox" @bind="playButtonEnable" />
+                <input type="checkbox" @bind="playButtonEnable">
                 <label>playButtonEnable</label>
             </div>
             <div>
-                <input @bind="intervalTime" style="width: 50px; padding: 3px 5px;" />
+                <input @bind="intervalTime" style="width: 50px; padding: 3px 5px;">
                 <label>intervalTime</label>
             </div>
             <div>
-                <input @bind="autoStartTime" style="width: 50px; padding: 3px 5px;" />
+                <input @bind="autoStartTime" style="width: 50px; padding: 3px 5px;">
                 <label>autoStartTime</label>
             </div>
         </div>
@@ -128,8 +128,8 @@
                 </Title>
                 <Content>
                     <p style="margin: 0;">
-                        I am any text.<br />
-                        I have no sense.<br />
+                        I am any text.<br>
+                        I have no sense.<br>
                         Reading me doesn't do anything.
                     </p>
                     <button class="btn-main center" style="margin-top: 20px;" @onclick="CloseDialog">close dialog</button>
