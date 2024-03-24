@@ -45,7 +45,7 @@ Triggering the menu is not included.
 
 ## Parameters
 
-| **Name**     | **Type**                  | **Default Value** | **Dexcription**                                                          |
+| **Name**     | **Type**                  | **Default Value** | **Description**                                                          |
 | ------------ | ------------------------- | ----------------- | ------------------------------------------------------------------------ |
 | ChildContent | RenderFragment            | *required*        | Content of this ContextMenu.                                             |
 | OnToggle     | EventCallback&lt;bool&gt; | default           | Fires every time when *Expanded* get changed. Value is equal *Expanded*. |
@@ -53,14 +53,14 @@ Triggering the menu is not included.
 
 ## Properties
 
-| **Name** | **Type** | get/set | **Dexcription**                    |
+| **Name** | **Type** | get/set | **Description**                    |
 | -------- | -------- | ------- | ---------------------------------- |
 | Expanded | bool     | get     | The state of collapsed or visible. |
 
 
 ## Methods
 
-| **Name**    | **Parameters**     | **ReturnType** | **Dexcription**                                                                           |
+| **Name**    | **Parameters**     | **ReturnType** | **Description**                                                                           |
 | ----------- | ------------------ | -------------- | ----------------------------------------------------------------------------------------- |
 | Open        | double x, double y | void           | Display the context menu at the given location.                                           |
 | Close       | *empty*            | void           | Collapses all expanded submenus and closes the context menu.                              |
@@ -76,7 +76,7 @@ Another *ContextMenu* inside of a *ContextMenu* or *ContextSubMenu*.
 
 ### Parameters
 
-| **Name** | **Type**                  | **Default Value** | **Dexcription**                                                          |
+| **Name** | **Type**                  | **Default Value** | **Description**                                                          |
 | -------- | ------------------------- | ----------------- | ------------------------------------------------------------------------ |
 | Head     | RenderFragment            | *required*        | Content that is collapsed visible.                                       |
 | Items    | RenderFragment            | *required*        | Content that is expanded visible.                                        |
@@ -84,14 +84,14 @@ Another *ContextMenu* inside of a *ContextMenu* or *ContextSubMenu*.
 
 ### Properties
 
-| **Name**             | **Type** | get/set | **Dexcription**                                                            |
+| **Name**             | **Type** | get/set | **Description**                                                            |
 | -------------------- | -------- | ------- | -------------------------------------------------------------------------- |
 | Expanded             | bool     | get/set | The state of collapsed or expanded for this submenu.                       |
 | SilentExpandedSetter | bool     | set     | Sets the state of *Expanded* without notifying *OnToggle* of this submenu. |
 
 ### Methods
 
-| **Name** | **Parameters** | **ReturnType** | **Dexcription**                                                       |
+| **Name** | **Parameters** | **ReturnType** | **Description**                                                       |
 | -------- | -------------- | -------------- | --------------------------------------------------------------------- |
 | Toggle   | *empty*        | void           | Expands/Collapses this menu. Shorthand for: *Expanded = !Expanded*;   |
 
@@ -104,7 +104,7 @@ This should be placed inside of a *ContextMenu* or *ContextSubMenu* instance.
 
 ### Parameters
 
-| **Name**     | **Type**                            | **Default Value** | **Dexcription**                                                |
+| **Name**     | **Type**                            | **Default Value** | **Description**                                                |
 | ------------ | ----------------------------------- | ----------------- | -------------------------------------------------------------- |
 | ChildContent | RenderFragment                      | *required*        | Html that will be displayed.                                   |
 | OnPressed    | EventCallback&lt;MouseEventArgs&gt; | default           | Invokes every time when this list item get clicked or touched. |

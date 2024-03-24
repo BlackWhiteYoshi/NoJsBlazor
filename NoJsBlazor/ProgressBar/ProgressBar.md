@@ -60,7 +60,7 @@ An animation that shows a bar growing from left to right.
 
 ### Parameters
 
-| **Name** | **Type** | **Default Value** | **Dexcription**                                                                      |
+| **Name** | **Type** | **Default Value** | **Description**                                                                      |
 | -------- | -------- | ----------------- | ------------------------------------------------------------------------------------ |
 | Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. Default is 0.0 |
 | Text     | string   | string.Empty      | Displaying text of this component. Default is string.Empty                           |
@@ -68,7 +68,7 @@ An animation that shows a bar growing from left to right.
 
 ### Properties
 
-| **Name** | **Type**                 | get/set | **Dexcription**                                                         |
+| **Name** | **Type**                 | get/set | **Description**                                                         |
 | -------- | ------------------------ | ------- | ----------------------------------------------------------------------- |
 | Content  | (float bar, string text) | get/set | Accessing *Progress* and *Text* together. Also rerenders the component. |
 
@@ -95,7 +95,7 @@ An animation that shows a circle filling clockwise starting at top.
 
 ### Parameters
 
-| **Name** | **Type** | **Default Value** | **Dexcription**                                                                      |
+| **Name** | **Type** | **Default Value** | **Description**                                                                      |
 | -------- | -------- | ----------------- | ------------------------------------------------------------------------------------ |
 | Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. Default is 0.0 |
 | Text     | string   | string.Empty      | Displaying text of this component. Default is string.Empty.                          |
@@ -103,7 +103,7 @@ An animation that shows a circle filling clockwise starting at top.
 
 ### Properties
 
-| **Name** | **Type**                 | get/set | **Dexcription**                                                         |
+| **Name** | **Type**                 | get/set | **Description**                                                         |
 | -------- | ------------------------ | ------- | ----------------------------------------------------------------------- |
 | Content  | (float bar, string text) | get/set | Accessing *Progress* and *Text* together. Also rerenders the component. |
 
@@ -138,7 +138,7 @@ An animation that shows speedometer where the hand is increasing with progress.
 
 ### Parameters
 
-| **Name** | **Type** | **Default Value** | **Dexcription**                                                                      |
+| **Name** | **Type** | **Default Value** | **Description**                                                                      |
 | -------- | -------- | ----------------- | ------------------------------------------------------------------------------------ |
 | Progress | float    | 0.0f              | The relative amount of the progress Bar. 0 means empty, 1 means full. Default is 0.0 |
 | Text     | string   | string.Empty      | Displaying text of this component. Default is string.Empty.                          |
@@ -146,6 +146,6 @@ An animation that shows speedometer where the hand is increasing with progress.
 
 ### Properties
 
-| **Name** | **Type**                 | get/set | **Dexcription**                                                         |
+| **Name** | **Type**                 | get/set | **Description**                                                         |
 | -------- | ------------------------ | ------- | ----------------------------------------------------------------------- |
 | Content  | (float bar, string text) | get/set | Accessing *Progress* and *Text* together. Also rerenders the component. |

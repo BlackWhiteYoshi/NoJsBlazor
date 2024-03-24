@@ -67,7 +67,7 @@ A Carousel like in Bootstrap. It can also display an overlay, control-arrows, it
 
 ## Parameters
 
-| **Name**            | **Type**                  | **Default Value**         | **Dexcription**                                                                                                                         |
+| **Name**            | **Type**                  | **Default Value**         | **Description**                                                                                                                         |
 | ------------------- | ------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | Items               | RenderFragment            | *required*                | Content of the *Carousel*. This should be a list of *CarouselItem* objects.                                                             |
 | Overlay             | RenderFragment?           | null                      | Html that will be rendered in the overlay section.                                                                                      |
@@ -85,7 +85,7 @@ A Carousel like in Bootstrap. It can also display an overlay, control-arrows, it
 
 ## Properties
 
-| **Name**         | **Type** | get/set | **Dexcription**                                                 |
+| **Name**         | **Type** | get/set | **Description**                                                 |
 | ---------------- | -------- | ------- | --------------------------------------------------------------- |
 | Active           | int      | get/set | The Index of the current Active Item.                           |
 | Running          | bool     | get     | Indicates if the interval of the carousel is currently running. |
@@ -94,7 +94,7 @@ A Carousel like in Bootstrap. It can also display an overlay, control-arrows, it
 
 ## Methods
 
-| **Name**          | **Parameters**                                         | **ReturnType** | **Dexcription**                                                                                                                                                                              |
+| **Name**          | **Parameters**                                         | **ReturnType** | **Description**                                                                                                                                                                              |
 | ----------------- | ------------------------------------------------------ | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | SwapCarouselItems | CarouselItem carouselItem1, CarouselItem carouselItem2 | void           | Finds the indexes of the 2 given CarouselItems and then executes *SwapCarouselItems(int, int)*. If one of the items is not present in the CarouselItem list, an ArgumentException is thrown. |
 | SwapCarouselItems | int index1, int index2                                 | void           | Swaps the 2 items in the CarouselItem list at the given indexes. The active item is preserved: e.g. 0 is active, swap(0, 1)  -> 1 will be active, so the active item won't change.           |
@@ -110,7 +110,7 @@ A component, that should only be used in the *Carousel.Items* Renderfragment.
 
 ### Parameters
 
-| **Name**     | **Type**       | **Default Value** | **Dexcription**                                       |
+| **Name**     | **Type**       | **Default Value** | **Description**                                       |
 | ------------ | -------------- | ----------------- | ----------------------------------------------------- |
 | ChildContent | RenderFragment | *required*        | Wrapper for the content that will be a carousel item. |
 
@@ -122,7 +122,7 @@ Type of animation, how the items are swapped.
 
 ### Members
 
-| **Name**    | **Dexcription**                                  |
+| **Name**    | **Description**                                  |
 | ----------- | ------------------------------------------------ |
 | FadeOut     | Transition on opacity                            |
 | Slide       | Transition on translate x-axis                   |

@@ -36,7 +36,7 @@ A container that content can be collapsed.
 
 ## Parameters
 
-| **Name**          | **Type**                  | **Default Value** | **Dexcription**                                                                                               |
+| **Name**          | **Type**                  | **Default Value** | **Description**                                                                                               |
 | ----------------- | ------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------- |
 | Head              | RenderFragment?           | null              | Content that is also visible collapsed. If clicked on it, it will expand/collapse.                            |
 | Content           | RenderFragment?           | null              | Content that is hidden when collapsed.                                                                        |
@@ -46,7 +46,7 @@ A container that content can be collapsed.
 
 ## Properties
 
-| **Name**             | **Type** | get/set | **Dexcription**                                                      |
+| **Name**             | **Type** | get/set | **Description**                                                      |
 | -------------------- | -------- | ------- | -------------------------------------------------------------------- |
 | Expanded             | bool     | get/set | The state of collapsed or expanded.                                  |
 | SilentExpandedSetter | bool     | set     | Sets the state of *Collapsed* without notifying *OnCollapseChanged*. |

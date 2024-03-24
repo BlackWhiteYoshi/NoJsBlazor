@@ -44,7 +44,7 @@ Input field with a embedded label.
 
 ## Parameters
 
-| **Name**        | **Type**                           | **Default Value** | **Dexcription**                                                                                                                                                                    |
+| **Name**        | **Type**                           | **Default Value** | **Description**                                                                                                                                                                    |
 | --------------- | ---------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Value           | string?                            | null              | Value of this Input field. Should be used as two-way-binding.                                                                                                                      |
 | ValueChanged    | EventCallback&lt;string?&gt;       | default           | Fires every time *Value* changes. This or *OnChange* can be used for two-way-binding.                                                                                              |

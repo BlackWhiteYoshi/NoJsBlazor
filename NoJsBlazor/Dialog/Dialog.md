@@ -43,7 +43,7 @@ A little message window that it is first hidden and can be displayed on demand.
 
 ## Parameters
 
-| **Name**               | **Type**                              | **Default Value** | **Dexcription**                                                                                                                 |
+| **Name**               | **Type**                              | **Default Value** | **Description**                                                                                                                 |
 | ---------------------- | ------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Title                  | RenderFragment?                       | null              | Html that will be displayed inside the head bar.                                                                                |
 | Content                | RenderFragment?                       | null              | Html that will be displayed inside the window.                                                                                  |
@@ -59,7 +59,7 @@ A little message window that it is first hidden and can be displayed on demand.
 
 ## Properties
 
-| **Name**           | **Type**         | get/set | **Dexcription**                                                                          |
+| **Name**           | **Type**         | get/set | **Description**                                                                          |
 | ------------------ | ---------------- | ------- | ---------------------------------------------------------------------------------------- |
 | XMovement          | double           | get/set | Current offset of x-coordinate, 0 means middle of the screen.                            |
 | YMovement          | double           | get/set | Current offset of y-coordinate, 0 means middle of the screen.                            |
@@ -70,7 +70,7 @@ A little message window that it is first hidden and can be displayed on demand.
 
 ## Methods
 
-| **Name**             | **Parameters** | **ReturnType** | **Dexcription**                                                                        |
+| **Name**             | **Parameters** | **ReturnType** | **Description**                                                                        |
 | -------------------- | -------------- | -------------- | -------------------------------------------------------------------------------------- |
 | Open                 | *empty*        | void           | Display the window. The same as setting *XMovement/YMovement = 0* and *Active = true*. |
 | OpenWithLastPosition | *empty*        | void           | Display the window at the last moved position. The same as *Active = true*.            |

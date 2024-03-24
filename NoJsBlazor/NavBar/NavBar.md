@@ -70,7 +70,7 @@ A container that contains a nested list of items/links. It automatically collaps
 
 ## Parameters
 
-| **Name**   | **Type**                  | **Default Value**     | **Dexcription**                                                                                   |
+| **Name**   | **Type**                  | **Default Value**     | **Description**                                                                                   |
 | ---------- | ------------------------- | --------------------- | ------------------------------------------------------------------------------------------------- |
 | Brand      | RenderFragment?           | null                  | Content/Icon which represents your site. If it is null, the corresponding parts are not rendered. |
 | Items      | RenderFragment            | *required*            | This should be a list of *NavBarMenu* of *NavBarItem*/*NavBarLink*.                               |
@@ -80,7 +80,7 @@ A container that contains a nested list of items/links. It automatically collaps
 
 ## Properties
 
-| **Name**             | **Type** | get/set | **Dexcription**                                            |
+| **Name**             | **Type** | get/set | **Description**                                            |
 | -------------------- | -------- | ------- | ---------------------------------------------------------- |
 | Expanded             | bool     | get/set | Value for Expanding or Collapsing the navbar.              |
 | SilentExpandedSetter | bool     | set     | Sets the state of *Expanded* without notifying *OnToggle*. |
@@ -88,7 +88,7 @@ A container that contains a nested list of items/links. It automatically collaps
 
 ## Methods
 
-| **Name** | **Parameters** | **ReturnType** | **Dexcription**                                                     |
+| **Name** | **Parameters** | **ReturnType** | **Description**                                                     |
 | -------- | -------------- | -------------- | ------------------------------------------------------------------- |
 | Toggle   | *empty*        | void           | Expands/Collapses this menu. Shorthand for: *Expanded = !Expanded;* |
 | Reset    | *empty*        | void           | Collapses this menu and all expanded submenus.                      |
@@ -102,7 +102,7 @@ This should be placed inside of a *NavBar* or *NavBarMenu*.
 
 ### Parameters
 
-| **Name** | **Type**                  | **Default Value** | **Dexcription**                                                          |
+| **Name** | **Type**                  | **Default Value** | **Description**                                                          |
 | -------- | ------------------------- | ----------------- | ------------------------------------------------------------------------ |
 | Head     | RenderFragment            | *required*        | Content that is collapsed visible.                                       |
 | Items    | RenderFragment            | *required*        | Content that is expanded visible.                                        |
@@ -110,14 +110,14 @@ This should be placed inside of a *NavBar* or *NavBarMenu*.
 
 ### Properties
 
-| **Name**             | **Type** | get/set | **Dexcription**                                                            |
+| **Name**             | **Type** | get/set | **Description**                                                            |
 | -------------------- | -------- | ------- | -------------------------------------------------------------------------- |
 | Expanded             | bool     | get/set | Value for expanding or collapsing this submenu.                            |
 | SilentExpandedSetter | bool     | set     | Sets the state of *Expanded* without notifying *OnToggle* of this submenu. |
 
 ### Methods
 
-| **Name** | **Parameters** | **ReturnType** | **Dexcription**                                                     |
+| **Name** | **Parameters** | **ReturnType** | **Description**                                                     |
 | -------- | -------------- | -------------- | ------------------------------------------------------------------- |
 | Toggle   | *empty*        | void           | Expands/Collapses this menu. Shorthand for: *Expanded = !Expanded;* |
 
@@ -130,7 +130,7 @@ This should be placed inside of a *NavBar* or *NavBarMenu*.
 
 ### Parameters
 
-| **Name**     | **Type**       | **Default Value** | **Dexcription**              |
+| **Name**     | **Type**       | **Default Value** | **Description**              |
 | ------------ | -------------- | ----------------- | ---------------------------- |
 | ChildContent | RenderFragment | *required*        | Html that will be displayed. |
 
@@ -143,7 +143,7 @@ This should be placed inside of a *NavBar* or *NavBarMenu*.
 
 ### Parameters
 
-| **Name**     | **Type**       | **Default Value** | **Dexcription**              |
+| **Name**     | **Type**       | **Default Value** | **Description**              |
 | ------------ | -------------- | ----------------- | ---------------------------- |
 | ChildContent | RenderFragment | *required*        | Html that will be displayed. |
 
@@ -155,7 +155,7 @@ Width values for changing between phone and desktop view.
 
 ### Members
 
-| **Name** | **Dexcription**                              |
+| **Name** | **Description**                              |
 | -------- | -------------------------------------------- |
 | none     | Changes never, stays always at desktop view. |
 | px500    | Below width of 500px is phone view.          |

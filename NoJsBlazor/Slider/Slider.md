@@ -73,14 +73,14 @@ An object that holds a ranged input together with a decrease and increase button
 
 ## Type Parameters
 
-| **Name** | **TypeConstraints**         |  **Dexcription**                                                     |
+| **Name** | **TypeConstraints**         |  **Description**                                                     |
 | -------- | --------------------------- | -------------------------------------------------------------------- |
 | Type     | struct, INumber&lt;Type&gt; | Number-type of the underlying value of the Slider. e.g. int, decimal |
 
 
 ## Parameters
 
-| **Name**           | **Type**                    | **Default Value**             | **Dexcription**                                                                                                                                                                                                  |
+| **Name**           | **Type**                    | **Default Value**             | **Description**                                                                                                                                                                                                  |
 | ------------------ | --------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Value              | Type                        | null                          | Value of the Slider. Should be used as two-way-binding.                                                                                                                                                          |
 | ValueChanged       | EventCallback&lt;Type&gt;   | default                       | Invokes every time Value get changed with: LeftButton, RightButton, Slider or EditField. This or *OnChange* can be used for two-way-binding.                                                                     |
