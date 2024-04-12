@@ -1,6 +1,3 @@
-// @ts-check
-
-
 /**
  * @param {HTMLObjectElement} targetElement
  * @param {number} pointerId
