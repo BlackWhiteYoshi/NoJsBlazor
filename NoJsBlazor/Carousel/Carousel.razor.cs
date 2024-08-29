@@ -332,12 +332,12 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
             case CarouselAnimation.SlideRotate:
                 int sgnDirection = Math.Sign(direction);
                 for (int i = 0; i != direction; i += sgnDirection)
-                    childList[next - i].Rotate(direction - i, direction);
-                childList[active].Rotate(0, direction);
+                    _ = childList[next - i].Rotate(direction - i, direction);
+                _ = childList[active].Rotate(0, direction);
                 break;
 
             default:
-                throw new ArgumentOutOfRangeException(nameof(CarouselAnimation), "Enum is out of range");
+                throw new ArgumentOutOfRangeException(nameof(Animation), $"Enum {nameof(CarouselAnimation)} is out of range");
         }
 
         this.active = next;

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
     <LangVersion>12</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -60,8 +60,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.14" />
-    <PackageReference Include="InlineComposition" Version="1.0.9" PrivateAssets="all" />
+    <PackageReference Condition="'$(TargetFramework)'=='net7.0'" Include="Microsoft.AspNetCore.Components.Web" Version="7.0.20" />
+    <PackageReference Condition="'$(TargetFramework)'=='net8.0'" Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
+    <PackageReference Include="InlineComposition" Version="1.4.0" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

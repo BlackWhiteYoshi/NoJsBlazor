@@ -27,29 +27,18 @@ public sealed partial class CarouselItem : ListableComponentBase<CarouselItem> {
     private int position = 1;
     private int rotateAmount = 0;
     private string slideClass = string.Empty; // "slide" or string.Empty;
-    private bool rotateAfterRender = false;
 
-    internal void Rotate(int start, int amount) {
+    internal async Task Rotate(int start, int amount) {
         slideClass = string.Empty;
         position = start;
         rotateAmount = amount;
 
-        rotateAfterRender = true;
+        await Task.Delay(30);
+        slideClass = "slide";
+        position -= rotateAmount;
+        Active = (position == 0);
+
         StateHasChanged();
-    }
-
-
-    protected override async Task OnAfterRenderAsync(bool firstRender) {
-        if (rotateAfterRender) {
-            rotateAfterRender = false;
-            await Task.Delay(30);
-
-            slideClass = "slide";
-            position -= rotateAmount;
-            Active = (position == 0);
-
-            StateHasChanged();
-        }
     }
 
     #endregion
