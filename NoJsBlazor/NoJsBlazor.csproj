@@ -24,7 +24,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <Version>4.0.2</Version>
+    <Version>4.0.3</Version>
     <IsAotCompatible>true</IsAotCompatible>
     <DebugType>embedded</DebugType>
     <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
