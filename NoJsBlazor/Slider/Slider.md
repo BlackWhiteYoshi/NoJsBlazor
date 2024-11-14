@@ -36,9 +36,9 @@ An object that holds a ranged input together with a decrease and increase button
     --button-background-color: #0D6EFD;
     --button-border-color: #EEE;
     --button-stroke-color: #FFF;
-    --button-background-color-hover: #0B5ED7;
-    --button-border-color-hover: #0A58CA;
-    --button-box-shadow-color-hover: #0A58CA;
+    --button-background-color-active: #0B5ED7;
+    --button-border-color-active: #0A58CA;
+    --button-box-shadow-color-active: #0A58CA;
     --button-disabled-color: #8AF;
     --slider-track-color: #5FF;
     --slider-track-height: 6px;
@@ -53,22 +53,22 @@ An object that holds a ranged input together with a decrease and increase button
 
 ## CSS Variables: .slider
 
-| **Name**                        | **Default Value**            |
-| ------------------------------- | ---------------------------- |
-| --button-background-color       | #0D6EFD                      |
-| --button-border-color           | #EEE                         |
-| --button-stroke-color           | #FFF                         |
-| --button-background-color-hover | #0B5ED7                      |
-| --button-border-color-hover     | #0A58CA                      |
-| --button-box-shadow-color-hover | #0A58CA                      |
-| --button-disabled-color         | #8AF                         |
-| --slider-track-color            | #5FF                         |
-| --slider-track-height           | 6px                          |
-| --slider-track-boder-radius     | 3px                          |
-| --slider-thumb-color            | #07F                         |
-| --slider-thumb-width            | 16px                         |
-| --slider-thumb-height           | 16px                         |
-| --slider-thumb-disabled-color   | var(--button-disabled-color) |
+| **Name**                         | **Default Value**            |
+| -------------------------------- | ---------------------------- |
+| --button-background-color        | #0D6EFD                      |
+| --button-border-color            | #EEE                         |
+| --button-stroke-color            | #FFF                         |
+| --button-background-color-active | #0B5ED7                      |
+| --button-border-color-active     | #0A58CA                      |
+| --button-box-shadow-color-active | #0A58CA                      |
+| --button-disabled-color          | #8AF                         |
+| --slider-track-color             | #5FF                         |
+| --slider-track-height            | 6px                          |
+| --slider-track-boder-radius      | 3px                          |
+| --slider-thumb-color             | #07F                         |
+| --slider-thumb-width             | 16px                         |
+| --slider-thumb-height            | 16px                         |
+| --slider-thumb-disabled-color    | var(--button-disabled-color) |
 
 
 ## Type Parameters

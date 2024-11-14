@@ -27,15 +27,23 @@
         <link rel="stylesheet" href="/site.css">
         
         <script src="/site.js" defer></script>
-        <script src="/_framework/blazor.web.js" defer></script>
+        @if (renderMode is not null) {
+            <script src="/_framework/blazor.web.js" defer></script>
+        }
+        else
+        {
+            <script src="/_framework/blazor.webassembly.js" defer></script>
+        }
     </head>
 
     <body>
-        @{
-            __builder.OpenComponent<Client.IApp>(0);
-            __builder.AddComponentRenderMode(renderMode);
-            __builder.CloseComponent();
-        }
+        <div id="anchor">
+            @{
+                __builder.OpenComponent<Client.IApp>(0);
+                __builder.AddComponentRenderMode(renderMode);
+                __builder.CloseComponent();
+            }
+        </div>
 
         <div id="blazor-error-ui">
             <div>

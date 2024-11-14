@@ -7,16 +7,11 @@ public sealed partial class Root : ComponentBase {
     [Inject]
     public required IConfiguration Configuration { private get; init; }
 
-    [Inject]
-    public required Services.PreRenderFlag PreRenderFlag { private get; init; }
-
 
     private IComponentRenderMode? renderMode;
 
     protected override void OnInitialized() {
         base.OnInitialized();
-
-        PreRenderFlag.Flag = true;
 
         bool preRender = bool.TryParse(Configuration["Prerender"], out bool value) switch {
             true /* value present */ => value,

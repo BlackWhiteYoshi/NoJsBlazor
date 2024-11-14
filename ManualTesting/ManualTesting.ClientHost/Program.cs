@@ -46,9 +46,6 @@ public static class Program {
                 razorComponentsBuilder.AddInteractiveServerComponents().AddCircuitOptions((CircuitOptions options) => options.DetailedErrors = builder.Environment.IsDevelopment());
             if (renderMode.HasFlag(RenderMode.Webassembly))
                 razorComponentsBuilder.AddInteractiveWebAssemblyComponents();
-
-            services.AddScoped<Services.PreRenderFlag>();
-            services.AddScoped<PreRendering>((IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<Services.PreRenderFlag>().GetFlag);
             
             services.AddCoreServices();
         }
@@ -62,7 +59,7 @@ public static class Program {
                 app.UseWebAssemblyDebugging();
             }
 
-            app.UseStaticFiles();
+            app.MapStaticAssets();
             app.UseAntiforgery();
 
             RazorComponentsEndpointConventionBuilder razorComponentsEndpointBuilder = app.MapRazorComponents<Root>().AddAdditionalAssemblies(typeof(Client.App).Assembly);

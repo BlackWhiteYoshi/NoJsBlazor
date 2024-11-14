@@ -4,7 +4,7 @@ namespace ManualTesting.Client;
 
 public sealed partial class AppNavBar : ComponentBase {
     [Inject]
-    public required IApp Root { private get; init; }
+    public required IApp App { private get; init; }
 
 
     [AllowNull]
@@ -13,9 +13,9 @@ public sealed partial class AppNavBar : ComponentBase {
 
     private void PhoneToggle(bool expanded) {
         if (expanded)
-            Root.Click += Reset;
+            App.Click += Reset;
         else
-            Root.Click -= Reset;
+            App.Click -= Reset;
     }
 
     private void Reset(MouseEventArgs e) => navBar.Reset();

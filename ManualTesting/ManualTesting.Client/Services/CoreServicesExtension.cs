@@ -7,7 +7,6 @@ public static class CoreServicesExtension {
     /// <param name="services"></param>
     /// <returns></returns>
     public static IServiceCollection AddCoreServices(this IServiceCollection services) {
-        services.AddScoped((IServiceProvider serviceProvider) => (IJSInProcessRuntime)serviceProvider.GetRequiredService<IJSRuntime>());
         services.AddScoped<IComponentActivator, ComponentActivator>();
 
         // component services

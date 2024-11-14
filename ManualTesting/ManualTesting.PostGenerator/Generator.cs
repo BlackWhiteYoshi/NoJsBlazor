@@ -52,7 +52,7 @@ public static class Generator {
         }
 
         public async Task CreateSiteMap() {
-            string siteMapContent = """
+            string siteMapContent = $"""
                 <?xml version="1.0" encoding="UTF-8"?>
                 <urlset
                       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -67,7 +67,7 @@ public static class Generator {
             await File.WriteAllTextAsync($"{config.WorkingDirectoryWithTrailingSlash}sitemap.xml", siteMapContent);
         }
 
-        public void RemoveFilesList() {
+        public void RemoveFiles() {
             foreach (string folder in config.RemoveFileList.folders) {
                 string path = $"{config.WorkingDirectoryWithTrailingSlash}{folder}";
                 if (Directory.Exists(path))
@@ -216,7 +216,7 @@ public static class Generator {
 
         if (config.RemoveFiles) {
             Console.WriteLine("Removing exceeding files...");
-            core.RemoveFilesList();
+            core.RemoveFiles();
             Console.WriteLine("Done removing exceeding files.\n");
         }
         else

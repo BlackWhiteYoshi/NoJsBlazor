@@ -12,9 +12,11 @@ public static class Program {
         {
             IServiceCollection services = builder.Services;
 
-            services.AddSingleton<PreRendering>(() => false);
             services.AddCoreServices();
         }
+
+        // add root components
+        builder.RootComponents.Add<IApp>("#anchor");
 
         return builder.Build().RunAsync();
     }

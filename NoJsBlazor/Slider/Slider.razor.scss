@@ -2,9 +2,9 @@
     --button-background-color: #0D6EFD;
     --button-border-color: #EEE;
     --button-stroke-color: #FFF;
-    --button-background-color-hover: #0B5ED7;
-    --button-border-color-hover: #0A58CA;
-    --button-box-shadow-color-hover: #0A58CA;
+    --button-background-color-active: #0B5ED7;
+    --button-border-color-active: #0A58CA;
+    --button-box-shadow-color-active: #0A58CA;
     --button-disabled-color: #8AF;
     --slider-track-color: #5FF;
     --slider-track-height: 6px;
@@ -59,9 +59,13 @@
             }
 
             &:hover {
-                border-color: var(--button-border-color-hover);
-                background-color: var(--button-background-color-hover);
-                box-shadow: 3px 3px var(--button-box-shadow-color-hover) inset;
+                background-color: var(--button-background-color-active);
+            }
+
+            &:active {
+                border-color: var(--button-border-color-active);
+                background-color: var(--button-background-color-active);
+                box-shadow: 3px 3px var(--button-box-shadow-color-active) inset;
             }
 
             &:disabled {

@@ -4,14 +4,14 @@ namespace ManualTesting.Client;
 
 public sealed partial class Home : ComponentBase, IDisposable {
     [Inject]
-    public required IApp Root { private get; init; }
+    public required IApp App { private get; init; }
 
     [Inject]
     public required IJSRuntime JsRuntime { private get; init; }
 
 
     public void Dispose() {
-        Root.Click -= CloseContextMenu;
+        App.Click -= CloseContextMenu;
     }
 
     #region Carousel
@@ -47,12 +47,12 @@ public sealed partial class Home : ComponentBase, IDisposable {
     private void OpenContextMenu(MouseEventArgs e) {
         // padding-left = 20px, padding-top = 20px
         contextMenu.Open(e.OffsetX + 20, e.OffsetY + 20);
-        Root.Click += CloseContextMenu;
+        App.Click += CloseContextMenu;
     }
 
     private void CloseContextMenu(MouseEventArgs e) {
         contextMenu.Close();
-        Root.Click -= CloseContextMenu;
+        App.Click -= CloseContextMenu;
     }
 
     #endregion
