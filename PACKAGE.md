@@ -14,7 +14,7 @@ For a demo go to [nojsblazor.firerocket.de](https://nojsblazor.firerocket.de).
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="NoJsBlazor" Version="x.x.x" />
+  <PackageReference Include="NoJsBlazor" Version="{latest version}" />
 </ItemGroup>
 ```
 
