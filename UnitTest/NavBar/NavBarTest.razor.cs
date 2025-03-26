@@ -1,30 +1,29 @@
 ﻿using AngleSharp.Dom;
-using Bunit;
 
 namespace UnitTest;
 
-public sealed partial class NavBarTest : TestContext {
+public sealed partial class NavBarTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void Four_Items_Has_ChildCount_Four() {
+    [Test]
+    public async ValueTask Four_Items_Has_ChildCount_Four() {
         IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
             builder.Add((NavBar navBar) => navBar.Items, FourNavBarMenus);
         });
         NavBar navBar = navBarContainer.Instance;
 
-        Assert.Equal(4, navBar.ChildCount);
+        await Assert.That(navBar.ChildCount).IsEqualTo(4);
     }
 
-    [Fact]
-    public void Brand_Is_Not_Rendered_If_It_Is_Null() {
+    [Test]
+    public async ValueTask Brand_Is_Not_Rendered_If_It_Is_Null() {
         IRenderedComponent<NavBar> navBarContainer = RenderComponent<NavBar>();
 
-        Assert.Empty(navBarContainer.FindAll(".navbar-brand"));
+        await Assert.That(navBarContainer.FindAll(".navbar-brand")).IsEmpty();
     }
 
-    [Fact]
-    public void Brand_Is_Rendered_In_Both_NavbarBrandDivs() {
+    [Test]
+    public async ValueTask Brand_Is_Rendered_In_Both_NavbarBrandDivs() {
         const string TEST_TEXT = "test text";
 
         IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
@@ -32,7 +31,7 @@ public sealed partial class NavBarTest : TestContext {
         });
 
         IElement brand = navBarContainer.Find(".nav-brand");
-        Assert.Equal(TEST_TEXT, brand.InnerHtml);
+        await Assert.That(brand.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
     #endregion
@@ -40,18 +39,18 @@ public sealed partial class NavBarTest : TestContext {
 
     #region interactive
 
-    [Fact]
-    public void Click_On_PhoneButton_Triggers_Expanding() {
+    [Test]
+    public async ValueTask Click_On_PhoneButton_Triggers_Expanding() {
         IRenderedComponent<NavBar> navBarContainer = RenderComponent<NavBar>();
         NavBar navBar = navBarContainer.Instance;
 
         IElement toggle = navBarContainer.Find(".nav-checkbox");
 
         toggle.Change(true);
-        Assert.True(navBar.Expanded);
+        await Assert.That(navBar.Expanded).IsTrue();
 
         toggle.Change(false);
-        Assert.False(navBar.Expanded);
+        await Assert.That(navBar.Expanded).IsFalse();
     }
 
     #endregion
@@ -59,19 +58,19 @@ public sealed partial class NavBarTest : TestContext {
 
     #region public methods
 
-    [Fact]
-    public void Reset_Closes_Submenus() {
+    [Test]
+    public async ValueTask Reset_Closes_Submenus() {
         (_, NavBar navBar, NavBarMenu navBarMenu, _) = RenderNavBarTree();
 
-        Assert.False(navBarMenu.Expanded);
+        await Assert.That(navBarMenu.Expanded).IsFalse();
         navBarMenu.Toggle();
-        Assert.True(navBarMenu.Expanded);
+        await Assert.That(navBarMenu.Expanded).IsTrue();
         navBar.Reset();
-        Assert.False(navBarMenu.Expanded);
+        await Assert.That(navBarMenu.Expanded).IsFalse();
     }
 
-    [Fact]
-    public void SilentExpandedSetter_Sets_Without_Notifying() {
+    [Test]
+    public async ValueTask SilentExpandedSetter_Sets_Without_Notifying() {
         int fired = 0;
 
         IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
@@ -80,8 +79,8 @@ public sealed partial class NavBarTest : TestContext {
         NavBar navBar = navBarContainer.Instance;
 
         navBar.SilentExpandedSetter = true;
-        Assert.True(navBar.Expanded);
-        Assert.Equal(0, fired);
+        await Assert.That(navBar.Expanded).IsTrue();
+        await Assert.That(fired).IsEqualTo(0);
     }
 
     #endregion
@@ -89,8 +88,8 @@ public sealed partial class NavBarTest : TestContext {
 
     #region events
 
-    [Fact]
-    public void OnToggle_Fires_When_Navbar_Expands() {
+    [Test]
+    public async ValueTask OnToggle_Fires_When_Navbar_Expands() {
         int fired = 0;
 
         IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
@@ -99,7 +98,7 @@ public sealed partial class NavBarTest : TestContext {
         NavBar navBar = navBarContainer.Instance;
 
         navBar.Expanded = true;
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
     #endregion

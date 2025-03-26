@@ -2,11 +2,11 @@
 
 namespace UnitTest;
 
-public sealed class SliderTest : TestContext {
+public sealed class SliderTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void Value_Is_Rendered_Inside_Label() {
+    [Test]
+    public async ValueTask Value_Is_Rendered_Inside_Label() {
         const int VALUE = 5;
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -14,11 +14,11 @@ public sealed class SliderTest : TestContext {
         });
 
         IElement label = sliderContainer.Find(".slider-buttons label");
-        Assert.Equal(VALUE.ToString(), label.InnerHtml);
+        await Assert.That(label.InnerHtml).IsEqualTo(VALUE.ToString());
     }
 
-    [Fact]
-    public void Title_Is_Rendered_Inside_First_Label() {
+    [Test]
+    public async ValueTask Title_Is_Rendered_Inside_First_Label() {
         const string TEST_TEXT = "Test Text";
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -26,20 +26,20 @@ public sealed class SliderTest : TestContext {
         });
 
         IElement label = sliderContainer.FindAll("label")[0];
-        Assert.Equal(TEST_TEXT, label.InnerHtml);
+        await Assert.That(label.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
-    [Fact]
-    public void Title_Is_Not_Rendered_When_Empty() {
+    [Test]
+    public async ValueTask Title_Is_Not_Rendered_When_Empty() {
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Title, string.Empty);
         });
 
-        Assert.Single(sliderContainer.FindAll("label"));
+        await Assert.That(sliderContainer.FindAll("label")).HasSingleItem();
     }
 
-    [Fact]
-    public void Min_Sets_MinAttribute() {
+    [Test]
+    public async ValueTask Min_Sets_MinAttribute() {
         const int MIN = 3;
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -48,11 +48,11 @@ public sealed class SliderTest : TestContext {
 
         IElement slider = sliderContainer.Find("input");
         IAttr min = slider.Attributes["min"]!;
-        Assert.Equal(MIN.ToString(), min.Value);
+        await Assert.That(min.Value).IsEqualTo(MIN.ToString());
     }
 
-    [Fact]
-    public void Max_Sets_MaxAttribute() {
+    [Test]
+    public async ValueTask Max_Sets_MaxAttribute() {
         const int MAX = 3;
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -61,11 +61,11 @@ public sealed class SliderTest : TestContext {
 
         IElement slider = sliderContainer.Find("input");
         IAttr max = slider.Attributes["max"]!;
-        Assert.Equal(MAX.ToString(), max.Value);
+        await Assert.That(max.Value).IsEqualTo(MAX.ToString());
     }
 
-    [Fact]
-    public void Step_Sets_StepAttribute() {
+    [Test]
+    public async ValueTask Step_Sets_StepAttribute() {
         const int STEP = 3;
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -74,13 +74,13 @@ public sealed class SliderTest : TestContext {
 
         IElement slider = sliderContainer.Find("input");
         IAttr step = slider.Attributes["step"]!;
-        Assert.Equal(STEP.ToString(), step.Value);
+        await Assert.That(step.Value).IsEqualTo(STEP.ToString());
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void Enable_Stes_DisabledAttribute(bool enabled) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask Enable_Stes_DisabledAttribute(bool enabled) {
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Enabled, enabled);
         });
@@ -88,26 +88,26 @@ public sealed class SliderTest : TestContext {
         IElement slider = sliderContainer.Find("input");
         IAttr? disabled = slider.Attributes["disabled"];
         if (enabled)
-            Assert.Null(disabled);
+            await Assert.That(disabled).IsNull();
         else
-            Assert.NotNull(disabled);
+            await Assert.That(disabled).IsNotNull();
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void Editable_Renderes_InputField(bool editable) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask Editable_Renderes_InputField(bool editable) {
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Editable, editable);
         });
 
         IRefreshableElementCollection<IElement> inputFields = sliderContainer.FindAll("input");
         // slider is also an inputField
-        Assert.Equal(editable ? 2 : 1, inputFields.Count);
+        await Assert.That(inputFields.Count).IsEqualTo(editable ? 2 : 1);
     }
 
-    [Fact]
-    public void LeftButtonContent_Is_Rendered_Inside_LeftButton() {
+    [Test]
+    public async ValueTask LeftButtonContent_Is_Rendered_Inside_LeftButton() {
         const string TEST_TEXT = "Test Text";
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -115,11 +115,11 @@ public sealed class SliderTest : TestContext {
         });
 
         IElement button = sliderContainer.Find("button");
-        Assert.Equal(TEST_TEXT, button.InnerHtml);
+        await Assert.That(button.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
-    [Fact]
-    public void RightButtonContent_Is_Rendered_Inside_RightButton() {
+    [Test]
+    public async ValueTask RightButtonContent_Is_Rendered_Inside_RightButton() {
         const string TEST_TEXT = "Test Text";
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -127,11 +127,11 @@ public sealed class SliderTest : TestContext {
         });
 
         IElement button = sliderContainer.FindAll("button")[1];
-        Assert.Equal(TEST_TEXT, button.InnerHtml);
+        await Assert.That(button.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
-    [Fact]
-    public void Display_Changes_Label_Output() {
+    [Test]
+    public async ValueTask Display_Changes_Label_Output() {
         const string TEST_TEXT = "Test Text";
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -139,11 +139,11 @@ public sealed class SliderTest : TestContext {
         });
 
         IElement label = sliderContainer.Find(".slider-buttons label");
-        Assert.Equal(TEST_TEXT, label.InnerHtml);
+        await Assert.That(label.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
-    [Fact]
-    public void ParseEdit_Reads_In_EditBox() {
+    [Test]
+    public async ValueTask ParseEdit_Reads_In_EditBox() {
         const int VALUE = 6;
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -154,7 +154,7 @@ public sealed class SliderTest : TestContext {
 
         IElement input = sliderContainer.Find("input");
         input.Change("doesn't matter because ParseEdit outputs always the same");
-        Assert.Equal(VALUE, slider.Value);
+        await Assert.That(slider.Value).IsEqualTo(VALUE);
     }
 
     #endregion
@@ -162,8 +162,8 @@ public sealed class SliderTest : TestContext {
 
     #region events
 
-    [Fact]
-    public void ValueChanged_Is_Fired_When_Value_Is_Modified_By_User() {
+    [Test]
+    public async ValueTask ValueChanged_Is_Fired_When_Value_Is_Modified_By_User() {
         int fired = 0;
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -175,11 +175,11 @@ public sealed class SliderTest : TestContext {
 
         IElement button = sliderContainer.Find("button");
         button.Click();
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
-    [Fact]
-    public void OnChange_Is_Fired_When_Value_Is_Modified_By_User() {
+    [Test]
+    public async ValueTask OnChange_Is_Fired_When_Value_Is_Modified_By_User() {
         int fired = 0;
 
         IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
@@ -191,7 +191,7 @@ public sealed class SliderTest : TestContext {
 
         IElement button = sliderContainer.Find("button");
         button.Click();
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
     #endregion

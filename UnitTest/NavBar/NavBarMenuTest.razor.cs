@@ -2,17 +2,17 @@
 
 namespace UnitTest;
 
-public sealed partial class NavBarMenuTest : TestContext {
+public sealed partial class NavBarMenuTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void Head_Is_Rendered_In_NavItemDropdown() {
+    [Test]
+    public async ValueTask Head_Is_Rendered_In_NavItemDropdown() {
         MarkupString TEST_HTML = new("<p>Test Text</p>");
 
         (IRenderedFragment? fragment, _, _, _) = RenderNavBarTree(TEST_HTML);
 
         IElement div = fragment.Find(".nav-element > .nav-div");
-        Assert.Contains(TEST_HTML.Value, div.InnerHtml);
+        await Assert.That(div.InnerHtml).Contains(TEST_HTML.Value);
     }
 
     #endregion
@@ -20,16 +20,16 @@ public sealed partial class NavBarMenuTest : TestContext {
 
     #region interavtive
 
-    [Fact]
-    public void OnTouch_Triggers_Expanding() {
+    [Test]
+    public async ValueTask OnTouch_Triggers_Expanding() {
         (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarTree(default);
-        Assert.False(navBarMenu.Expanded);
+        await Assert.That(navBarMenu.Expanded).IsFalse();
 
         IElement div = fragment.Find(".nav-dropdown-checkbox");
         div.Change(true);
-        Assert.True(navBarMenu.Expanded);
+        await Assert.That(navBarMenu.Expanded).IsTrue();
         div.Change(false);
-        Assert.False(navBarMenu.Expanded);
+        await Assert.That(navBarMenu.Expanded).IsFalse();
     }
 
     #endregion
@@ -37,24 +37,24 @@ public sealed partial class NavBarMenuTest : TestContext {
 
     #region public methods
 
-    [Fact]
-    public void Toggle_Changes_Expanded_State() {
-        (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarTree(default);
-        Assert.False(navBarMenu.Expanded);
+    [Test]
+    public async ValueTask Toggle_Changes_Expanded_State() {
+        (_, _, NavBarMenu navBarMenu, _) = RenderNavBarTree(default);
+        await Assert.That(navBarMenu.Expanded).IsFalse();
 
         navBarMenu.Toggle();
-        Assert.True(navBarMenu.Expanded);
+        await Assert.That(navBarMenu.Expanded).IsTrue();
     }
 
-    [Fact]
-    public void SilentExpandedSetter_Sets_Without_Notifying() {
+    [Test]
+    public async ValueTask SilentExpandedSetter_Sets_Without_Notifying() {
         int fired = 0;
 
         (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarWithCallback((bool expanded) => fired++);
 
         navBarMenu.SilentExpandedSetter = true;
-        Assert.True(navBarMenu.Expanded);
-        Assert.Equal(0, fired);
+        await Assert.That(navBarMenu.Expanded).IsTrue();
+        await Assert.That(fired).IsEqualTo(0);
     }
 
     #endregion
@@ -62,15 +62,15 @@ public sealed partial class NavBarMenuTest : TestContext {
 
     #region events
 
-    [Fact]
-    public void OnToggle_Fires_When_Menu_Expanded() {
+    [Test]
+    public async ValueTask OnToggle_Fires_When_Menu_Expanded() {
         int fired = 0;
 
         (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarWithCallback((bool expanded) => fired++);
-        Assert.Equal(0, fired);
+        await Assert.That(fired).IsEqualTo(0);
 
         navBarMenu.Expanded = true;
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
     #endregion

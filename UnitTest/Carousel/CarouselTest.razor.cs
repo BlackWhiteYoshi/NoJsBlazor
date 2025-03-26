@@ -2,39 +2,39 @@ using AngleSharp.Dom;
 
 namespace UnitTest;
 
-public sealed partial class CarouselTest : TestContext {
+public sealed partial class CarouselTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void Four_Items_Has_ChildCount_Four() {
+    [Test]
+    public async ValueTask Four_Items_Has_ChildCount_Four() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
         });
         Carousel carousel = carouselContainer.Instance;
 
-        Assert.Equal(4, carousel.ChildCount);
+        await Assert.That(carousel.ChildCount).IsEqualTo(4);
     }
 
-    [Fact]
-    public void Items_Are_Rendered_In_ItemsDiv() {
+    [Test]
+    public async ValueTask Items_Are_Rendered_In_ItemsDiv() {
+        static string TestDiv(string color) => $"<div style=\"background-color: {color};\"></div>";
+
+
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
         });
 
         IRefreshableElementCollection<IElement> divCollection = carouselContainer.FindAll(".carousel-element");
 
-        Assert.Equal(4, divCollection.Count);
-        Assert.Equal(TestDiv("red"), divCollection[0].InnerHtml);
-        Assert.Equal(TestDiv("blue"), divCollection[1].InnerHtml);
-        Assert.Equal(TestDiv("yellow"), divCollection[2].InnerHtml);
-        Assert.Equal(TestDiv("green"), divCollection[3].InnerHtml);
-
-
-        static string TestDiv(string color) => $"<div style=\"background-color: {color};\"></div>";
+        await Assert.That(divCollection.Count).IsEqualTo(4);
+        await Assert.That(divCollection[0].InnerHtml).IsEqualTo(TestDiv("red"));
+        await Assert.That(divCollection[1].InnerHtml).IsEqualTo(TestDiv("blue"));
+        await Assert.That(divCollection[2].InnerHtml).IsEqualTo(TestDiv("yellow"));
+        await Assert.That(divCollection[3].InnerHtml).IsEqualTo(TestDiv("green"));
     }
 
-    [Fact]
-    public void Items_AddingItemAppends() {
+    [Test]
+    public async ValueTask Items_AddingItemAppends() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
         });
@@ -45,16 +45,16 @@ public sealed partial class CarouselTest : TestContext {
 
         IElement purpleDiv = carouselContainer.FindAll(".carousel-element")[0];
         string purpleInnerHtml = purpleDiv.InnerHtml;
-        Assert.Contains("purple", purpleInnerHtml);
+        await Assert.That(purpleInnerHtml).Contains("purple");
 
         carousel.Active = carousel.ChildCount - 1;
-        Assert.Contains("z-index: 20", purpleDiv.Attributes["style"]!.Value);
+        await Assert.That(purpleDiv.Attributes["style"]!.Value).Contains("z-index: 20");
 
-        Assert.Equal(5, carousel.ChildCount);
+        await Assert.That(carousel.ChildCount).IsEqualTo(5);
     }
 
-    [Fact]
-    public void Items_RemoveItem_First() {
+    [Test]
+    public async ValueTask Items_RemoveItem_First() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
@@ -64,12 +64,12 @@ public sealed partial class CarouselTest : TestContext {
         RenderFragment itemsWithoutRed = (RenderFragment)CarouselItemBlue + CarouselItemYellow + CarouselItemGreen;
         carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithoutRed));
 
-        Assert.Equal(3, carousel.ChildCount);
-        Assert.Equal(0, carousel.Active);
+        await Assert.That(carousel.ChildCount).IsEqualTo(3);
+        await Assert.That(carousel.Active).IsEqualTo(0);
     }
 
-    [Fact]
-    public void Items_RemoveItem_Last() {
+    [Test]
+    public async ValueTask Items_RemoveItem_Last() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
@@ -79,12 +79,12 @@ public sealed partial class CarouselTest : TestContext {
         RenderFragment itemsWithoutGreen = (RenderFragment)CarouselItemRed + CarouselItemBlue + CarouselItemYellow;
         carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithoutGreen));
 
-        Assert.Equal(3, carousel.ChildCount);
-        Assert.Equal(1, carousel.Active);
+        await Assert.That(carousel.ChildCount).IsEqualTo(3);
+        await Assert.That(carousel.Active).IsEqualTo(1);
     }
 
-    [Fact]
-    public void Items_RemoveItem_Active() {
+    [Test]
+    public async ValueTask Items_RemoveItem_Active() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
@@ -94,12 +94,12 @@ public sealed partial class CarouselTest : TestContext {
         RenderFragment itemsWithoutRed = (RenderFragment)CarouselItemBlue + CarouselItemYellow + CarouselItemGreen;
         carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithoutRed));
 
-        Assert.Equal(3, carousel.ChildCount);
-        Assert.Equal(0, carousel.Active);
+        await Assert.That(carousel.ChildCount).IsEqualTo(3);
+        await Assert.That(carousel.Active).IsEqualTo(0);
     }
 
-    [Fact]
-    public void Items_RemoveLastChild_SetsActiveToMinus1() {
+    [Test]
+    public async ValueTask Items_RemoveLastChild_SetsActiveToMinus1() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, CarouselItemRed);
         });
@@ -108,12 +108,12 @@ public sealed partial class CarouselTest : TestContext {
         RenderFragment noItems = (RenderTreeBuilder builder) => { };
         carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", noItems));
 
-        Assert.Equal(0, carousel.ChildCount);
-        Assert.Equal(-1, carousel.Active);
+        await Assert.That(carousel.ChildCount).IsEqualTo(0);
+        await Assert.That(carousel.Active).IsEqualTo(-1);
     }
 
-    [Fact]
-    public void Items_RemoveItem_FirstActive() {
+    [Test]
+    public async ValueTask Items_RemoveItem_FirstActive() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 0);
@@ -123,12 +123,12 @@ public sealed partial class CarouselTest : TestContext {
         RenderFragment itemsWithoutBlue = (RenderFragment)CarouselItemRed + CarouselItemYellow + CarouselItemGreen;
         carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithoutBlue));
 
-        Assert.Equal(3, carousel.ChildCount);
-        Assert.Equal(0, carousel.Active);
+        await Assert.That(carousel.ChildCount).IsEqualTo(3);
+        await Assert.That(carousel.Active).IsEqualTo(0);
     }
 
-    [Fact]
-    public void Overlay_Is_Rendered_In_OverlayDiv() {
+    [Test]
+    public async ValueTask Overlay_Is_Rendered_In_OverlayDiv() {
         const string TEST_HTML = "<p>Test Text</p>";
 
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
@@ -138,84 +138,84 @@ public sealed partial class CarouselTest : TestContext {
 
         IElement overlayDiv = carouselContainer.Find(".carousel-overlay");
 
-        Assert.Equal(TEST_HTML, overlayDiv.InnerHtml);
+        await Assert.That(overlayDiv.InnerHtml).IsEqualTo(TEST_HTML);
     }
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(3)]
-    public void Active_Start_Sets_Active_Item(int activeValue) {
+    [Test]
+    [Arguments(0)]
+    [Arguments(1)]
+    [Arguments(2)]
+    [Arguments(3)]
+    public async ValueTask Active_Start_Sets_Active_Item(int activeValue) {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, activeValue);
         });
         Carousel carousel = carouselContainer.Instance;
 
-        Assert.Equal(activeValue, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(activeValue);
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void BeginRunning_Enables_Intervall(bool enabled) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask BeginRunning_Enables_Intervall(bool enabled) {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, enabled);
         });
         Carousel carousel = carouselContainer.Instance;
 
-        Assert.Equal(enabled, carousel.Running);
+        await Assert.That(carousel.Running).IsEqualTo(enabled);
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void ControlArrowsEnable_Enables_Control_Arrows(bool enabled) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask ControlArrowsEnable_Enables_Control_Arrows(bool enabled) {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ControlArrowsEnable, enabled);
         });
 
         if (enabled) {
-            Assert.Single(carouselContainer.FindAll(".carousel-arrow.prev"));
-            Assert.Single(carouselContainer.FindAll(".carousel-arrow.next"));
+            await Assert.That(carouselContainer.FindAll(".carousel-arrow.prev")).HasSingleItem();
+            await Assert.That(carouselContainer.FindAll(".carousel-arrow.next")).HasSingleItem();
         }
         else {
-            Assert.Empty(carouselContainer.FindAll(".carousel-arrow.prev"));
-            Assert.Empty(carouselContainer.FindAll(".carousel-arrow.next"));
+            await Assert.That(carouselContainer.FindAll(".carousel-arrow.prev")).IsEmpty();
+            await Assert.That(carouselContainer.FindAll(".carousel-arrow.next")).IsEmpty();
         }
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void IndicatorsEnable_Enables_Indicators(bool enabled) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask IndicatorsEnable_Enables_Indicators(bool enabled) {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.IndicatorsEnable, enabled);
         });
 
         if (enabled)
-            Assert.Single(carouselContainer.FindAll(".carousel-indicator-list"));
+            await Assert.That(carouselContainer.FindAll(".carousel-indicator-list")).HasSingleItem();
         else
-            Assert.Empty(carouselContainer.FindAll(".carousel-indicator-list"));
+            await Assert.That(carouselContainer.FindAll(".carousel-indicator-list")).IsEmpty();
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void PlayButtonEnable_Enables_Play_Button(bool enabled) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask PlayButtonEnable_Enables_Play_Button(bool enabled) {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.PlayButtonEnable, enabled);
         });
 
         if (enabled)
-            Assert.Single(carouselContainer.FindAll(".carousel-play-button"));
+            await Assert.That(carouselContainer.FindAll(".carousel-play-button")).HasSingleItem();
         else
-            Assert.Empty(carouselContainer.FindAll(".carousel-play-button"));
+            await Assert.That(carouselContainer.FindAll(".carousel-play-button")).IsEmpty();
     }
 
     #endregion
@@ -223,8 +223,8 @@ public sealed partial class CarouselTest : TestContext {
 
     #region interactive
 
-    [Fact]
-    public void Next_Click_Moves_To_Next_Item() {
+    [Test]
+    public async ValueTask Next_Click_Moves_To_Next_Item() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
@@ -233,17 +233,17 @@ public sealed partial class CarouselTest : TestContext {
         Carousel carousel = carouselContainer.Instance;
         IElement nextButton = carouselContainer.Find(".carousel-arrow.next");
 
-        Assert.Equal(1, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(1);
         nextButton.Click();
-        Assert.Equal(2, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(2);
         nextButton.Click();
-        Assert.Equal(3, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(3);
         nextButton.Click();
-        Assert.Equal(0, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(0);
     }
 
-    [Fact]
-    public void Prev_Click_Moves_To_Prev_Item() {
+    [Test]
+    public async ValueTask Prev_Click_Moves_To_Prev_Item() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
@@ -252,20 +252,20 @@ public sealed partial class CarouselTest : TestContext {
         Carousel carousel = carouselContainer.Instance;
         IElement prevButton = carouselContainer.Find(".carousel-arrow.prev");
 
-        Assert.Equal(2, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(2);
         prevButton.Click();
-        Assert.Equal(1, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(1);
         prevButton.Click();
-        Assert.Equal(0, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(0);
         prevButton.Click();
-        Assert.Equal(3, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(3);
     }
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(2)]
-    public void Indicator_Click_Moves_To_Correspondent_Item(int index) {
+    [Test]
+    [Arguments(0)]
+    [Arguments(1)]
+    [Arguments(2)]
+    public async ValueTask Indicator_Click_Moves_To_Correspondent_Item(int index) {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
@@ -279,19 +279,19 @@ public sealed partial class CarouselTest : TestContext {
 
 
         indicatorList.Children[index].Click();
-        Assert.Equal(index, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(index);
 
         indicatorList.Children[index2].Click();
-        Assert.Equal(index2, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(index2);
 
         indicatorList.Children[index3].Click();
-        Assert.Equal(index3, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(index3);
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void PlayButton_Click_Starts_And_Stops_Intervall(bool runAtBeginning) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask PlayButton_Click_Starts_And_Stops_Intervall(bool runAtBeginning) {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, runAtBeginning);
@@ -300,11 +300,11 @@ public sealed partial class CarouselTest : TestContext {
         Carousel carousel = carouselContainer.Instance;
         IElement playButton = carouselContainer.Find(".carousel-play-button");
 
-        Assert.Equal(runAtBeginning, carousel.Running);
+        await Assert.That(carousel.Running).IsEqualTo(runAtBeginning);
         playButton.Click();
-        Assert.NotEqual(runAtBeginning, carousel.Running);
+        await Assert.That(carousel.Running).IsNotEqualTo(runAtBeginning);
         playButton.Click();
-        Assert.Equal(runAtBeginning, carousel.Running);
+        await Assert.That(carousel.Running).IsEqualTo(runAtBeginning);
     }
 
     #endregion
@@ -312,8 +312,8 @@ public sealed partial class CarouselTest : TestContext {
 
     #region timer related
 
-    [Fact]
-    public void AutoStart_Activates_Interval() {
+    [Test]
+    public async ValueTask AutoStart_Activates_Interval() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
@@ -323,9 +323,9 @@ public sealed partial class CarouselTest : TestContext {
         });
         Carousel carousel = carouselContainer.Instance;
 
-        Assert.False(carousel.Running);
-        carouselContainer.WaitForAssertion(() => Assert.True(carousel.Running));
-        carouselContainer.WaitForAssertion(() => Assert.Equal(1, carousel.Active));
+        await Assert.That(carousel.Running).IsFalse();
+        carouselContainer.WaitForAssertion(async () => await Assert.That(carousel.Running).IsTrue());
+        carouselContainer.WaitForAssertion(async () => await Assert.That(carousel.Active).IsEqualTo(1));
     }
 
     #endregion
@@ -333,8 +333,8 @@ public sealed partial class CarouselTest : TestContext {
 
     #region api methods
 
-    [Fact]
-    public void SwapItem_Swaps_Items() {
+    [Test]
+    public async ValueTask SwapItem_Swaps_Items() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
@@ -344,19 +344,19 @@ public sealed partial class CarouselTest : TestContext {
         IRefreshableElementCollection<IElement> itemDivs = carouselContainer.FindAll(".carousel-element");
         IElement item0 = itemDivs[0];
         IElement item1 = itemDivs[1];
-        Assert.Contains("z-index: 20", item1.Attributes["style"]!.Value);
-        Assert.Equal(1, carousel.Active);
+        await Assert.That(item1.Attributes["style"]!.Value).Contains("z-index: 20");
+        await Assert.That(carousel.Active).IsEqualTo(1);
 
         carousel.SwapCarouselItems(0, 1);
 
 
         IRefreshableElementCollection<IElement> itemDivsAfter = carouselContainer.FindAll(".carousel-element");
-        Assert.Contains("z-index: 20", item1.Attributes["style"]!.Value);
-        Assert.Equal(0, carousel.Active);
+        await Assert.That(item1.Attributes["style"]!.Value).Contains("z-index: 20");
+        await Assert.That(carousel.Active).IsEqualTo(0);
     }
 
-    [Fact]
-    public void SetActiveItem_Sets_Item_With_Index_Active() {
+    [Test]
+    public async ValueTask SetActiveItem_Sets_Item_With_Index_Active() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
@@ -365,17 +365,17 @@ public sealed partial class CarouselTest : TestContext {
         Carousel carousel = carouselContainer.Instance;
 
         carousel.Active = 2;
-        Assert.Equal(2, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(2);
 
         carousel.Active = 0;
-        Assert.Equal(0, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(0);
 
         carousel.Active = 3;
-        Assert.Equal(3, carousel.Active);
+        await Assert.That(carousel.Active).IsEqualTo(3);
     }
 
-    [Fact]
-    public void StartInterval_Enables_Interval() {
+    [Test]
+    public async ValueTask StartInterval_Enables_Interval() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
@@ -383,15 +383,15 @@ public sealed partial class CarouselTest : TestContext {
         });
         Carousel carousel = carouselContainer.Instance;
 
-        Assert.False(carousel.Running);
+        await Assert.That(carousel.Running).IsFalse();
         carousel.StartInterval();
-        Assert.True(carousel.Running);
+        await Assert.That(carousel.Running).IsTrue();
         carousel.StartInterval();
-        Assert.True(carousel.Running);
+        await Assert.That(carousel.Running).IsTrue();
     }
 
-    [Fact]
-    public void StopInterval_Disables_Interval() {
+    [Test]
+    public async ValueTask StopInterval_Disables_Interval() {
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, true);
@@ -399,11 +399,11 @@ public sealed partial class CarouselTest : TestContext {
         });
         Carousel carousel = carouselContainer.Instance;
 
-        Assert.True(carousel.Running);
+        await Assert.That(carousel.Running).IsTrue();
         carousel.StopInterval();
-        Assert.False(carousel.Running);
+        await Assert.That(carousel.Running).IsFalse();
         carousel.StopInterval();
-        Assert.False(carousel.Running);
+        await Assert.That(carousel.Running).IsFalse();
     }
 
     #endregion
@@ -411,8 +411,8 @@ public sealed partial class CarouselTest : TestContext {
 
     #region event
 
-    [Fact]
-    public void OnActiveChanged_Fires_When_Active_Item_Changes() {
+    [Test]
+    public async ValueTask OnActiveChanged_Fires_When_Active_Item_Changes() {
         int fired = 0;
 
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
@@ -424,11 +424,11 @@ public sealed partial class CarouselTest : TestContext {
         Carousel carousel = carouselContainer.Instance;
 
         carousel.Active = 0;
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
-    [Fact]
-    public void OnRunningChanged_Fires_When_Running_State_Changes() {
+    [Test]
+    public async ValueTask OnRunningChanged_Fires_When_Running_State_Changes() {
         int fired = 0;
 
         IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
@@ -439,13 +439,13 @@ public sealed partial class CarouselTest : TestContext {
         Carousel carousel = carouselContainer.Instance;
 
         carousel.StartInterval();
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
 
         carousel.StartInterval();
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
 
         carousel.StopInterval();
-        Assert.Equal(2, fired);
+        await Assert.That(fired).IsEqualTo(2);
     }
 
     #endregion

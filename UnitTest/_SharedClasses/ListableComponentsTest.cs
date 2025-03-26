@@ -1,19 +1,19 @@
 ﻿namespace UnitTest;
 
-public sealed class ListableComponentsTest : TestContext {
+public sealed class ListableComponentsTest : Bunit.TestContext {
     private class ListholdingComponentDummy : ListholdingComponentBase<ListableComponentDummy> {
         public List<ListableComponentDummy> ChildList => childList;
     }
     private class ListableComponentDummy : ListableComponentBase<ListableComponentDummy> { }
 
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(3)]
-    [InlineData(10)]
-    public void ChildCount_Gives_Number_Of_Registered_Children(int count) {
+    [Test]
+    [Arguments(0)]
+    [Arguments(1)]
+    [Arguments(2)]
+    [Arguments(3)]
+    [Arguments(10)]
+    public async ValueTask ChildCount_Gives_Number_Of_Registered_Children(int count) {
         IRenderedComponent<ListholdingComponentDummy> listholdingComponentContainer = RenderComponent<ListholdingComponentDummy>();
         ListholdingComponentDummy listholdingComponent = listholdingComponentContainer.Instance;
 
@@ -22,16 +22,16 @@ public sealed class ListableComponentsTest : TestContext {
                 builder.AddCascadingValue("Parent", (ListholdingComponentBase<ListableComponentDummy>)listholdingComponent);
             });
 
-        Assert.Equal(count, listholdingComponent.ChildCount);
+        await Assert.That(listholdingComponent.ChildCount).IsEqualTo(count);
     }
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(3)]
-    [InlineData(10)]
-    public void Children_Are_Registered_In_ChildList(int count) {
+    [Test]
+    [Arguments(0)]
+    [Arguments(1)]
+    [Arguments(2)]
+    [Arguments(3)]
+    [Arguments(10)]
+    public async ValueTask Children_Are_Registered_In_ChildList(int count) {
         IRenderedComponent<ListholdingComponentDummy> listholdingComponentContainer = RenderComponent<ListholdingComponentDummy>();
         ListholdingComponentDummy listholdingComponent = listholdingComponentContainer.Instance;
 
@@ -42,6 +42,6 @@ public sealed class ListableComponentsTest : TestContext {
             });
 
         for (int i = 0; i < count; i++)
-            Assert.Equal(children[i].Instance, listholdingComponent.ChildList[i]);
+            await Assert.That(listholdingComponent.ChildList[i]).IsEqualTo(children[i].Instance);
     }
 }

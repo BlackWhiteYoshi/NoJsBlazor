@@ -2,15 +2,15 @@
 
 namespace UnitTest;
 
-public sealed class LoaderIconTest : TestContext {
+public sealed class LoaderIconTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void LoaderIconHas4Children() {
+    [Test]
+    public async ValueTask LoaderIconHas4Children() {
         IRenderedComponent<LoaderIcon> loaderIconContainer = RenderComponent<LoaderIcon>();
 
         IElement loaderIconDiv = loaderIconContainer.Find(".loader-icon");
-        Assert.Equal(4, loaderIconDiv.ChildElementCount);
+        await Assert.That(loaderIconDiv.ChildElementCount).IsEqualTo(4);
     }
 
     #endregion

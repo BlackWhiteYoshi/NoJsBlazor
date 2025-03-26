@@ -2,17 +2,17 @@
 
 namespace UnitTest;
 
-public sealed partial class ContextSubMenuTest : TestContext {
+public sealed partial class ContextSubMenuTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void Head_Is_Rendered_In_ContextSubMenuDiv() {
+    [Test]
+    public async ValueTask Head_Is_Rendered_In_ContextSubMenuDiv() {
         MarkupString TEST_HTML = new("<p>Test Text</p>");
 
         (IRenderedFragment? fragment, _, _, _) = RenderContextMenuTree(TEST_HTML);
 
         IElement div = fragment.Find(".context-submenu-toggle");
-        Assert.StartsWith(TEST_HTML.Value, div.InnerHtml);
+        await Assert.That(div.InnerHtml).StartsWith(TEST_HTML.Value);
     }
 
     #endregion
@@ -20,16 +20,16 @@ public sealed partial class ContextSubMenuTest : TestContext {
 
     #region interavtive
 
-    [Fact]
-    public void OnClick_Triggers_Expanding() {
+    [Test]
+    public async ValueTask OnClick_Triggers_Expanding() {
         (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuTree(default);
-        Assert.False(contextSubMenu.Expanded);
+        await Assert.That(contextSubMenu.Expanded).IsFalse();
 
         IElement checkbox = fragment.Find(".context-submenu-checkbox");
         checkbox.Change(true);
-        Assert.True(contextSubMenu.Expanded);
+        await Assert.That(contextSubMenu.Expanded).IsTrue();
         checkbox.Change(false);
-        Assert.False(contextSubMenu.Expanded);
+        await Assert.That(contextSubMenu.Expanded).IsFalse();
     }
 
 
@@ -38,25 +38,25 @@ public sealed partial class ContextSubMenuTest : TestContext {
 
     #region public methods
 
-    [Fact]
-    public void Toggle_Changes_Expanded_State() {
-        (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuTree(default);
-        Assert.False(contextSubMenu.Expanded);
+    [Test]
+    public async ValueTask Toggle_Changes_Expanded_State() {
+        (_, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuTree(default);
+        await Assert.That(contextSubMenu.Expanded).IsFalse();
 
         contextSubMenu.Toggle();
-        Assert.True(contextSubMenu.Expanded);
+        await Assert.That(contextSubMenu.Expanded).IsTrue();
     }
 
-    [Fact]
-    public void SilentExpandedSetter_Sets_Without_Notifying() {
+    [Test]
+    public async ValueTask SilentExpandedSetter_Sets_Without_Notifying() {
         int fired = 0;
 
         (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((bool expanded) => fired++);
 
         bool stateAfterToggling = !contextSubMenu.Expanded;
         contextSubMenu.SilentExpandedSetter = !contextSubMenu.Expanded;
-        Assert.Equal(stateAfterToggling, contextSubMenu.Expanded);
-        Assert.Equal(0, fired);
+        await Assert.That(contextSubMenu.Expanded).IsEqualTo(stateAfterToggling);
+        await Assert.That(fired).IsEqualTo(0);
     }
 
     #endregion
@@ -64,15 +64,15 @@ public sealed partial class ContextSubMenuTest : TestContext {
 
     #region events
 
-    [Fact]
-    public void OnToggle_Fires_When_Menu_Expanded() {
+    [Test]
+    public async ValueTask OnToggle_Fires_When_Menu_Expanded() {
         int fired = 0;
 
         (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((bool expanded) => fired++);
-        Assert.Equal(0, fired);
+        await Assert.That(fired).IsEqualTo(0);
 
         contextSubMenu.Expanded = true;
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
     #endregion

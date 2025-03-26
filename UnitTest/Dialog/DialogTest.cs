@@ -2,11 +2,11 @@
 
 namespace UnitTest;
 
-public sealed class DialogTest : TestContext {
+public sealed class DialogTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void Title_Is_Rendered_In_TitleDiv() {
+    [Test]
+    public async ValueTask Title_Is_Rendered_In_TitleDiv() {
         const string TEST_HTML = "<p>Test Text</p>";
 
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
@@ -17,11 +17,11 @@ public sealed class DialogTest : TestContext {
         dialog.Open();
 
         IElement div = dialogContainer.Find(".title");
-        Assert.Equal(TEST_HTML, div.InnerHtml);
+        await Assert.That(div.InnerHtml).IsEqualTo(TEST_HTML);
     }
 
-    [Fact]
-    public void Content_Is_Rendered_In_ContentDiv() {
+    [Test]
+    public async ValueTask Content_Is_Rendered_In_ContentDiv() {
         const string TEST_HTML = "<p>Test Text</p>";
 
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
@@ -31,13 +31,13 @@ public sealed class DialogTest : TestContext {
         dialog.Open();
 
         IElement div = dialogContainer.Find(".content");
-        Assert.Equal(TEST_HTML, div.InnerHtml);
+        await Assert.That(div.InnerHtml).IsEqualTo(TEST_HTML);
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void ShowTitle_Shows_Title(bool showTitle) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask ShowTitle_Shows_Title(bool showTitle) {
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ShowTitle, showTitle);
         });
@@ -46,16 +46,16 @@ public sealed class DialogTest : TestContext {
 
         IRefreshableElementCollection<IElement> divs = dialogContainer.FindAll(".title");
         if (showTitle)
-            Assert.Single(divs);
+            await Assert.That(divs).HasSingleItem();
         else
-            Assert.Empty(divs);
+            await Assert.That(divs).IsEmpty();
     }
 
-    [Theory]
-    [InlineData(true, 20.0, 30.0)]
-    [InlineData(true, 5.0, 1.0)]
-    [InlineData(false, 10.0, 23.0)]
-    public void Moveable_Allow_Moving_Window(bool moveable, double xMovement, double yMovement) {
+    [Test]
+    [Arguments(true, 20.0, 30.0)]
+    [Arguments(true, 5.0, 1.0)]
+    [Arguments(false, 10.0, 23.0)]
+    public async ValueTask Moveable_Allow_Moving_Window(bool moveable, double xMovement, double yMovement) {
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ShowTitle, true);
             builder.Add((Dialog dialog) => dialog.Moveable, moveable);
@@ -70,19 +70,19 @@ public sealed class DialogTest : TestContext {
         windowDiv.PointerMove(clientX: xMovement, clientY: yMovement, buttons: 1);
 
         if (moveable) {
-            Assert.Equal(xMovement, dialog.XMovement);
-            Assert.Equal(yMovement, dialog.YMovement);
+            await Assert.That(dialog.XMovement).IsEqualTo(xMovement);
+            await Assert.That(dialog.YMovement).IsEqualTo(yMovement);
         }
         else {
-            Assert.Equal(0, dialog.XMovement);
-            Assert.Equal(0, dialog.YMovement);
+            await Assert.That(dialog.XMovement).IsEqualTo(0);
+            await Assert.That(dialog.YMovement).IsEqualTo(0);
         }
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void ModalScreen_Enables_White_Background(bool enabled) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask ModalScreen_Enables_White_Background(bool enabled) {
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ModalScreen, enabled);
         });
@@ -93,15 +93,15 @@ public sealed class DialogTest : TestContext {
         IAttr style = modalDiv.Attributes["style"]!;
 
         if (enabled)
-            Assert.Equal(string.Empty, style.Value);
+            await Assert.That(style.Value).IsEqualTo(string.Empty);
         else
-            Assert.Equal("background: #0000; pointer-events: none;", style.Value);
+            await Assert.That(style.Value).IsEqualTo("background: #0000; pointer-events: none;");
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void CloseOnModalBackground_Trigger_Close_By_Clicking_On_Background(bool enabled) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask CloseOnModalBackground_Trigger_Close_By_Clicking_On_Background(bool enabled) {
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ModalScreen, true);
             builder.Add((Dialog dialog) => dialog.CloseOnModalBackground, enabled);
@@ -112,7 +112,7 @@ public sealed class DialogTest : TestContext {
         IElement modalDiv = dialogContainer.Find(".dialog-modal-background");
         modalDiv.Click();
 
-        Assert.Equal(!enabled, dialog.Active);
+        await Assert.That(dialog.Active).IsEqualTo(!enabled);
     }
 
     #endregion
@@ -120,27 +120,27 @@ public sealed class DialogTest : TestContext {
 
     #region public methods
 
-    [Fact]
-    public void Open_Activates_Window() {
+    [Test]
+    public async ValueTask Open_Activates_Window() {
         IRenderedComponent<Dialog> dialogContainer = RenderComponent<Dialog>();
         Dialog dialog = dialogContainer.Instance;
         dialog.Open();
 
-        Assert.True(dialog.Active);
+        await Assert.That(dialog.Active).IsTrue();
     }
 
-    [Fact]
-    public void Close_Deactivates_Window() {
+    [Test]
+    public async ValueTask Close_Deactivates_Window() {
         IRenderedComponent<Dialog> dialogContainer = RenderComponent<Dialog>();
         Dialog dialog = dialogContainer.Instance;
         dialog.Open();
         dialog.Close();
 
-        Assert.False(dialog.Active);
+        await Assert.That(dialog.Active).IsFalse();
     }
 
-    [Fact]
-    public void OpenWithLastPosition_Opens_With_Last_Coordinates() {
+    [Test]
+    public async ValueTask OpenWithLastPosition_Opens_With_Last_Coordinates() {
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ShowTitle, true);
             builder.Add((Dialog dialog) => dialog.Moveable, true);
@@ -158,21 +158,21 @@ public sealed class DialogTest : TestContext {
         windowDiv.PointerMove(clientX: X_MOVEMENT, clientY: Y_MOVEMENT, buttons: 1);
 
         dialog.Close();
-        Assert.Equal(X_MOVEMENT, dialog.XMovement);
-        Assert.Equal(Y_MOVEMENT, dialog.YMovement);
+        await Assert.That(dialog.XMovement).IsEqualTo(X_MOVEMENT);
+        await Assert.That(dialog.YMovement).IsEqualTo(Y_MOVEMENT);
 
         dialog.OpenWithLastPosition();
-        Assert.Equal(X_MOVEMENT, dialog.XMovement);
-        Assert.Equal(Y_MOVEMENT, dialog.YMovement);
+        await Assert.That(dialog.XMovement).IsEqualTo(X_MOVEMENT);
+        await Assert.That(dialog.YMovement).IsEqualTo(Y_MOVEMENT);
 
         dialog.Close();
         dialog.Open();
-        Assert.Equal(0, dialog.XMovement);
-        Assert.Equal(0, dialog.YMovement);
+        await Assert.That(dialog.XMovement).IsEqualTo(0);
+        await Assert.That(dialog.YMovement).IsEqualTo(0);
     }
 
-    [Fact]
-    public void SilentActiveSetter_Sets_Without_Notifying() {
+    [Test]
+    public async ValueTask SilentActiveSetter_Sets_Without_Notifying() {
         int fired = 0;
 
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
@@ -181,12 +181,12 @@ public sealed class DialogTest : TestContext {
         Dialog dialog = dialogContainer.Instance;
 
         dialog.SilentActiveSetter = true;
-        Assert.True(dialog.Active);
-        Assert.Equal(0, fired);
+        await Assert.That(dialog.Active).IsTrue();
+        await Assert.That(fired).IsEqualTo(0);
 
         dialog.SilentActiveSetter = false;
-        Assert.False(dialog.Active);
-        Assert.Equal(0, fired);
+        await Assert.That(dialog.Active).IsFalse();
+        await Assert.That(fired).IsEqualTo(0);
     }
 
     #endregion
@@ -194,8 +194,8 @@ public sealed class DialogTest : TestContext {
 
     #region events
 
-    [Fact]
-    public void OnActiveChanged_Fires_When_Dialog_Active_Changed() {
+    [Test]
+    public async ValueTask OnActiveChanged_Fires_When_Dialog_Active_Changed() {
         int open = 0;
         int close = 0;
 
@@ -210,16 +210,16 @@ public sealed class DialogTest : TestContext {
         Dialog dialog = dialogContainer.Instance;
         
         dialog.Open();
-        Assert.Equal(1, open);
-        Assert.Equal(0, close);
+        await Assert.That(open).IsEqualTo(1);
+        await Assert.That(close).IsEqualTo(0);
 
         dialog.Close();
-        Assert.Equal(1, open);
-        Assert.Equal(1, close);
+        await Assert.That(open).IsEqualTo(1);
+        await Assert.That(close).IsEqualTo(1);
     }
 
-    [Fact]
-    public void OnTitlePointerDown_Fires_When_Title_PointerDown() {
+    [Test]
+    public async ValueTask OnTitlePointerDown_Fires_When_Title_PointerDown() {
         int fired = 0;
 
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
@@ -230,11 +230,11 @@ public sealed class DialogTest : TestContext {
 
         IElement titleDiv = dialogContainer.Find(".title");
         titleDiv.PointerDown(clientX: 0, clientY: 0);
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
-    [Fact]
-    public void OnTitlePointerMove_Fires_When_Title_PointerMove_After_OnTitlePointerDown() {
+    [Test]
+    public async ValueTask OnTitlePointerMove_Fires_When_Title_PointerMove_After_OnTitlePointerDown() {
         int fired = 0;
 
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
@@ -245,16 +245,16 @@ public sealed class DialogTest : TestContext {
 
         IElement titleDiv = dialogContainer.Find(".title");
         titleDiv.PointerMove(clientX: 0, clientY: 0);
-        Assert.Equal(0, fired);
+        await Assert.That(fired).IsEqualTo(0);
 
         titleDiv.PointerDown(clientX: 0, clientY: 0);
         titleDiv.PointerMove(clientX: 0, clientY: 0);
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
 
-    [Fact]
-    public void OnTitlePointerUp_Fires_When_Title_PointerUp() {
+    [Test]
+    public async ValueTask OnTitlePointerUp_Fires_When_Title_PointerUp() {
         int fired = 0;
 
         IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
@@ -265,7 +265,7 @@ public sealed class DialogTest : TestContext {
 
         IElement titleDiv = dialogContainer.Find(".title");
         titleDiv.PointerUp(clientX: 0, clientY: 0);
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
     #endregion

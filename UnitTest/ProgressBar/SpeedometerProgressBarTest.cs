@@ -2,24 +2,24 @@
 
 namespace UnitTest;
 
-public sealed class SpeedometerProgressBarTest : TestContext {
+public sealed class SpeedometerProgressBarTest : Bunit.TestContext {
     #region parameter
 
-    [Theory]
-    [InlineData(0.5f)]
-    [InlineData(1.0f)]
-    public void Progress_Rotates_Meter(float progress) {
+    [Test]
+    [Arguments(0.5f)]
+    [Arguments(1.0f)]
+    public async ValueTask Progress_Rotates_Meter(float progress) {
         IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<SpeedometerProgressBar> builder) => {
             builder.Add((SpeedometerProgressBar speedometerProgressBar) => speedometerProgressBar.Progress, progress);
         });
 
         IElement line = speedometerProgressBarContainer.Find(".meter");
         IAttr style = line.Attributes["style"]!;
-        Assert.Equal($"rotate: {(float)(3.0 / 2.0 * Math.PI) * progress + (float)(1.0 / 4.0 * Math.PI)}rad", style.Value);
+        await Assert.That(style.Value).IsEqualTo($"rotate: {(float)(3.0 / 2.0 * Math.PI) * progress + (float)(1.0 / 4.0 * Math.PI)}rad");
     }
 
-    [Fact]
-    public void Text_Sets_Description() {
+    [Test]
+    public async ValueTask Text_Sets_Description() {
         const string TEST_TEXT = "Test Text";
 
         IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<SpeedometerProgressBar> builder) => {
@@ -27,7 +27,7 @@ public sealed class SpeedometerProgressBarTest : TestContext {
         });
 
         IElement p = speedometerProgressBarContainer.Find("p");
-        Assert.Equal(TEST_TEXT, p.InnerHtml);
+        await Assert.That(p.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
     #endregion
@@ -35,8 +35,8 @@ public sealed class SpeedometerProgressBarTest : TestContext {
 
     #region public methods
 
-    [Fact]
-    public void Content_Sets_Progress_And_Text() {
+    [Test]
+    public async ValueTask Content_Sets_Progress_And_Text() {
         const float TEST_VALUE = 0.5f;
         const string TEST_TEXT = "Test Text";
 
@@ -44,8 +44,8 @@ public sealed class SpeedometerProgressBarTest : TestContext {
         SpeedometerProgressBar speedometerProgressBar = speedometerProgressBarContainer.Instance;
 
         speedometerProgressBar.Content = (TEST_VALUE, TEST_TEXT);
-        Assert.Equal(TEST_VALUE, speedometerProgressBar.Progress);
-        Assert.Equal(TEST_TEXT, speedometerProgressBar.Text);
+        await Assert.That(speedometerProgressBar.Progress).IsEqualTo(TEST_VALUE);
+        await Assert.That(speedometerProgressBar.Text).IsEqualTo(TEST_TEXT);
     }
 
     #endregion

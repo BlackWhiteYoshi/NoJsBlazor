@@ -2,11 +2,11 @@
 
 namespace UnitTest;
 
-public sealed class CollapseDivTest : TestContext {
+public sealed class CollapseDivTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void Head_Is_Rendered_In_Head() {
+    [Test]
+    public async ValueTask Head_Is_Rendered_In_Head() {
         const string TEST_HTML = "<p>Test Text</p>";
 
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
@@ -15,11 +15,11 @@ public sealed class CollapseDivTest : TestContext {
 
         IElement headDiv = collapseDivContainer.Find(".head");
 
-        Assert.EndsWith(TEST_HTML, headDiv.InnerHtml);
+        await Assert.That(headDiv.InnerHtml).EndsWith(TEST_HTML);
     }
 
-    [Fact]
-    public void Content_Is_Rendered_In_Content() {
+    [Test]
+    public async ValueTask Content_Is_Rendered_In_Content() {
         const string TEST_HTML = "<p>Test Text</p>";
 
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
@@ -28,19 +28,19 @@ public sealed class CollapseDivTest : TestContext {
 
         IElement contentDiv = collapseDivContainer.Find(".content-inner");
 
-        Assert.Equal(TEST_HTML, contentDiv.InnerHtml);
+        await Assert.That(contentDiv.InnerHtml).IsEqualTo(TEST_HTML);
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void StartCollapsed_Starts_Collapsed(bool collapsed) {
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
+    public async ValueTask StartCollapsed_Starts_Collapsed(bool collapsed) {
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartExpanded, collapsed);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
-        Assert.Equal(collapsed, collapseDiv.Expanded);
+        await Assert.That(collapseDiv.Expanded).IsEqualTo(collapsed);
     }
 
     #endregion
@@ -48,18 +48,18 @@ public sealed class CollapseDivTest : TestContext {
 
     #region interactive
 
-    [Fact]
-    public void Head_Clicked_Trigger_Collapsing() {
+    [Test]
+    public async ValueTask Head_Clicked_Trigger_Collapsing() {
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartExpanded, false);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
-        Assert.False(collapseDiv.Expanded);
+        await Assert.That(collapseDiv.Expanded).IsFalse();
         collapseDivContainer.Find(".collapse-toggle").Change(true);
-        Assert.True(collapseDiv.Expanded);
+        await Assert.That(collapseDiv.Expanded).IsTrue();
         collapseDivContainer.Find(".collapse-toggle").Change(false);
-        Assert.False(collapseDiv.Expanded);
+        await Assert.That(collapseDiv.Expanded).IsFalse();
     }
 
     #endregion
@@ -67,8 +67,8 @@ public sealed class CollapseDivTest : TestContext {
 
     #region public methods
 
-    [Fact]
-    public void SilentCollapsedSetter_Sets_Without_Notifying() {
+    [Test]
+    public async ValueTask SilentCollapsedSetter_Sets_Without_Notifying() {
         int fired = 0;
 
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
@@ -78,8 +78,8 @@ public sealed class CollapseDivTest : TestContext {
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
 
         collapseDiv.SilentExpandedSetter = true;
-        Assert.True(collapseDiv.Expanded);
-        Assert.Equal(0, fired);
+        await Assert.That(collapseDiv.Expanded).IsTrue();
+        await Assert.That(fired).IsEqualTo(0);
     }
 
     #endregion
@@ -87,8 +87,8 @@ public sealed class CollapseDivTest : TestContext {
 
     #region events
 
-    [Fact]
-    public void OnCollapseChanged_Fires_When_Collapse_State_Changes() {
+    [Test]
+    public async ValueTask OnCollapseChanged_Fires_When_Collapse_State_Changes() {
         int fired = 0;
 
         IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
@@ -98,7 +98,7 @@ public sealed class CollapseDivTest : TestContext {
 
         collapseDiv.Expanded = !collapseDiv.Expanded;
 
-        Assert.Equal(1, fired);
+        await Assert.That(fired).IsEqualTo(1);
     }
 
     #endregion

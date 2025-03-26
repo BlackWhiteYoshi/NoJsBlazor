@@ -22,16 +22,12 @@
     <Using Include="Microsoft.AspNetCore.Components.Web" />
     <Using Include="Microsoft.JSInterop" />
     <Using Include="Bunit" />
-    <Using Include="Xunit" />
     <Using Include="NoJsBlazor" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="bunit" Version="1.36.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-    <PackageReference Include="xunit" Version="2.9.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" PrivateAssets="all" />
-    <PackageReference Include="coverlet.collector" Version="6.0.2" PrivateAssets="all" />
+    <PackageReference Include="TUnit" Version="0.18.60" />
+    <PackageReference Include="bunit" Version="1.38.5" />
   </ItemGroup>
 
   <ItemGroup>

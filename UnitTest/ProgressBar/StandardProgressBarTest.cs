@@ -2,11 +2,11 @@
 
 namespace UnitTest;
 
-public sealed class StandardProgressBarTest : TestContext {
+public sealed class StandardProgressBarTest : Bunit.TestContext {
     #region parameter
 
-    [Fact]
-    public void Text_Sets_Description() {
+    [Test]
+    public async ValueTask Text_Sets_Description() {
         const string TEST_TEXT = "Test Text";
 
         IRenderedComponent<StandardProgressBar> standardProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<StandardProgressBar> builder) => {
@@ -14,7 +14,7 @@ public sealed class StandardProgressBarTest : TestContext {
         });
 
         IElement p = standardProgressBarContainer.Find("p");
-        Assert.Equal(TEST_TEXT, p.InnerHtml);
+        await Assert.That(p.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
     #endregion
@@ -22,8 +22,8 @@ public sealed class StandardProgressBarTest : TestContext {
 
     #region public methods
 
-    [Fact]
-    public void Content_Sets_Progress_And_Text() {
+    [Test]
+    public async ValueTask Content_Sets_Progress_And_Text() {
         const float TEST_VALUE = 0.5f;
         const string TEST_TEXT = "Test Text";
 
@@ -31,8 +31,8 @@ public sealed class StandardProgressBarTest : TestContext {
         StandardProgressBar standardProgressBar = standardProgressBarContainer.Instance;
 
         standardProgressBar.Content = (TEST_VALUE, TEST_TEXT);
-        Assert.Equal(TEST_VALUE, standardProgressBar.Progress);
-        Assert.Equal(TEST_TEXT, standardProgressBar.Text);
+        await Assert.That(standardProgressBar.Progress).IsEqualTo(TEST_VALUE);
+        await Assert.That(standardProgressBar.Text).IsEqualTo(TEST_TEXT);
     }
 
     #endregion
