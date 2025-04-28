@@ -1,0 +1,9 @@
+﻿<Solution>
+  <Project Path="NoJsBlazor/NoJsBlazor.csproj" />
+  <Project Path="UnitTest/UnitTest.csproj" />
+  <Folder Name="/ManualTesting/">
+    <Project Path="ManualTesting/ManualTesting.Client/ManualTesting.Client.csproj" />
+    <Project Path="ManualTesting/ManualTesting.ClientHost/ManualTesting.ClientHost.csproj" />
+    <Project Path="ManualTesting/ManualTesting.PostGenerator/ManualTesting.PostGenerator.csproj" />
+  </Folder>
+</Solution>
