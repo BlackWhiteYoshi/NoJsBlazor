@@ -46,7 +46,7 @@ public static class Program {
                 razorComponentsBuilder.AddInteractiveServerComponents().AddCircuitOptions((CircuitOptions options) => options.DetailedErrors = builder.Environment.IsDevelopment());
             if (renderMode.HasFlag(RenderMode.Webassembly))
                 razorComponentsBuilder.AddInteractiveWebAssemblyComponents();
-            
+
             services.AddCoreServices();
         }
 

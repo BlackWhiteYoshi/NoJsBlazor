@@ -67,7 +67,7 @@
             stroke-width: 2;
             stroke-linecap: round;
         }
-    
+
         &:hover {
             opacity: 0.9;
         }
@@ -148,11 +148,11 @@
         & > line {
             stroke-width: 40%; // 0.8
         }
-    
+
         & > polygon {
             stroke-width: 20%; // 0.4
         }
-    
+
         &.pause > polygon {
             display: none;
         }
@@ -160,7 +160,7 @@
         &.play > line {
             display: none;
         }
-    
+
         &:hover {
             opacity: 0.9;
         }

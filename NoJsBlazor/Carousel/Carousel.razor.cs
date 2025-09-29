@@ -164,7 +164,7 @@ public sealed partial class Carousel : ListholdingComponentBase<CarouselItem>, I
         autoStart.Elapsed += AutoStart;
         autoStart.AutoReset = false;
     }
-    
+
     protected override void OnInitialized() => active = ActiveStart;
 
     private bool firstRender = true;

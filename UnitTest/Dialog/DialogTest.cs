@@ -208,7 +208,7 @@ public sealed class DialogTest : Bunit.TestContext {
             });
         });
         Dialog dialog = dialogContainer.Instance;
-        
+
         dialog.Open();
         await Assert.That(open).IsEqualTo(1);
         await Assert.That(close).IsEqualTo(0);

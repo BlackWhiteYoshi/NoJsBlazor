@@ -13,7 +13,7 @@ public static class Program {
             Console.WriteLine("completed with one or more errors\n");
             foreach (string error in errorList)
                 Console.WriteLine($"  {error}");
-            
+
             return 1;
         }
 

@@ -96,7 +96,7 @@ An object that holds a ranged input together with a decrease and increase button
 | Display            | Funck&lt;Type, string&gt;   | DefaultDisplay                | The way the value should be printed. Default is value.ToString().                                                                                                                                                |
 | ParseEdit          | Funck&lt;string?, Type?&gt; | DefaultParseEdit              | It should get the content of the edit field as string and return the appropriated number. It should return null if the value is not valid. Default try parses number and when succeed, clamps to Min,Max-bounds. |
 
-**Note**: 
+**Note**:  
 DefaultLeftButton and DefaultRightButton are private RenderFragments which render "🡸" and "🡺" arrows respectively.  
 DefaultDisplay is a private function which performs the ToString()-method on the value and if it returns null, defaults to string.empty.  
 DefaultParseEdit performs a TryParse on the value and if it succeed, it clamps to Min,Max-bounds, otherwise null.  

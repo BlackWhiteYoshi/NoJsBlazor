@@ -61,7 +61,7 @@ button:not(:disabled) { cursor: pointer; }
     }
 }
 
-.btn-main { @include button-template(#17F, #16E, #8AF); }  
+.btn-main { @include button-template(#17F, #16E, #8AF); }
 .btn-second { @include button-template(#1AF, #3CF, #ADF); }
 .btn-info { @include button-template(#23F, #00F, #99F); }
 .btn-deny { @include button-template(#060, #040, #7B7); }

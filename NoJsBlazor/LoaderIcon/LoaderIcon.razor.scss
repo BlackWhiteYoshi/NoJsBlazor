@@ -1,23 +1,23 @@
 ﻿.loader-icon {
     --size: 20px;
-                
+
     --move-type: move-type-1;
     --move-size: calc(var(--size) / 2);
     --move-duration: 3s;
     --move-timing-function: ease-in-out;
-                
+
     --spin-type: spin-type-1;
     --spin-duration: 2s;
     --spin-timing-function: linear;
     --spin-direction: normal;
-                
+
     --color1: #D00;
     --color2: #00D;
     --color3: #DD0;
     --color4: #0D0;
     --color-duration: 2s;
     --color-timing-function: ease-in-out;
-                
+
     --top-left-animation-type: ball-action-square;
     --top-left-animation-duration: 8s;
     --top-right-animation-type: ball-action-circle;
@@ -26,15 +26,15 @@
     --bottom-left-animation-duration: 4s;
     --bottom-right-animation-type: ball-action-big;
     --bottom-right-animation-duration: 10s;
-                
 
-    
+
+
     position: relative;
     animation:
         var(--move-type) var(--move-duration) var(--move-timing-function) alternate infinite,
         var(--spin-type) var(--spin-duration) var(--spin-timing-function) var(--spin-direction) infinite;
 
-            
+
     @keyframes spin-type-1 {
         from {
             rotate: 0deg;
@@ -57,7 +57,7 @@
             transform: skew(-30deg, -30deg);
         }
     }
-            
+
     @keyframes move-type-1 {
         from {
             width: calc(2 * var(--size));
@@ -68,7 +68,7 @@
             height: calc(2 * var(--size) + var(--move-size));
         }
     }
-            
+
     @keyframes move-type-2 {
         from {
             width: var(--size);
@@ -90,7 +90,7 @@
         height: var(--size);
         border-radius: 50%;
     }
-            
+
     .ball-top-left {
         @include ball();
         top: 0;
@@ -98,13 +98,13 @@
         animation:
             ball-color-1-2 var(--color-duration) var(--color-timing-function) alternate infinite,
             var(--top-left-animation-type) var(--top-left-animation-duration) linear normal infinite;
-        
+
         @keyframes ball-color-1-2 {
             from { background-color: var(--color1); }
             to { background-color: var(--color2); }
         }
     }
-    
+
     .ball-top-right {
         @include ball();
         top: 0;
@@ -112,13 +112,13 @@
         animation:
             ball-color-2-3 var(--color-duration) var(--color-timing-function) alternate infinite,
             var(--top-right-animation-type) var(--top-right-animation-duration) linear normal infinite;
-        
+
         @keyframes ball-color-2-3 {
             from { background-color: var(--color2); }
             to { background-color: var(--color3); }
         }
     }
-    
+
     .ball-bottom-left {
         @include ball();
         bottom: 0;
@@ -126,13 +126,13 @@
         animation:
             ball-color-3-4 var(--color-duration) var(--color-timing-function) alternate infinite,
             var(--bottom-left-animation-type) var(--bottom-left-animation-duration) linear normal infinite;
-        
+
         @keyframes ball-color-3-4 {
             from { background-color: var(--color3); }
             to { background-color: var(--color4); }
         }
     }
-    
+
     .ball-bottom-right {
         @include ball();
         bottom: 0;
@@ -146,8 +146,8 @@
             to { background-color: var(--color1); }
         }
     }
-    
-    
+
+
 
     // ball animations
 
@@ -169,7 +169,7 @@
             border-radius: 50%;
         }
     }
-            
+
     @keyframes ball-action-circle {
         40% {
             transform: rotate(-1080deg) translate(0);
@@ -181,7 +181,7 @@
             transform: rotate(1080deg) translate(0);
         }
     }
-            
+
     @keyframes ball-action-line {
         65% {
             translate: 0;
@@ -214,7 +214,7 @@
             translate: 0;
         }
     }
-            
+
     @keyframes ball-action-big {
         70% {
             z-index: -1;

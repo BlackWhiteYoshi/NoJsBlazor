@@ -1,4 +1,4 @@
-# NavBar 
+# NavBar
 A container that contains a nested list of items/links. It automatically collapses to phone view at a configurable threshold. Optional it can also show a brand.
 
 ```razor

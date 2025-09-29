@@ -70,7 +70,7 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
     /// <para>Shorthand for: <see cref="Expanded">Expanded</see> = !<see cref="Expanded">Expanded</see>;</para>
     /// </summary>
     public void Toggle() => Expanded = !Expanded;
-    
+
     /// <summary>
     /// Collapses this menu and all expanded submenus.
     /// </summary>
@@ -105,5 +105,5 @@ public sealed partial class NavBar : ListholdingComponentBase<NavBarMenu> {
         NavBarBreakpoint.em100 => "nav-root nav100em",
         _ => "nav-root"
     };
-    
+
 }

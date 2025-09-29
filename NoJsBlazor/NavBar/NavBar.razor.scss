@@ -133,7 +133,7 @@
     .nav-dropdown-toggle {
         display: contents;
     }
-    
+
     // desktop view little down arrow at top level mwnu
     .nav-dropdown-arrow {
         width: var(--arrow-down-size);
@@ -266,7 +266,7 @@
         .nav-dropdown-toggle {
             cursor: pointer;
         }
-        
+
         .nav-dropdown-list {
             padding: 0;
             margin-left: 10px;
@@ -277,7 +277,7 @@
         .nav-a {
             flex-grow: 1;
         }
-    
+
 
         // round circle dropdown icon
         .nav-dropdown-arrow,
@@ -291,7 +291,7 @@
             translate: none;
             rotate: none;
             transition: rotate 0.3s linear, stroke 0.1s linear;
-        
+
             & > polygon {
                 display: none;
             }
