@@ -1,5 +1,5 @@
-{
-  "working directory": "../../../../ManualTesting.Client/bin/Release/net9.0/browser-wasm/publish/wwwroot",
+﻿{
+  "working directory": "../../../../ManualTesting.Client/bin/Release/net10.0/browser-wasm/publish/wwwroot",
   "site url": "https://nojsblazor.firerocket.de",
   "generate files": {
     "html page": {
@@ -22,7 +22,7 @@
   },
   "zip files": {
     "enabled": true,
-    "exclude list startsWith": [],
+    "exclude list startsWith": [ "_content/style.min.css" ],
     "exclude list endsWith": [ ".gz", ".br", ".jpg", ".png", ".woff2" ]
   }
 }

@@ -99,29 +99,28 @@ internal abstract class InputBase {
             autocomplete="@(Autocomplete ? "on" : "off")"
             placeholder=""
             @attributes="@InputAttributes" />
-        <label for="@Id">@Label</label>  
+        <label for="@Id">@Label</label>
         */
 
         __builder.OpenElement(0, "input");
-
-        __builder.AddAttribute(1, "id", Id);
-        __builder.AddAttribute(2, "value", Value);
-        __builder.AddAttribute(3, "oninput", EventCallback.Factory.Create<ChangeEventArgs>(this, OnFieldInput));
-        __builder.AddAttribute(4, "onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, OnFieldChange));
-        __builder.AddAttribute(5, "type", Type);
-        __builder.AddAttribute(6, "name", Name);
-        __builder.AddAttribute(7, "autocomplete", Autocomplete ? "on" : "off");
-        __builder.AddAttribute(8, "placeholder", "");
-        __builder.AddMultipleAttributes(9, InputAttributes);
-
+        {
+            __builder.AddAttribute(1, "id", Id);
+            __builder.AddAttribute(2, "value", Value);
+            __builder.AddAttribute(3, "oninput", EventCallback.Factory.Create<ChangeEventArgs>(this, OnFieldInput));
+            __builder.AddAttribute(4, "onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, OnFieldChange));
+            __builder.AddAttribute(5, "type", Type);
+            __builder.AddAttribute(6, "name", Name);
+            __builder.AddAttribute(7, "autocomplete", Autocomplete ? "on" : "off");
+            __builder.AddAttribute(8, "placeholder", "");
+            __builder.AddMultipleAttributes(9, InputAttributes);
+        }
         __builder.CloseElement();
 
-
         __builder.OpenElement(10, "label");
-
-        __builder.AddAttribute(11, "for", Id);
-        __builder.AddContent(12, Label);
-
+        {
+            __builder.AddAttribute(11, "for", Id);
+            __builder.AddContent(12, Label);
+        }
         __builder.CloseElement();
     }
 }
