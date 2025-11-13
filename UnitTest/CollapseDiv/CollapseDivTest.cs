@@ -2,14 +2,14 @@
 
 namespace UnitTest;
 
-public sealed class CollapseDivTest : Bunit.TestContext {
+public sealed class CollapseDivTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Head_Is_Rendered_In_Head() {
         const string TEST_HTML = "<p>Test Text</p>";
 
-        IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
+        IRenderedComponent<CollapseDiv> collapseDivContainer = Render((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.Head, TEST_HTML);
         });
 
@@ -22,7 +22,7 @@ public sealed class CollapseDivTest : Bunit.TestContext {
     public async ValueTask Content_Is_Rendered_In_Content() {
         const string TEST_HTML = "<p>Test Text</p>";
 
-        IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
+        IRenderedComponent<CollapseDiv> collapseDivContainer = Render((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.Content, TEST_HTML);
         });
 
@@ -35,7 +35,7 @@ public sealed class CollapseDivTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask StartCollapsed_Starts_Collapsed(bool collapsed) {
-        IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
+        IRenderedComponent<CollapseDiv> collapseDivContainer = Render((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartExpanded, collapsed);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
@@ -50,7 +50,7 @@ public sealed class CollapseDivTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Head_Clicked_Trigger_Collapsing() {
-        IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
+        IRenderedComponent<CollapseDiv> collapseDivContainer = Render((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartExpanded, false);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;
@@ -71,7 +71,7 @@ public sealed class CollapseDivTest : Bunit.TestContext {
     public async ValueTask SilentCollapsedSetter_Sets_Without_Notifying() {
         int fired = 0;
 
-        IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
+        IRenderedComponent<CollapseDiv> collapseDivContainer = Render((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.StartExpanded, false);
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.OnExpandedChanged, (bool collapsed) => fired++);
         });
@@ -91,7 +91,7 @@ public sealed class CollapseDivTest : Bunit.TestContext {
     public async ValueTask OnCollapseChanged_Fires_When_Collapse_State_Changes() {
         int fired = 0;
 
-        IRenderedComponent<CollapseDiv> collapseDivContainer = RenderComponent((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
+        IRenderedComponent<CollapseDiv> collapseDivContainer = Render((ComponentParameterCollectionBuilder<CollapseDiv> builder) => {
             builder.Add((CollapseDiv collapseDiv) => collapseDiv.OnExpandedChanged, (bool collapsed) => fired++);
         });
         CollapseDiv collapseDiv = collapseDivContainer.Instance;

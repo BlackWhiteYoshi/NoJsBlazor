@@ -2,14 +2,14 @@
 
 namespace UnitTest;
 
-public sealed class InputTest : Bunit.TestContext {
+public sealed class InputTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Value_Sets_ValueAttrubute() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
+        IRenderedComponent<Input> inputContainer = Render((ComponentParameterCollectionBuilder<Input> builder) => {
             builder.Add((Input input) => input.Value, TEST_TEXT);
         });
 
@@ -22,7 +22,7 @@ public sealed class InputTest : Bunit.TestContext {
     public async ValueTask Title_Sets_Label_Id_Name_And_AutoComplete() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
+        IRenderedComponent<Input> inputContainer = Render((ComponentParameterCollectionBuilder<Input> builder) => {
             builder.Add((Input input) => input.Title, TEST_TEXT);
         });
         Input input = inputContainer.Instance;
@@ -37,7 +37,7 @@ public sealed class InputTest : Bunit.TestContext {
     public async ValueTask Label_Sets_Content_Of_Label() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
+        IRenderedComponent<Input> inputContainer = Render((ComponentParameterCollectionBuilder<Input> builder) => {
             builder.Add((Input input) => input.Label, TEST_TEXT);
         });
 
@@ -49,7 +49,7 @@ public sealed class InputTest : Bunit.TestContext {
     public async ValueTask Type_Sets_Attribute_Type() {
         const string TEST_TEXT = "password";
 
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
+        IRenderedComponent<Input> inputContainer = Render((ComponentParameterCollectionBuilder<Input> builder) => {
             builder.Add((Input input) => input.Type, TEST_TEXT);
         });
 
@@ -62,7 +62,7 @@ public sealed class InputTest : Bunit.TestContext {
     public async ValueTask Id_Sets_Attribute_Id() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
+        IRenderedComponent<Input> inputContainer = Render((ComponentParameterCollectionBuilder<Input> builder) => {
             builder.Add((Input input) => input.Id, TEST_TEXT);
         });
 
@@ -75,7 +75,7 @@ public sealed class InputTest : Bunit.TestContext {
     public async ValueTask Name_Sets_Attribute_Name() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
+        IRenderedComponent<Input> inputContainer = Render((ComponentParameterCollectionBuilder<Input> builder) => {
             builder.Add((Input input) => input.Name, TEST_TEXT);
         });
 
@@ -88,7 +88,7 @@ public sealed class InputTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask Autocomplete_Sets_Attribute_Autocomplete(bool enabled) {
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
+        IRenderedComponent<Input> inputContainer = Render((ComponentParameterCollectionBuilder<Input> builder) => {
             builder.Add((Input input) => input.Autocomplete, enabled);
         });
 
@@ -106,7 +106,7 @@ public sealed class InputTest : Bunit.TestContext {
     public async ValueTask ValueChanged_Fires_When_Input_Changed() {
         int fired = 0;
 
-        IRenderedComponent<Input> inputContainer = RenderComponent((ComponentParameterCollectionBuilder<Input> builder) => {
+        IRenderedComponent<Input> inputContainer = Render((ComponentParameterCollectionBuilder<Input> builder) => {
             builder.Add((Input input) => input.ValueChanged, (string? value) => fired++);
         });
 

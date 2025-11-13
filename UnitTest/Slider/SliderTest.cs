@@ -2,14 +2,14 @@
 
 namespace UnitTest;
 
-public sealed class SliderTest : Bunit.TestContext {
+public sealed class SliderTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Value_Is_Rendered_Inside_Label() {
         const int VALUE = 5;
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Value, VALUE);
         });
 
@@ -21,7 +21,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask Title_Is_Rendered_Inside_First_Label() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Title, TEST_TEXT);
         });
 
@@ -31,7 +31,7 @@ public sealed class SliderTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Title_Is_Not_Rendered_When_Empty() {
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Title, string.Empty);
         });
 
@@ -42,7 +42,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask Min_Sets_MinAttribute() {
         const int MIN = 3;
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Min, MIN);
         });
 
@@ -55,7 +55,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask Max_Sets_MaxAttribute() {
         const int MAX = 3;
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Max, MAX);
         });
 
@@ -68,7 +68,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask Step_Sets_StepAttribute() {
         const int STEP = 3;
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Step, STEP);
         });
 
@@ -81,7 +81,7 @@ public sealed class SliderTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask Enable_Stes_DisabledAttribute(bool enabled) {
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Enabled, enabled);
         });
 
@@ -97,11 +97,11 @@ public sealed class SliderTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask Editable_Renderes_InputField(bool editable) {
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Editable, editable);
         });
 
-        IRefreshableElementCollection<IElement> inputFields = sliderContainer.FindAll("input");
+        IReadOnlyList<IElement> inputFields = sliderContainer.FindAll("input");
         // slider is also an inputField
         await Assert.That(inputFields.Count).IsEqualTo(editable ? 2 : 1);
     }
@@ -110,7 +110,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask LeftButtonContent_Is_Rendered_Inside_LeftButton() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.LeftButtonContent, (RenderTreeBuilder builder) => builder.AddContent(0, TEST_TEXT));
         });
 
@@ -122,7 +122,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask RightButtonContent_Is_Rendered_Inside_RightButton() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.RightButtonContent, (RenderTreeBuilder builder) => builder.AddContent(0, TEST_TEXT));
         });
 
@@ -134,7 +134,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask Display_Changes_Label_Output() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Display, (int value) => TEST_TEXT);
         });
 
@@ -146,7 +146,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask ParseEdit_Reads_In_EditBox() {
         const int VALUE = 6;
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Editable, true);
             builder.Add((Slider<int> slider) => slider.ParseEdit, (string? input) => VALUE);
         });
@@ -166,7 +166,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask ValueChanged_Is_Fired_When_Value_Is_Modified_By_User() {
         int fired = 0;
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Value, 1);
             builder.Add((Slider<int> slider) => slider.Min, 0);
             builder.Add((Slider<int> slider) => slider.Max, 2);
@@ -182,7 +182,7 @@ public sealed class SliderTest : Bunit.TestContext {
     public async ValueTask OnChange_Is_Fired_When_Value_Is_Modified_By_User() {
         int fired = 0;
 
-        IRenderedComponent<Slider<int>> sliderContainer = RenderComponent((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
+        IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Value, 1);
             builder.Add((Slider<int> slider) => slider.Min, 0);
             builder.Add((Slider<int> slider) => slider.Max, 2);

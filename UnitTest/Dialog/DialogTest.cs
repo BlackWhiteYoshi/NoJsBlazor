@@ -2,14 +2,14 @@
 
 namespace UnitTest;
 
-public sealed class DialogTest : Bunit.TestContext {
+public sealed class DialogTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Title_Is_Rendered_In_TitleDiv() {
         const string TEST_HTML = "<p>Test Text</p>";
 
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.Title, TEST_HTML);
             builder.Add((Dialog dialog) => dialog.ShowTitle, true);
         });
@@ -24,7 +24,7 @@ public sealed class DialogTest : Bunit.TestContext {
     public async ValueTask Content_Is_Rendered_In_ContentDiv() {
         const string TEST_HTML = "<p>Test Text</p>";
 
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.Content, TEST_HTML);
         });
         Dialog dialog = dialogContainer.Instance;
@@ -38,13 +38,13 @@ public sealed class DialogTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask ShowTitle_Shows_Title(bool showTitle) {
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ShowTitle, showTitle);
         });
         Dialog dialog = dialogContainer.Instance;
         dialog.Open();
 
-        IRefreshableElementCollection<IElement> divs = dialogContainer.FindAll(".title");
+        IReadOnlyList<IElement> divs = dialogContainer.FindAll(".title");
         if (showTitle)
             await Assert.That(divs).HasSingleItem();
         else
@@ -56,7 +56,7 @@ public sealed class DialogTest : Bunit.TestContext {
     [Arguments(true, 5.0, 1.0)]
     [Arguments(false, 10.0, 23.0)]
     public async ValueTask Moveable_Allow_Moving_Window(bool moveable, double xMovement, double yMovement) {
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ShowTitle, true);
             builder.Add((Dialog dialog) => dialog.Moveable, moveable);
         });
@@ -64,10 +64,10 @@ public sealed class DialogTest : Bunit.TestContext {
         dialog.Open();
 
         IElement titleDiv = dialogContainer.Find(".title");
-        titleDiv.PointerDown(clientX: 0, clientY: 0);
+        titleDiv.PointerDown(new() { ClientX = 0, ClientY = 0 });
 
         IElement windowDiv = dialogContainer.Find(".dialog-window");
-        windowDiv.PointerMove(clientX: xMovement, clientY: yMovement, buttons: 1);
+        windowDiv.PointerMove(new() { ClientX = xMovement, ClientY = yMovement, Buttons = 1 });
 
         if (moveable) {
             await Assert.That(dialog.XMovement).IsEqualTo(xMovement);
@@ -83,7 +83,7 @@ public sealed class DialogTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask ModalScreen_Enables_White_Background(bool enabled) {
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ModalScreen, enabled);
         });
         Dialog dialog = dialogContainer.Instance;
@@ -102,7 +102,7 @@ public sealed class DialogTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask CloseOnModalBackground_Trigger_Close_By_Clicking_On_Background(bool enabled) {
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ModalScreen, true);
             builder.Add((Dialog dialog) => dialog.CloseOnModalBackground, enabled);
         });
@@ -122,7 +122,7 @@ public sealed class DialogTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Open_Activates_Window() {
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent<Dialog>();
+        IRenderedComponent<Dialog> dialogContainer = Render<Dialog>();
         Dialog dialog = dialogContainer.Instance;
         dialog.Open();
 
@@ -131,7 +131,7 @@ public sealed class DialogTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Close_Deactivates_Window() {
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent<Dialog>();
+        IRenderedComponent<Dialog> dialogContainer = Render<Dialog>();
         Dialog dialog = dialogContainer.Instance;
         dialog.Open();
         dialog.Close();
@@ -141,7 +141,7 @@ public sealed class DialogTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask OpenWithLastPosition_Opens_With_Last_Coordinates() {
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.ShowTitle, true);
             builder.Add((Dialog dialog) => dialog.Moveable, true);
         });
@@ -149,13 +149,13 @@ public sealed class DialogTest : Bunit.TestContext {
         dialog.Open();
 
         IElement titleDiv = dialogContainer.Find(".title");
-        titleDiv.PointerDown(clientX: 0, clientY: 0);
+        titleDiv.PointerDown(new() { ClientX = 0, ClientY = 0 });
 
         const double X_MOVEMENT = 20.0;
         const double Y_MOVEMENT = 30.0;
 
         IElement windowDiv = dialogContainer.Find(".dialog-window");
-        windowDiv.PointerMove(clientX: X_MOVEMENT, clientY: Y_MOVEMENT, buttons: 1);
+        windowDiv.PointerMove(new() { ClientX = X_MOVEMENT, ClientY = Y_MOVEMENT, Buttons = 1 });
 
         dialog.Close();
         await Assert.That(dialog.XMovement).IsEqualTo(X_MOVEMENT);
@@ -175,7 +175,7 @@ public sealed class DialogTest : Bunit.TestContext {
     public async ValueTask SilentActiveSetter_Sets_Without_Notifying() {
         int fired = 0;
 
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.OnActiveChanged, () => fired++);
         });
         Dialog dialog = dialogContainer.Instance;
@@ -199,7 +199,7 @@ public sealed class DialogTest : Bunit.TestContext {
         int open = 0;
         int close = 0;
 
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.OnActiveChanged, (bool value) => {
                 if (value)
                     open++;
@@ -222,14 +222,14 @@ public sealed class DialogTest : Bunit.TestContext {
     public async ValueTask OnTitlePointerDown_Fires_When_Title_PointerDown() {
         int fired = 0;
 
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.OnTitlePointerDown, (PointerEventArgs e) => fired++);
         });
         Dialog dialog = dialogContainer.Instance;
         dialog.Open();
 
         IElement titleDiv = dialogContainer.Find(".title");
-        titleDiv.PointerDown(clientX: 0, clientY: 0);
+        titleDiv.PointerDown(new() { ClientX = 0, ClientY = 0 });
         await Assert.That(fired).IsEqualTo(1);
     }
 
@@ -237,18 +237,18 @@ public sealed class DialogTest : Bunit.TestContext {
     public async ValueTask OnTitlePointerMove_Fires_When_Title_PointerMove_After_OnTitlePointerDown() {
         int fired = 0;
 
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.OnTitlePointerMove, (PointerEventArgs e) => fired++);
         });
         Dialog dialog = dialogContainer.Instance;
         dialog.Open();
 
         IElement titleDiv = dialogContainer.Find(".title");
-        titleDiv.PointerMove(clientX: 0, clientY: 0);
+        titleDiv.PointerMove(new() { ClientX = 0, ClientY = 0 });
         await Assert.That(fired).IsEqualTo(0);
 
-        titleDiv.PointerDown(clientX: 0, clientY: 0);
-        titleDiv.PointerMove(clientX: 0, clientY: 0);
+        titleDiv.PointerDown(new() { ClientX = 0, ClientY = 0 });
+        titleDiv.PointerMove(new() { ClientX = 0, ClientY = 0 });
         await Assert.That(fired).IsEqualTo(1);
     }
 
@@ -257,14 +257,14 @@ public sealed class DialogTest : Bunit.TestContext {
     public async ValueTask OnTitlePointerUp_Fires_When_Title_PointerUp() {
         int fired = 0;
 
-        IRenderedComponent<Dialog> dialogContainer = RenderComponent((ComponentParameterCollectionBuilder<Dialog> builder) => {
+        IRenderedComponent<Dialog> dialogContainer = Render((ComponentParameterCollectionBuilder<Dialog> builder) => {
             builder.Add((Dialog dialog) => dialog.OnTitlePointerUp, (PointerEventArgs e) => fired++);
         });
         Dialog dialog = dialogContainer.Instance;
         dialog.Open();
 
         IElement titleDiv = dialogContainer.Find(".title");
-        titleDiv.PointerUp(clientX: 0, clientY: 0);
+        titleDiv.PointerUp(new() { ClientX = 0, ClientY = 0 });
         await Assert.That(fired).IsEqualTo(1);
     }
 

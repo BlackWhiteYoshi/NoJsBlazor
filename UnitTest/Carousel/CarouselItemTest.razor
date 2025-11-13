@@ -1,8 +1,8 @@
 ﻿@namespace UnitTest
-@inherits TestContext
+@inherits BunitContext
 
 @code {
-    private IRenderedFragment RenderCarouselWithOneItem(MarkupString childcontent) => Render(
+    private IRenderedComponent<ContainerFragment> RenderCarouselWithOneItem(MarkupString childcontent) => Render(
         @<Carousel>
             <Items>
                 <CarouselItem>

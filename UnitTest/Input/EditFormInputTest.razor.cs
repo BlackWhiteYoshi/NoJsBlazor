@@ -1,8 +1,9 @@
 ﻿using AngleSharp.Dom;
+using Bunit.Rendering;
 
 namespace UnitTest;
 
-public sealed partial class EditFormInputTest : Bunit.TestContext {
+public sealed partial class EditFormInputTest : BunitContext {
     #region parameter
 
     [Test]
@@ -21,7 +22,7 @@ public sealed partial class EditFormInputTest : Bunit.TestContext {
     public async ValueTask Label_Sets_Content_Of_Label() {
         const string TEST_TEXT = "Test Text";
 
-        (IRenderedFragment fragment, _) = RenderLabel(TEST_TEXT);
+        (IRenderedComponent<ContainerFragment> fragment, _) = RenderLabel(TEST_TEXT);
 
         IElement label = fragment.Find("label");
         await Assert.That(label.InnerHtml).IsEqualTo(TEST_TEXT);
@@ -31,7 +32,7 @@ public sealed partial class EditFormInputTest : Bunit.TestContext {
     public async ValueTask Type_Sets_Attribute_Type() {
         const string TEST_TEXT = "Test Text";
 
-        (IRenderedFragment fragment, _) = RenderType(TEST_TEXT);
+        (IRenderedComponent<ContainerFragment> fragment, _) = RenderType(TEST_TEXT);
 
         IElement inputTag = fragment.Find("input");
         IAttr typeAttribute = inputTag.Attributes["type"]!;
@@ -42,7 +43,7 @@ public sealed partial class EditFormInputTest : Bunit.TestContext {
     public async ValueTask Id_Sets_Attribute_Id() {
         const string TEST_TEXT = "Test Text";
 
-        (IRenderedFragment fragment, _) = RenderId(TEST_TEXT);
+        (IRenderedComponent<ContainerFragment> fragment, _) = RenderId(TEST_TEXT);
 
         IElement inputTag = fragment.Find("input");
         IAttr idAttribute = inputTag.Attributes["id"]!;
@@ -53,7 +54,7 @@ public sealed partial class EditFormInputTest : Bunit.TestContext {
     public async ValueTask Name_Sets_Attribute_Name() {
         const string TEST_TEXT = "Test Text";
 
-        (IRenderedFragment fragment, _) = RenderName(TEST_TEXT);
+        (IRenderedComponent<ContainerFragment> fragment, _) = RenderName(TEST_TEXT);
 
         IElement inputTag = fragment.Find("input");
         IAttr nameAttribute = inputTag.Attributes["name"]!;
@@ -64,7 +65,7 @@ public sealed partial class EditFormInputTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask Autocomplete_Sets_Attribute_Autocomplete(bool enabled) {
-        (IRenderedFragment fragment, _) = RenderAutocomplete(enabled);
+        (IRenderedComponent<ContainerFragment> fragment, _) = RenderAutocomplete(enabled);
 
         IElement inputTag = fragment.Find("input");
         IAttr autocompleteAttribute = inputTag.Attributes["autocomplete"]!;
@@ -80,7 +81,7 @@ public sealed partial class EditFormInputTest : Bunit.TestContext {
     public async ValueTask Binding_Value_Sets_Model_Value() {
         const string TEST_TEXT = "Test Text";
 
-        (IRenderedFragment inputContainer, _, TestModel testModel) = RenderStandard();
+        (IRenderedComponent<ContainerFragment> inputContainer, _, TestModel testModel) = RenderStandard();
 
         IElement inputTag = inputContainer.Find("input");
         inputTag.Input(TEST_TEXT);

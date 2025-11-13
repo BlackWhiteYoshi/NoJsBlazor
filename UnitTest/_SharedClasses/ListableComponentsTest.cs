@@ -1,6 +1,6 @@
 ﻿namespace UnitTest;
 
-public sealed class ListableComponentsTest : Bunit.TestContext {
+public sealed class ListableComponentsTest : BunitContext {
     private class ListholdingComponentDummy : ListholdingComponentBase<ListableComponentDummy> {
         public List<ListableComponentDummy> ChildList => childList;
     }
@@ -14,11 +14,11 @@ public sealed class ListableComponentsTest : Bunit.TestContext {
     [Arguments(3)]
     [Arguments(10)]
     public async ValueTask ChildCount_Gives_Number_Of_Registered_Children(int count) {
-        IRenderedComponent<ListholdingComponentDummy> listholdingComponentContainer = RenderComponent<ListholdingComponentDummy>();
+        IRenderedComponent<ListholdingComponentDummy> listholdingComponentContainer = Render<ListholdingComponentDummy>();
         ListholdingComponentDummy listholdingComponent = listholdingComponentContainer.Instance;
 
         for (int i = 0; i < count; i++)
-            RenderComponent((ComponentParameterCollectionBuilder<ListableComponentDummy> builder) => {
+            Render((ComponentParameterCollectionBuilder<ListableComponentDummy> builder) => {
                 builder.AddCascadingValue("Parent", (ListholdingComponentBase<ListableComponentDummy>)listholdingComponent);
             });
 
@@ -32,12 +32,12 @@ public sealed class ListableComponentsTest : Bunit.TestContext {
     [Arguments(3)]
     [Arguments(10)]
     public async ValueTask Children_Are_Registered_In_ChildList(int count) {
-        IRenderedComponent<ListholdingComponentDummy> listholdingComponentContainer = RenderComponent<ListholdingComponentDummy>();
+        IRenderedComponent<ListholdingComponentDummy> listholdingComponentContainer = Render<ListholdingComponentDummy>();
         ListholdingComponentDummy listholdingComponent = listholdingComponentContainer.Instance;
 
         IRenderedComponent<ListableComponentDummy>[] children = new IRenderedComponent<ListableComponentDummy>[count];
         for (int i = 0; i < count; i++)
-            children[i] = RenderComponent((ComponentParameterCollectionBuilder<ListableComponentDummy> builder) => {
+            children[i] = Render((ComponentParameterCollectionBuilder<ListableComponentDummy> builder) => {
                 builder.AddCascadingValue("Parent", (ListholdingComponentBase<ListableComponentDummy>)listholdingComponent);
             });
 

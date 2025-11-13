@@ -2,12 +2,12 @@
 
 namespace UnitTest;
 
-public sealed partial class ContextMenuTest : Bunit.TestContext {
+public sealed partial class ContextMenuTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Four_Items_Has_ChildCount_Four() {
-        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
+        IRenderedComponent<ContextMenu> contextMenuContainer = Render((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
             builder.Add((ContextMenu contextMenu) => contextMenu.ChildContent, FourContextSubMenuItems);
         });
         ContextMenu contextMenu = contextMenuContainer.Instance;
@@ -20,7 +20,7 @@ public sealed partial class ContextMenuTest : Bunit.TestContext {
     public async ValueTask ChildContent_Is_Rendered_In_ContextMenuDiv() {
         const string TEST_HTML = "<p>Test Text</p>";
 
-        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
+        IRenderedComponent<ContextMenu> contextMenuContainer = Render((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
             builder.Add((ContextMenu contextMenu) => contextMenu.ChildContent, TEST_HTML);
         });
 
@@ -35,7 +35,7 @@ public sealed partial class ContextMenuTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Open_Expands_ContextMenu() {
-        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent<ContextMenu>();
+        IRenderedComponent<ContextMenu> contextMenuContainer = Render<ContextMenu>();
         ContextMenu contextMenu = contextMenuContainer.Instance;
 
         contextMenu.Open(0.0, 0.0);
@@ -44,7 +44,7 @@ public sealed partial class ContextMenuTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Close_Hides_ContextMenu() {
-        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent<ContextMenu>();
+        IRenderedComponent<ContextMenu> contextMenuContainer = Render<ContextMenu>();
         ContextMenu contextMenu = contextMenuContainer.Instance;
 
         contextMenu.Open(0.0, 0.0);
@@ -65,7 +65,7 @@ public sealed partial class ContextMenuTest : Bunit.TestContext {
     public async ValueTask SilentOpen_Expands_Without_Notifying() {
         int fired = 0;
 
-        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent<ContextMenu>((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
+        IRenderedComponent<ContextMenu> contextMenuContainer = Render<ContextMenu>((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
             builder.Add((ContextMenu contextMenu) => contextMenu.OnToggle, (bool expanded) => fired++);
         });
         ContextMenu contextMenu = contextMenuContainer.Instance;
@@ -79,7 +79,7 @@ public sealed partial class ContextMenuTest : Bunit.TestContext {
     public async ValueTask SilentClose_Hides_Without_Notifying() {
         int fired = 0;
 
-        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent<ContextMenu>((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
+        IRenderedComponent<ContextMenu> contextMenuContainer = Render<ContextMenu>((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
             builder.Add((ContextMenu contextMenu) => contextMenu.OnToggle, (bool expanded) => fired++);
         });
         ContextMenu contextMenu = contextMenuContainer.Instance;
@@ -99,7 +99,7 @@ public sealed partial class ContextMenuTest : Bunit.TestContext {
     public async ValueTask OnToggle_Fires_When_ContextMenu_Toggles() {
         int fired = 0;
 
-        IRenderedComponent<ContextMenu> contextMenuContainer = RenderComponent<ContextMenu>((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
+        IRenderedComponent<ContextMenu> contextMenuContainer = Render<ContextMenu>((ComponentParameterCollectionBuilder<ContextMenu> builder) => {
             builder.Add((ContextMenu contextMenu) => contextMenu.OnToggle, (bool expanded) => fired++);
         });
         ContextMenu contextMenu = contextMenuContainer.Instance;

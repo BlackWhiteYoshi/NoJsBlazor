@@ -2,12 +2,12 @@
 
 namespace UnitTest;
 
-public sealed partial class NavBarTest : Bunit.TestContext {
+public sealed partial class NavBarTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Four_Items_Has_ChildCount_Four() {
-        IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
+        IRenderedComponent<NavBar> navBarContainer = Render((ComponentParameterCollectionBuilder<NavBar> builder) => {
             builder.Add((NavBar navBar) => navBar.Items, FourNavBarMenus);
         });
         NavBar navBar = navBarContainer.Instance;
@@ -17,7 +17,7 @@ public sealed partial class NavBarTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Brand_Is_Not_Rendered_If_It_Is_Null() {
-        IRenderedComponent<NavBar> navBarContainer = RenderComponent<NavBar>();
+        IRenderedComponent<NavBar> navBarContainer = Render<NavBar>();
 
         await Assert.That(navBarContainer.FindAll(".navbar-brand")).IsEmpty();
     }
@@ -26,7 +26,7 @@ public sealed partial class NavBarTest : Bunit.TestContext {
     public async ValueTask Brand_Is_Rendered_In_Both_NavbarBrandDivs() {
         const string TEST_TEXT = "test text";
 
-        IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
+        IRenderedComponent<NavBar> navBarContainer = Render((ComponentParameterCollectionBuilder<NavBar> builder) => {
             builder.Add((NavBar navBar) => navBar.Brand, TEST_TEXT);
         });
 
@@ -41,7 +41,7 @@ public sealed partial class NavBarTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Click_On_PhoneButton_Triggers_Expanding() {
-        IRenderedComponent<NavBar> navBarContainer = RenderComponent<NavBar>();
+        IRenderedComponent<NavBar> navBarContainer = Render<NavBar>();
         NavBar navBar = navBarContainer.Instance;
 
         IElement toggle = navBarContainer.Find(".nav-checkbox");
@@ -73,7 +73,7 @@ public sealed partial class NavBarTest : Bunit.TestContext {
     public async ValueTask SilentExpandedSetter_Sets_Without_Notifying() {
         int fired = 0;
 
-        IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
+        IRenderedComponent<NavBar> navBarContainer = Render((ComponentParameterCollectionBuilder<NavBar> builder) => {
             builder.Add((NavBar navBar) => navBar.OnToggle, (bool expanded) => fired++);
         });
         NavBar navBar = navBarContainer.Instance;
@@ -92,7 +92,7 @@ public sealed partial class NavBarTest : Bunit.TestContext {
     public async ValueTask OnToggle_Fires_When_Navbar_Expands() {
         int fired = 0;
 
-        IRenderedComponent<NavBar> navBarContainer = RenderComponent((ComponentParameterCollectionBuilder<NavBar> builder) => {
+        IRenderedComponent<NavBar> navBarContainer = Render((ComponentParameterCollectionBuilder<NavBar> builder) => {
             builder.Add((NavBar navBar) => navBar.OnToggle, (bool expanded) => fired++);
         });
         NavBar navBar = navBarContainer.Instance;

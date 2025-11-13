@@ -2,14 +2,14 @@
 
 namespace UnitTest;
 
-public sealed class SpeedometerProgressBarTest : Bunit.TestContext {
+public sealed class SpeedometerProgressBarTest : BunitContext {
     #region parameter
 
     [Test]
     [Arguments(0.5f)]
     [Arguments(1.0f)]
     public async ValueTask Progress_Rotates_Meter(float progress) {
-        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<SpeedometerProgressBar> builder) => {
+        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = Render((ComponentParameterCollectionBuilder<SpeedometerProgressBar> builder) => {
             builder.Add((SpeedometerProgressBar speedometerProgressBar) => speedometerProgressBar.Progress, progress);
         });
 
@@ -22,7 +22,7 @@ public sealed class SpeedometerProgressBarTest : Bunit.TestContext {
     public async ValueTask Text_Sets_Description() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<SpeedometerProgressBar> builder) => {
+        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = Render((ComponentParameterCollectionBuilder<SpeedometerProgressBar> builder) => {
             builder.Add((SpeedometerProgressBar speedometerProgressBar) => speedometerProgressBar.Text, TEST_TEXT);
         });
 
@@ -40,7 +40,7 @@ public sealed class SpeedometerProgressBarTest : Bunit.TestContext {
         const float TEST_VALUE = 0.5f;
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = RenderComponent<SpeedometerProgressBar>();
+        IRenderedComponent<SpeedometerProgressBar> speedometerProgressBarContainer = Render<SpeedometerProgressBar>();
         SpeedometerProgressBar speedometerProgressBar = speedometerProgressBarContainer.Instance;
 
         speedometerProgressBar.Content = (TEST_VALUE, TEST_TEXT);

@@ -2,21 +2,21 @@
 
 namespace UnitTest;
 
-public sealed class CircleProgressBarTest : Bunit.TestContext {
+public sealed class CircleProgressBarTest : BunitContext {
     #region parameter
 
     [Test]
     [Arguments(0.5f)]
     [Arguments(1.0f)]
     public async ValueTask Progress_Fills_Circle(float progress) {
-        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<CircleProgressBar> builder) => {
+        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = Render((ComponentParameterCollectionBuilder<CircleProgressBar> builder) => {
             builder.Add((CircleProgressBar circleProgressBar) => circleProgressBar.Progress, progress);
         });
 
         if (progress < 1.0)
             await Assert.That(circleProgressBarContainer.FindAll("path")).HasSingleItem();
         else {
-            IRefreshableElementCollection<IElement> OuterAndInnerCircle = circleProgressBarContainer.FindAll("circle");
+            IReadOnlyList<IElement> OuterAndInnerCircle = circleProgressBarContainer.FindAll("circle");
             await Assert.That(OuterAndInnerCircle.Count).IsEqualTo(2);
         }
     }
@@ -25,7 +25,7 @@ public sealed class CircleProgressBarTest : Bunit.TestContext {
     public async ValueTask Text_Sets_Description() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<CircleProgressBar> builder) => {
+        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = Render((ComponentParameterCollectionBuilder<CircleProgressBar> builder) => {
             builder.Add((CircleProgressBar circleProgressBar) => circleProgressBar.Text, TEST_TEXT);
         });
 
@@ -43,7 +43,7 @@ public sealed class CircleProgressBarTest : Bunit.TestContext {
         const float TEST_VALUE = 0.5f;
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = RenderComponent<CircleProgressBar>();
+        IRenderedComponent<CircleProgressBar> circleProgressBarContainer = Render<CircleProgressBar>();
         CircleProgressBar circleProgressBar = circleProgressBarContainer.Instance;
 
         circleProgressBar.Content = (TEST_VALUE, TEST_TEXT);

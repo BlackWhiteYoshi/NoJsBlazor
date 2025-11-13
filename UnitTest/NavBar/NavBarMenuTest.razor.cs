@@ -1,15 +1,16 @@
 ﻿using AngleSharp.Dom;
+using Bunit.Rendering;
 
 namespace UnitTest;
 
-public sealed partial class NavBarMenuTest : Bunit.TestContext {
+public sealed partial class NavBarMenuTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Head_Is_Rendered_In_NavItemDropdown() {
         MarkupString TEST_HTML = new("<p>Test Text</p>");
 
-        (IRenderedFragment? fragment, _, _, _) = RenderNavBarTree(TEST_HTML);
+        (IRenderedComponent<ContainerFragment>? fragment, _, _, _) = RenderNavBarTree(TEST_HTML);
 
         IElement div = fragment.Find(".nav-element > .nav-div");
         await Assert.That(div.InnerHtml).Contains(TEST_HTML.Value);
@@ -22,7 +23,7 @@ public sealed partial class NavBarMenuTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask OnTouch_Triggers_Expanding() {
-        (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarTree(default);
+        (IRenderedComponent<ContainerFragment>? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarTree(default);
         await Assert.That(navBarMenu.Expanded).IsFalse();
 
         IElement div = fragment.Find(".nav-dropdown-checkbox");
@@ -50,7 +51,7 @@ public sealed partial class NavBarMenuTest : Bunit.TestContext {
     public async ValueTask SilentExpandedSetter_Sets_Without_Notifying() {
         int fired = 0;
 
-        (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarWithCallback((bool expanded) => fired++);
+        (IRenderedComponent<ContainerFragment>? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarWithCallback((bool expanded) => fired++);
 
         navBarMenu.SilentExpandedSetter = true;
         await Assert.That(navBarMenu.Expanded).IsTrue();
@@ -66,7 +67,7 @@ public sealed partial class NavBarMenuTest : Bunit.TestContext {
     public async ValueTask OnToggle_Fires_When_Menu_Expanded() {
         int fired = 0;
 
-        (IRenderedFragment? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarWithCallback((bool expanded) => fired++);
+        (IRenderedComponent<ContainerFragment>? fragment, _, NavBarMenu navBarMenu, _) = RenderNavBarWithCallback((bool expanded) => fired++);
         await Assert.That(fired).IsEqualTo(0);
 
         navBarMenu.Expanded = true;

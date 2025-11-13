@@ -2,14 +2,14 @@
 
 namespace UnitTest;
 
-public sealed class StandardProgressBarTest : Bunit.TestContext {
+public sealed class StandardProgressBarTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Text_Sets_Description() {
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<StandardProgressBar> standardProgressBarContainer = RenderComponent((ComponentParameterCollectionBuilder<StandardProgressBar> builder) => {
+        IRenderedComponent<StandardProgressBar> standardProgressBarContainer = Render((ComponentParameterCollectionBuilder<StandardProgressBar> builder) => {
             builder.Add((StandardProgressBar standardProgressBar) => standardProgressBar.Text, TEST_TEXT);
         });
 
@@ -27,7 +27,7 @@ public sealed class StandardProgressBarTest : Bunit.TestContext {
         const float TEST_VALUE = 0.5f;
         const string TEST_TEXT = "Test Text";
 
-        IRenderedComponent<StandardProgressBar> standardProgressBarContainer = RenderComponent<StandardProgressBar>();
+        IRenderedComponent<StandardProgressBar> standardProgressBarContainer = Render<StandardProgressBar>();
         StandardProgressBar standardProgressBar = standardProgressBarContainer.Instance;
 
         standardProgressBar.Content = (TEST_VALUE, TEST_TEXT);

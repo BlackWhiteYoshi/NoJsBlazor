@@ -1,15 +1,17 @@
 ﻿using AngleSharp.Dom;
+using Bunit;
+using Bunit.Rendering;
 
 namespace UnitTest;
 
-public sealed partial class ContextSubMenuTest : Bunit.TestContext {
+public sealed partial class ContextSubMenuTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Head_Is_Rendered_In_ContextSubMenuDiv() {
         MarkupString TEST_HTML = new("<p>Test Text</p>");
 
-        (IRenderedFragment? fragment, _, _, _) = RenderContextMenuTree(TEST_HTML);
+        (IRenderedComponent<ContainerFragment>? fragment, _, _, _) = RenderContextMenuTree(TEST_HTML);
 
         IElement div = fragment.Find(".context-submenu-toggle");
         await Assert.That(div.InnerHtml).StartsWith(TEST_HTML.Value);
@@ -22,7 +24,7 @@ public sealed partial class ContextSubMenuTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask OnClick_Triggers_Expanding() {
-        (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuTree(default);
+        (IRenderedComponent<ContainerFragment>? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuTree(default);
         await Assert.That(contextSubMenu.Expanded).IsFalse();
 
         IElement checkbox = fragment.Find(".context-submenu-checkbox");
@@ -51,7 +53,7 @@ public sealed partial class ContextSubMenuTest : Bunit.TestContext {
     public async ValueTask SilentExpandedSetter_Sets_Without_Notifying() {
         int fired = 0;
 
-        (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((bool expanded) => fired++);
+        (IRenderedComponent<ContainerFragment>? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((bool expanded) => fired++);
 
         bool stateAfterToggling = !contextSubMenu.Expanded;
         contextSubMenu.SilentExpandedSetter = !contextSubMenu.Expanded;
@@ -68,7 +70,7 @@ public sealed partial class ContextSubMenuTest : Bunit.TestContext {
     public async ValueTask OnToggle_Fires_When_Menu_Expanded() {
         int fired = 0;
 
-        (IRenderedFragment? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((bool expanded) => fired++);
+        (IRenderedComponent<ContainerFragment>? fragment, _, ContextSubMenu contextSubMenu, _) = RenderContextMenuWithCallback((bool expanded) => fired++);
         await Assert.That(fired).IsEqualTo(0);
 
         contextSubMenu.Expanded = true;

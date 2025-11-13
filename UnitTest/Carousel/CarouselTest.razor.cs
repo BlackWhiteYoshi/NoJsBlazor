@@ -1,13 +1,13 @@
-using AngleSharp.Dom;
+﻿using AngleSharp.Dom;
 
 namespace UnitTest;
 
-public sealed partial class CarouselTest : Bunit.TestContext {
+public sealed partial class CarouselTest : BunitContext {
     #region parameter
 
     [Test]
     public async ValueTask Four_Items_Has_ChildCount_Four() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
         });
         Carousel carousel = carouselContainer.Instance;
@@ -20,11 +20,11 @@ public sealed partial class CarouselTest : Bunit.TestContext {
         static string TestDiv(string color) => $"<div style=\"background-color: {color};\"></div>";
 
 
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
         });
 
-        IRefreshableElementCollection<IElement> divCollection = carouselContainer.FindAll(".carousel-element");
+        IReadOnlyList<IElement> divCollection = carouselContainer.FindAll(".carousel-element");
 
         await Assert.That(divCollection.Count).IsEqualTo(4);
         await Assert.That(divCollection[0].InnerHtml).IsEqualTo(TestDiv("red"));
@@ -35,13 +35,15 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Items_AddingItemAppends() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
         });
         Carousel carousel = carouselContainer.Instance;
 
         RenderFragment itemsWithPurple = (RenderFragment)CarouselItemPurple + ItemsRedBlueYellowGreen;
-        carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithPurple));
+        carouselContainer.Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
+            builder.Add((Carousel carousel) => carousel.Items, itemsWithPurple);
+        });
 
         IElement purpleDiv = carouselContainer.FindAll(".carousel-element")[0];
         string purpleInnerHtml = purpleDiv.InnerHtml;
@@ -55,14 +57,16 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Items_RemoveItem_First() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
         });
         Carousel carousel = carouselContainer.Instance;
 
         RenderFragment itemsWithoutRed = (RenderFragment)CarouselItemBlue + CarouselItemYellow + CarouselItemGreen;
-        carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithoutRed));
+        carouselContainer.Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
+            builder.Add((Carousel carousel) => carousel.Items, itemsWithoutRed);
+        });
 
         await Assert.That(carousel.ChildCount).IsEqualTo(3);
         await Assert.That(carousel.Active).IsEqualTo(0);
@@ -70,14 +74,16 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Items_RemoveItem_Last() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
         });
         Carousel carousel = carouselContainer.Instance;
 
         RenderFragment itemsWithoutGreen = (RenderFragment)CarouselItemRed + CarouselItemBlue + CarouselItemYellow;
-        carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithoutGreen));
+        carouselContainer.Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
+            builder.Add((Carousel carousel) => carousel.Items, itemsWithoutGreen);
+        });
 
         await Assert.That(carousel.ChildCount).IsEqualTo(3);
         await Assert.That(carousel.Active).IsEqualTo(1);
@@ -85,14 +91,16 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Items_RemoveItem_Active() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
         });
         Carousel carousel = carouselContainer.Instance;
 
         RenderFragment itemsWithoutRed = (RenderFragment)CarouselItemBlue + CarouselItemYellow + CarouselItemGreen;
-        carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithoutRed));
+        carouselContainer.Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
+            builder.Add((Carousel carousel) => carousel.Items, itemsWithoutRed);
+        });
 
         await Assert.That(carousel.ChildCount).IsEqualTo(3);
         await Assert.That(carousel.Active).IsEqualTo(0);
@@ -100,13 +108,15 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Items_RemoveLastChild_SetsActiveToMinus1() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, CarouselItemRed);
         });
         Carousel carousel = carouselContainer.Instance;
 
         RenderFragment noItems = (RenderTreeBuilder builder) => { };
-        carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", noItems));
+        carouselContainer.Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
+            builder.Add((Carousel carousel) => carousel.Items, noItems);
+        });
 
         await Assert.That(carousel.ChildCount).IsEqualTo(0);
         await Assert.That(carousel.Active).IsEqualTo(-1);
@@ -114,14 +124,16 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Items_RemoveItem_FirstActive() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 0);
         });
         Carousel carousel = carouselContainer.Instance;
 
         RenderFragment itemsWithoutBlue = (RenderFragment)CarouselItemRed + CarouselItemYellow + CarouselItemGreen;
-        carouselContainer.SetParametersAndRender(ComponentParameter.CreateParameter("Items", itemsWithoutBlue));
+        carouselContainer.Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
+            builder.Add((Carousel carousel) => carousel.Items, itemsWithoutBlue);
+        });
 
         await Assert.That(carousel.ChildCount).IsEqualTo(3);
         await Assert.That(carousel.Active).IsEqualTo(0);
@@ -131,7 +143,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     public async ValueTask Overlay_Is_Rendered_In_OverlayDiv() {
         const string TEST_HTML = "<p>Test Text</p>";
 
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.Overlay, TEST_HTML);
         });
@@ -147,7 +159,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     [Arguments(2)]
     [Arguments(3)]
     public async ValueTask Active_Start_Sets_Active_Item(int activeValue) {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, activeValue);
         });
@@ -160,7 +172,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask BeginRunning_Enables_Intervall(bool enabled) {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, enabled);
         });
@@ -173,7 +185,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask ControlArrowsEnable_Enables_Control_Arrows(bool enabled) {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ControlArrowsEnable, enabled);
         });
@@ -192,7 +204,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask IndicatorsEnable_Enables_Indicators(bool enabled) {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.IndicatorsEnable, enabled);
         });
@@ -207,7 +219,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask PlayButtonEnable_Enables_Play_Button(bool enabled) {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.PlayButtonEnable, enabled);
         });
@@ -225,7 +237,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Next_Click_Moves_To_Next_Item() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
@@ -244,7 +256,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask Prev_Click_Moves_To_Prev_Item() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 2);
@@ -266,7 +278,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     [Arguments(1)]
     [Arguments(2)]
     public async ValueTask Indicator_Click_Moves_To_Correspondent_Item(int index) {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
         });
@@ -292,7 +304,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     [Arguments(true)]
     [Arguments(false)]
     public async ValueTask PlayButton_Click_Starts_And_Stops_Intervall(bool runAtBeginning) {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, runAtBeginning);
         });
@@ -314,7 +326,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask AutoStart_Activates_Interval() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
             builder.Add((Carousel carousel) => carousel.IntervalTime, 1000);
@@ -335,13 +347,13 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask SwapItem_Swaps_Items() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
         });
         Carousel carousel = carouselContainer.Instance;
 
-        IRefreshableElementCollection<IElement> itemDivs = carouselContainer.FindAll(".carousel-element");
+        IReadOnlyList<IElement> itemDivs = carouselContainer.FindAll(".carousel-element");
         IElement item0 = itemDivs[0];
         IElement item1 = itemDivs[1];
         await Assert.That(item1.Attributes["style"]!.Value).Contains("z-index: 20");
@@ -350,14 +362,14 @@ public sealed partial class CarouselTest : Bunit.TestContext {
         carousel.SwapCarouselItems(0, 1);
 
 
-        IRefreshableElementCollection<IElement> itemDivsAfter = carouselContainer.FindAll(".carousel-element");
+        IReadOnlyList<IElement> itemDivsAfter = carouselContainer.FindAll(".carousel-element");
         await Assert.That(item1.Attributes["style"]!.Value).Contains("z-index: 20");
         await Assert.That(carousel.Active).IsEqualTo(0);
     }
 
     [Test]
     public async ValueTask SetActiveItem_Sets_Item_With_Index_Active() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
@@ -376,7 +388,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask StartInterval_Enables_Interval() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
             builder.Add((Carousel carousel) => carousel.IntervalTime, 100000);
@@ -392,7 +404,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
 
     [Test]
     public async ValueTask StopInterval_Disables_Interval() {
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, true);
             builder.Add((Carousel carousel) => carousel.IntervalTime, 100000);
@@ -415,7 +427,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     public async ValueTask OnActiveChanged_Fires_When_Active_Item_Changes() {
         int fired = 0;
 
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
             builder.Add((Carousel carousel) => carousel.ActiveStart, 1);
@@ -431,7 +443,7 @@ public sealed partial class CarouselTest : Bunit.TestContext {
     public async ValueTask OnRunningChanged_Fires_When_Running_State_Changes() {
         int fired = 0;
 
-        IRenderedComponent<Carousel> carouselContainer = RenderComponent((ComponentParameterCollectionBuilder<Carousel> builder) => {
+        IRenderedComponent<Carousel> carouselContainer = Render((ComponentParameterCollectionBuilder<Carousel> builder) => {
             builder.Add((Carousel carousel) => carousel.Items, ItemsRedBlueYellowGreen);
             builder.Add((Carousel carousel) => carousel.BeginRunning, false);
             builder.Add((Carousel carousel) => carousel.OnRunningChanged, (bool running) => fired++);

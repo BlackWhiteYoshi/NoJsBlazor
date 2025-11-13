@@ -1,13 +1,13 @@
 ﻿@namespace UnitTest
-@inherits TestContext
+@inherits BunitContext
 
 @code {
-    private (IRenderedFragment fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarTree(MarkupString headHtml) {
+    private (IRenderedComponent<ContainerFragment> fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarTree(MarkupString headHtml) {
         NavBar navBar = null!;
         NavBarMenu navBarMenu = null!;
         NavBarItem navBarItem = null!;
 
-        IRenderedFragment fragment = Render(
+        IRenderedComponent<ContainerFragment> fragment = Render(
             @<NavBar @ref="navBar">
                 <Items>
                     <NavBarMenu @ref="navBarMenu">
@@ -25,12 +25,12 @@
         return (fragment, navBar, navBarMenu, navBarItem);
     }
 
-    private (IRenderedFragment fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarWithCallback(Action<bool> eventCallback) {
+    private (IRenderedComponent<ContainerFragment> fragment, NavBar navBar, NavBarMenu navBarMenu, NavBarItem navBarItem) RenderNavBarWithCallback(Action<bool> eventCallback) {
         NavBar navBar = null!;
         NavBarMenu navBarMenu = null!;
         NavBarItem navBarItem = null!;
 
-        IRenderedFragment fragment = Render(
+        IRenderedComponent<ContainerFragment> fragment = Render(
             @<NavBar @ref="navBar">
                 <Items>
                     <NavBarMenu @ref="navBarMenu" OnToggle="eventCallback">
