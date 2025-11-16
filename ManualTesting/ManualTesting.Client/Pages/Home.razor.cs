@@ -1,4 +1,4 @@
-﻿using NoJsBlazor;
+using NoJsBlazor;
 
 namespace ManualTesting.Client;
 

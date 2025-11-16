@@ -1,4 +1,4 @@
-﻿namespace NoJsBlazor;
+namespace NoJsBlazor;
 
 /// <summary>
 /// <para>A component that can hold other components in a list.</para>

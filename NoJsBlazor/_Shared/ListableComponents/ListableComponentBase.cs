@@ -1,4 +1,4 @@
-﻿namespace NoJsBlazor;
+namespace NoJsBlazor;
 
 /// <summary>
 /// A Component that can be hold by <see cref="ListholdingComponentBase{T}"/> in a List.

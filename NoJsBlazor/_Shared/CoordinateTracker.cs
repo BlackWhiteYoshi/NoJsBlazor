@@ -1,4 +1,4 @@
-﻿namespace NoJsBlazor;
+namespace NoJsBlazor;
 
 /// <summary>
 /// This class can save a 2D-coordinate, calculates the difference to the next coordinate, then update the coordinate and calculates the next difference and so on.

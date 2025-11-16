@@ -1,4 +1,4 @@
-﻿namespace NoJsBlazor;
+namespace NoJsBlazor;
 
 /// <summary>
 /// Base Class for all ProgressBarComponents

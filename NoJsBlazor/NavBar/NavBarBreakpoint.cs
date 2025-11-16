@@ -1,4 +1,4 @@
-﻿namespace NoJsBlazor;
+namespace NoJsBlazor;
 
 /// <summary>
 /// Width values for changing between phone and desktop view.

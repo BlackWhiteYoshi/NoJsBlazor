@@ -1,4 +1,4 @@
-﻿using ManualTesting.Client.Services;
+using ManualTesting.Client.Services;
 
 namespace ManualTesting.Client;
 

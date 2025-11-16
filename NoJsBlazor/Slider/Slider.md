@@ -1,4 +1,4 @@
-﻿# Slider
+# Slider
 
 An object that holds a ranged input together with a decrease and increase button and a label indicating the current value.
 

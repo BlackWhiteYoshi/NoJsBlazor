@@ -1,4 +1,4 @@
-﻿namespace ManualTesting.Client.Services;
+namespace ManualTesting.Client.Services;
 
 public static class CoreServicesExtension {
     /// <summary>

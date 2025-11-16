@@ -1,4 +1,4 @@
-﻿namespace UnitTest;
+namespace UnitTest;
 
 public sealed class CoordinateTrackerTest {
     [Test]

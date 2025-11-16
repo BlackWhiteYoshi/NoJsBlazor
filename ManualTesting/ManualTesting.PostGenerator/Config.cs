@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Nodes;
 
 namespace ManualTesting.PostGenerator;
@@ -24,10 +24,10 @@ namespace ManualTesting.PostGenerator;
 
 file static class JsonNodeExtension {
     extension(JsonNode node) {
-        internal JsonNode Get(string key) => node[key] ?? throw new ArgumentException($"Cannot find key '{key}' in json config.");
-        internal string GetString(string key) => (string?)node.Get(key) ?? throw new ArgumentException($"key '{key}' must be a string.");
-        internal bool GetBool(string key) => (bool?)node.Get(key) ?? throw new ArgumentException($"key '{key}' must be a boolean.");
-        internal string[] ToStringArray() => node.AsArray().Select((JsonNode? node) => (string?)node ?? throw new ArgumentException($"key '{node}' must be a string.")).ToArray();
+        public JsonNode Get(string key) => node[key] ?? throw new ArgumentException($"Cannot find key '{key}' in json config.");
+        public string GetString(string key) => (string?)node.Get(key) ?? throw new ArgumentException($"key '{key}' must be a string.");
+        public bool GetBool(string key) => (bool?)node.Get(key) ?? throw new ArgumentException($"key '{key}' must be a boolean.");
+        public string[] ToStringArray() => node.AsArray().Select((JsonNode? node) => (string?)node ?? throw new ArgumentException($"key '{node}' must be a string.")).ToArray();
     }
 }
 

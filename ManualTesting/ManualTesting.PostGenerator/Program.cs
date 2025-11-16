@@ -1,4 +1,4 @@
-﻿namespace ManualTesting.PostGenerator;
+namespace ManualTesting.PostGenerator;
 
 public static class Program {
     public static int Main() {

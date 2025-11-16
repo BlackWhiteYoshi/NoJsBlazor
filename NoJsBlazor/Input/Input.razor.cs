@@ -1,4 +1,4 @@
-﻿using InlineCompositionAttributes;
+using InlineCompositionAttributes;
 
 namespace NoJsBlazor;
 

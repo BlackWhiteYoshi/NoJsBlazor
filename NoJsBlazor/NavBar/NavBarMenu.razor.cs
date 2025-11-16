@@ -1,4 +1,4 @@
-﻿namespace NoJsBlazor;
+namespace NoJsBlazor;
 
 /// <summary>
 /// <para>A single menu that can hold other <see cref="NavBarMenu"/> and <see cref="NavBarItem"/>/<see cref="NavBarLink"/>.</para>

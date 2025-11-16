@@ -1,4 +1,4 @@
-﻿using ManualTesting.Client.Services;
+using ManualTesting.Client.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace ManualTesting.Client;
