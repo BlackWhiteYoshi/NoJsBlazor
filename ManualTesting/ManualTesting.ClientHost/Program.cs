@@ -14,7 +14,7 @@ public static class Program {
     }
 
 
-    public static Task Main(string[] args) {
+    public static async Task Main(string[] args) {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         bool isDevelopmentEnvironment = builder.Environment.IsDevelopment();
@@ -50,7 +50,7 @@ public static class Program {
             services.AddCoreServices();
         }
 
-        WebApplication app = builder.Build();
+        await using WebApplication app = builder.Build();
 
         // configure Pipeline
         {
@@ -70,6 +70,6 @@ public static class Program {
         }
 
 
-        return app.RunAsync();
+        await app.RunAsync();
     }
 }

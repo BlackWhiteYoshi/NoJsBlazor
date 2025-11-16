@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 namespace ManualTesting.Client;
 
 public static class Program {
-    public static Task Main(string[] args) {
+    public static async Task Main(string[] args) {
         WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
         bool isDevelopmentEnvironment = builder.HostEnvironment.IsDevelopment();
 
@@ -18,6 +18,7 @@ public static class Program {
         // add root components
         builder.RootComponents.Add<IApp>("#anchor");
 
-        return builder.Build().RunAsync();
+        await using WebAssemblyHost host = builder.Build();
+        await host.RunAsync();
     }
 }
