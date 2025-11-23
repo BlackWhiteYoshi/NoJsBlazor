@@ -3,7 +3,7 @@
 Library for Blazor applications. It contains some UI components.  
 This Library does not use any Javascript code, everything is implemented in Razor, (S)CSS and C#.
 
-For a demo go to [nojsblazor.firerocket.de](https://nojsblazor.firerocket.de).
+For a demo go to [nojsblazor.blackwhiteyoshi.com](https://nojsblazor.blackwhiteyoshi.com).
 
 
 
