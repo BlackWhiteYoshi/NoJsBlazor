@@ -30,50 +30,48 @@
         </div>
         <div class="center" style="margin: 50px auto;">
             <div style="margin-bottom: 10px">
-                <label>items</label>
+                <span>items</span>
                 @foreach (int i in Enumerable.Range(0, colorList.Count)) {
-                    <div>
-                        <input @bind="colorList[i]" style="width: 250px">
-                    </div>
+                    <input @bind="colorList[i]" style="display: block; min-width: 250px; margin-block: 6px;">
                 }
-                <div class="center">
-                    <button @onclick="_ => colorList.Add(string.Empty)" style="padding: 3px 5px; background-color: #88F;">+</button>
-                    <button @onclick="_ => colorList.RemoveAt(colorList.Count - 1)" style="padding: 3px 5px;  background-color: #F88;">-</button>
+                <div class="center" style="margin-bottom: 8px;">
+                    <button @onclick="_ => colorList.Add(string.Empty)" style="min-width: 32px; padding-block: 3px; background-color: #88F; margin: 2px 8px;">+</button>
+                    <button @onclick="_ => colorList.RemoveAt(colorList.Count - 1)" style="min-width: 32px; padding-block: 3px;  background-color: #F88; margin: 2px 8px;">-</button>
                 </div>
-                <div>
+                <div style ="margin-bottom: 8px;">
                     <input @bind="swap1" style="width: 40px">
                     <input @bind="swap2" style="width: 40px">
                     <button @onclick="_ => carousel!.SwapCarouselItems(swap1, swap2)">Swap items</button>
                 </div>
             </div>
-            <div>
+            <label style="display: block; margin-bottom: 8px;">
                 <select @bind="carouselAnimation" style="padding: 3px 10px;">
                     <option value="@CarouselAnimation.FadeOut">FadeOut</option>
                     <option value="@CarouselAnimation.Slide">Slide</option>
                     <option value="@CarouselAnimation.SlideRotate">SlideRotate</option>
                 </select>
-                <label>Animation</label>
-            </div>
-            <div>
+                <span style="margin-left: 8px;">Animation</span>
+            </label>
+            <label style="display: block; margin-bottom: 4px;">
                 <input type="checkbox" @bind="controlArrowsEnable">
-                <label>controlArrowsEnable</label>
-            </div>
-            <div>
+                <span>controlArrowsEnable</span>
+            </label>
+            <label style="display: block; margin-bottom: 4px;">
                 <input type="checkbox" @bind="indicatorsEnable">
-                <label>indicatorsEnable</label>
-            </div>
-            <div>
+                <span>indicatorsEnable</span>
+            </label>
+            <label style="display: block; margin-bottom: 8px;">
                 <input type="checkbox" @bind="playButtonEnable">
-                <label>playButtonEnable</label>
-            </div>
-            <div>
+                <span>playButtonEnable</span>
+            </label>
+            <label style="display: block; margin-bottom: 8px;">
                 <input @bind="intervalTime" style="width: 50px; padding: 3px 5px;">
-                <label>intervalTime</label>
-            </div>
-            <div>
+                <span>intervalTime</span>
+            </label>
+            <label style="display: block; margin-bottom: 8px;">
                 <input @bind="autoStartTime" style="width: 50px; padding: 3px 5px;">
-                <label>autoStartTime</label>
-            </div>
+                <span>autoStartTime</span>
+            </label>
         </div>
     </section>
 
