@@ -5,12 +5,12 @@
 
 <div class="slider" @attributes="@Attributes">
     @if (Title != string.Empty) {
-        <label>@Title</label>
+        <span>@Title</span>
     }
     <div class="slider-buttons">
         <button disabled="@(Value <= Min || !Enabled)" @onclick="OnLeftButton">@LeftButtonContent</button>
         @if (!Editable) {
-            <label>@Display(Value)</label>
+            <span>@Display(Value)</span>
         }
         else {
             <input value="@Display(Value)" @onchange="OnChangeEditField">
