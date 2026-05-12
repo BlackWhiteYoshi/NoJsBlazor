@@ -60,10 +60,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Condition="'$(TargetFramework)'=='net8.0'" Include="Microsoft.AspNetCore.Components.Web" Version="8.0.22" />
-    <PackageReference Condition="'$(TargetFramework)'=='net9.0'" Include="Microsoft.AspNetCore.Components.Web" Version="9.0.11" />
-    <PackageReference Condition="'$(TargetFramework)'=='net10.0'" Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0" />
-    <PackageReference Include="InlineComposition" Version="1.5.0" PrivateAssets="all" />
+    <PackageReference Condition="'$(TargetFramework)'=='net8.0'" Include="Microsoft.AspNetCore.Components.Web" Version="8.0.26" />
+    <PackageReference Condition="'$(TargetFramework)'=='net9.0'" Include="Microsoft.AspNetCore.Components.Web" Version="9.0.15" />
+    <PackageReference Condition="'$(TargetFramework)'=='net10.0'" Include="Microsoft.AspNetCore.Components.Web" Version="10.0.7" />
+    <PackageReference Include="InlineComposition" Version="1.5.1" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
