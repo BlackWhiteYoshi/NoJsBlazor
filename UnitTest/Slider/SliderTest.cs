@@ -6,27 +6,27 @@ public sealed class SliderTest : BunitContext {
     #region parameter
 
     [Test]
-    public async ValueTask Value_Is_Rendered_Inside_Label() {
+    public async ValueTask Value_Is_Rendered_Inside_Span() {
         const int VALUE = 5;
 
         IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Value, VALUE);
         });
 
-        IElement label = sliderContainer.Find(".slider-buttons label");
-        await Assert.That(label.InnerHtml).IsEqualTo(VALUE.ToString());
+        IElement span = sliderContainer.Find(".slider-buttons span");
+        await Assert.That(span.InnerHtml).IsEqualTo(VALUE.ToString());
     }
 
     [Test]
-    public async ValueTask Title_Is_Rendered_Inside_First_Label() {
+    public async ValueTask Title_Is_Rendered_Inside_First_Span() {
         const string TEST_TEXT = "Test Text";
 
         IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Title, TEST_TEXT);
         });
 
-        IElement label = sliderContainer.FindAll("label")[0];
-        await Assert.That(label.InnerHtml).IsEqualTo(TEST_TEXT);
+        IElement span = sliderContainer.FindAll("span")[0];
+        await Assert.That(span.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
     [Test]
@@ -35,7 +35,7 @@ public sealed class SliderTest : BunitContext {
             builder.Add((Slider<int> slider) => slider.Title, string.Empty);
         });
 
-        await Assert.That(sliderContainer.FindAll("label")).HasSingleItem();
+        await Assert.That(sliderContainer.FindAll("span")).HasSingleItem();
     }
 
     [Test]
@@ -131,15 +131,15 @@ public sealed class SliderTest : BunitContext {
     }
 
     [Test]
-    public async ValueTask Display_Changes_Label_Output() {
+    public async ValueTask Display_Changes_Span_Output() {
         const string TEST_TEXT = "Test Text";
 
         IRenderedComponent<Slider<int>> sliderContainer = Render((ComponentParameterCollectionBuilder<Slider<int>> builder) => {
             builder.Add((Slider<int> slider) => slider.Display, (int value) => TEST_TEXT);
         });
 
-        IElement label = sliderContainer.Find(".slider-buttons label");
-        await Assert.That(label.InnerHtml).IsEqualTo(TEST_TEXT);
+        IElement span = sliderContainer.Find(".slider-buttons span");
+        await Assert.That(span.InnerHtml).IsEqualTo(TEST_TEXT);
     }
 
     [Test]

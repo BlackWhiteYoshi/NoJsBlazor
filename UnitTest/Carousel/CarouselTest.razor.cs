@@ -336,8 +336,8 @@ public sealed partial class CarouselTest : BunitContext {
         Carousel carousel = carouselContainer.Instance;
 
         await Assert.That(carousel.Running).IsFalse();
-        carouselContainer.WaitForAssertion(async () => await Assert.That(carousel.Running).IsTrue());
-        carouselContainer.WaitForAssertion(async () => await Assert.That(carousel.Active).IsEqualTo(1));
+        carouselContainer.WaitForState(() => carousel.Running);
+        carouselContainer.WaitForState(() => carousel.Active == 1);
     }
 
     #endregion
