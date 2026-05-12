@@ -21,3 +21,7 @@
 @use 'ProgressBar/SpeedometerProgressBar.razor.scss';
 
 @use 'Slider/Slider.razor.scss';
+
+
+// sass Main.scss wwwroot/style.css --no-source-map --watch
+// sass Main.scss wwwroot/style.min.css --no-source-map --style=compressed

@@ -49,11 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="compilerconfig.json" />
-    <None Include="compilerconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\PACKAGE.md" Pack="True" PackagePath="/" />
     <None Include="..\ICON.png" Pack="True" PackagePath="/" />
     <None Include="..\LICENSE" Pack="True" PackagePath="/" />
