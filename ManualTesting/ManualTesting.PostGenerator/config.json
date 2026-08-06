@@ -1,5 +1,5 @@
 {
-  "working directory": "../../../../ManualTesting.Client/bin/Release/net10.0/browser-wasm/publish/wwwroot",
+  "working directory": "../../../../ManualTesting.Client/bin/Release/net10.0/publish/wwwroot",
   "site url": "https://nojsblazor.firerocket.de",
   "generate files": {
     "html page": {
