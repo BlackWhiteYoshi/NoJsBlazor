@@ -5,6 +5,7 @@
     <LangVersion>14</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
 
     <Title>NoJsBlazor</Title>
     <Description>Library for Blazor applications. It contains some UI components. This Library does not use any Javascript code, everything is implemented in Razor, (S)CSS and C#.</Description>
@@ -27,7 +28,6 @@
     <Version>4.0.5</Version>
     <IsAotCompatible>true</IsAotCompatible>
     <DebugType>embedded</DebugType>
-    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">

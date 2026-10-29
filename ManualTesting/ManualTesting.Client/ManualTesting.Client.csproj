@@ -8,7 +8,7 @@
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
     <CompressionEnabled>false</CompressionEnabled>
     <DisableScopedCssBundling>true</DisableScopedCssBundling>
-    <!--<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>-->
+    <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <PropertyGroup>
