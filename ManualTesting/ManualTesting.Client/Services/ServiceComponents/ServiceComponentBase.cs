@@ -8,7 +8,7 @@ namespace ManualTesting.Client.Services;
 /// - has a Dispose() method that resets the <see cref="RenderHandle"/><br />
 /// - provide Property <see cref="HasRenderHandle"/>
 /// </summary>
-public abstract class ServiceComponentBase : ComponentBase, IComponent, IDisposable {
+public closed class ServiceComponentBase : ComponentBase, IComponent, IDisposable {
     [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_renderHandle")]
     private extern static ref RenderHandle GetRenderHandle(ComponentBase @this);
 

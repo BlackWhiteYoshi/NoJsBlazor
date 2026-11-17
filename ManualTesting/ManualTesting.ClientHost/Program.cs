@@ -54,13 +54,8 @@ public static class Program {
 
         // configure Pipeline
         {
-            if (isDevelopmentEnvironment) {
-                app.UseDeveloperExceptionPage();
-                app.UseWebAssemblyDebugging();
-            }
-
+            app.UseDeveloperExceptionPage();
             app.MapStaticAssets();
-            app.UseAntiforgery();
 
             RazorComponentsEndpointConventionBuilder razorComponentsEndpointBuilder = app.MapRazorComponents<Root>().AddAdditionalAssemblies(typeof(Client.App).Assembly);
             if (renderMode.HasFlag(RenderMode.Server))

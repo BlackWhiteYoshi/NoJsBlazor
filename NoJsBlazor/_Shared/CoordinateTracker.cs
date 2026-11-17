@@ -8,6 +8,7 @@ public struct CoordinateTracker {
     /// x-coordinate
     /// </summary>
     public double x;
+
     /// <summary>
     /// y-coordinate
     /// </summary>

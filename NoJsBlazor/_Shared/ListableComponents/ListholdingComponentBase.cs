@@ -9,7 +9,7 @@ public abstract class ListholdingComponentBase<T> : ComponentBase where T : List
     /// <summary>
     /// List of all registered <see cref="ListableComponentBase{T}">ListableComponentBase</see> childs.
     /// </summary>
-    protected readonly List<T> childList = new();
+    protected readonly List<T> childList = [];
 
 
     /// <summary>

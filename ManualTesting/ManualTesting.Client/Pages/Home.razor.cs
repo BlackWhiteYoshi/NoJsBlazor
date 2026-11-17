@@ -67,9 +67,9 @@ public sealed partial class Home : ComponentBase, IDisposable {
 
     private void CloseDialog(MouseEventArgs e) => dialog.Close();
 
-    private void OnTitleDown(PointerEventArgs e) => ((IJSInProcessRuntime)JsRuntime).InvokeVoid("setPointerCapture", dialog.TitleDiv, e.PointerId);
+    private async Task OnTitleDown(PointerEventArgs e) => await JsRuntime.InvokeVoidAsync("setPointerCapture", dialog.TitleDiv, e.PointerId);
 
-    private void OnTitleUp(PointerEventArgs e) => ((IJSInProcessRuntime)JsRuntime).InvokeVoid("releasePointerCapture", dialog.TitleDiv, e.PointerId);
+    private async Task OnTitleUp(PointerEventArgs e) => await JsRuntime.InvokeVoidAsync("releasePointerCapture", dialog.TitleDiv, e.PointerId);
 
     #endregion
 

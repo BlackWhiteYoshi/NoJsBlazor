@@ -142,7 +142,6 @@ public sealed partial class Dialog : ComponentBase {
         YMovement += dy;
 
         OnTitlePointerMove.InvokeAsync(e);
-        StateHasChanged();
     }
 
     private void TitleUp(PointerEventArgs e) {

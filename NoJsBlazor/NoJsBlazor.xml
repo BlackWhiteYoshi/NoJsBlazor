@@ -1027,7 +1027,8 @@
         </member>
         <member name="T:InlineCompositionAttributes.InlineBaseAttribute">
             <summary>
-            <para>Marks this class/struct as inlineable, so it can be listed in a <see cref="T:InlineCompositionAttributes.InlineAttribute`1"/> Attribute.</para>
+            Classes/Structs that get inlined can be decorated with additional modifiers.<br />
+            Itself it does nothing, but you can also use it to make the usage of your base class/struct clear.
             </summary>
         </member>
         <member name="P:InlineCompositionAttributes.InlineBaseAttribute.MapBaseType">
