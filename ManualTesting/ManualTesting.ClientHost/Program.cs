@@ -34,7 +34,7 @@ public static class Program {
 
         // check for valid startup configuration
         if (renderMode == RenderMode.Static && !preRender)
-            throw new ArgumentException($"invalid combination of 'RenderMode' and 'Prerender': static without prerendering basically means doing nothing");
+            throw new ArgumentException($"invalid combination of 'RenderMode' and 'Prerender': static without prerendering is not supported");
 
 
         // configure Services
@@ -64,6 +64,9 @@ public static class Program {
                 razorComponentsEndpointBuilder.AddInteractiveWebAssemblyRenderMode();
         }
 
+
+        app.Services.GetRequiredService<ILogger<RenderMode>>()
+            .LogInformation("Application starting with: RenderMode={}, Prerender={}", renderMode, preRender);
 
         await app.RunAsync();
     }

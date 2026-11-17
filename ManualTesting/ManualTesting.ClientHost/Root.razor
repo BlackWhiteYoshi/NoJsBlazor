@@ -26,13 +26,7 @@
         <link rel="stylesheet" href="/site.css">
 
         <script src="/site.js" defer></script>
-        @if (renderMode is not null) {
-            <script src="/_framework/blazor.web.js" defer></script>
-        }
-        else
-        {
-            <script src="/_framework/blazor.webassembly.js" defer></script>
-        }
+        <script src="@(renderMode is not null ? "_framework/blazor.web.js" : "_framework/blazor.webassembly.js")" defer></script>
     </head>
 
     <body>
